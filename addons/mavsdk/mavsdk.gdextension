@@ -1,6 +1,6 @@
 [configuration]
 
-entry_symbol = "gdextension_init"
+entry_symbol = "mavsdk_init"
 
 [libraries]
 

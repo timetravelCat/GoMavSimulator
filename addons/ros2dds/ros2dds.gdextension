@@ -1,0 +1,8 @@
+[configuration]
+
+entry_symbol = "ros2dds_init"
+
+[libraries]
+
+windows.debug.x86_64 = "bin/ros2dds_binding_debug.dll"
+windows.release.x86_64 = "bin/ros2dds_binding_release.dll"
