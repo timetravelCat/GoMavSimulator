@@ -15,6 +15,7 @@ env.Append(LIBS=["@MAVSDK_TARGET@"])
 # mavsdk binding 
 env.Append(CPPPATH=["include"])
 sources = Glob("src/*.cpp")
+sources += Glob("*.cpp")
 
 # exports
 library = env.SharedLibrary(
