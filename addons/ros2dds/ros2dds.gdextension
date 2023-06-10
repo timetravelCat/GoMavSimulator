@@ -6,3 +6,8 @@ entry_symbol = "ros2dds_init"
 
 windows.debug.x86_64 = "bin/ros2dds_binding_debug.dll"
 windows.release.x86_64 = "bin/ros2dds_binding_release.dll"
+
+[dependencies]
+
+windows.debug.x86_64 = "bin/tinyxml2.dll"
+windows.release.x86_64 = "bin/tinyxml2.dll"
