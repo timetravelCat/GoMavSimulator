@@ -1,0 +1,8 @@
+[configuration]
+
+entry_symbol = "gdextension_init"
+
+[libraries]
+
+windows.debug.x86_64 = "bin/mavsdk_binding_debug.dll"
+windows.release.x86_64 = "bin/mavsdk_binding_release.dll"

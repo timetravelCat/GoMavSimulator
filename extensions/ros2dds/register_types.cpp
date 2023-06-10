@@ -91,3 +91,17 @@ void uninitialize_ros2dds_module(ModuleInitializationLevel p_level) {
 		memdelete(_coordinate_3d);
 	}
 }
+
+extern "C"
+{
+	GDExtensionBool GDE_EXPORT ros2dds_init(const GDExtensionInterface *p_interface, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
+	{
+		godot::GDExtensionBinding::InitObject init_obj(p_interface, p_library, r_initialization);
+
+		init_obj.register_initializer(initialize_ros2dds_module);
+		init_obj.register_terminator(uninitialize_ros2dds_module);
+		init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
+
+		return init_obj.init();
+	}
+}
