@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+import os
+env = SConscript("../godot-cpp/SConstruct")
+
+if env["target"] == "template_debug":
+    suffix = "_debug"
+else:
+    suffix = "_release"
+
+# mavsdk
+env.Append(CPPPATH=["@MAVSDK_INCLUDE_DIR@"])
+env.Append(LIBPATH=["@MAVSDK_LIBRARY_DIR@"])
+env.Append(LIBS=["@MAVSDK_TARGET@"])
+
+# mavsdk binding 
+env.Append(CPPPATH=["include"])
+sources = Glob("src/*.cpp")
+
+# exports
+library = env.SharedLibrary(
+    target="bin/" + "mavsdk_binding" + suffix,
+    source=sources,
+)
+
+Default(library)
