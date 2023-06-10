@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+import os
+env = SConscript("../godot-cpp/SConstruct")
+
+if env["target"] == "template_debug":
+    suffix = "_debug"
+else:
+    suffix = "_release"
+
+# fastdds
+env.Append(CPPPATH=[
+    "@FAST_CDR_INCLUDE_DIR@",
+    "@FAST_DDS_INCLUDE_DIR@"
+    ])
+env.Append(LIBPATH=[
+    "@SHLWAPI_LIB_DIR@",
+    "@FAST_DDS_LIBRARY_DIR@",
+    "@FAST_CDR_LIBRARY_DIR@",
+    "@FOONATHAN_MEMORY_LIBRARY_DIR@",
+    "@OPENSSL_SSL_DIR@",
+    "@OPENSSL_CRYPTO_DIR@",
+    "@TINYXML2_LIB_DIR@"
+    ])
+env.Append(LIBS=[
+    "@FAST_DDS_TARGET@",
+    "@FAST_CDR_TARGET@",
+    "@FOONATHAN_MEMORY_TARGET@",
+    "tinyxml2",
+    "@SHLWAPI_TARGET@",
+    "@OPENSSL_CRYPTO_TARGET@",
+    "@OPENSSL_SSL_TARGET@"
+    ])
+
+# ros2dds binding 
+env.Append(CPPPATH=["include"])
+sources = Glob("src/*.cpp")
+sources += Glob("*.cpp")
+sources += Glob("include/builtin_interfaces/msg/*.cxx")
+sources += Glob("include/geometry_msgs/msg/*.cxx")
+sources += Glob("include/nav_msgs/msg/*.cxx")
+sources += Glob("include/sensor_msgs/msg/*.cxx")
+sources += Glob("include/std_msgs/msg/*.cxx")
+sources += Glob("include/visualization_msgs/msg/*.cxx")
+
+# exports
+library = env.SharedLibrary(
+    target="../../addons/ros2dds/bin/" + "ros2dds_binding" + suffix,
+    source=sources,
+)
+
+Default(library)

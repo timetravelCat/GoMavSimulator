@@ -35,7 +35,7 @@ if(WIN32 AND ROS2_DDS)
     SET(OPENSSL_MSVC_STATIC_RT OFF CACHE BOOL "OpenSSL RT option" FORCE)
 endif()
 
-if(ROS_DDS)
+if(ROS2_DDS)
     find_package(OpenSSL REQUIRED)
 endif()
 

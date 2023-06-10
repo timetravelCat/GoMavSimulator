@@ -16,3 +16,5 @@ extensions/mavsdk/SConstruct
 extensions/ros2dds/SConstruct
 extensions/**/*.obj
 extensions/**/**/*.obj
+extensions/**/**/**/*.obj
+extensions/**/**/**/**/*.obj
