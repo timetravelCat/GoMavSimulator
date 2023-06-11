@@ -45,9 +45,28 @@ if(WIN32)
     endmacro(FILTER_LIST)
     FILTER_LIST("${TINYXML2_LIBRARY}" TINYXML2_LIB optimized debug)
     set(TINYXML2_LIBRARY ${TINYXML2_LIB})
-endif()
+    get_filename_component(TINYXML2_LIB_DIR ${TINYXML2_LIB} DIRECTORY)
 
-get_filename_component(TINYXML2_LIB_DIR ${TINYXML2_LIB} DIRECTORY)
+else()
+    ExternalProject_Add(tinyxml2
+    GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+    GIT_TAG        9.0.0
+    CMAKE_ARGS
+        -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
+        -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+        -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
+    CMAKE_CACHE_ARGS  
+        -DCMAKE_INSTALL_PREFIX:PATH=install
+        -DCMAKE_BUILD_TYPE:STRING=Release
+        -DBUILD_TESTING:BOOL=OFF
+        -Dtinyxml2_BUILD_TESTING:BOOL=OFF
+        -DBUILD_SHARED_LIBS:BOOL=OFF
+    BUILD_COMMAND  ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
+    INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
+    )
+
+    set(TINYXML2_LIB_DIR ${CMAKE_BINARY_DIR}/ros2dds/tinyxml2-prefix/src/tinyxml2-build/install/lib)
+endif()
 
 # foonathan_memory
 ExternalProject_Add(foonathan_memory
@@ -56,6 +75,7 @@ ExternalProject_Add(foonathan_memory
     CMAKE_ARGS
         -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
         -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+        -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     CMAKE_CACHE_ARGS  
         -DCMAKE_INSTALL_PREFIX:PATH=install
         -DCMAKE_BUILD_TYPE:STRING=Release 
@@ -80,6 +100,7 @@ ExternalProject_Add(Fast-CDR
     CMAKE_ARGS
         -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
         -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+        -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
     CMAKE_CACHE_ARGS  
         -DCMAKE_INSTALL_PREFIX:PATH=install
         -DCMAKE_BUILD_TYPE:STRING=Release 
@@ -118,6 +139,7 @@ DEPENDS
 CMAKE_ARGS
     -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
     -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+    -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
 CMAKE_CACHE_ARGS  
     -DCMAKE_INSTALL_PREFIX:PATH=install
     -DCMAKE_BUILD_TYPE:STRING=Release  

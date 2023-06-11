@@ -6,3 +6,5 @@ entry_symbol = "mavsdk_init"
 
 windows.debug.x86_64 = "bin/mavsdk_binding_debug.dll"
 windows.release.x86_64 = "bin/mavsdk_binding_release.dll"
+linux.debug.x86_64 = "bin/libmavsdk_binding_debug.so"
+linux.release.x86_64 = "bin/libmavsdk_binding_release.so"
