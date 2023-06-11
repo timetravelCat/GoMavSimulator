@@ -1,6 +1,7 @@
 # option(ROS2_IDL_TOOL    "build fast-dds-gen for new idl generation"                             OFF)
 # option(IDL_GENERATION   "generate idls after ROS2_IDL_TOOL enabled"                             OFF)
 
+# Windows SDK
 if(WIN32)
     include(cmake/FindWindowsSDK.cmake)
     if(NOT WINDOWSSDK_FOUND)
@@ -12,7 +13,6 @@ if(WIN32)
 else()
     
 endif()
-
 
 # OpenSSL
 get_property(OPENSSL_SSL_PATH TARGET OpenSSL::SSL PROPERTY LOCATION)
@@ -29,44 +29,24 @@ else()
 endif()
 
 # TinyXML2
-if(WIN32)
-    macro(FILTER_LIST INPUT OUTPUT GOOD BAD)
-    set(LST ${INPUT})   # can we avoid this?
-    set(PICKME YES)
-    foreach(ELEMENT IN LISTS LST)
-        if(${ELEMENT} STREQUAL general OR ${ELEMENT} STREQUAL ${GOOD})
-        set(PICKME YES)
-        elseif(${ELEMENT} STREQUAL ${BAD})
-        set(PICKME NO)
-        elseif(PICKME)
-        list(APPEND ${OUTPUT} ${ELEMENT})
-        endif()
-    endforeach()
-    endmacro(FILTER_LIST)
-    FILTER_LIST("${TINYXML2_LIBRARY}" TINYXML2_LIB optimized debug)
-    set(TINYXML2_LIBRARY ${TINYXML2_LIB})
-    get_filename_component(TINYXML2_LIB_DIR ${TINYXML2_LIB} DIRECTORY)
+ExternalProject_Add(tinyxml2
+GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+GIT_TAG        9.0.0
+CMAKE_ARGS
+    -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
+    -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+    -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
+CMAKE_CACHE_ARGS  
+    -DCMAKE_INSTALL_PREFIX:PATH=install
+    -DCMAKE_BUILD_TYPE:STRING=Release
+    -DBUILD_TESTING:BOOL=OFF
+    -Dtinyxml2_BUILD_TESTING:BOOL=OFF
+    -DBUILD_SHARED_LIBS:BOOL=OFF
+BUILD_COMMAND  ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
+INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
+)
 
-else()
-    ExternalProject_Add(tinyxml2
-    GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
-    GIT_TAG        9.0.0
-    CMAKE_ARGS
-        -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
-        -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
-        -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
-    CMAKE_CACHE_ARGS  
-        -DCMAKE_INSTALL_PREFIX:PATH=install
-        -DCMAKE_BUILD_TYPE:STRING=Release
-        -DBUILD_TESTING:BOOL=OFF
-        -Dtinyxml2_BUILD_TESTING:BOOL=OFF
-        -DBUILD_SHARED_LIBS:BOOL=OFF
-    BUILD_COMMAND  ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
-    INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
-    )
-
-    set(TINYXML2_LIB_DIR ${CMAKE_BINARY_DIR}/ros2dds/tinyxml2-prefix/src/tinyxml2-build/install/lib)
-endif()
+set(TINYXML2_LIB_DIR ${CMAKE_BINARY_DIR}/ros2dds/tinyxml2-prefix/src/tinyxml2-build/install/lib)
 
 # foonathan_memory
 ExternalProject_Add(foonathan_memory
@@ -93,7 +73,7 @@ set(FOONATHAN_MEMORY_TARGET foonathan_memory-${FOONATHAN_MEMORY_VERSION})
 set(FOONATHAN_MEMORY_LIBRARY_DIR ${CMAKE_BINARY_DIR}/ros2dds/foonathan_memory-prefix/src/foonathan_memory-build/install/lib)
 set(FOONATHAN_MEMORY_INCLUDE_DIR ${CMAKE_BINARY_DIR}/ros2dds/foonathan_memory-prefix/src/foonathan_memory-build/install/include)
 
-# fast-CDR
+# Fast-CDR
 ExternalProject_Add(Fast-CDR
     GIT_REPOSITORY https://github.com/eProsima/Fast-CDR.git
     GIT_TAG        ${FAST_CDR_VERSION}
@@ -130,6 +110,7 @@ else()
     set(FOONATHAN_MEMORY_CMAKE_DIR lib)
 endif()
 
+# Fast-DDS
 ExternalProject_Add(Fast-DDS
 GIT_REPOSITORY https://github.com/eProsima/Fast-DDS.git
 GIT_TAG        ${FAST_DDS_VERSION}
