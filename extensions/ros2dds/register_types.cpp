@@ -62,9 +62,10 @@ void initialize_ros2dds_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(Coordinate3D);
 	_coordinate_3d = memnew(Coordinate3D);
 	Engine::get_singleton()->register_singleton("Coordinate3D", Coordinate3D::get_singleton());
-	GDREGISTER_ABSTRACT_CLASS(ROS2DDS);
-	GDREGISTER_ABSTRACT_CLASS(Publisher);
-	GDREGISTER_ABSTRACT_CLASS(Subscriber);
+	// 2023.06.11 at this time, GDREGISTER_ABSTRACT_CLASS has bug.
+	GDREGISTER_CLASS(ROS2DDS); 		// GDREGISTER_ABSTRACT_CLASS(ROS2DDS);
+	GDREGISTER_CLASS(Publisher); 	// GDREGISTER_ABSTRACT_CLASS(Publisher);
+	GDREGISTER_CLASS(Subscriber); 	// GDREGISTER_ABSTRACT_CLASS(Subscriber);
 	GDREGISTER_CLASS(ImagePublisher);
 	GDREGISTER_CLASS(CompressedImagePublisher);
 	GDREGISTER_CLASS(CameraInfoPublisher);
