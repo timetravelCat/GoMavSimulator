@@ -16,7 +16,8 @@ public:
 		JPEG
 	};
 
-	bool publish(const Ref<Image> &p_image) {
+	bool publish() {
+		const Ref<Image> p_image = get_viewport()->get_texture()->get_image();
 		compressedImage.format() = format == PNG ? "png" : "jpeg";
 		switch (format) {
 			case JPEG: {
@@ -45,7 +46,7 @@ protected:
 		BIND_ENUM_CONSTANT(JPEG);
 		BIND_ENUM_CONSTANT(PNG);
 
-		ClassDB::bind_method(D_METHOD("publish", "image"), &CompressedImagePublisher::publish);
+		ClassDB::bind_method(D_METHOD("publish"), &CompressedImagePublisher::publish);
 		ClassDB::bind_method(D_METHOD("set_format", "format"), &CompressedImagePublisher::set_format);
 		ClassDB::bind_method(D_METHOD("get_format"), &CompressedImagePublisher::get_format);
 		ClassDB::bind_method(D_METHOD("set_quality", "quality"), &CompressedImagePublisher::set_quality);

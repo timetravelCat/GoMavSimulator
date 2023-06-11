@@ -76,7 +76,8 @@ public:
 		return "UNKNOWN";
 	}
 
-	bool publish(const Ref<Image> &p_image) {
+	bool publish() {
+		const Ref<Image> p_image = get_viewport()->get_texture()->get_image();
 		const std::string encoding = get_encoding(p_image->get_format());
 		if (encoding.compare("UNKNOWN") == 0) {
 			WARN_PRINT_ONCE("Cannot publish compressed image type in ImagePublisher");
@@ -99,7 +100,7 @@ public:
 
 protected:
 	static void _bind_methods() {
-		ClassDB::bind_method(D_METHOD("publish", "image"), &ImagePublisher::publish);
+		ClassDB::bind_method(D_METHOD("publish"), &ImagePublisher::publish);
 	}
 
 private:
