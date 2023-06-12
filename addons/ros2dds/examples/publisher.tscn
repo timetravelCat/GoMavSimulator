@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://cewjvk8cimb5t"]
+
+[ext_resource type="Script" path="res://addons/ros2dds/examples/ImagePublisher.gd" id="1_wkpnb"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/PoseStampedPublisher.gd" id="2_uftbu"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/PointStampedPublisher.gd" id="3_t33ol"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/PathPublisher.gd" id="4_p3kd5"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/RangePublisher.gd" id="5_884mv"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/PointCloudPublisher.gd" id="6_sngtk"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/MarkerPublisher.gd" id="7_1y5l4"]
+[ext_resource type="Script" path="res://addons/ros2dds/examples/MarkerPublisher2.gd" id="7_jycrw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uubwf"]
+albedo_color = Color(0.713726, 0.384314, 0.301961, 1)
+metallic = 0.62
+roughness = 0.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_80hwr"]
+material = SubResource("StandardMaterial3D_uubwf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6lci"]
+albedo_color = Color(0.00784314, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qo5pc"]
+material = SubResource("StandardMaterial3D_a6lci")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.95882)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.701419, -0.712749, 0, 0.712749, 0.701419, 0, 0, 0)
+mesh = SubResource("TorusMesh_80hwr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0453978, 0.998969, 0, -0.998969, -0.0453978, 0, 2.64804, 0)
+
+[node name="ImagePublisher" type="ImagePublisher" parent="."]
+topic_name = "image"
+topic_type = "sensor_msgs::msg::dds_::Image_"
+script = ExtResource("1_wkpnb")
+
+[node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="." node_paths=PackedStringArray("node3d")]
+node3d = NodePath("../Camera3D")
+topic_name = "pose"
+topic_type = "geometry_msgs::msg::dds_::PoseStamped_"
+script = ExtResource("2_uftbu")
+
+[node name="PointStampedPublisher" type="PointStampedPublisher" parent="."]
+topic_name = "point"
+topic_type = "geometry_msgs::msg::dds_::PointStamped_"
+script = ExtResource("3_t33ol")
+
+[node name="PathPublisher" type="PathPublisher" parent="."]
+topic_name = "path"
+topic_type = "nav_msgs::msg::dds_::Path_"
+script = ExtResource("4_p3kd5")
+
+[node name="RangePublisher" type="RangePublisher" parent="."]
+field_of_view = 45.0
+topic_name = "range"
+topic_type = "sensor_msgs::msg::dds_::Range_"
+script = ExtResource("5_884mv")
+
+[node name="PointCloudPublisher" type="PointCloudPublisher" parent="."]
+topic_name = "pointCloud"
+topic_type = "sensor_msgs::msg::dds_::PointCloud2_"
+script = ExtResource("6_sngtk")
+
+[node name="MarkerPublisher" type="MarkerPublisher" parent="."]
+type = 1
+mesh = SubResource("PlaneMesh_qo5pc")
+scale = Vector3(2, -2, 0)
+color = Color(0.00784314, 1, 1, 1)
+topic_name = "marker2"
+topic_type = "visualization_msgs::msg::dds_::Marker_"
+script = ExtResource("7_1y5l4")
+
+[node name="MarkerPublisher2" type="MarkerPublisher" parent="." node_paths=PackedStringArray("node3d")]
+type = 3
+scale = Vector3(1, 1, 3)
+color = Color(1, 0.85098, 0.92549, 1)
+node3d = NodePath("../Camera3D")
+topic_name = "marker"
+topic_type = "visualization_msgs::msg::dds_::Marker_"
+script = ExtResource("7_jycrw")
