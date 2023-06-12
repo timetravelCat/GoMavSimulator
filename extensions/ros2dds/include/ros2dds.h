@@ -25,49 +25,54 @@
 
 using namespace godot;
 
-class ROS2DDS : public Node {
+class ROS2DDS : public Node
+{
 	GDCLASS(ROS2DDS, Node)
 
 public:
 	ROS2DDS();
 	virtual ~ROS2DDS();
 
-	enum QoSOption {
+	enum QoSOption
+	{
 		QOS_FASTEST,
 		QOS_NORMAL
 	};
 
 	void set_qos_option(QoSOption p_qos_option) { qos_option = p_qos_option; };
 	QoSOption get_qos_option() { return qos_option; };
-	QoSOption qos_option{ QoSOption::QOS_FASTEST };
+	QoSOption qos_option{QoSOption::QOS_FASTEST};
 
 	void set_domain_id(int p_domain_id) { domain_id = p_domain_id; };
 	int get_domain_id() { return domain_id; };
-	int domain_id{ 0 };
+	int domain_id{0};
 
 	void set_domain_name(String p_domain_name) { domain_name = p_domain_name; };
 	String get_domain_name() { return domain_name; };
-	String domain_name{ "ROS2DDS" };
+	String domain_name{"ROS2DDS"};
 
 	void set_topic_name(String p_topic_name) { topic_name = p_topic_name; };
 	String get_topic_name() { return topic_name; };
-	String topic_name{ "" };
+	String topic_name{""};
 
 	String get_topic_type() { return topic_type; }
-	String topic_type{ "" };
+	String topic_type{""};
+
+	virtual void _enter_tree() override;
+
+	bool initialize() { return _initialization(); };
 
 protected:
 	static void _bind_methods();
 
-	virtual eprosima::fastdds::dds::TypeSupport _set_type() {return eprosima::fastdds::dds::TypeSupport{};};
-	virtual bool _initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &wqos, eprosima::fastdds::dds::DataReaderQos &rqos) {return false;};
+	virtual eprosima::fastdds::dds::TypeSupport _set_type() { return eprosima::fastdds::dds::TypeSupport{}; };
+	virtual bool _initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &wqos, eprosima::fastdds::dds::DataReaderQos &rqos) { return false; };
 
 	bool _initialization();
-	bool _initialized{ false };
-	void _notification(int p_notification);
+	bool _initialized{false};
 
-	eprosima::fastdds::dds::DomainParticipant *_participant{ nullptr };
-	eprosima::fastdds::dds::Topic *_topic{ nullptr };
+	eprosima::fastdds::dds::DomainParticipant *_participant{nullptr};
+	eprosima::fastdds::dds::Topic *_topic{nullptr};
 };
 
 VARIANT_ENUM_CAST(ROS2DDS::QoSOption);

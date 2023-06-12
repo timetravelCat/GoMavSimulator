@@ -13,11 +13,8 @@ using namespace godot;
 class CameraInfoPublisher : public Publisher {
 	GDCLASS(CameraInfoPublisher, Publisher)
 public:
-	bool publish_current() {
-		return publish(get_viewport());
-	}
-
-	bool publish(const Viewport *viewport) {
+	bool publish() {
+		const Viewport *viewport = get_viewport();
 		if (!viewport) {
 			return false;
 		}
@@ -89,8 +86,7 @@ protected:
 		ClassDB::bind_method(D_METHOD("set_distortion", "distortion", "coefficients"), &CameraInfoPublisher::set_distortion);
 		ClassDB::bind_method(D_METHOD("get_distortion"), &CameraInfoPublisher::get_distortion);
 		ADD_PROPERTY(PropertyInfo(Variant::INT, "distortion", PROPERTY_HINT_ENUM, "PLUMB_BOB,RATIONAL_POLYNOMIAL,EQUIDISTANT"), "", "get_distortion");
-		ClassDB::bind_method(D_METHOD("publish", "viewport"), &CameraInfoPublisher::publish);
-		ClassDB::bind_method(D_METHOD("publish_current"), &CameraInfoPublisher::publish_current);
+		ClassDB::bind_method(D_METHOD("publish"), &CameraInfoPublisher::publish);
 	}
 
 private:
