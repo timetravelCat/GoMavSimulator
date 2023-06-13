@@ -95,6 +95,7 @@ private:
 	static std::unique_ptr<std::thread> _discovery_thread;
 	static std::atomic<bool> _request_discovery_stop;
 	static std::map<int32_t, APIs> _apis;
+	static int32_t _standalones;
 	static std::shared_ptr<mavsdk::Mavsdk> _mavsdk;
 
 	void _mavlink_message_callback(const int32_t &sys_id, const mavlink_message_t &mavlink_message);
@@ -129,6 +130,7 @@ public:
 		singleton = this;
 	};
 	~GoMAVSDKServer() {
+		_finalize();
 		singleton = nullptr;
 	};
 };

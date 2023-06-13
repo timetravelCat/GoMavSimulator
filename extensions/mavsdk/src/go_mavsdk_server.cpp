@@ -10,6 +10,7 @@ GoMAVSDKServer *GoMAVSDKServer::singleton = nullptr;
 std::unique_ptr<std::thread> GoMAVSDKServer::_discovery_thread;
 std::atomic<bool> GoMAVSDKServer::_request_discovery_stop{ true };
 std::map<int32_t, GoMAVSDKServer::APIs> GoMAVSDKServer::_apis;
+int32_t GoMAVSDKServer::_standalones{0};
 std::shared_ptr<mavsdk::Mavsdk> GoMAVSDKServer::_mavsdk;
 
 static bool initialized{ false };
@@ -22,29 +23,36 @@ void GoMAVSDKServer::initialize(bool force) {
 		}
 	}
 
+	_standalones = 0;
 	_mavsdk = std::make_unique<mavsdk::Mavsdk>();
+	mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
+	_mavsdk->set_configuration(config);
 
 	_request_discovery_stop.store(false);
 	_discovery_thread = std::make_unique<std::thread>(
 			[this] {
 				_mavsdk->subscribe_on_new_system(
 						[this]() {
-							if (_mavsdk->systems().size() > _apis.size())
+							if (_mavsdk->systems().size() > (_apis.size() + _standalones)) {
 								for (auto system : _mavsdk->systems()) {
 									const int32_t sys_id = system->get_system_id();
-									if (_apis.count(sys_id) == 0) {
-										APIs api;
-										api.system = system;
-										api.shell = std::make_shared<mavsdk::Shell>(system);
-										api.param = std::make_shared<mavsdk::Param>(system);
-										api.mavlink_passthrough = std::make_shared<mavsdk::MavlinkPassthrough>(system);
-										api.shell->subscribe_receive([this, &sys_id](const std::string output) { _on_shell_received(sys_id, output.data());});
-										_THREAD_SAFE_LOCK_
-										_apis.insert({ sys_id, api });
-										_THREAD_SAFE_UNLOCK_
-										emit_signal("on_system_discovered", sys_id);
-									}
+									if(system->has_autopilot()) {
+										if (_apis.count(sys_id) == 0) {
+											APIs api;
+											api.system = system;
+											api.shell = std::make_shared<mavsdk::Shell>(system);
+											api.param = std::make_shared<mavsdk::Param>(system);
+											api.mavlink_passthrough = std::make_shared<mavsdk::MavlinkPassthrough>(system);
+											api.shell->subscribe_receive([this, &sys_id](const std::string output) { _on_shell_received(sys_id, output.data());});
+											_THREAD_SAFE_LOCK_
+											_apis.insert({ sys_id, api });
+											_THREAD_SAFE_UNLOCK_
+											emit_signal("on_system_discovered", sys_id);
+										}
+									} 
 								}
+								_standalones = _mavsdk->systems().size() - _apis.size();
+							}
 						});
 
 				while (!_request_discovery_stop.load()) {
