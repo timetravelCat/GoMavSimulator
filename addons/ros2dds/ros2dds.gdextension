@@ -8,3 +8,8 @@ windows.debug.x86_64 = "bin/ros2dds_binding_debug.dll"
 windows.release.x86_64 = "bin/ros2dds_binding_release.dll"
 linux.debug.x86_64 = "bin/libros2dds_binding_debug.so"
 linux.release.x86_64 = "bin/libros2dds_binding_release.so"
+
+[icons]
+ROS2DDS = "res://addons/ros2dds/icon/ros2.svg"
+Pulbisher = "res://addons/ros2dds/icon/publisher.svg"
+Subscriber = "res://addons/ros2dds/icon/subscriber.svg"
