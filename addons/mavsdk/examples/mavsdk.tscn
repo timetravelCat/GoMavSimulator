@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca0gf2mqdc58r"]
+
+[ext_resource type="Script" path="res://addons/mavsdk/examples/mavsdk.gd" id="1_g446e"]
+[ext_resource type="Script" path="res://addons/mavsdk/examples/GoMAVSDK.gd" id="2_dbg8y"]
+
+[node name="mavsdk" type="Node"]
+script = ExtResource("1_g446e")
+
+[node name="GoMAVSDK" type="GoMAVSDK" parent="."]
+script = ExtResource("2_dbg8y")
+
+[connection signal="on_mavlink_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_mavlink_received"]

@@ -43,7 +43,7 @@ void GoMAVSDKServer::initialize(bool force) {
 											api.shell = std::make_shared<mavsdk::Shell>(system);
 											api.param = std::make_shared<mavsdk::Param>(system);
 											api.mavlink_passthrough = std::make_shared<mavsdk::MavlinkPassthrough>(system);
-											api.shell->subscribe_receive([this, &sys_id](const std::string output) { _on_shell_received(sys_id, output.data());});
+											api.shell->subscribe_receive([this, sys_id](const std::string output) { _on_shell_received(sys_id, output.data());});
 											_THREAD_SAFE_LOCK_
 											_apis.insert({ sys_id, api });
 											_THREAD_SAFE_UNLOCK_
