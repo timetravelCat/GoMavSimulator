@@ -145,7 +145,9 @@ You can find examples of mavsdk / ros2dds api in addons/mavsdk:ros22ds/examples
 ## Extending GDExtension
 Extending mavsdk or ros2 messaging requires source build of each library.
 
-### Supported platform & required dependency: (If you installed [ros2](https://docs.ros.org/en/iron/Installation/Windows-Install-Binary.html) before in your system, maybe all dependencies are already satisfied.)
+Supported platform & required dependency: 
+
+(If you installed [ros2](https://docs.ros.org/en/iron/Installation/Windows-Install-Binary.html) in your system, maybe all dependencies are already satisfied.)
 - Windows
   - https://chocolatey.org/install
     ```powershell
