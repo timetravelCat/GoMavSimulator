@@ -41,12 +41,13 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#installation-from-sources">Installation from sources</a></li>
+    <li><a href="#gdextension">GDExtension</a></li>
+      <ul>
+        <li><a href="#extending-gdextension">Extending GDExtension</a></li>
+      </ul>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -73,40 +74,14 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 * [![ROS2][ros2.com]][ros2-url]
 * [![fastDDS][fastdds.com]][fastdds-url]
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* 
-  ```sh
-  
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/timetravelCat/GoMavSimulator.git
-   ```
-2. 
-   ```sh
-   
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+- Download latest [release](https://github.com/timetravelCat/GoMavSimulator/releases/)
+- Configure simulation
+  - Select ground-truth position/orientation topics from MAVSDK or ROS2
+  - Setup sensors (image, depth image, PointClouds, range ...)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -118,6 +93,91 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Installation from sources
+
+```bash
+git clone https://github.com/timetravelCat/GoMavSimulator.git
+```
+- Open GoMavSimulator by [godot editor](https://godotengine.org/)
+- Run in editor 
+- Manually export by templates [Exporting projects](https://docs.godotengine.org/en/stable/tutorials/export/exporting_projects.html)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- GDExtension  -->
+## GDExtension
+You can find examples of mavsdk / ros2dds api in addons/mavsdk:ros22ds/examples
+![ros2dds](extra/ros2dds.png)
+### ROS2DDS Features 
+  - Topic name can be configured by "Topic Name" property
+  - Singleton class for coordinate transform(EUS, ENU, NED) are implemented (see Coordinate3D).
+<details>
+  <summary>Implemented Publishers / Subscribers</summary>
+  <ol>
+    <li><a href="https://docs.ros2.org/foxy/api/geometry_msgs/msg/PointStamped.html">PointStamped(Pub/Sub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/geometry_msgs/msg/PoseStamped.html">PoseStamped(Pub/Sub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/sensor_msgs/msg/PointCloud2.html">PointCloud(Pub/Sub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/nav_msgs/msg/Path.html">Path(Pub/Sub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/visualization_msgs/msg/Marker.html">Marker(Pub/Sub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/sensor_msgs/msg/Range.html">Range(Pub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/sensor_msgs/msg/Image.html">Image(Pub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/sensor_msgs/msg/CompressedImage.html">CompressedImage(Pub)</a></li>
+    <li><a href="https://docs.ros2.org/foxy/api/sensor_msgs/msg/CameraInfo.html">CameraInfo(Pub)</a></li>
+  </ol>
+</details>
+
+### MAVSDK Features
+<details>
+  <summary>Implemented methods</summary>
+  <ol>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_mavsdk.html">mavsdk</a></li>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_system.html">system</a></li>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_shell.html">shell</a></li>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_param.html">param</a></li>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_mavlink_passthrough.html">mavlink_passthrouth</a></li>
+  </ol>
+</details>
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Extending GDExtension
+Extending mavsdk or ros2 messaging requires source build of each library.
+
+### Supported platform & required dependency: (If you installed [ros2](https://docs.ros.org/en/iron/Installation/Windows-Install-Binary.html) before in your system, maybe all dependencies are already satisfied.)
+- Windows
+  - https://chocolatey.org/install
+    ```powershell
+      choco install -y python --version 3.8.3
+      choco install -y curl tinyxml2
+    ```
+  - [OpenSSL 1.1.1u](https://slproweb.com/products/Win32OpenSSL.html) 
+  - Windows SDK, from [Visual Studio 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16&src=myvs&utm_medium=microsoft&utm_source=my.visualstudio.com&utm_campaign=download&utm_content=vs+community+2019) 
+  
+- Linux
+  ```sh
+  ./extensions/ubuntu_setup.sh # Tested on ubuntu 22.04
+  ```
+
+### Steps for rebuilding shared library.
+- Building dependency libraries
+  ```bash
+  cd extensions
+  mkdir -p build 
+  cmake ..
+  # You can enable/disable build for mavsdk / ros2dds by cmake option ROS2_DDS, MAVSDK
+  # If you are using Windows, You may need manually set path for curl.
+  # set CURL_INCLUDE_DIRS, CURL_LIBRARIES properly.
+  cmake --build . --config Release
+  ```
+- Building GDExtension shared libraries
+  ```bash
+  cd mavsdk # or ros2dds
+  scons # target=template_release
+  ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
