@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+import os
+env = SConscript("../godot-cpp/SConstruct")
+
+if env["target"] == "template_debug":
+    suffix = "_debug"
+else:
+    suffix = "_release"
+
+env.Append(LIBPATH=[
+    "@WINDOWS_SDK_LIB_DIR@",
+    ])
+env.Append(LIBS=[
+    "@SETUPAPI_TARGET@",
+    "@ADVAPI32_TARGET@"
+    ])
+
+# serial binding 
+env.Append(CPPPATH=["include"])
+sources = Glob("src/*.cc")
+sources += Glob("*.cpp")
+sources.append("@serial_SRC_1@")
+sources.append("@serial_SRC_2@")
+
+# exports
+library = env.SharedLibrary(
+    target="../../addons/serial/bin/" + "serial_binding" + suffix,
+    source=sources,
+)
+
+Default(library)

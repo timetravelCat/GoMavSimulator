@@ -148,6 +148,9 @@ Extending mavsdk or ros2 messaging requires source build of each library.
 Supported platform & required dependency: 
 
 (If you installed [ros2](https://docs.ros.org/en/iron/Installation/Windows-Install-Binary.html) in your system, maybe all dependencies are already satisfied.)
+
+Serial GDextension is based on [matrixant](https://github.com/matrixant/serial_port), [serial](https://github.com/wjwwood/serial).
+
 - Windows
   - https://chocolatey.org/install
     ```powershell
@@ -168,14 +171,14 @@ Supported platform & required dependency:
   cd extensions
   mkdir -p build 
   cmake ..
-  # You can enable/disable build for mavsdk / ros2dds by cmake option ROS2_DDS, MAVSDK
+  # You can enable/disable build for mavsdk / ros2dds / serial by cmake option ROS2_DDS, MAVSDK, SERIAL
   # If you are using Windows, You may need manually set path for curl.
   # set CURL_INCLUDE_DIRS, CURL_LIBRARIES properly.
   cmake --build . --config Release
   ```
 - Building GDExtension shared libraries
   ```bash
-  cd mavsdk # or ros2dds
+  cd mavsdk # ros2dds or serial
   scons # target=template_release
   ```
 

@@ -9,6 +9,7 @@ SET(CMAKE_BUILD_TYPE Release CACHE STRING "Enforce Release Build" FORCE)
 
 option(ROS2_DDS         "build ros2-dds libraries (foonathan-memory, fast-cdr, fast-dds ...)"   ON)
 option(MAVSDK           "build mavsdk library"                                                  ON)
+option(SERIAL           "build serial library"                                                  ON)
 
 set(FOONATHAN_MEMORY_VERSION "v0.7-3" CACHE STRING "version of foonathan_memory(https://github.com/foonathan/memory.git)")
 set(FAST_CDR_VERSION "v1.0.27" CACHE STRING "version of Fast-CDR(https://github.com/eProsima/Fast-CDR.git)")
@@ -54,4 +55,8 @@ endif()
 
 if(ROS2_DDS)
     add_subdirectory(ros2dds)
+endif()
+
+if(SERIAL)
+    add_subdirectory(serial)
 endif()
