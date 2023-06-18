@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhoy8rp8jiuwi"]
+
+[ext_resource type="Texture2D" uid="uid://cyslamdd8txlt" path="res://modules/console/icons/resize-svgrepo-com.svg" id="1_3wrr1"]
+[ext_resource type="Texture2D" uid="uid://c3ig2a45pej56" path="res://modules/console/icons/bookmark-svgrepo-com.svg" id="1_jvdvo"]
+[ext_resource type="Texture2D" uid="uid://bdi8txp2du234" path="res://modules/console/icons/bookmark-filled-svgrepo-com.svg" id="1_puc17"]
+[ext_resource type="Texture2D" uid="uid://0pbnqhxhlc6h" path="res://modules/console/icons/chevron_right.svg" id="1_tebey"]
+[ext_resource type="Script" path="res://modules/console/Console.gd" id="1_u72xh"]
+[ext_resource type="Script" path="res://modules/console/Contents.gd" id="2_vmx5k"]
+[ext_resource type="Shader" path="res://modules/console/BorderColor.gdshader" id="2_x4dfk"]
+[ext_resource type="Script" path="res://modules/console/BorderColor.gd" id="3_1ju3q"]
+[ext_resource type="Texture2D" uid="uid://yw3ehe01q14o" path="res://modules/console/icons/broom.png" id="3_bjnyt"]
+[ext_resource type="Script" path="res://modules/console/ConsoleWriter.gd" id="5_dw11f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkeyo"]
+shader = ExtResource("2_x4dfk")
+shader_parameter/color = Color(0.839216, 0.882353, 0.839216, 1)
+shader_parameter/speed = 4.0
+shader_parameter/size = 0.02
+shader_parameter/progress = 0.0
+
+[node name="Console" type="Window" node_paths=PackedStringArray("contents")]
+initial_position = 2
+size = Vector2i(400, 400)
+script = ExtResource("1_u72xh")
+contents = NodePath("VerticalSplit/ContentsPanel/ContentsContainer/Contents")
+
+[node name="BorderColor" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xkeyo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+script = ExtResource("3_1ju3q")
+normal = Color(0.784314, 1, 1, 1)
+accept = Color(0.521569, 0.905882, 0.521569, 1)
+warning = Color(0.894118, 0.627451, 0, 1)
+alert = Color(0.776471, 0, 0, 1)
+
+[node name="VerticalSplit" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentsPanel" type="MarginContainer" parent="VerticalSplit"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ContentsColor" type="ColorRect" parent="VerticalSplit/ContentsPanel"]
+layout_mode = 2
+color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[node name="ContentsContainer" type="MarginContainer" parent="VerticalSplit/ContentsPanel"]
+layout_mode = 2
+theme_override_constants/margin_right = 28
+
+[node name="Contents" type="RichTextLabel" parent="VerticalSplit/ContentsPanel/ContentsContainer"]
+layout_mode = 2
+focus_mode = 2
+context_menu_enabled = true
+selection_enabled = true
+script = ExtResource("2_vmx5k")
+
+[node name="AllwaysOnTopButton" type="TextureButton" parent="VerticalSplit/ContentsPanel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "If enabled, window is allways on top."
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("1_jvdvo")
+texture_pressed = ExtResource("1_puc17")
+stretch_mode = 3
+
+[node name="ClearButton" type="Button" parent="VerticalSplit/ContentsPanel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+action_mode = 0
+icon = ExtResource("3_bjnyt")
+flat = true
+icon_alignment = 1
+
+[node name="BottomSplit" type="HBoxContainer" parent="VerticalSplit"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HistoryMenu" type="MenuButton" parent="VerticalSplit/BottomSplit"]
+layout_mode = 2
+icon = ExtResource("1_tebey")
+
+[node name="ConsoleWriter" type="LineEdit" parent="VerticalSplit/BottomSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+clear_button_enabled = true
+flat = true
+caret_blink = true
+script = ExtResource("5_dw11f")
+
+[node name="ExpandButton" type="Button" parent="VerticalSplit/BottomSplit"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+icon = ExtResource("1_3wrr1")
+flat = true
+expand_icon = true
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="toggled" from="VerticalSplit/ContentsPanel/AllwaysOnTopButton" to="." method="_on_allways_on_top_button_toggled"]
+[connection signal="pressed" from="VerticalSplit/ContentsPanel/ClearButton" to="VerticalSplit/ContentsPanel/ContentsContainer/Contents" method="_on_clear_button_pressed"]
+[connection signal="gui_input" from="VerticalSplit/BottomSplit/ConsoleWriter" to="VerticalSplit/BottomSplit/ConsoleWriter" method="_on_gui_input"]
+[connection signal="text_submitted" from="VerticalSplit/BottomSplit/ConsoleWriter" to="." method="_on_console_writer_text_submitted"]
+[connection signal="text_submitted" from="VerticalSplit/BottomSplit/ConsoleWriter" to="VerticalSplit/ContentsPanel/ContentsContainer/Contents" method="_on_console_writer_text_submitted"]
+[connection signal="text_submitted" from="VerticalSplit/BottomSplit/ConsoleWriter" to="VerticalSplit/BottomSplit/ConsoleWriter" method="_on_text_submitted"]
