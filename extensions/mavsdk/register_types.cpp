@@ -48,7 +48,6 @@ void initialize_mavsdk_module(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(GoMAVSDKServer);
 	_GoMAVSDKServer = memnew(GoMAVSDKServer);
 	Engine::get_singleton()->register_singleton("GoMAVSDKServer", GoMAVSDKServer::get_singleton());
-	_GoMAVSDKServer->initialize();
 
 	GDREGISTER_CLASS(GoMAVSDK);
 }

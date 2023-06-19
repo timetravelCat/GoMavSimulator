@@ -14,6 +14,7 @@ func _ready():
 	GoMAVSDKServer.connect("on_system_discovered", _on_system_discovered)
 	GoMAVSDKServer.add_connection("serial://COM3:57600")
 	GoMAVSDKServer.connect("on_shell_received", _on_shell_received)
+	GoMAVSDKServer.start_discovery()
 	pass # Replace with function body.
 
 

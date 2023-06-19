@@ -112,6 +112,8 @@ public:
 
 	ConnectionResult add_connection(String address, ForwardOption forwarding = ForwardOption::FORWARD_OFF);
 	ConnectionResult setup_udp_remote(String remote_ip, int32_t remote_port, ForwardOption forwarding = ForwardOption::FORWARD_OFF);
+	void start_discovery();
+	void stop_discovery();
 
 	TypedArray<int32_t> get_discovered() const;
 	TypedArray<int32_t> get_connected() const;
@@ -128,6 +130,7 @@ public:
 
 	GoMAVSDKServer() {
 		singleton = this;
+		initialize();
 	};
 	~GoMAVSDKServer() {
 		_finalize();
