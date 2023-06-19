@@ -78,6 +78,8 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 <!-- GETTING STARTED -->
 ## Getting Started
+- Install [OpenSSL 1.1.1u](https://slproweb.com/products/Win32OpenSSL.html) 
+- Add OpenSSL binary path(C:\Program Files\OpenSSL-Win64\bin\) to System PATH
 - Download latest [release](https://github.com/timetravelCat/GoMavSimulator/releases/)
 - Configure simulation
   - Select ground-truth position/orientation topics from MAVSDK or ROS2
@@ -155,7 +157,7 @@ Serial GDextension is based on [matrixant](https://github.com/matrixant/serial_p
   - https://chocolatey.org/install
     ```powershell
       choco install -y python --version 3.8.3
-      choco install -y curl tinyxml2
+      choco install -y curl
     ```
   - [OpenSSL 1.1.1u](https://slproweb.com/products/Win32OpenSSL.html) 
   - Windows SDK, from [Visual Studio 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16&src=myvs&utm_medium=microsoft&utm_source=my.visualstudio.com&utm_campaign=download&utm_content=vs+community+2019) 
