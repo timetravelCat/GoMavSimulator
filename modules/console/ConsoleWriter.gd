@@ -13,7 +13,6 @@ func _on_text_submitted(command):
 	if _idx_prev >= 0:
 		history.remove_at(_idx_prev)
 	
-	historyMenu.add_item(command)
 	history.append(command)
 	history_location = history.size() - 1 # reset history location to recent
 	pass
