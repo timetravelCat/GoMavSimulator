@@ -20,8 +20,6 @@ set(MAVSDK_VERSION "v1.4.14-fix" CACHE STRING "version of MAVSDK(https://github.
 # ====================================================== # 
 # ================= dependency check =================== #
 # ====================================================== #
-find_package(TinyXML2 REQUIRED)
-
 if(MAVSDK)
     if(WIN32)
         # MAVSDK requires CURL. you need to set manually for windows. 

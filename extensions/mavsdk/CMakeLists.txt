@@ -8,27 +8,26 @@
     # CURL_LIBRARIES
     # CURL_INCLUDE_DIRS
 
-# 2. TinyXML2
-if(WIN32)
-    macro(FILTER_LIST INPUT OUTPUT GOOD BAD)
-    set(LST ${INPUT})   # can we avoid this?
-    set(PICKME YES)
-    foreach(ELEMENT IN LISTS LST)
-        if(${ELEMENT} STREQUAL general OR ${ELEMENT} STREQUAL ${GOOD})
-        set(PICKME YES)
-        elseif(${ELEMENT} STREQUAL ${BAD})
-        set(PICKME NO)
-        elseif(PICKME)
-        list(APPEND ${OUTPUT} ${ELEMENT})
-        endif()
-    endforeach()
-    endmacro(FILTER_LIST)
-    FILTER_LIST("${TINYXML2_LIBRARY}" TINYXML2_LIB optimized debug)
-    set(TINYXML2_LIBRARY ${TINYXML2_LIB})
-endif()
+# TinyXML2
+ExternalProject_Add(tinyxml2
+GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+GIT_TAG        9.0.0
+CMAKE_ARGS
+    -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
+    -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
+    -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=ON
+CMAKE_CACHE_ARGS  
+    -DCMAKE_INSTALL_PREFIX:PATH=install
+    -DCMAKE_BUILD_TYPE:STRING=Release
+    -DBUILD_TESTING:BOOL=OFF
+    -Dtinyxml2_BUILD_TESTING:BOOL=OFF
+    -DBUILD_SHARED_LIBS:BOOL=OFF
+BUILD_COMMAND  ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
+INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
+)
 
-    # TINYXML2_LIBRARY
-    # TINYXML2_INCLUDE_DIR
+set(TINYXML2_LIBRARY ${CMAKE_BINARY_DIR}/mavsdk/tinyxml2-prefix/src/tinyxml2-build/install/lib)
+set(TINYXML2_INCLUDE_DIR ${CMAKE_BINARY_DIR}/mavsdk/tinyxml2-prefix/src/tinyxml2-build/install/include)
 
 # 3. JsonCPP
 ExternalProject_Add(jsoncpp
@@ -50,7 +49,7 @@ INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
 ExternalProject_Add(MAVSDK
 GIT_REPOSITORY https://github.com/timetravelCat/MAVSDK.git
 GIT_TAG ${MAVSDK_VERSION}
-DEPENDS jsoncpp
+DEPENDS jsoncpp tinyxml2
 CMAKE_ARGS 
     -DCMAKE_POLICY_DEFAULT_CMP0091:STRING=NEW 
     -DCMAKE_MSVC_RUNTIME_LIBRARY:STRING=MultiThreaded$<$<CONFIG:Debug>:Debug>DLL
