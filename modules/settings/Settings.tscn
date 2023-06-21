@@ -1,0 +1,466 @@
+[gd_scene load_steps=2 format=3 uid="uid://df188sjgsf3uy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_18t8q"]
+font_size = 20
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 96
+theme_override_constants/margin_bottom = 24
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Tab" type="TabContainer" parent="Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="GENERAL" type="Control" parent="Margin/VBoxContainer/Tab"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 16
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GENERAL GRAPHIC SETTINGS"
+label_settings = SubResource("LabelSettings_18t8q")
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "FULLSCRREN MODE"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 2
+selected = 0
+popup/item_0/text = "  WINDOWED"
+popup/item_0/id = 0
+popup/item_1/text = "  FULLSCREEN"
+popup/item_1/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SCREEN RESOLUTION"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 1
+selected = 0
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "MAIN WINDOW"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 1
+selected = 0
+popup/item_0/text = "0"
+popup/item_0/id = 0
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VERTICAL SYNC"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "      ON      "
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+text = "     OFF     "
+
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "FRAME RATE LIMITATION"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 6
+selected = 1
+fit_to_longest_item = false
+popup/item_0/text = "30"
+popup/item_0/id = 0
+popup/item_1/text = "60"
+popup/item_1/id = 1
+popup/item_2/text = "72"
+popup/item_2/id = 2
+popup/item_3/text = "120"
+popup/item_3/id = 3
+popup/item_4/text = "144"
+popup/item_4/id = 4
+popup/item_5/text = "UNLIMITED"
+popup/item_5/id = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OVERALL QUALITY"
+label_settings = SubResource("LabelSettings_18t8q")
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "OVERALL QUALITY"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+popup/item_4/disabled = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="Label2" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CUTSTOM QUALITY SETTINGS"
+label_settings = SubResource("LabelSettings_18t8q")
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "TEXTURE"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SHADOWS"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VISUAL EFFECTS"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "ANTI ALISING"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "AMBIENT OCCLUSION"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "ANISOTROPIC FILTERING"
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+item_count = 5
+selected = 0
+popup/item_0/text = "ULTRA"
+popup/item_0/id = 0
+popup/item_1/text = "HIGH"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "LOW"
+popup/item_3/id = 3
+popup/item_4/text = "DISABLED"
+popup/item_4/id = 4
+
+[node name="MAVLINK" type="Control" parent="Margin/VBoxContainer/Tab"]
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SIMULATOR" type="Control" parent="Margin/VBoxContainer/Tab"]
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "QUIT"
+
+[node name="VSeparator" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BACK"
+
+[node name="VSeparator3" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESET TO DEFAULT"
+
+[node name="VSeparator4" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="LinkButton" type="LinkButton" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "GoMavSimulator"
+uri = "https://github.com/timetravelCat/GoMavSimulator"
+
+[node name="VSeparator5" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
