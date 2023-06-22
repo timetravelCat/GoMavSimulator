@@ -1,0 +1,59 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ckui405kgf56e"]
+
+[ext_resource type="FontFile" uid="uid://clid185erprtp" path="res://assets/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="1_4uici"]
+[ext_resource type="FontFile" uid="uid://cyhgl1e57eura" path="res://assets/fonts/linux-libertine/LinLibertine_5.3.0_2012_07_02/LinLibertineOTF_5.3.0_2012_07_02/LinLibertine_RBI.otf" id="1_tevx0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65dbe"]
+draw_center = false
+border_width_top = 4
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0.290196)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 12.0
+expand_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kep7l"]
+bg_color = Color(0, 0, 0, 0.0901961)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.368627)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_top = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yu0q5"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 0.701961)
+corner_radius_top_left = 24
+corner_radius_bottom_right = 24
+expand_margin_left = 16.0
+expand_margin_right = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn3c7"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(0, 0, 0, 0.254902)
+
+[resource]
+default_font = ExtResource("1_4uici")
+default_font_size = 26
+Label/colors/font_color = Color(0.796078, 0.545098, 0.27451, 1)
+Label/constants/line_spacing = 20
+Label/styles/normal = SubResource("StyleBoxFlat_65dbe")
+OptionButton/constants/arrow_margin = 10
+OptionButton/constants/outline_size = 1
+TabContainer/colors/font_selected_color = Color(0.431373, 0.94902, 0.94902, 1)
+TabContainer/colors/font_unselected_color = Color(0.317647, 0.392157, 0.380392, 1)
+TabContainer/font_sizes/font_size = 36
+TabContainer/fonts/font = ExtResource("1_tevx0")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_kep7l")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_yu0q5")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_bn3c7")
