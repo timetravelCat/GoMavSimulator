@@ -51,41 +51,39 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 16
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "GENERAL GRAPHIC SETTINGS"
 label_settings = ExtResource("2_wwpjq")
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "FULLSCRREN MODE"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 2
 selected = 0
 popup/item_0/text = "  WINDOWED"
@@ -93,92 +91,95 @@ popup/item_0/id = 0
 popup/item_1/text = "  FULLSCREEN"
 popup/item_1/id = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "SCREEN RESOLUTION"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 1
 selected = 0
 popup/item_0/text = "1920x1080"
 popup/item_0/id = 0
 
-[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "MAIN WINDOW"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 1
 selected = 0
 popup/item_0/text = "0"
 popup/item_0/id = 0
 
-[node name="MarginContainer4" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "VERTICAL SYNC"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "      ON      "
 
-[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 disabled = true
 toggle_mode = true
 text = "     OFF     "
 
-[node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "FRAME RATE LIMITATION"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 6
 selected = 1
 fit_to_longest_item = false
@@ -195,65 +196,98 @@ popup/item_4/id = 4
 popup/item_5/text = "UNLIMITED"
 popup/item_5/id = 5
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "UI SCALING"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 
-[node name="HSlider" type="HSlider" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 50.0
 
-[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer7" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "MINIMAP"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "      ON      "
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer"]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+text = "     OFF     "
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "OVERALL QUALITY"
 label_settings = ExtResource("2_wwpjq")
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "OVERALL QUALITY"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -269,30 +303,31 @@ popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 popup/item_4/disabled = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="Label2" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Label2" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CUTSTOM QUALITY SETTINGS"
 label_settings = ExtResource("2_wwpjq")
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "TEXTURE"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -307,19 +342,20 @@ popup/item_3/id = 3
 popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "SHADOWS"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -334,19 +370,20 @@ popup/item_3/id = 3
 popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "VISUAL EFFECTS"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -361,19 +398,20 @@ popup/item_3/id = 3
 popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "ANTI ALISING"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -388,19 +426,20 @@ popup/item_3/id = 3
 popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer6"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "AMBIENT OCCLUSION"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer6"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -415,19 +454,20 @@ popup/item_3/id = 3
 popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer7"]
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "ANISOTROPIC FILTERING"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer7"]
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/GENERAL/Margin/HBoxContainer/VBoxContainer2/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 4
 item_count = 5
 selected = 0
 fit_to_longest_item = false
@@ -457,6 +497,275 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONSOLE SETTINGS"
+label_settings = ExtResource("2_wwpjq")
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "OPEN CONSOLE"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "CONNECTED"
+popup/item_0/id = 0
+popup/item_1/text = "DISABLED"
+popup/item_1/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "CLOSE CONSOLE"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "DISCONNECTED"
+popup/item_0/id = 0
+popup/item_1/text = "DISABLED"
+popup/item_1/id = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OPEN CONSOLE"
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CLOSE CONSOLE
+"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="Label2" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "JOYSTICK SETTINGS"
+label_settings = ExtResource("2_wwpjq")
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "JOYSTICK CONTROL"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 1
+popup/item_0/text = "ENABLED"
+popup/item_0/id = 0
+popup/item_1/text = "DISABLED"
+popup/item_1/id = 1
+
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VIRTUAL JOYSTICK"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 1
+popup/item_0/text = "ON"
+popup/item_0/id = 0
+popup/item_1/text = "OFF"
+popup/item_1/id = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONNECTION SETTINGS"
+label_settings = ExtResource("2_wwpjq")
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SYSTEM ID"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "254"
+placeholder_text = "0~255"
+alignment = 1
+max_length = 3
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "UDP PORT FORWARDING
+(Experimental)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "14456"
+alignment = 1
+max_length = 5
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "DISABLED"
+popup/item_0/id = 0
+popup/item_1/text = "ENABLED"
+popup/item_1/id = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "AUTO CONNECTION"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = " ADD "
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = " DEL "
+
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_right = 128
+
+[node name="ItemList" type="ItemList" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/MarginContainer5"]
+layout_mode = 2
+auto_height = true
+item_count = 2
+item_0/text = "udp://:14550"
+item_1/text = "serial://COM3:57600"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
 
 [node name="SIMULATOR" type="Control" parent="Margin/VBoxContainer/Tab"]
 visible = false
