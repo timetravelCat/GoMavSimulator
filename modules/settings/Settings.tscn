@@ -36,6 +36,7 @@ tab_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="GENERAL" type="Control" parent="Margin/VBoxContainer/Tab"]
+visible = false
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL"]
@@ -483,7 +484,6 @@ popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
 [node name="MAVLINK" type="Control" parent="Margin/VBoxContainer/Tab"]
-visible = false
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK"]
@@ -751,13 +751,34 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 text = " DEL "
 
+[node name="Button3" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "  ON  "
+
+[node name="Button4" type="Button" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = " OFF "
+
 [node name="MarginContainer5" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_right = 128
 
-[node name="ItemList" type="ItemList" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/MarginContainer5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/MarginContainer5"]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/MarginContainer5/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "udp(serial)://[host(path)][:port(baudrate)]"
+
+[node name="ItemList" type="ItemList" parent="Margin/VBoxContainer/Tab/MAVLINK/Margin/HBoxContainer/VBoxContainer2/MarginContainer5/VBoxContainer"]
+layout_mode = 2
+select_mode = 1
+allow_reselect = true
 auto_height = true
 item_count = 2
 item_0/text = "udp://:14550"
