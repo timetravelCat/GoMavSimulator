@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ckui405kgf56e"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ckui405kgf56e"]
+
+[ext_resource type="FontFile" uid="uid://b2t1wrlschvhx" path="res://assets/fonts/xolonium/Xolonium-Regular.ttf" id="1_qa5du"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65dbe"]
 draw_center = false
@@ -40,6 +42,7 @@ content_margin_right = 24.0
 bg_color = Color(0, 0, 0, 0.254902)
 
 [resource]
+default_font = ExtResource("1_qa5du")
 default_font_size = 26
 Label/colors/font_color = Color(0.796078, 0.545098, 0.27451, 1)
 Label/constants/line_spacing = 20
