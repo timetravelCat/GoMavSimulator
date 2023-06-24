@@ -36,7 +36,6 @@ tab_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="GENERAL" type="Control" parent="Margin/VBoxContainer/Tab"]
-visible = false
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/GENERAL"]
@@ -484,6 +483,7 @@ popup/item_4/text = "DISABLED"
 popup/item_4/id = 4
 
 [node name="MAVLINK" type="Control" parent="Margin/VBoxContainer/Tab"]
+visible = false
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/Tab/MAVLINK"]

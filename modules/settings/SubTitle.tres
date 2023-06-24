@@ -1,7 +1,4 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cm52gobxee8w4"]
-
-[ext_resource type="FontFile" uid="uid://ob2e5m7yhus0" path="res://assets/fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="1_hlf66"]
+[gd_resource type="LabelSettings" format=3 uid="uid://cm52gobxee8w4"]
 
 [resource]
-font = ExtResource("1_hlf66")
 font_size = 32
