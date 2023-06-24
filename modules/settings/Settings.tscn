@@ -49,7 +49,6 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 16
-metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/GENERAL/Margin"]
 layout_mode = 2
@@ -803,6 +802,400 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "VEHICLE SETUP"
+label_settings = ExtResource("2_wwpjq")
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VEHICLE TYPE"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+popup/item_0/text = "MULTICOPTER"
+popup/item_0/id = 0
+popup/item_1/text = "ROVER"
+popup/item_1/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VEHICLE NAME"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/margin_right = 0
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 2
+max_length = 10
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer8" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "DOMAIN ID"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "0"
+placeholder_text = "0~9999"
+alignment = 1
+max_length = 4
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "POSE SOURCE"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 3
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "MAVLINK"
+popup/item_0/id = 0
+popup/item_1/text = "ROS2"
+popup/item_1/id = 1
+popup/item_2/text = "KEYBOARD"
+popup/item_2/id = 2
+
+[node name="MarginContainer7" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "VEHICLE SCALE"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="HSlider" type="HSlider" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 10.0
+exp_edit = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="ItemList" type="ItemList" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+auto_height = true
+item_count = 2
+item_0/text = "(name)(multicopter)(domain id)(source)(scale)"
+item_1/text = "w"
+
+[node name="MarginContainer9" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Button" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ADVANCED
+CONFIGURATION"
+
+[node name="Button4" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "DISABLE"
+
+[node name="Button2" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ADD "
+
+[node name="Button3" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DELETE"
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SENSOR SETUP"
+label_settings = ExtResource("2_wwpjq")
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SENSOR TYPE"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 4
+selected = 2
+fit_to_longest_item = false
+popup/item_0/text = "RGB CAMERA"
+popup/item_0/id = 0
+popup/item_1/text = "DEPTH CAMERA"
+popup/item_1/id = 1
+popup/item_2/text = "RANGE(ToF)"
+popup/item_2/id = 2
+popup/item_3/text = "LIDAR"
+popup/item_3/id = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SENSOR NAME"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/margin_right = 0
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 2
+max_length = 10
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "FRD (Front, Right, Down) distance from vehicle's Centor of Mass"
+mouse_filter = 0
+text = "SENSOR LOCATION(m)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "x(m)"
+
+[node name="LineEdit2" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "y(m)"
+
+[node name="LineEdit3" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "z(m)"
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "Z-Y-X Euler angles"
+mouse_filter = 0
+text = "SENSOR ROTATION(deg)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LineEdit" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "x(deg)"
+
+[node name="LineEdit2" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "y(deg)"
+
+[node name="LineEdit3" type="LineEdit" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "z(deg)"
+
+[node name="ItemList" type="ItemList" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+auto_height = true
+item_count = 2
+item_0/text = "(type)(name)(location)(rotation)"
+item_1/text = "w"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Button4" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ADVANCED
+CONFIGURATION"
+
+[node name="Button5" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "DISABLE"
+
+[node name="Button6" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ADD "
+
+[node name="Button7" type="Button" parent="Margin/VBoxContainer/Tab/SIMULATOR/Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DELETE"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer"]
 layout_mode = 2
