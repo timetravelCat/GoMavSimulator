@@ -17,21 +17,25 @@
 #include <mavsdk/plugins/mavlink_passthrough/mavlink_passthrough.h>
 #include <mavsdk/plugins/param/param.h>
 #include <mavsdk/plugins/shell/shell.h>
+#include <mavsdk/plugins/manual_control/manual_control.h>
 #include <mavsdk/system.h>
 
 using namespace godot;
 
-class GoMAVSDKServer : public Object {
+class GoMAVSDKServer : public Object
+{
 	GDCLASS(GoMAVSDKServer, Object)
 	_THREAD_SAFE_CLASS_
 
 public:
-	enum ForwardOption {
+	enum ForwardOption
+	{
 		FORWARD_OFF = (int)mavsdk::ForwardingOption::ForwardingOff,
 		FORWARD_ON = (int)mavsdk::ForwardingOption::ForwardingOn
 	};
 
-	enum ConnectionResult {
+	enum ConnectionResult
+	{
 		CONNECTION_SUCCESS = (int)mavsdk::ConnectionResult::Success,
 		CONNECTION_TIMEOUT = (int)mavsdk::ConnectionResult::Timeout,
 		CONNECTION_SOCKETERROR = (int)mavsdk::ConnectionResult::SocketError,
@@ -48,7 +52,8 @@ public:
 		CONNECTION_BAUDRATEUNKNOWN = (int)mavsdk::ConnectionResult::BaudrateUnknown
 	};
 
-	enum ShellResult {
+	enum ShellResult
+	{
 		SHELL_UNKNOWN = (int)mavsdk::Shell::Result::Unknown,
 		SHELL_SUCCESS = (int)mavsdk::Shell::Result::Success,
 		SHELL_NOSYSTEM = (int)mavsdk::Shell::Result::NoSystem,
@@ -57,7 +62,8 @@ public:
 		SHELL_BUSY = (int)mavsdk::Shell::Result::Busy
 	};
 
-	enum ParamResult {
+	enum ParamResult
+	{
 		PARAM_UNKNOWN = (int)mavsdk::Param::Result::Unknown,
 		PARAM_SUCCESS = (int)mavsdk::Param::Result::Success,
 		PARAM_TIMEOUT = (int)mavsdk::Param::Result::Timeout,
@@ -68,7 +74,8 @@ public:
 		PARAM_PARAMVALUETOOLONG = (int)mavsdk::Param::Result::ParamValueTooLong
 	};
 
-	enum MavlinkPassthroughResult {
+	enum MavlinkPassthroughResult
+	{
 		MAVLINK_PASSTHROUGH_UNKNOWN = (int)mavsdk::MavlinkPassthrough::Result::Unknown,
 		MAVLINK_PASSTHROUGH_SUCCESS = (int)mavsdk::MavlinkPassthrough::Result::Success,
 		MAVLINK_PASSTHROUGH_CONNECTIONERROR = (int)mavsdk::MavlinkPassthrough::Result::ConnectionError,
@@ -79,14 +86,36 @@ public:
 		MAVLINK_PASSTHROUGH_COMMANDTIMEOUT = (int)mavsdk::MavlinkPassthrough::Result::CommandTimeout
 	};
 
-	struct APIs {
+	enum ManualControlResult
+	{
+		MANUAL_CONTROL_UNKNOWN = (int)mavsdk::ManualControl::Result::Unknown,
+		MANUAL_CONTROL_SUCCESS = (int)mavsdk::ManualControl::Result::Success,
+		MANUAL_CONTROL_NOSYSTEM = (int)mavsdk::ManualControl::Result::NoSystem,
+		MANUAL_CONTROL_CONNECTIONERROR = (int)mavsdk::ManualControl::Result::ConnectionError,
+		MANUAL_CONTROL_BUSY = (int)mavsdk::ManualControl::Result::Busy,
+		MANUAL_CONTROL_COMMANDDENIED = (int)mavsdk::ManualControl::Result::CommandDenied,
+		MANUAL_CONTROL_TIMEOUT = (int)mavsdk::ManualControl::Result::Timeout,
+		MANUAL_CONTROL_INPUTOUTOFRANGE = (int)mavsdk::ManualControl::Result::InputOutOfRange,
+		MANUAL_CONTROL_INPUTNOTSET = (int)mavsdk::ManualControl::Result::InputNotSet
+	};
+
+	enum ManualControlMode
+	{
+		MANUAL_CONTROL_POSITION,
+		MANUAL_CONTROL_ALTITUDE
+	};
+
+	struct APIs
+	{
 		std::shared_ptr<mavsdk::System> system;
 		std::shared_ptr<mavsdk::Shell> shell;
 		std::shared_ptr<mavsdk::Param> param;
 		std::shared_ptr<mavsdk::MavlinkPassthrough> mavlink_passthrough;
+		std::shared_ptr<mavsdk::ManualControl> manual_control;
 	};
 
-	static GoMAVSDKServer *get_singleton() {
+	static GoMAVSDKServer *get_singleton()
+	{
 		return singleton;
 	}
 
@@ -100,8 +129,8 @@ private:
 
 	void _mavlink_message_callback(const int32_t &sys_id, const mavlink_message_t &mavlink_message);
 
-	void _on_shell_received(const int32_t& sys_id, const String message);
-	void _on_mavlink_received(const int32_t& sys_id, const PackedByteArray& message);
+	void _on_shell_received(const int32_t &sys_id, const String message);
+	void _on_mavlink_received(const int32_t &sys_id, const PackedByteArray &message);
 
 protected:
 	static void _bind_methods();
@@ -109,9 +138,10 @@ protected:
 public:
 	void initialize(bool force = false);
 	void _finalize();
-	
+
+	constexpr static uint8_t component_id{190};
 	uint8_t system_id{245};
-	int32_t get_system_id() {return system_id;}
+	int32_t get_system_id() { return system_id; }
 	void set_system_id(int32_t sys_id);
 
 	ConnectionResult add_connection(String address, ForwardOption forwarding = ForwardOption::FORWARD_OFF);
@@ -132,11 +162,17 @@ public:
 	bool add_mavlink_subscription(int32_t sys_id, int32_t message_id);
 	MavlinkPassthroughResult send_mavlink(int32_t sys_id, const PackedByteArray &message);
 
-	GoMAVSDKServer() {
+	void _on_response_manual_control(int32_t sys_id, mavsdk::ManualControl::Result result);
+	void request_manual_control(int32_t sys_id, ManualControlMode mode);
+	ManualControlResult send_manual_control(int32_t sys_id, real_t x, real_t y, real_t z, real_t r);
+
+	GoMAVSDKServer()
+	{
 		singleton = this;
 		initialize();
 	};
-	~GoMAVSDKServer() {
+	~GoMAVSDKServer()
+	{
 		_finalize();
 		singleton = nullptr;
 	};
@@ -147,3 +183,5 @@ VARIANT_ENUM_CAST(GoMAVSDKServer::ConnectionResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ShellResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ParamResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::MavlinkPassthroughResult);
+VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlResult);
+VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlMode);
