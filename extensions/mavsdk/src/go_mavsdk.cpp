@@ -67,12 +67,12 @@ bool GoMAVSDK::add_mavlink_subscription(const int32_t &message_id) {
 
 void GoMAVSDK::_on_shell_received(const int32_t &p_sys_id, const String &message) {
 	if (sys_enable && (sys_id == p_sys_id)) {
-		emit_signal("on_shell_received", message);
+		emit_signal("shell_received", message);
 	}
 }
 void GoMAVSDK::_on_mavlink_received(const int32_t &p_sys_id, const PackedByteArray &message) {
 	if (sys_enable && (sys_id == p_sys_id)) {
-		emit_signal("on_mavlink_received", message);
+		emit_signal("mavlink_received", message);
 	}
 }
 
@@ -84,8 +84,8 @@ void GoMAVSDK::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "sys_id"), "set_sys_id", "get_sys_id");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "sys_enable"), "set_sys_enable", "get_sys_enable");
-	ADD_SIGNAL(MethodInfo("on_shell_received", PropertyInfo(Variant::STRING, "shell")));
-	ADD_SIGNAL(MethodInfo("on_mavlink_received", PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message")));
+	ADD_SIGNAL(MethodInfo("shell_received", PropertyInfo(Variant::STRING, "shell")));
+	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message")));
 
 	ClassDB::bind_method(D_METHOD("is_system_discovered"), &GoMAVSDK::is_system_discovered);
 	ClassDB::bind_method(D_METHOD("is_system_connected"), &GoMAVSDK::is_system_connected);

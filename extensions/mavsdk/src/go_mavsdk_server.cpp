@@ -76,7 +76,7 @@ void GoMAVSDKServer::set_system_id(int32_t sys_id)
 
 void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String message)
 {
-	emit_signal("on_shell_received", sys_id, message);
+	emit_signal("shell_received", sys_id, message);
 	extern std::unordered_set<GoMAVSDK *> _go_mavsdk_set;
 	for (auto &iter : _go_mavsdk_set)
 	{
@@ -86,7 +86,7 @@ void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String mess
 
 void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const PackedByteArray &message)
 {
-	emit_signal("on_mavlink_received", sys_id, message);
+	emit_signal("mavlink_received", sys_id, message);
 	extern std::unordered_set<GoMAVSDK *> _go_mavsdk_set;
 	for (auto &iter : _go_mavsdk_set)
 	{
@@ -132,7 +132,7 @@ void GoMAVSDKServer::start_discovery()
 									_THREAD_SAFE_LOCK_
 									_apis.insert({sys_id, api});
 									_THREAD_SAFE_UNLOCK_
-									emit_signal("on_system_discovered", sys_id);
+									emit_signal("system_discovered", sys_id);
 								}
 							}
 						}
@@ -354,9 +354,9 @@ GoMAVSDKServer::MavlinkPassthroughResult GoMAVSDKServer::send_mavlink(int32_t sy
 
 void GoMAVSDKServer::_bind_methods()
 {
-	ADD_SIGNAL(MethodInfo("on_system_discovered", PropertyInfo(Variant::INT, "sys_id")));													  // Verified
-	ADD_SIGNAL(MethodInfo("on_shell_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::STRING, "shell")));				  // Verified
-	ADD_SIGNAL(MethodInfo("on_mavlink_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message"))); // Verified
+	ADD_SIGNAL(MethodInfo("system_discovered", PropertyInfo(Variant::INT, "sys_id")));													  // Verified
+	ADD_SIGNAL(MethodInfo("shell_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::STRING, "shell")));				  // Verified
+	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message"))); // Verified
 	ClassDB::bind_method(D_METHOD("initialize", "force"), &GoMAVSDKServer::initialize, DEFVAL(0));											  // Verified
 	ClassDB::bind_method(D_METHOD("set_system_id", "sys_id"), &GoMAVSDKServer::set_system_id);												  // Verified
 	ClassDB::bind_method(D_METHOD("get_system_id"), &GoMAVSDKServer::get_system_id);														  // Verified

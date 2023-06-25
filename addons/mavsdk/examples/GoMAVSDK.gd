@@ -11,21 +11,18 @@ func _process(delta):
 	if is_system_connected() && !once_connected:
 		once_connected = true
 		print("conneted to sysid = ", sys_id)
-		connect("on_shell_received", _on_shell_received)
+
 		send_shell("listener vehicle_angular_acceleration")
 		print(get_param("MAV_SYS_ID")) 
 		print(get_param("MAV_SYSS_ID")) # Non-exist parameter case
 		add_mavlink_subscription(74) # 74 : VFR_HUD
 	pass
 
-
-
 func _on_shell_received(shell):
 	print(shell)
 	pass 
 
-
 func _on_mavlink_received(message):
-	# Requires parsing for mavlink messages
+	# TODO Requires parsing library for mavlink messages
 	# print("VFR_HUD RECEIVED")
 	pass 

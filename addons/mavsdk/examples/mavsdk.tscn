@@ -9,4 +9,5 @@ script = ExtResource("1_g446e")
 [node name="GoMAVSDK" type="GoMAVSDK" parent="."]
 script = ExtResource("2_dbg8y")
 
-[connection signal="on_mavlink_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_mavlink_received"]
+[connection signal="mavlink_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_mavlink_received"]
+[connection signal="shell_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_shell_received"]
