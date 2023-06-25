@@ -29,8 +29,9 @@ void GoMAVSDKServer::initialize(bool force)
 	}
 
 	_standalones = 0;
-	_mavsdk = std::make_unique<mavsdk::Mavsdk>();
+	_mavsdk = std::make_shared<mavsdk::Mavsdk>();
 	mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
+	config.set_system_id(system_id);
 	_mavsdk->set_configuration(config);
 	initialized = true;
 }
@@ -53,6 +54,23 @@ void GoMAVSDKServer::_finalize()
 		_mavsdk.reset();
 
 		initialized = false;
+	}
+}
+
+void GoMAVSDKServer::set_system_id(int32_t sys_id)
+{
+	if(sys_id > 255 || sys_id < 0) {
+		WARN_PRINT("Tried to set_system_id of wrong range");
+		return;
+	}
+
+	this->system_id = sys_id;
+
+	if (_mavsdk)
+	{
+		mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
+		config.set_system_id(system_id);
+		_mavsdk->set_configuration(config);
 	}
 }
 
@@ -340,6 +358,8 @@ void GoMAVSDKServer::_bind_methods()
 	ADD_SIGNAL(MethodInfo("on_shell_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::STRING, "shell")));				  // Verified
 	ADD_SIGNAL(MethodInfo("on_mavlink_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message"))); // Verified
 	ClassDB::bind_method(D_METHOD("initialize", "force"), &GoMAVSDKServer::initialize, DEFVAL(0));											  // Verified
+	ClassDB::bind_method(D_METHOD("set_system_id", "sys_id"), &GoMAVSDKServer::set_system_id);												  // Verified
+	ClassDB::bind_method(D_METHOD("get_system_id"), &GoMAVSDKServer::get_system_id);														  // Verified
 	ClassDB::bind_method(D_METHOD("add_connection", "address", "forwarding"), &GoMAVSDKServer::add_connection, DEFVAL(0));					  // Verified
 	ClassDB::bind_method(D_METHOD("setup_udp_remote", "remote_ip", "remote_port", "forwarding"), &GoMAVSDKServer::setup_udp_remote, DEFVAL(0));
 	ClassDB::bind_method(D_METHOD("start_discovery"), &GoMAVSDKServer::start_discovery);

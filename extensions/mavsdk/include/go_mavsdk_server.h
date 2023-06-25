@@ -109,6 +109,10 @@ protected:
 public:
 	void initialize(bool force = false);
 	void _finalize();
+	
+	uint8_t system_id{245};
+	int32_t get_system_id() {return system_id;}
+	void set_system_id(int32_t sys_id);
 
 	ConnectionResult add_connection(String address, ForwardOption forwarding = ForwardOption::FORWARD_OFF);
 	ConnectionResult setup_udp_remote(String remote_ip, int32_t remote_port, ForwardOption forwarding = ForwardOption::FORWARD_OFF);
