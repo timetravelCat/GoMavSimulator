@@ -83,20 +83,30 @@ void GoMAVSDKServer::set_system_id(int32_t sys_id)
 void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String message)
 {
 	emit_signal("shell_received", sys_id, message);
-	extern std::unordered_set<GoMAVSDK *> _go_mavsdk_set;
-	for (auto &iter : _go_mavsdk_set)
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
-		iter->_on_shell_received(sys_id, message);
+		iter->_on_shell_received(message);
 	}
 }
 
 void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const PackedByteArray &message)
 {
 	emit_signal("mavlink_received", sys_id, message);
-	extern std::unordered_set<GoMAVSDK *> _go_mavsdk_set;
-	for (auto &iter : _go_mavsdk_set)
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
-		iter->_on_mavlink_received(sys_id, message);
+		iter->_on_mavlink_received(message);
+	}
+}
+
+void GoMAVSDKServer::_on_response_manual_control(int32_t sys_id, mavsdk::ManualControl::Result result)
+{
+	emit_signal("response_manual_control", sys_id, (ManualControlResult)result);
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
+	{
+		iter->_on_response_manual_control((ManualControlResult)result);
 	}
 }
 
@@ -357,16 +367,6 @@ GoMAVSDKServer::MavlinkPassthroughResult GoMAVSDKServer::send_mavlink(int32_t sy
 	}
 
 	return MavlinkPassthroughResult::MAVLINK_PASSTHROUGH_COMMANDNOSYSTEM;
-}
-
-void GoMAVSDKServer::_on_response_manual_control(int32_t sys_id, mavsdk::ManualControl::Result result)
-{
-	emit_signal("response_manual_control", sys_id, (ManualControlResult)result);
-	extern std::unordered_set<GoMAVSDK *> _go_mavsdk_set;
-	for (auto &iter : _go_mavsdk_set)
-	{
-		iter->_on_response_manual_control(sys_id, (ManualControlResult)result);
-	}
 }
 
 void GoMAVSDKServer::request_manual_control(int32_t sys_id, ManualControlMode mode)

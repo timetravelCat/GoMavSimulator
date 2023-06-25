@@ -9,8 +9,8 @@ protected:
 	static void _bind_methods();
 
 public:
-	GoMAVSDK();
-	~GoMAVSDK();
+	GoMAVSDK() {};
+	~GoMAVSDK() {};
 
 	void set_sys_id(int32_t p_sys_id);
 	int32_t get_sys_id() const;
@@ -27,9 +27,9 @@ public:
 	void request_manual_control(GoMAVSDKServer::ManualControlMode mode);
 	GoMAVSDKServer::ManualControlResult send_manual_control(const real_t& x, const real_t& y, const real_t& z, const real_t& r);
 
-	void _on_shell_received(const int32_t &p_sys_id, const String &message);
-	void _on_mavlink_received(const int32_t &p_sys_id, const PackedByteArray &message);
-	void _on_response_manual_control(const int32_t &p_sys_id, GoMAVSDKServer::ManualControlResult result);
+	void _on_shell_received(const String &message);
+	void _on_mavlink_received(const PackedByteArray &message);
+	void _on_response_manual_control(GoMAVSDKServer::ManualControlResult result);
 
 private:
 	GoMAVSDKServer *server{ GoMAVSDKServer::get_singleton() };
