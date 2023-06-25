@@ -2,6 +2,8 @@
 #include <go_mavsdk.h>
 #include <unordered_set>
 #include <iostream>
+#include <mutex>
+#include <condition_variable>
 
 using namespace std::this_thread;
 using namespace std::chrono;
@@ -12,6 +14,9 @@ std::atomic<bool> GoMAVSDKServer::_request_discovery_stop{true};
 std::map<int32_t, GoMAVSDKServer::APIs> GoMAVSDKServer::_apis;
 int32_t GoMAVSDKServer::_standalones{0};
 std::shared_ptr<mavsdk::Mavsdk> GoMAVSDKServer::_mavsdk;
+
+static std::mutex _mutex;
+static std::condition_variable _condition_variable;
 
 static bool initialized{false};
 void GoMAVSDKServer::initialize(bool force)
@@ -140,10 +145,8 @@ void GoMAVSDKServer::start_discovery()
 					}
 				});
 
-			while (!_request_discovery_stop.load())
-			{
-				sleep_for(duration<double>(1.0));
-			}
+			std::unique_lock<std::mutex> lock(_mutex);
+			_condition_variable.wait(lock);
 		});
 }
 
@@ -152,6 +155,7 @@ void GoMAVSDKServer::stop_discovery()
 	if (_request_discovery_stop.load() == false)
 	{
 		_request_discovery_stop.store(true);
+		_condition_variable.notify_all();
 		_discovery_thread->join();
 		_discovery_thread.reset();
 	}
