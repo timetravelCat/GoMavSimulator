@@ -1,6 +1,5 @@
 #pragma once
 
-#include "coordinate_3d.h"
 #include "publisher.h"
 #include "sensor_msgs/msg/RangePubSubTypes.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "coordinate_3d.h"
+#include "enu2eus.h"
 #include "geometry_msgs/msg/PoseStampedPubSubTypes.h"
 #include "publisher.h"
 
@@ -12,8 +12,8 @@ public:
 	bool publish(Vector3 position, Quaternion orientation) {
 		updateHeader(poseStamped);
 		if (eus_to_enu) {
-			position = Coordinate3D::get_singleton()->eus_to_enu_v(position);
-			orientation = Coordinate3D::get_singleton()->eus_to_enu_q(orientation);
+			position = ENU2EUS::eus_to_enu_v(position);
+			orientation = ENU2EUS::eus_to_enu_q(orientation);
 		}
 		poseStamped.pose().position() = conversion(position);
 		poseStamped.pose().orientation() = conversion(orientation);

@@ -31,7 +31,8 @@
 #include <gdextension_interface.h>
 #include <camera_info_publisher.h>
 #include <compressed_image_publisher.h>
-#include <coordinate_3d.h>
+#include <enu2eus.h>
+#include <enu2ned.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -52,16 +53,13 @@
 #include <ros2dds.h>
 #include <subscriber.h>
 
-static Coordinate3D *_coordinate_3d = nullptr;
-
 void initialize_ros2dds_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
 
-	GDREGISTER_CLASS(Coordinate3D);
-	_coordinate_3d = memnew(Coordinate3D);
-	Engine::get_singleton()->register_singleton("Coordinate3D", Coordinate3D::get_singleton());
+	GDREGISTER_CLASS(ENU2EUS);
+	GDREGISTER_CLASS(ENU2NED);
 	// 2023.06.11 at this time, GDREGISTER_ABSTRACT_CLASS has bug.
 	GDREGISTER_CLASS(ROS2DDS); 		// GDREGISTER_ABSTRACT_CLASS(ROS2DDS);
 	GDREGISTER_CLASS(Publisher); 	// GDREGISTER_ABSTRACT_CLASS(Publisher);
@@ -85,11 +83,6 @@ void initialize_ros2dds_module(ModuleInitializationLevel p_level) {
 void uninitialize_ros2dds_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
-	}
-
-	Engine::get_singleton()->unregister_singleton("Coordinate3D");
-	if (_coordinate_3d) {
-		memdelete(_coordinate_3d);
 	}
 }
 

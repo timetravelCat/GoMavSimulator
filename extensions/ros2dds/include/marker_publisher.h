@@ -86,7 +86,7 @@ public:
 			}
 
 			if (eus_to_enu) {
-				set_scale(Coordinate3D::get_singleton()->eus_to_enu_v(size));
+				set_scale(ENU2EUS::eus_to_enu_v(size));
 			} else {
 				set_scale(size);
 			}
@@ -110,7 +110,7 @@ public:
 			}
 
 			if (eus_to_enu) {
-				set_scale(Coordinate3D::get_singleton()->eus_to_enu_v(size));
+				set_scale(ENU2EUS::eus_to_enu_v(size));
 			} else {
 				set_scale(size);
 			}
@@ -192,8 +192,8 @@ public:
 		}
 
 		if (eus_to_enu) {
-			position = Coordinate3D::get_singleton()->eus_to_enu_v(position);
-			orientation = Coordinate3D::get_singleton()->eus_to_enu_q(orientation);
+			position = ENU2EUS::eus_to_enu_v(position);
+			orientation = ENU2EUS::eus_to_enu_q(orientation);
 		}
 
 		marker.type((int32_t)type);
@@ -233,7 +233,7 @@ public:
 		marker.points().resize(positions.size());
 		if (eus_to_enu) {
 			for (int i = 0; i < positions.size(); i++) {
-				marker.points()[i] = conversion(Coordinate3D::get_singleton()->eus_to_enu_v(positions[i]));
+				marker.points()[i] = conversion(ENU2EUS::eus_to_enu_v(positions[i]));
 			}
 		} else {
 			for (int i = 0; i < positions.size(); i++) {

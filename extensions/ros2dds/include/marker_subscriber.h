@@ -87,11 +87,11 @@ public:
 
 		if (enu_to_eus) {
 			if (global) {
-				meshInstance3D->set_global_transform(Transform3D{ Basis{ Coordinate3D::get_singleton()->enu_to_eus_q(conversion(recv->pose().orientation())) },
-						Coordinate3D::get_singleton()->enu_to_eus_v(conversion(recv->pose().position())) });
+				meshInstance3D->set_global_transform(Transform3D{ Basis{ ENU2EUS::enu_to_eus_q(conversion(recv->pose().orientation())) },
+						ENU2EUS::enu_to_eus_v(conversion(recv->pose().position())) });
 			} else {
-				meshInstance3D->set_transform(Transform3D{ Basis{ Coordinate3D::get_singleton()->enu_to_eus_q(conversion(recv->pose().orientation())) },
-						Coordinate3D::get_singleton()->enu_to_eus_v(conversion(recv->pose().position())) });
+				meshInstance3D->set_transform(Transform3D{ Basis{ ENU2EUS::enu_to_eus_q(conversion(recv->pose().orientation())) },
+						ENU2EUS::enu_to_eus_v(conversion(recv->pose().position())) });
 			}
 		} else {
 			if (global) {

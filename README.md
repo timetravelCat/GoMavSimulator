@@ -113,7 +113,7 @@ You can find examples of mavsdk / ros2dds api in addons/mavsdk:ros22ds/examples
 ![ros2dds](extra/ros2dds.png)
 ### ROS2DDS Features 
   - Topic name can be configured by "Topic Name" property
-  - Singleton class for coordinate transform(EUS, ENU, NED) are implemented (see Coordinate3D).
+  - Classes for coordinate transform(EUS, ENU, NED) are implemented (see NED2EUS ENU2EUS NED2ENU).
 <details>
   <summary>Implemented Publishers / Subscribers</summary>
   <ol>
@@ -145,6 +145,10 @@ You can find examples of mavsdk / ros2dds api in addons/mavsdk:ros22ds/examples
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Extending GDExtension
+Building GDExtension module requires godot-cpp submodule
+```bash
+git submodule update --init --recursive
+```
 Extending mavsdk or ros2 messaging requires source build of each library.
 
 Supported platform & required dependency: 

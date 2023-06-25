@@ -18,7 +18,7 @@ public:
 		auto iter = poses.begin();
 		if (enu_to_eus) {
 			for (auto &position : positions) {
-				position = Coordinate3D::get_singleton()->enu_to_eus_v(conversion((*iter).pose().position()));
+				position = ENU2EUS::enu_to_eus_v(conversion((*iter).pose().position()));
 				iter++;
 			}
 

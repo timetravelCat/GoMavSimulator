@@ -29,6 +29,7 @@
 /**************************************************************************/
 
 #include <gdextension_interface.h>
+#include "ned2eus.h"
 #include "go_mavsdk_server.h"
 #include "go_mavsdk.h"
 #include <godot_cpp/core/defs.hpp>
@@ -45,6 +46,7 @@ void initialize_mavsdk_module(ModuleInitializationLevel p_level)
 		return;
 	}
 
+	GDREGISTER_CLASS(NED2EUS);
 	GDREGISTER_CLASS(GoMAVSDKServer);
 	_GoMAVSDKServer = memnew(GoMAVSDKServer);
 	Engine::get_singleton()->register_singleton("GoMAVSDKServer", GoMAVSDKServer::get_singleton());

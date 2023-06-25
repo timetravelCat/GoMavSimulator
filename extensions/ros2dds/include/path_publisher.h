@@ -1,6 +1,6 @@
 #pragma once
 
-#include "coordinate_3d.h"
+#include "enu2eus.h"
 #include "nav_msgs/msg/PathPubSubTypes.h"
 #include "publisher.h"
 
@@ -15,7 +15,7 @@ public:
 		_path.poses().resize(path.size());
 		if (eus_to_enu) {
 			for (int i = 0; i < path.size(); i++) {
-				const Vector3 position = Coordinate3D::get_singleton()->eus_to_enu_v(path[i]);
+				const Vector3 position = ENU2EUS::eus_to_enu_v(path[i]);
 				_path.poses()[i].pose().position() = conversion(position);
 			}
 		} else {

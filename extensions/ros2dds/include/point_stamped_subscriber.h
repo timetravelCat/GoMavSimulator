@@ -12,7 +12,7 @@ public:
 		const geometry_msgs::msg::PointStamped *recv = static_cast<geometry_msgs::msg::PointStamped *>(p_data);
 		const geometry_msgs::msg::Point &position = recv->point();
 		if (enu_to_eus) {
-			emit_signal("on_data_subscribed", Coordinate3D::get_singleton()->enu_to_eus_v(conversion(position)));
+			emit_signal("on_data_subscribed", ENU2EUS::enu_to_eus_v(conversion(position)));
 		} else {
 			emit_signal("on_data_subscribed", conversion(position));
 		}

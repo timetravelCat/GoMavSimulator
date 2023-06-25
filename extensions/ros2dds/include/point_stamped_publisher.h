@@ -1,6 +1,6 @@
 #pragma once
 
-#include "coordinate_3d.h"
+#include "enu2eus.h"
 #include "geometry_msgs/msg/PointStampedPubSubTypes.h"
 #include "publisher.h"
 
@@ -12,7 +12,7 @@ public:
 	bool publish(Vector3 point) {
 		updateHeader(pointStamped);
 		if (eus_to_enu) {
-			point = Coordinate3D::get_singleton()->eus_to_enu_v(point);
+			point = ENU2EUS::eus_to_enu_v(point);
 		}
 
 		pointStamped.point() = conversion(point);

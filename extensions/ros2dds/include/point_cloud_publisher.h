@@ -1,6 +1,6 @@
 #pragma once
 
-#include "coordinate_3d.h"
+#include "enu2eus.h"
 #include "publisher.h"
 #include "sensor_msgs/msg/PointCloud2PubSubTypes.h"
 #include "sensor_msgs/point_cloud2_iterator.hpp"
@@ -22,7 +22,7 @@ public:
 		sensor_msgs::PointCloud2Iterator<float> iter_z(pointCloud, "z");
 		if (eus_to_enu) {
 			for (int i = 0; i < positions.size(); ++i, ++iter_x, ++iter_y, ++iter_z) {
-				const Vector3 position = Coordinate3D::get_singleton()->eus_to_enu_v(positions[i]);
+				const Vector3 position = ENU2EUS::eus_to_enu_v(positions[i]);
 				*iter_x = position.x;
 				*iter_y = position.y;
 				*iter_z = position.z;

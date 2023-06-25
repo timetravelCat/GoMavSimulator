@@ -14,8 +14,8 @@ public:
 		const geometry_msgs::msg::Quaternion &orientation = recv->pose().orientation();
 		if (enu_to_eus) {
 			emit_signal("on_data_subscribed",
-					Coordinate3D::get_singleton()->enu_to_eus_v(conversion(position)),
-					Coordinate3D::get_singleton()->enu_to_eus_q(conversion(orientation)));
+					ENU2EUS::enu_to_eus_v(conversion(position)),
+					ENU2EUS::enu_to_eus_q(conversion(orientation)));
 		} else {
 			emit_signal("on_data_subscribed",
 					conversion(position),
