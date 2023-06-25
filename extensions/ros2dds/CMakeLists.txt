@@ -29,7 +29,7 @@ else()
 endif()
 
 # TinyXML2
-ExternalProject_Add(tinyxml2
+ExternalProject_Add(tinyxml2u # added suffix u (due to same target exists in mavsdk)
 GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
 GIT_TAG        9.0.0
 CMAKE_ARGS
@@ -46,7 +46,7 @@ BUILD_COMMAND  ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
 INSTALL_COMMAND  ${CMAKE_COMMAND} --install <BINARY_DIR> --config Release
 )
 
-set(TINYXML2_LIB_DIR ${CMAKE_BINARY_DIR}/ros2dds/tinyxml2-prefix/src/tinyxml2-build/install/lib)
+set(TINYXML2_LIB_DIR ${CMAKE_BINARY_DIR}/ros2dds/tinyxml2u-prefix/src/tinyxml2u-build/install/lib)
 
 # foonathan_memory
 ExternalProject_Add(foonathan_memory
