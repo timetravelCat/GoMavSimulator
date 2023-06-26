@@ -10,7 +10,7 @@ protected:
 
 public:
 	GoMAVSDK() {};
-	~GoMAVSDK() {};
+	~GoMAVSDK();
 
 	void set_sys_id(int32_t p_sys_id);
 	int32_t get_sys_id() const;
@@ -28,11 +28,45 @@ public:
 	GoMAVSDKServer::ManualControlResult send_manual_control(const real_t& x, const real_t& y, const real_t& z, const real_t& r);
 
 	void _on_shell_received(const String &message);
-	void _on_mavlink_received(const PackedByteArray &message);
+	void _on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
 	void _on_response_manual_control(GoMAVSDKServer::ManualControlResult result);
 
+	void start_odometry_subscription();
+
+	enum OdometrySource
+	{
+		ODOMETRY_GROUND_TRUTH,
+		ODOMETRY_ESTIMATION
+	};
+
+	OdometrySource odometry_source{OdometrySource::ODOMETRY_GROUND_TRUTH};
+	void set_odometry_source(OdometrySource p_odometry_source) {odometry_source = p_odometry_source;}
+	OdometrySource get_odometry_source() {return odometry_source;}
+
+	void set_ned_to_eus(bool p_ned_to_eus) { ned_to_eus = p_ned_to_eus; };
+	bool get_ned_to_eus() { return ned_to_eus; };
+	bool ned_to_eus{ true };
+
+	Quaternion get_orientation() {return orientation;}
+	void set_orientation(Quaternion p_orientation) {orientation = p_orientation;}
+	Quaternion orientation;
+
+	Vector3 get_position(){return position;}
+	void set_position(Vector3 p_position) {position = p_position;}
+	Vector3 position;
+
 private:
+	bool is_vehicle_standby{false};
+	bool is_reference_valid{false};
+	int32_t reference_latitude;
+	int32_t reference_longitude;
+	int32_t reference_altitude;
+
 	GoMAVSDKServer *server{ GoMAVSDKServer::get_singleton() };
 	bool sys_enable{ true };
 	int32_t sys_id{ -1 };
+
+	void parse_odometry_subscription(const mavlink_message_t &mavlink_message);
 };
+
+VARIANT_ENUM_CAST(GoMAVSDK::OdometrySource);

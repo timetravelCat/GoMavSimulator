@@ -1,8 +1,15 @@
 #include <go_mavsdk.h>
 #include <unordered_set>
 #include <array>
+#include <ned2eus.h>
 
-std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX+1> _go_mavsdk_sets;
+std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+
+GoMAVSDK::~GoMAVSDK()
+{
+	if (sys_id <= UINT8_MAX && sys_id >= 0)
+		_go_mavsdk_sets[sys_id].erase(this);
+}
 
 void GoMAVSDK::set_sys_id(int32_t p_sys_id)
 {
@@ -107,11 +114,102 @@ void GoMAVSDK::_on_shell_received(const String &message)
 		emit_signal("shell_received", message);
 	}
 }
-void GoMAVSDK::_on_mavlink_received(const PackedByteArray &message)
+void GoMAVSDK::_on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message)
 {
 	if (sys_enable)
 	{
-		emit_signal("mavlink_received", message);
+		emit_signal("mavlink_received", byte_message);
+		parse_odometry_subscription(mavlink_message);
+	}
+}
+
+void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_message)
+{
+	switch (odometry_source)
+	{
+	case OdometrySource::ODOMETRY_GROUND_TRUTH:
+	{
+		switch (mavlink_message.msgid)
+		{
+		case MAVLINK_MSG_ID_HEARTBEAT:
+		{
+			mavlink_heartbeat_t heartbeat;
+			mavlink_msg_heartbeat_decode(&mavlink_message, &heartbeat);
+
+			is_vehicle_standby = false;
+			if (heartbeat.system_status == MAV_STATE_STANDBY)
+				is_vehicle_standby = true;
+		}
+		break;
+
+		case MAVLINK_MSG_ID_HIL_STATE_QUATERNION:
+		{
+			mavlink_hil_state_quaternion_t hil_state_quaternion;
+			mavlink_msg_hil_state_quaternion_decode(&mavlink_message, &hil_state_quaternion);
+
+			if (is_vehicle_standby && !is_reference_valid)
+			{
+				reference_latitude = hil_state_quaternion.lat;
+				reference_longitude = hil_state_quaternion.lon;
+				reference_altitude = hil_state_quaternion.alt;
+				is_reference_valid = true;
+			}
+
+			if (is_reference_valid)
+			{
+				// calculate ned position from reference lat, lon, alt
+				static constexpr double CONSTANTS_RADIUS_OF_EARTH = 6371000;
+				static constexpr double DEG_TO_RAD = M_PI / 180.0;
+				const double COS_LAT0 = cos(reference_latitude * 1.0e-7 * DEG_TO_RAD);
+
+				position.x = double(hil_state_quaternion.lat - reference_latitude) * 1.0e-7 * DEG_TO_RAD * CONSTANTS_RADIUS_OF_EARTH;
+				position.y = double(hil_state_quaternion.lon - reference_longitude) * 1.0e-7 * COS_LAT0 * DEG_TO_RAD * CONSTANTS_RADIUS_OF_EARTH;
+				position.z = (reference_altitude - hil_state_quaternion.alt) * 1.0e-3;
+
+				if (ned_to_eus)
+					position = NED2EUS::ned_to_eus_v(position);
+			}
+
+			orientation = Quaternion(hil_state_quaternion.attitude_quaternion[1],
+									 hil_state_quaternion.attitude_quaternion[2],
+									 hil_state_quaternion.attitude_quaternion[3],
+									 hil_state_quaternion.attitude_quaternion[0]);
+			if (ned_to_eus)
+				orientation = NED2EUS::ned_to_eus_q(orientation);
+		}
+		break;
+		}
+	}
+	break;
+
+	case OdometrySource::ODOMETRY_ESTIMATION:
+	{
+		switch (mavlink_message.msgid)
+		{
+		case MAVLINK_MSG_ID_LOCAL_POSITION_NED:
+		{
+			mavlink_local_position_ned_t local_position_ned;
+			mavlink_msg_local_position_ned_decode(&mavlink_message, &local_position_ned);
+			position = Vector3(local_position_ned.x, local_position_ned.y, local_position_ned.z);
+
+			if (ned_to_eus)
+				position = NED2EUS::ned_to_eus_v(position);
+		}
+		break;
+
+		case MAVLINK_MSG_ID_ATTITUDE_QUATERNION:
+		{
+			mavlink_attitude_quaternion_t attitude_quaternion;
+			mavlink_msg_attitude_quaternion_decode(&mavlink_message, &attitude_quaternion);
+			orientation = Quaternion(attitude_quaternion.q2, attitude_quaternion.q3, attitude_quaternion.q4, attitude_quaternion.q1);
+
+			if (ned_to_eus)
+				orientation = NED2EUS::ned_to_eus_q(orientation);
+		}
+		break;
+		}
+	}
+	break;
 	}
 }
 
@@ -120,6 +218,22 @@ void GoMAVSDK::_on_response_manual_control(GoMAVSDKServer::ManualControlResult r
 	if (sys_enable)
 	{
 		emit_signal("response_manual_control", result);
+	}
+}
+
+void GoMAVSDK::start_odometry_subscription()
+{
+	switch (odometry_source)
+	{
+	case OdometrySource::ODOMETRY_GROUND_TRUTH:
+		add_mavlink_subscription(MAVLINK_MSG_ID_HEARTBEAT);
+		add_mavlink_subscription(MAVLINK_MSG_ID_HIL_STATE_QUATERNION);
+		break;
+
+	case OdometrySource::ODOMETRY_ESTIMATION:
+		add_mavlink_subscription(MAVLINK_MSG_ID_LOCAL_POSITION_NED);
+		add_mavlink_subscription(MAVLINK_MSG_ID_ATTITUDE_QUATERNION);
+		break;
 	}
 }
 
@@ -147,4 +261,25 @@ void GoMAVSDK::_bind_methods()
 
 	ClassDB::bind_method(D_METHOD("request_manual_control", "mode"), &GoMAVSDK::request_manual_control);
 	ClassDB::bind_method(D_METHOD("send_manual_control", "x", "y", "z", "r"), &GoMAVSDK::send_manual_control);
+
+	BIND_ENUM_CONSTANT(ODOMETRY_GROUND_TRUTH);
+	BIND_ENUM_CONSTANT(ODOMETRY_ESTIMATION);
+
+	ClassDB::bind_method(D_METHOD("start_odometry_subscription"), &GoMAVSDK::start_odometry_subscription);
+
+	ClassDB::bind_method(D_METHOD("set_odometry_source", "odometry_source"), &GoMAVSDK::set_odometry_source);
+	ClassDB::bind_method(D_METHOD("get_odometry_source"), &GoMAVSDK::get_odometry_source);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "odometry_source", PROPERTY_HINT_ENUM, "GROUND_TRUTH,ESTIMATION"), "set_odometry_source", "get_odometry_source");
+
+	ClassDB::bind_method(D_METHOD("set_ned_to_eus", "ned_to_eus"), &GoMAVSDK::set_ned_to_eus);
+	ClassDB::bind_method(D_METHOD("get_ned_to_eus"), &GoMAVSDK::get_ned_to_eus);
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "ned_to_eus"), "set_ned_to_eus", "get_ned_to_eus");
+
+	ClassDB::bind_method(D_METHOD("set_position", "position"), &GoMAVSDK::set_position);
+	ClassDB::bind_method(D_METHOD("get_position"), &GoMAVSDK::get_position);
+	ADD_PROPERTY(PropertyInfo(Variant::VECTOR3, "position"), "set_position", "get_position");
+
+	ClassDB::bind_method(D_METHOD("set_orientation", "orientation"), &GoMAVSDK::set_orientation);
+	ClassDB::bind_method(D_METHOD("get_orientation"), &GoMAVSDK::get_orientation);
+	ADD_PROPERTY(PropertyInfo(Variant::QUATERNION, "orientation"), "set_orientation", "get_orientation");
 }

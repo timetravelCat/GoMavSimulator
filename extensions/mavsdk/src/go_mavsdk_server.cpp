@@ -35,8 +35,6 @@ void GoMAVSDKServer::initialize(bool force)
 
 	_standalones = 0;
 	_mavsdk = std::make_shared<mavsdk::Mavsdk>();
-	mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
-	config.set_system_id(system_id);
 	_mavsdk->set_configuration(config);
 	initialized = true;
 }
@@ -70,12 +68,26 @@ void GoMAVSDKServer::set_system_id(int32_t sys_id)
 		return;
 	}
 
-	this->system_id = sys_id;
+	config.set_system_id(sys_id);
 
 	if (_mavsdk)
 	{
-		mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
-		config.set_system_id(system_id);
+		_mavsdk->set_configuration(config);
+	}
+}
+
+void GoMAVSDKServer::set_component_id(int32_t comp_id)
+{
+	if (comp_id > 255 || comp_id < 0)
+	{
+		WARN_PRINT("Tried to set_component_id of wrong range");
+		return;
+	}
+
+	config.set_component_id(comp_id);
+
+	if(_mavsdk)
+	{
 		_mavsdk->set_configuration(config);
 	}
 }
@@ -90,13 +102,13 @@ void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String mess
 	}
 }
 
-void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const PackedByteArray &message)
+void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message)
 {
-	emit_signal("mavlink_received", sys_id, message);
+	emit_signal("mavlink_received", sys_id, byte_message);
 	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
 	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
-		iter->_on_mavlink_received(message);
+		iter->_on_mavlink_received(mavlink_message, byte_message);
 	}
 }
 
@@ -304,10 +316,10 @@ Dictionary GoMAVSDKServer::get_all_params(int32_t sys_id)
 
 void GoMAVSDKServer::_mavlink_message_callback(const int32_t &sys_id, const mavlink_message_t &mavlink_message)
 {
-	PackedByteArray message;
-	message.resize(mavlink_msg_get_send_buffer_length(&mavlink_message));
-	mavlink_msg_to_send_buffer(message.ptrw(), &mavlink_message);
-	_on_mavlink_received(sys_id, message);
+	PackedByteArray byte_message;
+	byte_message.resize(mavlink_msg_get_send_buffer_length(&mavlink_message));
+	mavlink_msg_to_send_buffer(byte_message.ptrw(), &mavlink_message);
+	_on_mavlink_received(sys_id, mavlink_message, byte_message);
 }
 
 bool GoMAVSDKServer::add_mavlink_subscription(int32_t sys_id, int32_t message_id)
@@ -410,6 +422,8 @@ void GoMAVSDKServer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("initialize", "force"), &GoMAVSDKServer::initialize, DEFVAL(0));						   // Verified
 	ClassDB::bind_method(D_METHOD("set_system_id", "sys_id"), &GoMAVSDKServer::set_system_id);							   // Verified
 	ClassDB::bind_method(D_METHOD("get_system_id"), &GoMAVSDKServer::get_system_id);									   // Verified
+	ClassDB::bind_method(D_METHOD("set_component_id", "comp_id"), &GoMAVSDKServer::set_component_id);							   // Verified
+	ClassDB::bind_method(D_METHOD("get_component_id"), &GoMAVSDKServer::get_component_id);									   // Verified
 	ClassDB::bind_method(D_METHOD("add_connection", "address", "forwarding"), &GoMAVSDKServer::add_connection, DEFVAL(0)); // Verified
 	ClassDB::bind_method(D_METHOD("setup_udp_remote", "remote_ip", "remote_port", "forwarding"), &GoMAVSDKServer::setup_udp_remote, DEFVAL(0));
 	ClassDB::bind_method(D_METHOD("start_discovery"), &GoMAVSDKServer::start_discovery);

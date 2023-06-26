@@ -130,7 +130,7 @@ private:
 	void _mavlink_message_callback(const int32_t &sys_id, const mavlink_message_t &mavlink_message);
 
 	void _on_shell_received(const int32_t &sys_id, const String message);
-	void _on_mavlink_received(const int32_t &sys_id, const PackedByteArray &message);
+	void _on_mavlink_received(const int32_t &sys_id, const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
 
 protected:
 	static void _bind_methods();
@@ -139,9 +139,10 @@ public:
 	void initialize(bool force = false);
 	void _finalize();
 
-	constexpr static uint8_t component_id{190};
-	uint8_t system_id{245};
-	int32_t get_system_id() { return system_id; }
+	mavsdk::Mavsdk::Configuration config{mavsdk::Mavsdk::Configuration::UsageType::GroundStation};
+	int32_t get_component_id() {return config.get_component_id();}
+	void set_component_id(int32_t comp_id);
+	int32_t get_system_id() { return config.get_system_id(); }
 	void set_system_id(int32_t sys_id);
 
 	ConnectionResult add_connection(String address, ForwardOption forwarding = ForwardOption::FORWARD_OFF);

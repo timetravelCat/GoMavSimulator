@@ -1,5 +1,7 @@
 extends GoMAVSDK
 
+@onready var meshInstance3D:MeshInstance3D=$MeshInstance3D
+
 var once_connected
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,11 +17,16 @@ func _process(delta):
 		send_shell("listener vehicle_angular_acceleration")
 		print(get_param("MAV_SYS_ID")) 
 		print(get_param("MAV_SYSS_ID")) # Non-exist parameter case
-		add_mavlink_subscription(74) # 74 : VFR_HUD
+		# add_mavlink_subscription(74) # 74 : VFR_HUD
+		# send_shell("uorb top")
+		start_odometry_subscription()
+	
+	meshInstance3D.position = position;
+	meshInstance3D.basis = Basis(orientation)
 	pass
 
 func _on_shell_received(shell):
-	print(shell)
+	# print(shell)
 	pass 
 
 func _on_mavlink_received(message):
