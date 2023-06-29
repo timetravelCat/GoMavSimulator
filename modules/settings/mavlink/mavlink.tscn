@@ -3,10 +3,14 @@
 [ext_resource type="LabelSettings" uid="uid://cm52gobxee8w4" path="res://modules/settings/SubTitle.tres" id="1_cd3fk"]
 [ext_resource type="Script" path="res://modules/settings/mavlink/mavlink.gd" id="1_krufd"]
 
-[node name="MAVLINK" type="Control" node_paths=PackedStringArray("system_id", "component_id", "udp_portforward", "udp_portforward_port", "autoconnect", "autoconnect_list")]
+[node name="MAVLINK" type="Control" node_paths=PackedStringArray("console_connect", "console_disconnect", "joystick_control", "virtual_joystick", "system_id", "component_id", "udp_portforward", "udp_portforward_port", "autoconnect", "autoconnect_list")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_krufd")
+console_connect = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer/console_connected")
+console_disconnect = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer2/console_disconnected")
+joystick_control = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer4/joystick_control")
+virtual_joystick = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer5/virtual_joystick")
 system_id = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/system_id")
 component_id = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/component_id")
 udp_portforward = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer/udp_portforward")
@@ -331,12 +335,8 @@ placeholder_text = "udp(serial)://[host(path)][:port(baudrate)]"
 
 [node name="autoconnect_list" type="ItemList" parent="Margin/HBoxContainer/VBoxContainer2/MarginContainer5/VBoxContainer"]
 layout_mode = 2
-select_mode = 1
 allow_reselect = true
 auto_height = true
-item_count = 2
-item_0/text = "udp://:14550"
-item_1/text = "serial://COM3:57600"
 
 [node name="MarginContainer4" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
