@@ -1,6 +1,7 @@
 extends Control
 
 @export var system_id:LineEdit
+@export var component_id:LineEdit
 @export var udp_portforward:OptionButton
 @export var udp_portforward_port:LineEdit
 @export var autoconnect:LineEdit
@@ -57,7 +58,15 @@ func _on_system_id_text_submitted(new_text:String):
 		# reset LineEdit
 		system_id.clear()
 	pass # Replace with function body.
-	
+
+func _on_component_id_text_submitted(new_text:String):
+	if new_text.is_valid_int():
+		MavlinkSettings.component_id_changed.emit(new_text.to_int())
+	else:
+		# reset LineEdit
+		component_id.clear()
+	pass 
+
 func _on_udp_portforward_item_selected(index):
 	if udp_portforward_port.text.is_valid_int() == false:
 		udp_portforward_port.clear()
@@ -109,3 +118,4 @@ func _on_autoconnect_disable_pressed():
 			autoconnect_list.set_item_custom_fg_color(selected_item, Color(1.0, 1.0, 1.0, 0.2))
 			autoconnect_list.set_item_tooltip(selected_item, "disabled")
 	pass
+

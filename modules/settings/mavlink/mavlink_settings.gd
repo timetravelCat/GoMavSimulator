@@ -16,6 +16,10 @@ signal virutal_joystick_enabled(enable:bool)
 var system_id:int
 signal system_id_changed(sys_id:int)
 
+# mavsdk compid settings
+var component_id:int
+signal component_id_changed(component_id:int)
+
 # portforward settings
 var udp_portforward_enabled:bool
 var udp_portforward_port:int

@@ -3,11 +3,12 @@
 [ext_resource type="LabelSettings" uid="uid://cm52gobxee8w4" path="res://modules/settings/SubTitle.tres" id="1_cd3fk"]
 [ext_resource type="Script" path="res://modules/settings/mavlink/mavlink.gd" id="1_krufd"]
 
-[node name="MAVLINK" type="Control" node_paths=PackedStringArray("system_id", "udp_portforward", "udp_portforward_port", "autoconnect", "autoconnect_list")]
+[node name="MAVLINK" type="Control" node_paths=PackedStringArray("system_id", "component_id", "udp_portforward", "udp_portforward_port", "autoconnect", "autoconnect_list")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_krufd")
 system_id = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/system_id")
+component_id = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/component_id")
 udp_portforward = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer/udp_portforward")
 udp_portforward_port = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer/udp_portforward_port")
 autoconnect = NodePath("Margin/HBoxContainer/VBoxContainer2/MarginContainer5/VBoxContainer/autoconnect")
@@ -210,6 +211,32 @@ caret_blink = true
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "COMPONENT ID"
+vertical_alignment = 1
+
+[node name="component_id" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "190"
+placeholder_text = "0~255"
+alignment = 1
+max_length = 3
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -322,6 +349,7 @@ theme_override_constants/margin_top = 6
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer4/joystick_control" to="." method="_on_joystick_control_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer5/virtual_joystick" to="." method="_on_virtual_joystick_item_selected"]
 [connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer/system_id" to="." method="_on_system_id_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/component_id" to="." method="_on_component_id_text_submitted"]
 [connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer/udp_portforward_port" to="." method="_on_udp_portforward_port_text_submitted"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer2/HBoxContainer/udp_portforward" to="." method="_on_udp_portforward_item_selected"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/autoconnect_add" to="." method="_on_autoconnect_add_pressed"]
