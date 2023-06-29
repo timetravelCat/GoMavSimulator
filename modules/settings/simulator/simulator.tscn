@@ -1,11 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://krvkbrvmctag"]
+[gd_scene load_steps=4 format=3 uid="uid://krvkbrvmctag"]
 
 [ext_resource type="LabelSettings" uid="uid://cm52gobxee8w4" path="res://modules/settings/SubTitle.tres" id="1_dt44q"]
+[ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
+[ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control"]
-visible = false
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "CameraWitdh", "CameraHeight", "LidarVerticalFov", "LidarWidth", "LidarHeigth")]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_r845a")
+VehicleType = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer/VehicleType")
+VehicleName = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer/VehicleName")
+DomainID = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer6/DomainID")
+PoseSource = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer7/PoseSource")
+VehicleScale = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer/VehicleScale")
+VehicleList = NodePath("Margin/HBoxContainer/VBoxContainer/VehicleList")
+VehicleDisable = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDisable")
+VehiclePopup = NodePath("Margin/VehiclePopup")
+MavlinkPoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer/MavlinkPoseSource")
+MavlinkSysId = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer2/sysid")
+Ros2PoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer3/topic")
+SensorType = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/SensorType")
+SensorName = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer/SensorName")
+PublishRate = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer9/HBoxContainer/PublishRate")
+LocationX = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationX")
+LocationY = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationY")
+LocationZ = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationZ")
+RotationX = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationX")
+RotationY = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationY")
+RotationZ = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationZ")
+SensorList = NodePath("Margin/HBoxContainer/VBoxContainer2/SensorList")
+SensorDisable = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable")
+SensorPopup = NodePath("Margin/SensorPopup")
+CameraWitdh = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraWidth")
+CameraHeight = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraHeight")
+LidarVerticalFov = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer2/VerticalFov")
+LidarWidth = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarWidth")
+LidarHeigth = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarHeight")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -47,7 +77,7 @@ size_flags_horizontal = 10
 text = "VEHICLE TYPE"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="VehicleType" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -82,12 +112,13 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme_override_constants/margin_right = 0
 
-[node name="LineEdit" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer"]
+[node name="VehicleName" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 2
 max_length = 10
+expand_to_text_length = true
 context_menu_enabled = false
 select_all_on_focus = true
 caret_blink = true
@@ -106,7 +137,7 @@ size_flags_horizontal = 10
 text = "DOMAIN ID"
 vertical_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
+[node name="DomainID" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -132,7 +163,7 @@ size_flags_horizontal = 10
 text = "POSE SOURCE"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
+[node name="PoseSource" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -168,7 +199,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/margin_left = 32
 
-[node name="HSlider" type="HSlider" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+[node name="VehicleScale" type="HSlider" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -184,14 +215,11 @@ theme_override_constants/margin_left = 32
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="ItemList" type="ItemList" parent="Margin/HBoxContainer/VBoxContainer"]
+[node name="VehicleList" type="ItemList" parent="Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-allow_reselect = true
 auto_height = true
-item_count = 2
-item_0/text = "(name)(multicopter)(domain id)(source)(scale)"
-item_1/text = "w"
+max_columns = 10
 
 [node name="MarginContainer9" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -201,24 +229,24 @@ theme_override_constants/margin_top = 6
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Button" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="VehicleAdvancedConfig" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ADVANCED
 CONFIGURATION"
 
-[node name="Button4" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="VehicleDisable" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "DISABLE"
 
-[node name="Button2" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="VehicleAdd" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "ADD "
+text = "   ADD   "
 
-[node name="Button3" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="VehicleDelete" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DELETE"
@@ -252,7 +280,7 @@ size_flags_horizontal = 10
 text = "SENSOR TYPE"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="SensorType" type="OptionButton" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -292,10 +320,46 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 theme_override_constants/margin_right = 0
 
-[node name="LineEdit" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer"]
+[node name="SensorName" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+alignment = 2
+max_length = 10
+expand_to_text_length = true
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "PUBLISH RATE(Hz)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer9/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/margin_right = 0
+
+[node name="PublishRate" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer9/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "0~100"
 alignment = 2
 max_length = 10
 context_menu_enabled = false
@@ -322,19 +386,19 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="LineEdit" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+[node name="LocationX" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "x(m)"
 
-[node name="LineEdit2" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+[node name="LocationY" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "y(m)"
 
-[node name="LineEdit3" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
+[node name="LocationZ" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -360,55 +424,269 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="LineEdit" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+[node name="RotationX" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "x(deg)"
 
-[node name="LineEdit2" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+[node name="RotationY" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "y(deg)"
 
-[node name="LineEdit3" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+[node name="RotationZ" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "z(deg)"
 
-[node name="ItemList" type="ItemList" parent="Margin/HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer8" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="SensorList" type="ItemList" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-allow_reselect = true
 auto_height = true
-item_count = 2
-item_0/text = "(type)(name)(location)(rotation)"
-item_1/text = "w"
+max_columns = 10
+
+[node name="MarginContainer7" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Button4" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="SensorAdvancedConfig" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ADVANCED
 CONFIGURATION"
 
-[node name="Button5" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="SensorDisable" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "DISABLE"
 
-[node name="Button6" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="SensorAdd" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ADD "
 
-[node name="Button7" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
+[node name="SensorDelete" type="Button" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DELETE"
+
+[node name="VehiclePopup" type="MarginContainer" parent="Margin"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="ColorRect" type="ColorRect" parent="Margin/VehiclePopup"]
+layout_mode = 2
+color = Color(0.0509804, 0.0941176, 0.0980392, 0.847059)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VehiclePopup"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "POSE SOURCE(MAVLINK)"
+vertical_alignment = 1
+
+[node name="MavlinkPoseSource" type="OptionButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+item_count = 2
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "GROUND TRUTH"
+popup/item_0/id = 0
+popup/item_1/text = "ESTIMATION"
+popup/item_1/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "SYS ID(MAVLINK)"
+vertical_alignment = 1
+
+[node name="sysid" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "0-255"
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "POSE SOURCE(ROS2)"
+vertical_alignment = 1
+
+[node name="topic" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "topic name"
+alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="VehicleSetupClose" type="TextureButton" parent="Margin/VehiclePopup"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("3_me20j")
+stretch_mode = 4
+
+[node name="SensorPopup" type="MarginContainer" parent="Margin"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="ColorRect" type="ColorRect" parent="Margin/SensorPopup"]
+layout_mode = 2
+color = Color(0.0509804, 0.0941176, 0.0980392, 0.847059)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/SensorPopup"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "RESOLUTION(CAMERA)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="CameraWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "width"
+alignment = 1
+
+[node name="CameraHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "height"
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "VERTICAL FOV(LIDAR)"
+vertical_alignment = 1
+
+[node name="VerticalFov" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "degree"
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "RESOLUTION(LIDAR)"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="LidarWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "width"
+alignment = 1
+
+[node name="LidarHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "height"
+alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="SensorSetupClose" type="TextureButton" parent="Margin/SensorPopup"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("3_me20j")
+stretch_mode = 4
+
+[connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/VehicleList" to="." method="_on_vehicle_list_item_selected"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleAdvancedConfig" to="." method="_on_vehicle_advanced_config_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDisable" to="." method="_on_vehicle_disable_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleAdd" to="." method="_on_vehicle_add_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDelete" to="." method="_on_vehicle_delete_pressed"]
+[connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/SensorList" to="." method="_on_sensor_list_item_selected"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorAdvancedConfig" to="." method="_on_sensor_advanced_config_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable" to="." method="_on_sensor_disable_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorAdd" to="." method="_on_sensor_add_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDelete" to="." method="_on_sensor_delete_pressed"]
+[connection signal="pressed" from="Margin/VehiclePopup/VehicleSetupClose" to="." method="_on_vehicle_setup_close_pressed"]
+[connection signal="pressed" from="Margin/SensorPopup/SensorSetupClose" to="." method="_on_sensor_setup_close_pressed"]

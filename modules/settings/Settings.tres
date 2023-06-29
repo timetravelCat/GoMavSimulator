@@ -44,6 +44,7 @@ bg_color = Color(0, 0, 0, 0.254902)
 [resource]
 default_font = ExtResource("1_qa5du")
 default_font_size = 26
+ItemList/constants/h_separation = 16
 Label/colors/font_color = Color(0.796078, 0.545098, 0.27451, 1)
 Label/constants/line_spacing = 20
 Label/styles/normal = SubResource("StyleBoxFlat_65dbe")
