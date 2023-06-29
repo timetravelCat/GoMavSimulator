@@ -391,18 +391,24 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "x(m)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="LocationY" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "y(m)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="LocationZ" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "z(m)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="MarginContainer6" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -429,18 +435,24 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "x(deg)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="RotationY" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "y(deg)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="RotationZ" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "z(deg)"
+alignment = 1
+select_all_on_focus = true
 
 [node name="MarginContainer8" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2

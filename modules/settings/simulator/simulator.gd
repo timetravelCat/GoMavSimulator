@@ -36,9 +36,38 @@ extends Control
 @export var LidarWidth:LineEdit
 @export var LidarHeigth:LineEdit
 
-func _ready():
-	# TODO set defaults to controls
-	pass
+func reset_to_default():
+	# Set all control node value as default
+	VehicleType.select(0)
+	VehicleName.clear()
+	DomainID.text = "0"
+	PoseSource.select(0)
+	VehicleScale.value = SimulatorSettings.VEHICLE_DEFAULT_SCALE
+	VehicleDisable.text = "DISABLE"
+	
+	SensorType.select(0)
+	SensorName.clear()
+	PublishRate.clear()
+	LocationX.text = "0.0"
+	LocationY.text = "0.0"
+	LocationZ.text = "0.0"
+	RotationX.text = "0.0"
+	RotationY.text = "0.0"
+	RotationZ.text = "0.0"
+	SensorList.clear()
+	SensorDisable.text = "DISABLE"
+	
+	# Clear VehicleList
+	while VehicleList.item_count > 0:
+		VehicleList.select(0)
+		_on_vehicle_delete_pressed()
+	
+	# Load Default Vehicle 
+	var NewVehicle = SimulatorSettings.Vehicle.new()
+	NewVehicle.item_id = VehicleList.add_item(NewVehicle.name)
+	# (TODO add default sensor)
+	SimulatorSettings.VehicleList.merge({NewVehicle.name: NewVehicle})
+	
 
 func _on_vehicle_add_pressed():
 	if VehicleName.text.is_empty():
@@ -74,31 +103,29 @@ func _on_vehicle_delete_pressed():
 		Notification.notify(" Select Veihcle ", Notification.NOTICE_TYPE.WARNING)
 		return
 	
-	var selected_items:PackedInt32Array = VehicleList.get_selected_items()
-	for item in selected_items:
-		var key:String = VehicleList.get_item_text(item)
-		SimulatorSettings.VehicleList.erase(key)
-		VehicleList.remove_item(item)
+	var item:int = VehicleList.get_selected_items()[0]
+	var key:String = VehicleList.get_item_text(item)
+	SimulatorSettings.VehicleList.erase(key)
+	VehicleList.remove_item(item)
 
 func _on_vehicle_disable_pressed():
 	if !VehicleList.is_anything_selected():
 		Notification.notify(" Select Veihcle ", Notification.NOTICE_TYPE.WARNING)
 		return
 	
-	var selected_items:PackedInt32Array = VehicleList.get_selected_items()
-	for item in selected_items:
-		var key:String = VehicleList.get_item_text(item)
-		if SimulatorSettings.VehicleList.has(key):
-			var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.Vehicle
-			vehicle.enable = !vehicle.enable
-			
-			# set color
-			if !vehicle.enable:
-				VehicleList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 0.2))	
-				VehicleDisable.text = "ENABLE"
-			else :
-				VehicleList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 1.0)) # Enabled color
-				VehicleDisable.text = "DISABLE"
+	var item:int = VehicleList.get_selected_items()[0]
+	var key:String = VehicleList.get_item_text(item)
+	if SimulatorSettings.VehicleList.has(key):
+		var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.Vehicle
+		vehicle.enable = !vehicle.enable
+		
+		# set color
+		if !vehicle.enable:
+			VehicleList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 0.2))	
+			VehicleDisable.text = "ENABLE"
+		else :
+			VehicleList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 1.0)) # Enabled color
+			VehicleDisable.text = "DISABLE"
 	
 func _on_vehicle_list_item_selected(index):
 	var key:String = VehicleList.get_item_text(index)
@@ -174,30 +201,28 @@ func _on_sensor_delete_pressed():
 	if vehicle == null:
 		return
 	
-	var selected_items:PackedInt32Array = SensorList.get_selected_items()
-	for item in selected_items:
-		var key:String = SensorList.get_item_text(item)
-		vehicle.sensors.erase(key)
-		SensorList.remove_item(item)
+	var item:int = SensorList.get_selected_items()[0]
+	var key:String = SensorList.get_item_text(item)
+	vehicle.sensors.erase(key)
+	SensorList.remove_item(item)
 
 func _on_sensor_disable_pressed():
 	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
 	if vehicle == null:
 		return
 		
-	var selected_items:PackedInt32Array = SensorList.get_selected_items()
-	for item in selected_items:
-		var key:String = SensorList.get_item_text(item)
-		if vehicle.sensors.has(key):
-			var sensor := vehicle.sensors[key] as SimulatorSettings.Sensor
-			sensor.enable = !sensor.enable
-			
-			if !sensor.enable:
-				SensorList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 0.2))
-				SensorDisable.text = "ENABLE"
-			else :
-				SensorList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 1.0))
-				SensorDisable.text = "DISABLE"
+	var item:int = SensorList.get_selected_items()[0]
+	var key:String = SensorList.get_item_text(item)
+	if vehicle.sensors.has(key):
+		var sensor := vehicle.sensors[key] as SimulatorSettings.Sensor
+		sensor.enable = !sensor.enable
+		
+		if !sensor.enable:
+			SensorList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 0.2))
+			SensorDisable.text = "ENABLE"
+		else :
+			SensorList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 1.0))
+			SensorDisable.text = "DISABLE"
 	
 func _on_sensor_list_item_selected(index):
 	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
@@ -210,12 +235,12 @@ func _on_sensor_list_item_selected(index):
 	SensorType.select(sensor.type)
 	SensorName.text = sensor.name
 	PublishRate.text = str(sensor.hz)
-	var position:Vector3 = ENU2EUS.eus_to_enu_v(sensor.location)
-	var rotation:Basis = ENU2EUS.eus_to_enu_b(sensor.rotation)
-	LocationX.text = str(position.x)
-	LocationY.text = str(position.y)
-	LocationZ.text = str(position.z)
-	var euler:Vector3 = rotation.get_euler(EULER_ORDER_ZYX)
+	var sensor_position:Vector3 = ENU2EUS.eus_to_enu_v(sensor.location)
+	var sensor_rotation:Basis = ENU2EUS.eus_to_enu_b(sensor.rotation)
+	LocationX.text = str(sensor_position.x)
+	LocationY.text = str(sensor_position.y)
+	LocationZ.text = str(sensor_position.z)
+	var euler:Vector3 = sensor_rotation.get_euler(EULER_ORDER_ZYX)
 	RotationX.text = str(rad_to_deg(euler.x))
 	RotationY.text = str(rad_to_deg(euler.y))
 	RotationZ.text = str(rad_to_deg(euler.z))
@@ -225,7 +250,7 @@ func _on_sensor_list_item_selected(index):
 	CameraHeight.text = str(sensor.resoultion.y)
 	LidarVerticalFov.text = str(rad_to_deg(sensor.vertical_fov))
 	LidarWidth.text = str(rad_to_deg(sensor.horizontal_resolution))
-	LidarWidth.text = str(rad_to_deg(sensor.vertical_resolution))
+	LidarHeigth.text = str(rad_to_deg(sensor.vertical_resolution))
 
 func get_selected_vehicle() -> SimulatorSettings.Vehicle:
 	if !VehicleList.is_anything_selected():

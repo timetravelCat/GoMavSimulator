@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://df188sjgsf3uy"]
+[gd_scene load_steps=6 format=3 uid="uid://df188sjgsf3uy"]
 
 [ext_resource type="Theme" uid="uid://ckui405kgf56e" path="res://modules/settings/Settings.tres" id="1_714jo"]
+[ext_resource type="Script" path="res://modules/settings/Settings.gd" id="2_c2rbr"]
 [ext_resource type="PackedScene" uid="uid://duvx1j0f3ka8m" path="res://modules/settings/general/general.tscn" id="3_3hli3"]
 [ext_resource type="PackedScene" uid="uid://bkym8b44e7s8b" path="res://modules/settings/mavlink/mavlink.tscn" id="3_gr4d4"]
 [ext_resource type="PackedScene" uid="uid://krvkbrvmctag" path="res://modules/settings/simulator/simulator.tscn" id="4_t23n2"]
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" node_paths=PackedStringArray("tab", "general", "mavlink", "simulator")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +14,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_714jo")
+script = ExtResource("2_c2rbr")
+tab = NodePath("Margin/VBoxContainer/Tab")
+general = NodePath("Margin/VBoxContainer/Tab/GENERAL")
+mavlink = NodePath("Margin/VBoxContainer/Tab/MAVLINK")
+simulator = NodePath("Margin/VBoxContainer/Tab/SIMULATOR")
 metadata/_edit_lock_ = true
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -45,6 +51,7 @@ visible = false
 layout_mode = 2
 
 [node name="SIMULATOR" parent="Margin/VBoxContainer/Tab" instance=ExtResource("4_t23n2")]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VBoxContainer"]
@@ -86,3 +93,7 @@ uri = "https://github.com/timetravelCat/GoMavSimulator"
 
 [node name="VSeparator5" type="VSeparator" parent="Margin/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+
+[connection signal="pressed" from="Margin/VBoxContainer/HBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Margin/VBoxContainer/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Margin/VBoxContainer/HBoxContainer2/ResetButton" to="." method="_on_reset_button_pressed"]

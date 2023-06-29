@@ -4,9 +4,9 @@ extends Node
 enum VEHICLE_TYPE {MULTICOPTER, ROVER}
 enum POSE_SOURCE {MAVLINK, ROS2, NONE}
 enum MAVLINK_POSE_SOURCE {GROUND_TRUTH, ESTIMATION}
+const VEHICLE_DEFAULT_SCALE:float=10.0
 
 # Default advanced vehicle setting defaults
-const VEHICLE_DEFAULT_SCALE:float=10.0
 const MAVLINK_POSE_SOURCE_DEFAULT=SimulatorSettings.MAVLINK_POSE_SOURCE.GROUND_TRUTH
 const VEHILE_SYSID_DEFAULT:int=0
 const ROS2_POSE_TOPIC_DEFAULT:String="pose"
@@ -19,16 +19,16 @@ const LIDAR_DEFAULT_VERTICAL_RESOLUTION:float = 0.0
 const LIDAR_DEFAULT_HORIZONTAL_RESOLUTION:float = deg_to_rad(5.0)
 
 class Vehicle:
-	var item_id:int # itemlist control id
-	var enable:bool
-	var name:String
-	var type:VEHICLE_TYPE
-	var scale:float
-	var pose_source:POSE_SOURCE
-	var domain_id:int
+	var item_id:int = 0 # itemlist control id
+	var enable:bool = true
+	var name:String = "sim"
+	var type:VEHICLE_TYPE = VEHICLE_TYPE.MULTICOPTER
+	var scale:float = 1.0
+	var pose_source:POSE_SOURCE = POSE_SOURCE.MAVLINK
+	var domain_id:int = 0
 	# advanced setting
-	var mavlink_pose_source:MAVLINK_POSE_SOURCE
-	var sys_id:int # mavlink system id
+	var mavlink_pose_source:MAVLINK_POSE_SOURCE = MAVLINK_POSE_SOURCE_DEFAULT
+	var sys_id:int = VEHILE_SYSID_DEFAULT# mavlink system id
 	var ros2_pose_source:String # name of PoseStamped topic.
 	var sensors:Dictionary # ["name", Sensor]
 
