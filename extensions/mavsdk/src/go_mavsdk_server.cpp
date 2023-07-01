@@ -51,6 +51,7 @@ void GoMAVSDKServer::_finalize()
 			api.second.shell.reset();
 			api.second.param.reset();
 			api.second.mavlink_passthrough.reset();
+			api.second.manual_control.reset();
 		}
 
 		_apis.clear();
@@ -134,6 +135,7 @@ GoMAVSDKServer::ConnectionResult GoMAVSDKServer::setup_udp_remote(String remote_
 
 void GoMAVSDKServer::start_discovery()
 {
+	stop_discovery();
 	_request_discovery_stop.store(false);
 	_discovery_thread = std::make_unique<std::thread>(
 		[this]
@@ -171,7 +173,7 @@ void GoMAVSDKServer::start_discovery()
 				});
 
 			std::unique_lock<std::mutex> lock(_mutex);
-			_condition_variable.wait(lock);
+			_condition_variable.wait(lock, []{return _request_discovery_stop.load();});
 		});
 }
 
