@@ -11,13 +11,23 @@ func _on_shell_received(sys_id, shell):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.add_connection("serial://COM3:57600")
+	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.connect("shell_received", _on_shell_received)
 	GoMAVSDKServer.start_discovery()
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+# Reset GoMAVSDKServer after 5s
+func _on_timer_timeout():
+	GoMAVSDKServer.initialize(true)
+	print("Initialized")
+	# GoMAVSDKServer.add_connection("serial://COM3:57600")
+
+# Reconnecting GoMAVSDKServer after 10s
+func _on_timer_2_timeout():
+	GoMAVSDKServer.add_connection("serial://COM3:57600")
+	GoMAVSDKServer.start_discovery()

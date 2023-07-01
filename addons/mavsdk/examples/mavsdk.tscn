@@ -18,5 +18,15 @@ mesh = SubResource("BoxMesh_4gc5m")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="mavlink_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_mavlink_received"]
 [connection signal="shell_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_shell_received"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
