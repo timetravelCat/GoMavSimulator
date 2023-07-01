@@ -2,6 +2,7 @@ extends Window
 
 @export var contents:RichTextLabel
 signal text_submitted(text: String)
+signal text_submitted_with_sysid(sys_id:int, text:String)
 
 func append_contents(text: String):
 	contents.append_text(text)
@@ -26,5 +27,6 @@ func _on_close_requested():
 	pass 
 
 func _on_console_writer_text_submitted(new_text):
-	text_submitted.emit(text_submitted, new_text)
+	text_submitted.emit(new_text)
+	text_submitted_with_sysid.emit(name.to_int(), new_text)
 	pass 

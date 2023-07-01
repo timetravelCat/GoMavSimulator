@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhoy8rp8jiuwi"]
+[gd_scene load_steps=14 format=3 uid="uid://bhoy8rp8jiuwi"]
 
 [ext_resource type="Texture2D" uid="uid://byif8bpl66qjr" path="res://modules/console/icons/resize-svgrepo-com.svg" id="1_3wrr1"]
 [ext_resource type="Texture2D" uid="uid://np2d48qym0bc" path="res://modules/console/icons/bookmark-svgrepo-com.svg" id="1_jvdvo"]
 [ext_resource type="Texture2D" uid="uid://da8aerupqqeme" path="res://modules/console/icons/bookmark-filled-svgrepo-com.svg" id="1_puc17"]
+[ext_resource type="FontFile" uid="uid://bxs4vg8cnhf15" path="res://assets/fonts/linux-libertine/LinLibertine_RZ.otf" id="1_q8ggw"]
 [ext_resource type="Texture2D" uid="uid://b0bu1mdfhr5ou" path="res://modules/console/icons/chevron_right.svg" id="1_tebey"]
 [ext_resource type="Script" path="res://modules/console/Console.gd" id="1_u72xh"]
 [ext_resource type="Script" path="res://modules/console/Contents.gd" id="2_vmx5k"]
@@ -10,6 +11,9 @@
 [ext_resource type="Script" path="res://modules/console/BorderColor.gd" id="3_1ju3q"]
 [ext_resource type="Texture2D" uid="uid://cnm1oc28ou3mv" path="res://modules/console/icons/broom.png" id="3_bjnyt"]
 [ext_resource type="Script" path="res://modules/console/ConsoleWriter.gd" id="5_dw11f"]
+
+[sub_resource type="Theme" id="Theme_f3o6w"]
+default_font = ExtResource("1_q8ggw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xkeyo"]
 shader = ExtResource("2_x4dfk")
@@ -21,6 +25,7 @@ shader_parameter/progress = 0.0
 [node name="Console" type="Window" node_paths=PackedStringArray("contents")]
 initial_position = 2
 size = Vector2i(400, 400)
+theme = SubResource("Theme_f3o6w")
 script = ExtResource("1_u72xh")
 contents = NodePath("VerticalSplit/ContentsPanel/ContentsContainer/Contents")
 
@@ -64,6 +69,7 @@ theme_override_constants/margin_right = 28
 [node name="Contents" type="RichTextLabel" parent="VerticalSplit/ContentsPanel/ContentsContainer"]
 layout_mode = 2
 focus_mode = 2
+scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 script = ExtResource("2_vmx5k")
