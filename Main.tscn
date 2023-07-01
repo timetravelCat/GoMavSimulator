@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rls8rni64seq"]
+
+[ext_resource type="PackedScene" uid="uid://df188sjgsf3uy" path="res://modules/settings/Settings.tscn" id="1_7eqy0"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Settings" parent="." instance=ExtResource("1_7eqy0")]

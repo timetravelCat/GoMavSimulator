@@ -19,7 +19,6 @@ extends Control
 @export var settings:Theme
 @export var subtitle:LabelSettings
 
-@export var world_environment:WorldEnvironment
 var viewports:Array
 
 func reset_to_default():
@@ -230,6 +229,7 @@ func _on_anti_alising_item_selected(index):
 	pass 
 
 func _on_ambient_occlusion_item_selected(index):
+	var world_environment:WorldEnvironment = GeneralSettings.get_current_world()
 	if world_environment == null:
 		return
 		
@@ -283,6 +283,7 @@ func _on_texture_item_selected(index):
 	pass 
 
 func _on_visual_effects_item_selected(index):
+	var world_environment:WorldEnvironment = GeneralSettings.get_current_world()
 	if world_environment == null:
 		return
 		
@@ -292,10 +293,10 @@ func _on_visual_effects_item_selected(index):
 			world_environment.environment.set_ssr_max_steps(56)
 			world_environment.environment.sdfgi_enabled = true
 			world_environment.environment.glow_enabled = true
-			world_environment.environment.volumetric_fog_enabled = true
+			# world_environment.environment.volumetric_fog_enabled = true
 			RenderingServer.gi_set_use_half_resolution(false)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_ULTRA, true, 0.5, 4, 50, 300)
-			RenderingServer.environment_set_volumetric_fog_filter_active(true)
+			# RenderingServer.environment_set_volumetric_fog_filter_active(true)
 			pass
 		1: # HIGH
 			world_environment.environment.set_ssr_enabled(true)
@@ -303,10 +304,10 @@ func _on_visual_effects_item_selected(index):
 			world_environment.environment.ssil_enabled = true
 			world_environment.environment.sdfgi_enabled = true
 			world_environment.environment.glow_enabled = true
-			world_environment.environment.volumetric_fog_enabled = true
+			# world_environment.environment.volumetric_fog_enabled = true
 			RenderingServer.gi_set_use_half_resolution(false)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_HIGH, true, 0.5, 4, 50, 300)
-			RenderingServer.environment_set_volumetric_fog_filter_active(true)
+			# RenderingServer.environment_set_volumetric_fog_filter_active(true)
 			pass
 		2: # MEDIUM
 			world_environment.environment.set_ssr_enabled(true)
@@ -314,10 +315,10 @@ func _on_visual_effects_item_selected(index):
 			world_environment.environment.ssil_enabled = true
 			world_environment.environment.sdfgi_enabled = true
 			world_environment.environment.glow_enabled = true
-			world_environment.environment.volumetric_fog_enabled = true
+			# world_environment.environment.volumetric_fog_enabled = true
 			RenderingServer.gi_set_use_half_resolution(true)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_MEDIUM, true, 0.5, 4, 50, 300)
-			RenderingServer.environment_set_volumetric_fog_filter_active(false)
+			# RenderingServer.environment_set_volumetric_fog_filter_active(false)
 			pass
 		3: # LOW
 			world_environment.environment.set_ssr_enabled(true)
@@ -325,10 +326,10 @@ func _on_visual_effects_item_selected(index):
 			world_environment.environment.ssil_enabled = true
 			world_environment.environment.sdfgi_enabled = true
 			world_environment.environment.glow_enabled = true
-			world_environment.environment.volumetric_fog_enabled = true
+			# world_environment.environment.volumetric_fog_enabled = true
 			RenderingServer.gi_set_use_half_resolution(true)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_LOW, true, 0.5, 4, 50, 300)
-			RenderingServer.environment_set_volumetric_fog_filter_active(false)
+			# RenderingServer.environment_set_volumetric_fog_filter_active(false)
 			pass
 		4: # VERY LOW
 			world_environment.environment.set_ssr_enabled(true)
@@ -336,14 +337,14 @@ func _on_visual_effects_item_selected(index):
 			world_environment.environment.ssil_enabled = true
 			world_environment.environment.sdfgi_enabled = false
 			world_environment.environment.glow_enabled = false
-			world_environment.environment.volumetric_fog_enabled = false
+			# world_environment.environment.volumetric_fog_enabled = false
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_VERY_LOW, true, 0.5, 4, 50, 300)
 		5: # DISABLED
 			world_environment.environment.set_ssr_enabled(false)
 			world_environment.environment.ssil_enabled = false
 			world_environment.environment.sdfgi_enabled = false
 			world_environment.environment.glow_enabled = false
-			world_environment.environment.volumetric_fog_enabled = false
+			# world_environment.environment.volumetric_fog_enabled = false
 			pass
 	pass
 
