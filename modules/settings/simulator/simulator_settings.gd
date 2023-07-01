@@ -8,7 +8,7 @@ const VEHICLE_DEFAULT_SCALE:float=10.0
 
 # Default advanced vehicle setting defaults
 const MAVLINK_POSE_SOURCE_DEFAULT=SimulatorSettings.MAVLINK_POSE_SOURCE.GROUND_TRUTH
-const VEHILE_SYSID_DEFAULT:int=0
+const VEHILE_SYSID_DEFAULT:int=1
 const ROS2_POSE_TOPIC_DEFAULT:String="pose"
 
 # Default advanced sensor settings defaults
@@ -18,7 +18,7 @@ const LIDAR_DEFAULT_VERTICAL_FOV:float = 0.0
 const LIDAR_DEFAULT_VERTICAL_RESOLUTION:float = 0.0 
 const LIDAR_DEFAULT_HORIZONTAL_RESOLUTION:float = deg_to_rad(5.0)
 
-class Vehicle:
+class VehicleSetting:
 	var item_id:int = 0 # itemlist control id
 	var enable:bool = true
 	var name:String = "sim"

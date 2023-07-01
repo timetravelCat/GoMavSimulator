@@ -47,6 +47,7 @@ func reset_to_default():
 		MavlinkSettings.AutoConnectList.merge({key:autoConnect})
 		if !autoConnect.enabled:
 			autoconnect_list.set_item_custom_fg_color(autoConnect.index, Color(1.0, 1.0, 1.0, 0.2))
+	MavlinkSettings.auto_connect_list_changed.emit(true)
 
 func _on_console_connected_item_selected(index):
 	match index:
@@ -142,6 +143,7 @@ func _on_autoconnect_add_pressed():
 	autoConnect.index = autoconnect_list.add_item(autoconnect.text)
 	autoConnect.enabled = true
 	MavlinkSettings.AutoConnectList.merge({autoconnect.text:autoConnect})
+	MavlinkSettings.auto_connect_list_changed.emit(false)
 
 func _on_autoconnect_remove_pressed():
 	if !autoconnect_list.is_anything_selected():
@@ -151,6 +153,7 @@ func _on_autoconnect_remove_pressed():
 	var selected_item:int = autoconnect_list.get_selected_items()[0]
 	MavlinkSettings.AutoConnectList.erase(autoconnect_list.get_item_text(selected_item))
 	autoconnect_list.remove_item(selected_item)
+	MavlinkSettings.auto_connect_list_changed.emit(true)
 
 func _on_autoconnect_enable_pressed():
 	if !autoconnect_list.is_anything_selected():
@@ -161,6 +164,7 @@ func _on_autoconnect_enable_pressed():
 	MavlinkSettings.AutoConnectList[autoconnect_list.get_item_text(selected_item)].enabled = true
 	autoconnect_list.set_item_custom_fg_color(selected_item, Color(1.0, 1.0, 1.0, 1.0))
 	autoconnect_list.set_item_tooltip(selected_item, "enabled")
+	MavlinkSettings.auto_connect_list_changed.emit(false)
 			
 func _on_autoconnect_disable_pressed():
 	if !autoconnect_list.is_anything_selected():
@@ -171,3 +175,4 @@ func _on_autoconnect_disable_pressed():
 	MavlinkSettings.AutoConnectList[autoconnect_list.get_item_text(selected_item)].enabled = false
 	autoconnect_list.set_item_custom_fg_color(selected_item, Color(1.0, 1.0, 1.0, 0.2))
 	autoconnect_list.set_item_tooltip(selected_item, "disabled")
+	MavlinkSettings.auto_connect_list_changed.emit(true)

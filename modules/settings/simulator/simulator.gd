@@ -82,7 +82,7 @@ func _on_vehicle_add_pressed():
 		Notification.notify(" Exist Veihcle Name ", Notification.NOTICE_TYPE.ALERT)
 		return
 	
-	var NewVehicle = SimulatorSettings.Vehicle.new()
+	var NewVehicle = SimulatorSettings.VehicleSetting.new()
 	NewVehicle.enable = true
 	NewVehicle.name = VehicleName.text
 	NewVehicle.type = VehicleType.selected
@@ -116,7 +116,7 @@ func _on_vehicle_disable_pressed():
 	var item:int = VehicleList.get_selected_items()[0]
 	var key:String = VehicleList.get_item_text(item)
 	if SimulatorSettings.VehicleList.has(key):
-		var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.Vehicle
+		var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.VehicleSetting
 		vehicle.enable = !vehicle.enable
 		
 		# set color
@@ -130,7 +130,7 @@ func _on_vehicle_disable_pressed():
 func _on_vehicle_list_item_selected(index):
 	var key:String = VehicleList.get_item_text(index)
 	if SimulatorSettings.VehicleList.has(key):
-		var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.Vehicle
+		var vehicle := SimulatorSettings.VehicleList[key] as SimulatorSettings.VehicleSetting
 		
 		VehicleType.select(vehicle.type)
 		VehicleName.text = vehicle.name
@@ -164,7 +164,7 @@ func _on_sensor_add_pressed():
 		Notification.notify(" Invalid Rotation ", Notification.NOTICE_TYPE.ALERT)
 		return
 	
-	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
+	var vehicle:SimulatorSettings.VehicleSetting = get_selected_vehicle()
 	if vehicle == null:
 		return
 		
@@ -197,7 +197,7 @@ func _on_sensor_add_pressed():
 	vehicle.sensors.merge({NewSensor.name: NewSensor})
 
 func _on_sensor_delete_pressed():
-	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
+	var vehicle:SimulatorSettings.VehicleSetting = get_selected_vehicle()
 	if vehicle == null:
 		return
 	
@@ -207,7 +207,7 @@ func _on_sensor_delete_pressed():
 	SensorList.remove_item(item)
 
 func _on_sensor_disable_pressed():
-	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
+	var vehicle:SimulatorSettings.VehicleSetting = get_selected_vehicle()
 	if vehicle == null:
 		return
 		
@@ -225,7 +225,7 @@ func _on_sensor_disable_pressed():
 			SensorDisable.text = "DISABLE"
 	
 func _on_sensor_list_item_selected(index):
-	var vehicle:SimulatorSettings.Vehicle = get_selected_vehicle()
+	var vehicle:SimulatorSettings.VehicleSetting = get_selected_vehicle()
 	if vehicle == null:
 		return
 	
@@ -252,7 +252,7 @@ func _on_sensor_list_item_selected(index):
 	LidarWidth.text = str(rad_to_deg(sensor.horizontal_resolution))
 	LidarHeigth.text = str(rad_to_deg(sensor.vertical_resolution))
 
-func get_selected_vehicle() -> SimulatorSettings.Vehicle:
+func get_selected_vehicle() -> SimulatorSettings.VehicleSetting:
 	if !VehicleList.is_anything_selected():
 		Notification.notify(" Select Veihcle ", Notification.NOTICE_TYPE.ALERT)
 		return null
