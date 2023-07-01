@@ -21,6 +21,7 @@ Notification="*res://modules/notice/Notification.gd"
 GeneralSettings="*res://modules/settings/general/general_settings.gd"
 MavlinkSettings="*res://modules/settings/mavlink/mavlink_settings.gd"
 SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
+VehicleFactory="*res://modules/vehicle/VehicleFactory.gd"
 
 [display]
 
