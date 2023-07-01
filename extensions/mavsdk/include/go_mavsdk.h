@@ -31,7 +31,7 @@ public:
 	void _on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
 	void _on_response_manual_control(GoMAVSDKServer::ManualControlResult result);
 
-	void start_odometry_subscription();
+	bool start_odometry_subscription();
 
 	enum OdometrySource
 	{

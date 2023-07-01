@@ -176,6 +176,9 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 									 hil_state_quaternion.attitude_quaternion[0]);
 			if (ned_to_eus)
 				orientation = NED2EUS::ned_to_eus_q(orientation);
+
+			if (is_reference_valid)
+				emit_signal("pose_subscribed", position, orientation);
 		}
 		break;
 		}
@@ -194,6 +197,8 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 
 			if (ned_to_eus)
 				position = NED2EUS::ned_to_eus_v(position);
+
+			emit_signal("pose_subscribed", position, orientation);
 		}
 		break;
 
@@ -205,6 +210,8 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 
 			if (ned_to_eus)
 				orientation = NED2EUS::ned_to_eus_q(orientation);
+			
+			emit_signal("pose_subscribed", position, orientation);
 		}
 		break;
 		}
@@ -221,20 +228,24 @@ void GoMAVSDK::_on_response_manual_control(GoMAVSDKServer::ManualControlResult r
 	}
 }
 
-void GoMAVSDK::start_odometry_subscription()
+bool GoMAVSDK::start_odometry_subscription()
 {
+	bool res = true;
+
 	switch (odometry_source)
 	{
 	case OdometrySource::ODOMETRY_GROUND_TRUTH:
-		add_mavlink_subscription(MAVLINK_MSG_ID_HEARTBEAT);
-		add_mavlink_subscription(MAVLINK_MSG_ID_HIL_STATE_QUATERNION);
+		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_HEARTBEAT);
+		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_HIL_STATE_QUATERNION);
 		break;
 
 	case OdometrySource::ODOMETRY_ESTIMATION:
-		add_mavlink_subscription(MAVLINK_MSG_ID_LOCAL_POSITION_NED);
-		add_mavlink_subscription(MAVLINK_MSG_ID_ATTITUDE_QUATERNION);
+		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_LOCAL_POSITION_NED);
+		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_ATTITUDE_QUATERNION);
 		break;
 	}
+
+	return res;
 }
 
 void GoMAVSDK::_bind_methods()
@@ -274,6 +285,8 @@ void GoMAVSDK::_bind_methods()
 	ClassDB::bind_method(D_METHOD("set_ned_to_eus", "ned_to_eus"), &GoMAVSDK::set_ned_to_eus);
 	ClassDB::bind_method(D_METHOD("get_ned_to_eus"), &GoMAVSDK::get_ned_to_eus);
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "ned_to_eus"), "set_ned_to_eus", "get_ned_to_eus");
+
+	ADD_SIGNAL(MethodInfo("pose_subscribed", PropertyInfo(Variant::VECTOR3, "position"), PropertyInfo(Variant::QUATERNION, "orientation")));
 
 	ClassDB::bind_method(D_METHOD("set_position", "position"), &GoMAVSDK::set_position);
 	ClassDB::bind_method(D_METHOD("get_position"), &GoMAVSDK::get_position);
