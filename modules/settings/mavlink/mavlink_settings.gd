@@ -89,11 +89,13 @@ func _on_system_discovered(sys_id:int):
 		call_deferred("add_child", window)
 		if !open_console_when_connected:
 			window.hide()
+	else:
+		if open_console_when_connected:
+			get_node(str(sys_id)).call_deferred("show")
 
 func _on_shell_received(sys_id:int, msg:String):
 	if has_node(str(sys_id)):
 		get_node(str(sys_id)).append_contents(msg)
-		print(msg)
 
 func show_consoles():
 	for child in get_children():
