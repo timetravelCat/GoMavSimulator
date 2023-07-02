@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://rls8rni64seq"]
+[gd_scene load_steps=3 format=3 uid="uid://rls8rni64seq"]
 
 [ext_resource type="PackedScene" uid="uid://df188sjgsf3uy" path="res://modules/settings/Settings.tscn" id="1_7eqy0"]
+[ext_resource type="Script" path="res://Main.gd" id="1_lokdk"]
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_lokdk")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -5.6552e-09, -1.2493e-07, -9.23376e-08, 0.707107, 0.707107, 8.43399e-08, 0.707107, -0.707107, -2, 14, -10.815)
 
 [node name="Settings" parent="." instance=ExtResource("1_7eqy0")]
+
+[node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="."]
+eus_to_enu = false
+topic_name = "model/pose"
+topic_type = "geometry_msgs::msg::dds_::PoseStamped_"
