@@ -6,10 +6,9 @@ extends Control
 @export var virtual_joystick:OptionButton
 @export var system_id:LineEdit
 @export var component_id:LineEdit
-@export var udp_portforward:OptionButton
-@export var udp_portforward_port:LineEdit
 @export var autoconnect:LineEdit
 @export var autoconnect_list:ItemList
+@export var serial:OptionButton
 
 func reset_to_default():
 	console_connect.select(0)
@@ -29,10 +28,6 @@ func reset_to_default():
 	
 	component_id.text = str(MavlinkSettings.DEFAULT_COMP_ID)
 	component_id.text_submitted.emit(component_id.text)
-	
-	udp_portforward.select(0)
-	udp_portforward_port.text = str(MavlinkSettings.DEFAULT_UDP_PORTFORWARD_PORT)
-	MavlinkSettings.udp_portforward_changed.emit(false, MavlinkSettings.DEFAULT_UDP_PORTFORWARD_PORT)
 	
 	# remove all items in list
 	while autoconnect_list.item_count > 0:
@@ -104,31 +99,6 @@ func _on_component_id_text_submitted(new_text:String):
 		
 	MavlinkSettings.component_id_changed.emit(new_text.to_int())
 
-func _on_udp_portforward_item_selected(index):
-	if udp_portforward_port.text.is_valid_int() == false:
-		Notification.notify(" Unvalid port ", Notification.NOTICE_TYPE.ALERT)
-		udp_portforward_port.clear()
-		return
-		
-	match index:
-		0:
-			MavlinkSettings.udp_portforward_changed.emit(false, udp_portforward_port.text.to_int())
-		1:
-			MavlinkSettings.udp_portforward_changed.emit(true, udp_portforward_port.text.to_int())
-
-func _on_udp_portforward_port_text_submitted(new_text:String):
-	if !new_text.is_valid_int():
-		Notification.notify(" Unvalid port ", Notification.NOTICE_TYPE.ALERT)
-		udp_portforward_port.clear()
-		return 
-		
-	match udp_portforward.get_selected_id():
-		0:
-			MavlinkSettings.udp_portforward_changed.emit(false, new_text.to_int())
-		1:
-			MavlinkSettings.udp_portforward_changed.emit(true, new_text.to_int())
-			pass
-
 func _on_autoconnect_add_pressed():
 	if autoconnect.text.is_empty():
 		Notification.notify(" Empty Connection Address ", Notification.NOTICE_TYPE.ALERT)
@@ -176,3 +146,16 @@ func _on_autoconnect_disable_pressed():
 	autoconnect_list.set_item_custom_fg_color(selected_item, Color(1.0, 1.0, 1.0, 0.2))
 	autoconnect_list.set_item_tooltip(selected_item, "disabled")
 	MavlinkSettings.auto_connect_list_changed.emit(true)
+
+var serial_item:Array
+
+func _on_serial_pressed():
+	for key in SerialPort.list_ports():
+		if not serial_item.has(key):
+			serial_item.append(key)	
+			serial.add_item(key)
+	serial.selected = -1
+
+func _on_serial_item_selected(index):
+	autoconnect.text = "serial://" + serial.get_item_text(index) + ":57600"
+	serial.selected = -1

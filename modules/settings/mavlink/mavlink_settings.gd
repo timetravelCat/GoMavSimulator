@@ -1,8 +1,8 @@
 extends Node
 
 # console settings
-var open_console_when_connected:bool
-var close_console_when_disconnected:bool
+var open_console_when_connected:bool = true
+var close_console_when_disconnected:bool = true
 signal open_mavlink_shell
 signal close_mavlink_shell
 var console_timer:Timer
@@ -24,12 +24,6 @@ const DEFAULT_COMP_ID:int = 190
 var component_id:int
 signal component_id_changed(component_id:int)
 
-# portforward settings
-const DEFAULT_UDP_PORTFORWARD_PORT = 14446
-var udp_portforward_enabled:bool
-var udp_portforward_port:int
-signal udp_portforward_changed(enable:bool, port:int)
-
 # mavlink auto connection settings
 class AutoConnect:
 	var index:int # ItemList index
@@ -37,6 +31,7 @@ class AutoConnect:
 
 signal auto_connect_list_changed(reset:bool)
 var AutoConnectList:Dictionary # contains [address(String), AutoConnect]
+var auto_connect_timer:Timer
 
 const DEFAULT_AUTOCONNECT_LIST:Dictionary = {
 	"udp://:14550" : false,		 	# index = 0, enabled = true
@@ -59,10 +54,20 @@ func _ready():
 	GoMAVSDKServer.connect("shell_received", _on_shell_received)
 	
 	# initialize mavsdk server
+	auto_connect_timer = Timer.new()
+	auto_connect_timer.name = "auto_connect_timer"
+	auto_connect_timer.wait_time = 1.0
+	auto_connect_timer.one_shot = false
+	auto_connect_timer.autostart = true
+	auto_connect_timer.connect("timeout", _on_auto_connect_timer_timeout)
+	add_child(auto_connect_timer)
 	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.start_discovery() # start mavsdk discovery 
 	start_autoconnect(false)
 	connect("auto_connect_list_changed", start_autoconnect)
+
+func _exit_tree():
+	GoMAVSDKServer.initialize(true) 
 
 func _console_timer_timeout():
 	for child in get_children():
@@ -116,8 +121,15 @@ func start_autoconnect(reset:bool):
 		GoMAVSDKServer.initialize(true) # This stops all vehicle mavlink subscription's stop
 		GoMAVSDKServer.start_discovery()
 		get_tree().call_group("VehicleTimer", "start") # TODO find better way
-	
+	_on_auto_connect_timer_timeout()
+
+# try to connection until success all connection
+func _on_auto_connect_timer_timeout():
+	var restart_timer:bool = false
 	for key in AutoConnectList:
 		var autoConnect:AutoConnect = AutoConnectList[key]
 		if autoConnect.enabled:
-			GoMAVSDKServer.add_connection(key)
+			if GoMAVSDKServer.add_connection(key) != GoMAVSDKServer.CONNECTION_SUCCESS:
+				restart_timer = true
+	if restart_timer:
+		auto_connect_timer.start()
