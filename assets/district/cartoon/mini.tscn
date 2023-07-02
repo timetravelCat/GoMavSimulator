@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1t8vfvfn7iky"]
+
+[ext_resource type="PackedScene" uid="uid://cvvmnx8xswbs1" path="res://assets/district/cartoon/mini.glb" id="1_lmeoc"]
+
+[node name="mini" instance=ExtResource("1_lmeoc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0)
