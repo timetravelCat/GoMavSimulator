@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
 [ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "CameraWitdh", "CameraHeight", "LidarVerticalFov", "LidarWidth", "LidarHeigth")]
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "CameraWitdh", "CameraHeight", "LidarVerticalFov", "LidarWidth", "LidarHeigth", "RangeDistance")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r845a")
@@ -36,6 +36,7 @@ CameraHeight = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxCont
 LidarVerticalFov = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer2/VerticalFov")
 LidarWidth = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarWidth")
 LidarHeigth = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarHeight")
+RangeDistance = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer4/RangeDistance")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -681,6 +682,22 @@ alignment = 1
 [node name="MarginContainer4" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "DISTANCE(RANGE)"
+vertical_alignment = 1
+
+[node name="RangeDistance" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+placeholder_text = "m"
+alignment = 1
 
 [node name="SensorSetupClose" type="TextureButton" parent="Margin/SensorPopup"]
 custom_minimum_size = Vector2(40, 40)

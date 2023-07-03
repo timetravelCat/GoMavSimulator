@@ -35,6 +35,7 @@ extends Control
 @export var LidarVerticalFov:LineEdit
 @export var LidarWidth:LineEdit
 @export var LidarHeigth:LineEdit
+@export var RangeDistance:LineEdit
 
 func reset_to_default():
 	# Set all control node value as default
@@ -251,6 +252,7 @@ func _on_sensor_list_item_selected(index):
 	LidarVerticalFov.text = str(rad_to_deg(sensor.vertical_fov))
 	LidarWidth.text = str(rad_to_deg(sensor.horizontal_resolution))
 	LidarHeigth.text = str(rad_to_deg(sensor.vertical_resolution))
+	RangeDistance.text = str(sensor.range_distance)
 
 func get_selected_vehicle() -> SimulatorSettings.VehicleSetting:
 	if !VehicleList.is_anything_selected():
@@ -264,8 +266,14 @@ func get_selected_vehicle() -> SimulatorSettings.VehicleSetting:
 	return SimulatorSettings.VehicleList.get(VehicleList.get_item_text(VehicleList.get_selected_items()[0]))
 	
 func _on_vehicle_advanced_config_pressed():
+	if !VehicleList.is_anything_selected():
+		Notification.notify(" Select Veihcle ", Notification.NOTICE_TYPE.ALERT)
+		return
 	VehiclePopup.show()
 func _on_sensor_advanced_config_pressed():
+	if !SensorList.is_anything_selected():
+		Notification.notify(" Select Sensor ", Notification.NOTICE_TYPE.ALERT)
+		return
 	SensorPopup.show()
 func _on_vehicle_setup_close_pressed():
 	VehiclePopup.hide()

@@ -12,6 +12,7 @@ const VEHILE_SYSID_DEFAULT:int=1
 const ROS2_POSE_TOPIC_DEFAULT:String="pose"
 
 # Default advanced sensor settings defaults
+const RANGE_DEFAULT_DISTANCE:float = 100.0
 const RGB_CAMERA_DEFAULT_RESOLUTION:Vector2i = Vector2i(640, 360)
 const DEPTH_CAMERA_DEFUALT_RESOLUTION:Vector2i = Vector2i(360, 180)
 const LIDAR_DEFAULT_VERTICAL_FOV:float = 0.0
@@ -51,3 +52,4 @@ class Sensor:
 	var vertical_fov:float # LIDAR in radian, horizontal resoultion is 360 deg.
 	var vertical_resolution:float # LIDAR vertical resolution in radian
 	var horizontal_resolution:float # LIDAR horizontal resolution in radian
+	var range_distance:float
