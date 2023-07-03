@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://betcdhu4iamlw"]
+
+[ext_resource type="Script" path="res://modules/sensor/Range/Range.gd" id="1_48tt3"]
+
+[node name="Range" type="RayCast3D" node_paths=PackedStringArray("_timer", "_range_publisher")]
+script = ExtResource("1_48tt3")
+_timer = NodePath("PublishTimer")
+_range_publisher = NodePath("RangePublisher")
+
+[node name="PublishTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="RangePublisher" type="RangePublisher" parent="."]
+publish_on_matched = false
+domain_id = 1
+topic_name = "model/test"
+topic_type = "sensor_msgs::msg::dds_::Range_"
+
+[connection signal="timeout" from="PublishTimer" to="." method="_on_publish_timer_timeout"]
