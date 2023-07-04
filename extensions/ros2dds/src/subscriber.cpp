@@ -34,7 +34,8 @@ void Subscriber::_deinitialize()
 {
 	if (_data != nullptr)
 	{
-		_set_type().delete_data(_data);
+		// _set_type().delete_data(_data);
+		delete _data;
 	}
 
 	if (_reader != nullptr)
