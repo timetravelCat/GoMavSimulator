@@ -27,6 +27,7 @@ wait_time = 10.0
 autostart = true
 
 [connection signal="mavlink_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_mavlink_received"]
+[connection signal="pose_subscribed" from="GoMAVSDK" to="GoMAVSDK" method="_on_go_mavsdk_pose_subscribed"]
 [connection signal="shell_received" from="GoMAVSDK" to="GoMAVSDK" method="_on_shell_received"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

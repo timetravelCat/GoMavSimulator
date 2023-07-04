@@ -19,7 +19,6 @@ func _process(delta):
 		print(get_param("MAV_SYSS_ID")) # Non-exist parameter case
 		# add_mavlink_subscription(74) # 74 : VFR_HUD
 		# send_shell("uorb top")
-		start_odometry_subscription()
 	
 	meshInstance3D.position = position;
 	meshInstance3D.basis = Basis(orientation)
@@ -33,3 +32,8 @@ func _on_mavlink_received(message):
 	# TODO Requires parsing library for mavlink messages
 	# print("VFR_HUD RECEIVED")
 	pass 
+
+func _on_go_mavsdk_pose_subscribed(position, orientation):
+	odometry_source = GoMAVSDK.ODOMETRY_ESTIMATION
+	print("position, orientation subscribed")
+	pass # Replace with function body.

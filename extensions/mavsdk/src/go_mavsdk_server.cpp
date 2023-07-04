@@ -165,6 +165,12 @@ void GoMAVSDKServer::start_discovery()
 									_apis.insert({sys_id, api});
 									_THREAD_SAFE_UNLOCK_
 									emit_signal("system_discovered", sys_id);
+
+									// Add default subscriptions (pose source related)
+									add_mavlink_subscription(sys_id, MAVLINK_MSG_ID_HEARTBEAT);
+									add_mavlink_subscription(sys_id, MAVLINK_MSG_ID_HIL_STATE_QUATERNION);
+									add_mavlink_subscription(sys_id, MAVLINK_MSG_ID_LOCAL_POSITION_NED);
+									add_mavlink_subscription(sys_id, MAVLINK_MSG_ID_ATTITUDE_QUATERNION);
 								}
 							}
 						}

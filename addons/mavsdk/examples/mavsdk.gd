@@ -23,11 +23,14 @@ func _process(delta):
 
 # Reset GoMAVSDKServer after 5s
 func _on_timer_timeout():
-	GoMAVSDKServer.initialize(true)
-	print("Initialized")
+	# GoMAVSDKServer.initialize(true)
+	# print("Initialized")
 	# GoMAVSDKServer.add_connection("serial://COM3:57600")
+	pass
 
 # Reconnecting GoMAVSDKServer after 10s
 func _on_timer_2_timeout():
-	GoMAVSDKServer.add_connection("serial://COM3:57600")
-	GoMAVSDKServer.start_discovery()
+	# GoMAVSDKServer.add_connection("serial://COM3:57600")
+	# GoMAVSDKServer.start_discovery()
+	pass
+

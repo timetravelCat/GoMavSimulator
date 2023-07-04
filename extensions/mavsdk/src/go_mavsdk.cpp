@@ -228,26 +228,6 @@ void GoMAVSDK::_on_response_manual_control(GoMAVSDKServer::ManualControlResult r
 	}
 }
 
-bool GoMAVSDK::start_odometry_subscription()
-{
-	bool res = true;
-
-	switch (odometry_source)
-	{
-	case OdometrySource::ODOMETRY_GROUND_TRUTH:
-		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_HEARTBEAT);
-		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_HIL_STATE_QUATERNION);
-		break;
-
-	case OdometrySource::ODOMETRY_ESTIMATION:
-		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_LOCAL_POSITION_NED);
-		res = res && add_mavlink_subscription(MAVLINK_MSG_ID_ATTITUDE_QUATERNION);
-		break;
-	}
-
-	return res;
-}
-
 void GoMAVSDK::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("set_sys_id", "sys_id"), &GoMAVSDK::set_sys_id);
@@ -275,8 +255,6 @@ void GoMAVSDK::_bind_methods()
 
 	BIND_ENUM_CONSTANT(ODOMETRY_GROUND_TRUTH);
 	BIND_ENUM_CONSTANT(ODOMETRY_ESTIMATION);
-
-	ClassDB::bind_method(D_METHOD("start_odometry_subscription"), &GoMAVSDK::start_odometry_subscription);
 
 	ClassDB::bind_method(D_METHOD("set_odometry_source", "odometry_source"), &GoMAVSDK::set_odometry_source);
 	ClassDB::bind_method(D_METHOD("get_odometry_source"), &GoMAVSDK::get_odometry_source);
