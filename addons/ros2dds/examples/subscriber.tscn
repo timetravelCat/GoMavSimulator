@@ -9,7 +9,6 @@
 
 [node name="PointStampedPublisher" type="PointStampedPublisher" parent="." node_paths=PackedStringArray("node3d")]
 node3d = NodePath("MeshInstance3D")
-publish_on_matched = false
 qos_option = 1
 topic_name = "point"
 topic_type = "geometry_msgs::msg::dds_::PointStamped_"

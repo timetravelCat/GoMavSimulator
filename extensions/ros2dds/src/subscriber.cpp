@@ -4,30 +4,8 @@ Subscriber::Subscriber() {}
 
 Subscriber::~Subscriber()
 {
-	if (_reader != nullptr)
-	{
-		_subscriber->delete_datareader(_reader);
-	}
-	if (_subscriber != nullptr)
-	{
-		_participant->delete_subscriber(_subscriber);
-	}
+	_deinitialize();
 }
-
-void Subscriber::_enter_tree()
-{
-	ROS2DDS::_enter_tree();
-	_data = _set_type().create_data();
-	_initialization();
-};
-
-void Subscriber::_exit_tree()
-{
-	if (_data != nullptr)
-	{
-		_set_type().delete_data(_data);
-	}
-};
 
 bool Subscriber::_initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &_, eprosima::fastdds::dds::DataReaderQos &qos)
 {
@@ -43,7 +21,31 @@ bool Subscriber::_initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fas
 		return false;
 	}
 
+	_data = _set_type().create_data();
+	if (!_data)
+	{
+		return false;
+	}
+
 	return true;
+}
+
+void Subscriber::_deinitialize()
+{
+	if (_data != nullptr)
+	{
+		_set_type().delete_data(_data);
+	}
+
+	if (_reader != nullptr)
+	{
+		_subscriber->delete_datareader(_reader);
+	}
+
+	if (_subscriber != nullptr)
+	{
+		_participant->delete_subscriber(_subscriber);
+	}
 }
 
 void Subscriber::_bind_methods() {}

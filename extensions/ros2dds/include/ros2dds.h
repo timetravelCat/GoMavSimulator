@@ -39,36 +39,50 @@ public:
 		QOS_NORMAL
 	};
 
-	void set_qos_option(QoSOption p_qos_option) { qos_option = p_qos_option; };
+	void set_qos_option(QoSOption p_qos_option)
+	{
+		qos_option = p_qos_option;
+		initialize();
+	};
 	QoSOption get_qos_option() { return qos_option; };
 	QoSOption qos_option{QoSOption::QOS_FASTEST};
 
-	void set_domain_id(int p_domain_id) { domain_id = p_domain_id; };
+	void set_domain_id(int p_domain_id)
+	{
+		domain_id = p_domain_id;
+		initialize();
+	};
 	int get_domain_id() { return domain_id; };
 	int domain_id{0};
 
-	void set_domain_name(String p_domain_name) { domain_name = p_domain_name; };
+	void set_domain_name(String p_domain_name)
+	{
+		domain_name = p_domain_name;
+		initialize();
+	};
 	String get_domain_name() { return domain_name; };
 	String domain_name{"ROS2DDS"};
 
-	void set_topic_name(String p_topic_name) { topic_name = p_topic_name; };
+	void set_topic_name(String p_topic_name)
+	{
+		topic_name = p_topic_name;
+		initialize();
+	};
 	String get_topic_name() { return topic_name; };
 	String topic_name{""};
 
 	String get_topic_type() { return topic_type; }
 	String topic_type{""};
-
-	virtual void _enter_tree() override;
-
-	bool initialize() { return _initialization(); };
+	bool initialize() { return _initialization(true); };
 
 protected:
 	static void _bind_methods();
 
 	virtual eprosima::fastdds::dds::TypeSupport _set_type() { return eprosima::fastdds::dds::TypeSupport{}; };
+	virtual void _deinitialize(){};
 	virtual bool _initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &wqos, eprosima::fastdds::dds::DataReaderQos &rqos) { return false; };
 
-	bool _initialization();
+	bool _initialization(bool force);
 	bool _initialized{false};
 
 	eprosima::fastdds::dds::DomainParticipant *_participant{nullptr};

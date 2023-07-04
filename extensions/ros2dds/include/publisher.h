@@ -14,10 +14,11 @@ public:
 
 	bool _publish(void *p_data);
 	bool _initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &qos, eprosima::fastdds::dds::DataReaderQos &_) override;
+	void _deinitialize() override;
 
 	void set_publish_on_matched(bool p_publish_on_matched) { publish_on_matched = p_publish_on_matched; };
 	bool get_publish_on_matched() { return publish_on_matched; };
-	bool publish_on_matched{ true };
+	bool publish_on_matched{ false };
 
 	void set_frame_id(String p_frame_id) { frame_id = p_frame_id; };
 	String get_frame_id() { return frame_id; };

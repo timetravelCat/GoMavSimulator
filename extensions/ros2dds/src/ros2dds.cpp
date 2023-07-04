@@ -13,29 +13,41 @@ ROS2DDS::~ROS2DDS()
 	{
 		_participant->delete_topic(_topic);
 	}
-	DomainParticipantFactory::get_instance()->delete_participant(_participant);
+
+	if(_participant != nullptr)
+	{
+		DomainParticipantFactory::get_instance()->delete_participant(_participant);
+	}
 }
 
-void ROS2DDS::_enter_tree()
+bool ROS2DDS::_initialization(bool force)
 {
 	topic_type = String(_set_type().get_type_name().c_str());
-};
 
-bool ROS2DDS::_initialization()
-{
-	if (_initialized)
+	if (_initialized && !force)
 	{
 		return true;
 	}
 
 	if (topic_name.is_empty())
 	{
-		WARN_PRINT_ONCE("ROS2DDS initialization failed due to topic name is not assigned.");
 		return false;
 	}
 
 	DomainParticipantQos pqos;
 	pqos.name(domain_name.utf8().get_data());
+	
+	_deinitialize();
+
+	if (_topic != nullptr)
+	{
+		_participant->delete_topic(_topic);
+	}
+
+	if(_participant != nullptr)
+	{
+		DomainParticipantFactory::get_instance()->delete_participant(_participant);
+	}
 
 	_participant = DomainParticipantFactory::get_instance()->create_participant(domain_id, pqos);
 	if (!_participant)
@@ -69,7 +81,6 @@ bool ROS2DDS::_initialization()
 
 	if (!_initialize(_topic, wqos, rqos))
 	{
-		WARN_PRINT_ONCE("ROS2DDS initialization failed");
 		return false;
 	}
 

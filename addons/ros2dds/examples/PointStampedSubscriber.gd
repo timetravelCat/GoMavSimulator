@@ -3,11 +3,8 @@ extends PointStampedSubscriber
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	topic_name = "point2"
 	connect("on_data_subscribed", _on_data_subscribed)
-	
-	# initialized called automatically if topic_name assigned in editor, 
-	# however if you set topic_name by code, after _enter_tree, calling initalize may be required.
-	initialize()
 	pass # Replace with function body.
 
 

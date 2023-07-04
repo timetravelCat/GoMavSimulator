@@ -7,6 +7,8 @@ var t = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	meshInstance3D = get_node("MeshInstance3D")
+	print("reset topic name on publisher")
+	topic_name = "point2"
 	pass # Replace with function body.
 
 
