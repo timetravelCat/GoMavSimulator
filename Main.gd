@@ -4,18 +4,14 @@ extends Node3D
 
 func _ready():
 	# Currently, for testing
-	
-	# TEST case 1 (by mavlink message)
-	var setting:SimulatorSettings.VehicleSetting = SimulatorSettings.VehicleSetting.new()
-	setting.type = 0
-	
-	# TEST case 2 (by ros2 pose topic)
-	setting.pose_source = SimulatorSettings.POSE_SOURCE.ROS2
-	setting.name = "model"
-	setting.ros2_pose_source = "pose"
-	setting.domain_id = 0
-	
-	add_child(VehicleFactory.Create(setting)) 
+	var vehicle:Vehicle = Vehicle.new()
+	vehicle.name = "vehicle"
+	vehicle.enable = true
+	vehicle.pose_type = Vehicle.POSE_TYPE.ROS2
+	vehicle.pose.name = "pose"
+	var vehicle_pose_subscriber = vehicle.pose as PoseStampedSubscriber
+	print(vehicle.pose.topic_name)
+	add_child(vehicle) 
 
 var t = 0.0
 func _process(delta):

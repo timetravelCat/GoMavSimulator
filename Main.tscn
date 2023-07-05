@@ -7,11 +7,11 @@
 script = ExtResource("1_lokdk")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -5.6552e-09, -1.2493e-07, -9.23376e-08, 0.707107, 0.707107, 8.43399e-08, 0.707107, -0.707107, -2, 14, -10.815)
+transform = Transform3D(-1, -5.65523e-09, -1.2493e-07, -9.23376e-08, 0.707107, 0.707107, 8.43399e-08, 0.707107, -0.707107, -2, 14, -10.815)
 
 [node name="Settings" parent="." instance=ExtResource("1_7eqy0")]
 
 [node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="."]
 eus_to_enu = false
-topic_name = "model/pose"
+topic_name = "vehicle/pose"
 topic_type = "geometry_msgs::msg::dds_::PoseStamped_"
