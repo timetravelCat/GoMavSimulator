@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
 [ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "CameraWitdh", "CameraHeight", "LidarVerticalFov", "LidarWidth", "LidarHeigth", "RangeDistance")]
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "CameraWitdh", "CameraHeight", "LidarVerticalFov", "LidarWidth", "LidarHeigth", "RangeDistance")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r845a")
@@ -21,6 +21,7 @@ MavlinkSysId = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer2/sysid"
 Ros2PoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer3/topic")
 SensorType = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/SensorType")
 SensorName = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer/SensorName")
+FrameID = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer/FrameID")
 PublishRate = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer9/HBoxContainer/PublishRate")
 LocationX = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationX")
 LocationY = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationY")
@@ -333,6 +334,42 @@ select_all_on_focus = true
 caret_blink = true
 
 [node name="MarginContainer4" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "FRAME ID"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer6" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/margin_right = 0
+
+[node name="FrameID" type="LineEdit" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "/map"
+alignment = 2
+max_length = 15
+expand_to_text_length = true
+context_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
