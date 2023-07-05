@@ -5,6 +5,7 @@ var world_volumetric = preload("res://modules/world/environment/Volumetric.tscn"
 
 var district_mumbai:PackedScene = preload("res://assets/district/cartoon/mumbai.tscn")
 var district_mini:PackedScene = preload("res://assets/district/cartoon/mini.tscn")
+# var district_village:PackedScene = preload("res://assets/district/photorealistic/village.tscn")
 
 func _enter_tree():
 	# TODO implement save-load
@@ -19,13 +20,15 @@ func _ready():
 	add_child(world)
 	
 	# Register district
-	var district:Node3D = district_mumbai.instantiate()
+	var district:Node3D = district_mini.instantiate()
 	district.name = "district"
 	recursive_create_collision_body(district)
 	add_child(district)
 
 func get_current_world() -> WorldEnvironment:
-	return find_child("world").get_node("WorldEnvironment")
+	if find_child("world", false, false):	
+		return find_child("world", false, false).get_node("WorldEnvironment")
+	return null
 
 func recursive_create_collision_body(district_child:Node):
 	for child in district_child.get_children():
