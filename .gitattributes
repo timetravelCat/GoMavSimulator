@@ -39,6 +39,7 @@
 # GDExtension
 *.so    binary
 *.dll   binary
+*.lib   binary
 *.exp   binary
 *.bin   binary
 
