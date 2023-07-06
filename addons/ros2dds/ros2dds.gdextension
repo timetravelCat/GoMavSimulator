@@ -1,6 +1,7 @@
 [configuration]
 
 entry_symbol = "ros2dds_init"
+compatibility_minimum = 4.1
 
 [libraries]
 
@@ -11,5 +12,19 @@ linux.release.x86_64 = "bin/libros2dds_binding_release.so"
 
 [icons]
 ROS2DDS = "res://addons/ros2dds/icon/ros2.svg"
-Pulbisher = "res://addons/ros2dds/icon/publisher.svg"
+Publisher = "res://addons/ros2dds/icon/publisher.svg"
 Subscriber = "res://addons/ros2dds/icon/subscriber.svg"
+ImagePublisher = "res://addons/ros2dds/icon/publisher.svg"
+CompressedImagePublisher = "res://addons/ros2dds/icon/publisher.svg"
+CameraInfoPublisher = "res://addons/ros2dds/icon/publisher.svg"
+PoseStampedPublisher = "res://addons/ros2dds/icon/publisher.svg"
+PointStampedPublisher = "res://addons/ros2dds/icon/publisher.svg"
+PointCloudPublisher = "res://addons/ros2dds/icon/publisher.svg"
+PathPublisher = "res://addons/ros2dds/icon/publisher.svg"
+RangePublisher = "res://addons/ros2dds/icon/publisher.svg"
+MarkerPublisher = "res://addons/ros2dds/icon/publisher.svg"
+PoseStampedSubscriber = "res://addons/ros2dds/icon/subscriber.svg"
+PointStampedSubscriber = "res://addons/ros2dds/icon/subscriber.svg"
+PathSubscriber = "res://addons/ros2dds/icon/subscriber.svg"
+PointCloudSubscriber = "res://addons/ros2dds/icon/subscriber.svg"
+MarkerSubscriber = "res://addons/ros2dds/icon/subscriber.svg"
