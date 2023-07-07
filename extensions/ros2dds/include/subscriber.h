@@ -13,7 +13,7 @@ public:
 	virtual ~Subscriber();
 	bool _initialize(eprosima::fastdds::dds::Topic *topic, eprosima::fastdds::dds::DataWriterQos &_, eprosima::fastdds::dds::DataReaderQos &qos) override;
 	void _deinitialize() override;
-	
+
 protected:
 	static void _bind_methods();
 	virtual void _on_data_subscribed(void *data){};
