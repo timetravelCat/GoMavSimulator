@@ -1,19 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://betcdhu4iamlw"]
+[gd_scene load_steps=2 format=3 uid="uid://buybekntavl0w"]
 
-[ext_resource type="Script" path="res://modules/sensor/Range/Range.gd" id="1_ngxnr"]
+[ext_resource type="Script" path="res://modules/sensor/Range/Range.gd" id="1_5yvs0"]
 
-[node name="Range" type="RayCast3D" node_paths=PackedStringArray("publisher", "_timer")]
-script = ExtResource("1_ngxnr")
+[node name="Range" type="Node3D" node_paths=PackedStringArray("publisher")]
+script = ExtResource("1_5yvs0")
 publisher = NodePath("RangePublisher")
-_timer = NodePath("PublishTimer")
-
-[node name="PublishTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="RangePublisher" type="RangePublisher" parent="."]
-domain_id = 1
-topic_name = "model/test"
-topic_type = "sensor_msgs::msg::dds_::Range_"
 
-[connection signal="renamed" from="." to="." method="_on_renamed"]
-[connection signal="timeout" from="PublishTimer" to="." method="_on_publish_timer_timeout"]
+[node name="RayCast3D" type="RayCast3D" parent="."]

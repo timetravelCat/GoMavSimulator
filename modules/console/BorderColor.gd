@@ -5,20 +5,18 @@ extends ColorRect
 @export var warning:Color
 @export var alert:Color
 
-enum NOTIFY {NORMAL, ACCEPT, WARN, ALERT}
-
 func set_shader_progress(progress: float):
 	material.set_shader_parameter("progress", progress)
 	pass
 
-func notify(type: NOTIFY):
+func notify(type: Console.NOTIFY):
 	var material_color = normal
 	match type:
-		NOTIFY.ACCEPT:
+		Console.NOTIFY.ACCEPT:
 			material_color = accept
-		NOTIFY.WARN:
+		Console.NOTIFY.WARN:
 			material_color = warning
-		NOTIFY.ALERT:
+		Console.NOTIFY.ALERT:
 			material_color = alert
 			
 	material.set_shader_parameter("color", material_color)
