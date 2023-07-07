@@ -5,9 +5,9 @@ class_name Sensor
 @export_category("Common Settings")
 @export var type:Vehicle.SENSOR_TYPE
 @export var publisher:Publisher
-@export var hz:float = 10.0:			# default publish hz
+@export var hz:float = 10.0:
 	set(_hz):
-		timer.wait_time = 1.0 / hz
+		timer.wait_time = 1.0 / _hz
 		hz = _hz
 @export var enable:bool = true:
 	set(_enable):
