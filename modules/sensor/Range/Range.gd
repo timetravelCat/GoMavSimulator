@@ -5,6 +5,7 @@ extends Sensor
 
 @export var distance:float = 100.0: 	# default distance
 	set(_distance):
+		distance = _distance
 		get_node("RayCast3D").target_position = Vector3(distance, 0.0, 0.0)
 		get_node("RangePublisher").max_range = distance
 

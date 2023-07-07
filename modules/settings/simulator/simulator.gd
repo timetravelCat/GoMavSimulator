@@ -45,7 +45,10 @@ func _ready():
 	SensorType.clear()
 	for sensor_type in 	Vehicle.SENSOR_TYPE_STRING:
 		SensorType.add_item(sensor_type)
-
+	PoseSource.clear()
+	for pose_type in Vehicle.POSE_TYPE_STRING:
+		PoseSource.add_item(pose_type)
+	
 func reset_to_default():
 	# Set all control node value as default
 	VehicleType.select(0)
@@ -73,15 +76,7 @@ func reset_to_default():
 		VehicleList.select(0)
 		_on_vehicle_delete_pressed()
 	
-	if SimulatorSettings.add_vehicle(
-		SimulatorSettings.def_vehicle_name,
-		SimulatorSettings.def_model_type,
-		SimulatorSettings.def_domain_id,
-		SimulatorSettings.def_pose_type,
-		SimulatorSettings.def_vehicle_scale,
-		SimulatorSettings.def_odometry_source,
-		SimulatorSettings.def_sys_id,
-		SimulatorSettings.def_ros2_pose_subscriber_topic_name):
+	if SimulatorSettings.add_vehicle():
 			VehicleList.add_item(SimulatorSettings.def_vehicle_name)
 
 func _on_vehicle_add_pressed():
@@ -104,7 +99,9 @@ func _on_vehicle_add_pressed():
 		GoMAVSDK.OdometrySource.ODOMETRY_GROUND_TRUTH,
 		SimulatorSettings.def_sys_id,
 		SimulatorSettings.def_ros2_pose_subscriber_topic_name):
-			VehicleList.add_item(VehicleName.text)
+			var select_item = VehicleList.add_item(VehicleName.text)
+			VehicleList.select(select_item)
+			_on_vehicle_list_item_selected(select_item)
 
 func _on_vehicle_delete_pressed():
 	if !VehicleList.is_anything_selected():
@@ -259,25 +256,24 @@ func _on_sensor_list_item_selected(index):
 #	LidarWidth.text = str(rad_to_deg(sensor.horizontal_resolution))
 #	LidarHeigth.text = str(rad_to_deg(sensor.vertical_resolution))
 	pass
-
-func get_selected_vehicle()->Vehicle:
+func get_selected_vehicle(notify:bool = true)->Vehicle:
 	if !VehicleList.is_anything_selected():
-		Notification.notify(" Select a vehicle ", Notification.NOTICE_TYPE.ALERT)
+		if notify:
+			Notification.notify(" Select a vehicle ", Notification.NOTICE_TYPE.ALERT)
 		return null
 	
 	return SimulatorSettings.get_vehicle(VehicleList.get_item_text(VehicleList.get_selected_items()[0]))
-
-func get_selected_sensor()->Sensor:
+func get_selected_sensor(notify:bool = true)->Sensor:
 	var vehicle:Vehicle = get_selected_vehicle()
 	if not vehicle:
 		return null
 	
 	if not SensorList.is_anything_selected():
-		Notification.notify(" Select a sensor ", Notification.NOTICE_TYPE.ALERT)
+		if notify:
+			Notification.notify(" Select a sensor ", Notification.NOTICE_TYPE.ALERT)
 		return null
 	
 	return vehicle.get_sensor(SensorList.get_item_text(SensorList.get_selected_items()[0]))
-
 func _on_vehicle_advanced_config_pressed():
 	if !VehicleList.is_anything_selected():
 		Notification.notify(" Select Veihcle ", Notification.NOTICE_TYPE.ALERT)
@@ -292,3 +288,99 @@ func _on_vehicle_setup_close_pressed():
 	VehiclePopup.hide()
 func _on_sensor_setup_close_pressed():
 	SensorPopup.hide()
+# diselect if right-mouse clicked
+func _on_vehicle_list_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			SensorList.deselect_all()
+			VehicleList.deselect_all()
+func _on_sensor_list_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			SensorList.deselect_all()
+
+func _on_vehicle_type_item_selected(index):
+	var vehicle = get_selected_vehicle(false)
+	var model_type:Vehicle.MODEL_TYPE = index as Vehicle.MODEL_TYPE
+	if vehicle:
+		vehicle.model_type = model_type
+
+func _on_vehicle_name_text_submitted(new_text:String):
+	var vehicle = get_selected_vehicle(false)
+	if vehicle and not new_text.is_empty():
+		vehicle.name = new_text
+		VehicleList.set_item_text(VehicleList.get_selected_items()[0], vehicle.name)
+		
+func _on_domain_id_text_submitted(new_text:String):
+	var vehicle = get_selected_vehicle(false)
+	if vehicle and not new_text.is_empty() and new_text.is_valid_int():
+		vehicle.domain_id = new_text.to_int()
+
+func _on_pose_source_item_selected(index):
+	var vehicle = get_selected_vehicle(false)
+	var pose_type:Vehicle.POSE_TYPE = index as Vehicle.POSE_TYPE
+	if vehicle:
+		vehicle.pose_type = pose_type
+		
+func _on_vehicle_scale_value_changed(value):
+	var vehicle = get_selected_vehicle(false)
+	if vehicle:
+		var model_scale:float = value * SimulatorSettings.def_vehicle_scaler / VehicleScale.max_value
+		vehicle.model.scale = Vector3(model_scale, model_scale, model_scale)
+
+# vehicle advanced config
+func _on_mavlink_pose_source_item_selected(index):
+	var vehicle = get_selected_vehicle(false)
+	var mavlink_pose_type:GoMAVSDK.OdometrySource = index as GoMAVSDK.OdometrySource
+	if vehicle and vehicle.pose_type == Vehicle.POSE_TYPE.MAVLINK:
+		var pose_mavlink:GoMAVSDK = vehicle.pose
+		pose_mavlink.odometry_source = mavlink_pose_type
+
+func _on_sysid_text_submitted(new_text:String):
+	var vehicle = get_selected_vehicle(false)
+	if vehicle and vehicle.pose_type == Vehicle.POSE_TYPE.MAVLINK and new_text.is_valid_int():
+		var pose_mavlink:GoMAVSDK = vehicle.pose
+		pose_mavlink.sys_id = new_text.to_int()
+
+func _on_topic_text_submitted(new_text):
+	var vehicle = get_selected_vehicle(false)
+	if vehicle and vehicle.pose_type == Vehicle.POSE_TYPE.ROS2 and !vehicle.find_child(new_text, false, false):
+		var pose_ros2:PoseStampedSubscriber = vehicle.pose
+		pose_ros2.name = new_text
+
+# NOT YET SUPPORTED
+func _on_sensor_type_item_selected(index):
+	pass # Replace with function body.
+
+func _on_sensor_name_text_submitted(new_text:String):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty():
+		sensor.name = new_text
+		SensorList.set_item_text(SensorList.get_selected_items()[0], sensor.name)
+
+func _on_frame_id_text_submitted(new_text):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty():
+		sensor.publisher.frame_id = new_text
+
+func _on_publish_rate_text_submitted(new_text:String):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.hz = new_text.to_float()
+
+func _on_location_text_submitted(new_text:String):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.position = ENU2EUS.enu_to_eus_v(Vector3(LocationX.text.to_float(), LocationY.text.to_float(), LocationZ.text.to_float()))
+		print(sensor.position)
+
+func _on_rotation_text_submitted(new_text:String):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.basis = ENU2EUS.enu_to_eus_b(Basis.from_euler(Vector3(deg_to_rad(RotationX.text.to_float()), deg_to_rad(RotationY.text.to_float()), deg_to_rad(RotationZ.text.to_float())), EULER_ORDER_ZYX))
+
+# sensor advanced config
+func _on_range_distance_text_submitted(new_text:String):
+	var sensor:Sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.distance = new_text.to_float()

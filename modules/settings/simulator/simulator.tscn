@@ -415,7 +415,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
-tooltip_text = "FRD (Front, Right, Down) distance from vehicle's Centor of Mass"
+tooltip_text = "FLU (Front, Left, Up) distance from vehicle's Centor of Mass"
 mouse_filter = 0
 text = "SENSOR LOCATION(m)"
 vertical_alignment = 1
@@ -744,15 +744,36 @@ size_flags_vertical = 0
 texture_normal = ExtResource("3_me20j")
 stretch_mode = 4
 
+[connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer/VehicleType" to="." method="_on_vehicle_type_item_selected"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer/VehicleName" to="." method="_on_vehicle_name_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer6/DomainID" to="." method="_on_domain_id_text_submitted"]
+[connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer7/PoseSource" to="." method="_on_pose_source_item_selected"]
+[connection signal="value_changed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxContainer/VehicleScale" to="." method="_on_vehicle_scale_value_changed"]
+[connection signal="gui_input" from="Margin/HBoxContainer/VBoxContainer/VehicleList" to="." method="_on_vehicle_list_gui_input"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/VehicleList" to="." method="_on_vehicle_list_item_selected"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleAdvancedConfig" to="." method="_on_vehicle_advanced_config_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDisable" to="." method="_on_vehicle_disable_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleAdd" to="." method="_on_vehicle_add_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDelete" to="." method="_on_vehicle_delete_pressed"]
+[connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer/SensorType" to="." method="_on_sensor_type_item_selected"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer/SensorName" to="." method="_on_sensor_name_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer/FrameID" to="." method="_on_frame_id_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer9/HBoxContainer/PublishRate" to="." method="_on_publish_rate_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationX" to="." method="_on_location_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationY" to="." method="_on_location_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/HBoxContainer/LocationZ" to="." method="_on_location_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationX" to="." method="_on_rotation_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationY" to="." method="_on_rotation_text_submitted"]
+[connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/RotationZ" to="." method="_on_rotation_text_submitted"]
+[connection signal="gui_input" from="Margin/HBoxContainer/VBoxContainer2/SensorList" to="." method="_on_sensor_list_gui_input"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/SensorList" to="." method="_on_sensor_list_item_selected"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorAdvancedConfig" to="." method="_on_sensor_advanced_config_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable" to="." method="_on_sensor_disable_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorAdd" to="." method="_on_sensor_add_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDelete" to="." method="_on_sensor_delete_pressed"]
+[connection signal="item_selected" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer/MavlinkPoseSource" to="." method="_on_mavlink_pose_source_item_selected"]
+[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer2/sysid" to="." method="_on_sysid_text_submitted"]
+[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer3/topic" to="." method="_on_topic_text_submitted"]
 [connection signal="pressed" from="Margin/VehiclePopup/VehicleSetupClose" to="." method="_on_vehicle_setup_close_pressed"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer4/RangeDistance" to="." method="_on_range_distance_text_submitted"]
 [connection signal="pressed" from="Margin/SensorPopup/SensorSetupClose" to="." method="_on_sensor_setup_close_pressed"]

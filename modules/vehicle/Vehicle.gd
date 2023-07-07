@@ -22,6 +22,10 @@ var model_type:MODEL_TYPE = MODEL_TYPE.MULTICOPTER:
 var model:Node3D = null # contain vehicle mesh
 # ===== pose configuration ====== #
 enum POSE_TYPE {MAVLINK, ROS2, USER}
+const POSE_TYPE_STRING:PackedStringArray = [
+	"MAVLINK",
+	"ROS2",
+	"USER"]
 static var pose_list:Array = [
 	preload("res://modules/vehicle/pose/pose_mavlink.tscn"),
 	preload("res://modules/vehicle/pose/pose_ros2.tscn"),
@@ -110,6 +114,13 @@ func add_sensor(_sensor_name:String, _sensor_type:SENSOR_TYPE):
 	
 	var sensor = sensor_list[_sensor_type].instantiate()
 	sensor.name = _sensor_name
+	
+	# set default settings
+	match _sensor_type:
+		SENSOR_TYPE.RANGE:
+			sensor.distance = SimulatorSettings.def_range_distance
+		# TODO other sensor default setting
+	
 	sensors.append(sensor)
 	add_child(sensor)
 	return sensor

@@ -26,6 +26,7 @@ func _init():
 
 func _enter_tree():
 	get_parent().connect("renamed", _on_renamed)
+	connect("renamed", _on_renamed)
 	_on_renamed()
 
 func _on_renamed():

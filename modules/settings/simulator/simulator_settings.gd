@@ -12,6 +12,9 @@ const def_pose_type:Vehicle.POSE_TYPE = Vehicle.POSE_TYPE.ROS2 # Temporary
 const def_odometry_source:GoMAVSDK.OdometrySource = GoMAVSDK.OdometrySource.ODOMETRY_GROUND_TRUTH
 const def_frame_id:String = "/map"
 
+# sensor defaults
+const def_range_distance:float = 100.0
+
 var VehicleContainer:Node
 var VehicleLoader:PackedScene = preload("res://modules/vehicle/Vehicle.tscn")
 
@@ -24,14 +27,14 @@ func get_vehicle(vehicle_name:String)->Vehicle:
 	return VehicleContainer.find_child(vehicle_name, false, false)
 
 func add_vehicle(
-					vehicle_name:String, \
-					model_type:Vehicle.MODEL_TYPE = Vehicle.MODEL_TYPE.MULTICOPTER, \
-					domain_id:int = 0, \
-					pose_type:Vehicle.POSE_TYPE = Vehicle.POSE_TYPE.MAVLINK, \
-					vehicle_scale:float = 1.0, \
-					odometry_source:GoMAVSDK.OdometrySource = GoMAVSDK.OdometrySource.ODOMETRY_GROUND_TRUTH, \
-					sys_id:int = 1, \
-					ros2_pose_source:String = "pose")->bool:
+					vehicle_name:String = def_vehicle_name, \
+					model_type:Vehicle.MODEL_TYPE = def_model_type, \
+					domain_id:int = def_domain_id, \
+					pose_type:Vehicle.POSE_TYPE = def_pose_type, \
+					vehicle_scale:float = def_vehicle_scale, \
+					odometry_source:GoMAVSDK.OdometrySource = def_odometry_source, \
+					sys_id:int = def_sys_id, \
+					ros2_pose_source:String = def_ros2_pose_subscriber_topic_name)->bool:
 	if VehicleContainer.find_child(vehicle_name, false, false):
 		Notification.notify("Same vehicle name found : " + vehicle_name, Notification.NOTICE_TYPE.ALERT)
 		return false
@@ -60,22 +63,3 @@ func remove_vehicle(vehicle_name:String):
 	if vehicle:
 		VehicleContainer.remove_child(vehicle)
 		vehicle.free()
-
-## Sensor configurations
-#enum SENSOR_TYPE {RGB_CAMERA, DEPTH_CAMERA, RANGE, LIDAR}
-#
-## Sensor dictionary structure
-#class Sensor:
-#	var item_id:int # itemlist control id
-#	var enable:bool
-#	var name:String # name of ros2 published topic
-#	var type:SENSOR_TYPE
-#	var location:Vector3
-#	var rotation:Basis
-#	var hz:float # publish hz
-#	# advanced setting
-#	var resoultion:Vector2i # CAMERA TYPE RESOLUTION
-#	var vertical_fov:float # LIDAR in radian, horizontal resoultion is 360 deg.
-#	var vertical_resolution:float # LIDAR vertical resolution in radian
-#	var horizontal_resolution:float # LIDAR horizontal resolution in radian
-#	var range_distance:float
