@@ -7,6 +7,8 @@ var district_mumbai:PackedScene = preload("res://assets/district/cartoon/mumbai.
 var district_mini:PackedScene = preload("res://assets/district/cartoon/mini.tscn")
 # var district_village:PackedScene = preload("res://assets/district/photorealistic/village.tscn")
 
+var viewports:Array
+
 func _enter_tree():
 	# TODO implement save-load
 	# TODO select by start settings
@@ -14,6 +16,9 @@ func _enter_tree():
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Register main window viewport
+	viewports.append(get_viewport())		
+	
 	# Regieter world
 	var world:Node3D = world_volumetric.instantiate()
 	world.name = "world"
@@ -36,3 +41,15 @@ func recursive_create_collision_body(district_child:Node):
 		var meshInstance = child as MeshInstance3D
 		if meshInstance: # in case of meshinstance, 
 			meshInstance.create_trimesh_collision()
+
+# New Viewer functionality
+var viewer_offset:Vector2i = Vector2i.ZERO
+var viewer_loader:PackedScene = preload("res://modules/viewer/Viewer.tscn")
+
+func create_new_viewer():
+	var viewer:Viewer = viewer_loader.instantiate()
+	viewer.position = get_window().position + viewer_offset
+	viewer_offset += Vector2i(64, 36)
+	if viewer_offset.x > 640:
+		viewer_offset = Vector2.ZERO
+	add_child(viewer)

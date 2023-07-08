@@ -1,0 +1,47 @@
+extends Window
+
+class_name Viewer
+
+@onready var freeFlyCamera:FreeFlyCamera = $FreeFlyCamera
+@onready var thirdPersonCamera:ThirdPersonCamera = $ThirdPersonCamera
+@onready var vehicleSelector:OptionButton = $ColorRect/HBoxContainer/VehicleSelector
+
+func _enter_tree():
+	# shares same world of parent
+	world_3d = get_parent().get_window().world_3d
+	GeneralSettings.viewports.append(get_viewport())
+
+func _exit_tree():
+	GeneralSettings.viewports.erase(get_viewport())
+
+func _on_close_requested():
+	call_deferred("queue_free")
+
+# TODO bug on godot : always on top makes other control node weird. (buttons not working)
+func _on_always_on_top_toggled(button_pressed):
+	always_on_top = button_pressed
+
+func _on_vehicle_selector_pressed():
+	vehicleSelector.clear()
+	vehicleSelector.add_item("FreeCam")
+	# get current vehicle list
+	for vehicle in SimulatorSettings.VehicleContainer.get_children():
+		vehicleSelector.add_item(vehicle.name)
+	vehicleSelector.selected = -1
+
+func _on_vehicle_selector_item_selected(index):
+	if index == 0:
+		freeFlyCamera.make_current()
+		title = ""
+		return
+	
+	var key = vehicleSelector.get_item_text(index)
+	var vehicle = SimulatorSettings.VehicleContainer.find_child(key, false, false)
+	if not vehicle:
+		Notification.notify("Vehicle deleted during selection", Notification.NOTICE_TYPE.ALERT) 
+		return
+	thirdPersonCamera.follow = vehicle
+	thirdPersonCamera.make_current()
+	title = vehicle.name
+		
+	

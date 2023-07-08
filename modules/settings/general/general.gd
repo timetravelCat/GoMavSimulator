@@ -19,8 +19,6 @@ extends Control
 @export var settings:Theme
 @export var subtitle:LabelSettings
 
-var viewports:Array
-
 func reset_to_default():
 	# WINDOWED MODE
 	fullscreen.select(0)
@@ -55,9 +53,6 @@ func _ready():
 	for i in DisplayServer.get_screen_count():
 		var res = DisplayServer.screen_get_size(i)
 		main_window.add_item(str(i) + " : " + str(res.x) + "x" + str(res.y))
-	
-	# Register main camera viewport (TODO find better place)
-	viewports.append(get_viewport())		
 
 	pass
 
@@ -154,74 +149,74 @@ func _on_shadows_item_selected(index):
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
 			# directional_light.shadow_bias = 0.005
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 16384
 		1: # HIGH
 			RenderingServer.directional_shadow_atlas_set_size(8192, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
 			# directional_light.shadow_bias = 0.01
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 8192
 		2: # MIDIUM
 			RenderingServer.directional_shadow_atlas_set_size(4096, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM)
 			# directional_light.shadow_bias = 0.02
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 4096
 		3: # LOW
 			RenderingServer.directional_shadow_atlas_set_size(2048, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
 			# directional_light.shadow_bias = 0.03
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 2048
 		4: # VERY LOW
 			RenderingServer.directional_shadow_atlas_set_size(1024, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_VERY_LOW)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_VERY_LOW)
 			# directional_light.shadow_bias = 0.04
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 1024
 		5: # DISABLED
 			RenderingServer.directional_shadow_atlas_set_size(512, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
 			# directional_light.shadow_bias = 0.06
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.positional_shadow_atlas_size = 0
 	pass 
 
 func _on_anti_alising_item_selected(index):
 	match index:
 		0: # MXAA_8
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_8X
 				viewport.use_taa = false
 				viewport.screen_space_aa = false
 		1: # MSAA_4
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_4X
 				viewport.use_taa = false
 				viewport.screen_space_aa = false
 		2: # MSAA_2
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_2X
 				viewport.use_taa = false
 				viewport.screen_space_aa = false
 		3: # TAA
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.use_taa = true
 				viewport.screen_space_aa = false
 			pass
 		4: # FXAA
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.screen_space_aa = true
 				viewport.use_taa = false
 			pass
 		5: # DISABLED
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_DISABLED
 				viewport.screen_space_aa = false
 				viewport.screen_space_aa = false
@@ -257,27 +252,27 @@ func _on_ambient_occlusion_item_selected(index):
 func _on_texture_item_selected(index):
 	match index:
 		0: # ULTRA
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 0.0
 			pass
 		1: # HIGH
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 1.0
 			pass
 		2: # MEDIUM
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 2.0
 			pass
 		3: # LOW
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 4.0
 			pass
 		4: # VERY LOW
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 8.0
 			pass
 		5: # DISABLED
-			for viewport in viewports:
+			for viewport in GeneralSettings.viewports:
 				viewport.mesh_lod_threshold = 8.0
 			pass
 	pass 
@@ -364,3 +359,6 @@ func _on_overall_quality_item_selected(index):
 	visual_effects.select(index)
 	visual_effects.item_selected.emit(index)
 	pass 
+
+func _on_open_new_viewer_pressed():
+	GeneralSettings.create_new_viewer()

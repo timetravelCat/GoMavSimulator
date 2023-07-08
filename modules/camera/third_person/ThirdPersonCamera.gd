@@ -22,7 +22,7 @@ func _process(delta):
 	)
 
 func _input(event):
-	if not control:
+	if not get_window().has_focus() or not current:
 		return
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

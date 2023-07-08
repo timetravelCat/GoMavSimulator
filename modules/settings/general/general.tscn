@@ -247,6 +247,16 @@ layout_mode = 2
 toggle_mode = true
 text = "     OFF     "
 
+[node name="MarginContainer8" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="open_new_viewer" type="Button" parent="Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = " Open Additonal Viewer"
+
 [node name="MarginContainer" type="MarginContainer" parent="Margin/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
@@ -466,6 +476,7 @@ popup/item_5/id = 5
 [connection signal="value_changed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer6/HBoxContainer/ui_scaling" to="." method="_on_ui_scaling_value_changed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer/minimap_on" to="." method="_on_minimap_on_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer/minimap_off" to="." method="_on_minimap_off_pressed"]
+[connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/open_new_viewer" to="." method="_on_open_new_viewer_pressed"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer/overall_quality" to="." method="_on_overall_quality_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/shadows" to="." method="_on_shadows_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/visual_effects" to="." method="_on_visual_effects_item_selected"]

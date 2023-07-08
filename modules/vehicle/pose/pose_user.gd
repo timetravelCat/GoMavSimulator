@@ -5,7 +5,7 @@ extends Node
 @export var drag_sensitivity:float = 0.05
 
 func _process(delta):
-	if not control or not get_parent():
+	if not control or not get_window().has_focus():
 		return
 	var direction = Vector3.ZERO
 	if Input.is_key_pressed(KEY_W): 	direction.z -= 1
@@ -23,7 +23,7 @@ func _process(delta):
 	get_parent().global_transform.basis = get_parent().global_transform.basis * Basis(Vector3(0.0, 0.0, 1.0), angle*drag_sensitivity)
 
 func _input(event):
-	if not control or not get_parent():
+	if not control or not get_window().has_focus():
 		return
 
 	if event is InputEventMouseMotion:
