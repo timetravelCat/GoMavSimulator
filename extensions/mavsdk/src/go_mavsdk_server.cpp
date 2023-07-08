@@ -52,6 +52,7 @@ void GoMAVSDKServer::_finalize()
 			api.second.param.reset();
 			api.second.mavlink_passthrough.reset();
 			api.second.manual_control.reset();
+			api.second.action.reset();
 		}
 
 		_apis.clear();
@@ -87,7 +88,7 @@ void GoMAVSDKServer::set_component_id(int32_t comp_id)
 
 	config.set_component_id(comp_id);
 
-	if(_mavsdk)
+	if (_mavsdk)
 	{
 		_mavsdk->set_configuration(config);
 	}
@@ -95,7 +96,7 @@ void GoMAVSDKServer::set_component_id(int32_t comp_id)
 
 void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String message)
 {
-	emit_signal("shell_received", sys_id, message);
+	call_deferred("emit_signal", "shell_received", sys_id, message);
 	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
 	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
@@ -105,7 +106,7 @@ void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String mess
 
 void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message)
 {
-	emit_signal("mavlink_received", sys_id, byte_message);
+	call_deferred("emit_signal", "mavlink_received", sys_id, byte_message);
 	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
 	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
@@ -115,11 +116,111 @@ void GoMAVSDKServer::_on_mavlink_received(const int32_t &sys_id, const mavlink_m
 
 void GoMAVSDKServer::_on_response_manual_control(int32_t sys_id, mavsdk::ManualControl::Result result)
 {
-	emit_signal("response_manual_control", sys_id, (ManualControlResult)result);
+	call_deferred("emit_signal", "response_manual_control", sys_id, (ManualControlResult)result);
 	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
 	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
 		iter->_on_response_manual_control((ManualControlResult)result);
+	}
+}
+
+void GoMAVSDKServer::_on_response_action(int32_t sys_id, mavsdk::Action::Result result)
+{
+	call_deferred("emit_signal", "response_action", sys_id, (ManualControlResult)result);
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
+	{
+		iter->_on_response_action((ActionResult)result);
+	}
+}
+
+void GoMAVSDKServer::request_arm(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->arm_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_disarm(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->disarm_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_takeoff(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->takeoff_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_land(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->land_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_reboot(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->reboot_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_shutdown(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->shutdown_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_terminate(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->terminate_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_kill(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->kill_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_return_to_launch(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->return_to_launch_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
+	}
+}
+
+void GoMAVSDKServer::request_hold(int32_t sys_id)
+{
+	_THREAD_SAFE_METHOD_
+	if (is_system_discovered(sys_id))
+	{
+		_apis[sys_id].action->hold_async(std::bind(&GoMAVSDKServer::_on_response_action, this, sys_id, std::placeholders::_1));
 	}
 }
 
@@ -158,13 +259,15 @@ void GoMAVSDKServer::start_discovery()
 									api.param = std::make_shared<mavsdk::Param>(system);
 									api.mavlink_passthrough = std::make_shared<mavsdk::MavlinkPassthrough>(system);
 									api.manual_control = std::make_shared<mavsdk::ManualControl>(system);
+									api.action = std::make_shared<mavsdk::Action>(system);
 
 									api.shell->subscribe_receive([this, sys_id](const std::string output)
 																 { _on_shell_received(sys_id, output.data()); });
 									_THREAD_SAFE_LOCK_
 									_apis.insert({sys_id, api});
 									_THREAD_SAFE_UNLOCK_
-									emit_signal("system_discovered", sys_id);
+							
+									call_deferred("emit_signal", "system_discovered", sys_id);
 
 									// Add default subscriptions (pose source related)
 									add_mavlink_subscription(sys_id, MAVLINK_MSG_ID_HEARTBEAT);
@@ -179,7 +282,8 @@ void GoMAVSDKServer::start_discovery()
 				});
 
 			std::unique_lock<std::mutex> lock(_mutex);
-			_condition_variable.wait(lock, []{return _request_discovery_stop.load();});
+			_condition_variable.wait(lock, []
+									 { return _request_discovery_stop.load(); });
 		});
 }
 
@@ -426,12 +530,13 @@ void GoMAVSDKServer::_bind_methods()
 	ADD_SIGNAL(MethodInfo("shell_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::STRING, "shell")));				   // Verified
 	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message"))); // Verified
 	ADD_SIGNAL(MethodInfo("response_manual_control", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::INT, "result")));
+	ADD_SIGNAL(MethodInfo("response_action", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::INT, "result")));
 
 	ClassDB::bind_method(D_METHOD("initialize", "force"), &GoMAVSDKServer::initialize, DEFVAL(0));						   // Verified
 	ClassDB::bind_method(D_METHOD("set_system_id", "sys_id"), &GoMAVSDKServer::set_system_id);							   // Verified
 	ClassDB::bind_method(D_METHOD("get_system_id"), &GoMAVSDKServer::get_system_id);									   // Verified
-	ClassDB::bind_method(D_METHOD("set_component_id", "comp_id"), &GoMAVSDKServer::set_component_id);							   // Verified
-	ClassDB::bind_method(D_METHOD("get_component_id"), &GoMAVSDKServer::get_component_id);									   // Verified
+	ClassDB::bind_method(D_METHOD("set_component_id", "comp_id"), &GoMAVSDKServer::set_component_id);					   // Verified
+	ClassDB::bind_method(D_METHOD("get_component_id"), &GoMAVSDKServer::get_component_id);								   // Verified
 	ClassDB::bind_method(D_METHOD("add_connection", "address", "forwarding"), &GoMAVSDKServer::add_connection, DEFVAL(0)); // Verified
 	ClassDB::bind_method(D_METHOD("setup_udp_remote", "remote_ip", "remote_port", "forwarding"), &GoMAVSDKServer::setup_udp_remote, DEFVAL(0));
 	ClassDB::bind_method(D_METHOD("start_discovery"), &GoMAVSDKServer::start_discovery);
@@ -448,6 +553,17 @@ void GoMAVSDKServer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("add_mavlink_subscription", "sys_id", "message_id"), &GoMAVSDKServer::add_mavlink_subscription); // Verified partially
 	ClassDB::bind_method(D_METHOD("request_manual_control", "sys_id", "mode"), &GoMAVSDKServer::request_manual_control);
 	ClassDB::bind_method(D_METHOD("send_manual_control", "sys_id", "x", "y", "z", "r"), &GoMAVSDKServer::send_manual_control);
+
+	ClassDB::bind_method(D_METHOD("request_arm", "sys_id"), &GoMAVSDKServer::request_arm);
+	ClassDB::bind_method(D_METHOD("request_disarm", "sys_id"), &GoMAVSDKServer::request_disarm);
+	ClassDB::bind_method(D_METHOD("request_takeoff", "sys_id"), &GoMAVSDKServer::request_takeoff);
+	ClassDB::bind_method(D_METHOD("request_land", "sys_id"), &GoMAVSDKServer::request_land);
+	ClassDB::bind_method(D_METHOD("request_reboot", "sys_id"), &GoMAVSDKServer::request_reboot);
+	ClassDB::bind_method(D_METHOD("request_shutdown", "sys_id"), &GoMAVSDKServer::request_shutdown);
+	ClassDB::bind_method(D_METHOD("request_terminate", "sys_id"), &GoMAVSDKServer::request_terminate);
+	ClassDB::bind_method(D_METHOD("request_kill", "sys_id"), &GoMAVSDKServer::request_kill);
+	ClassDB::bind_method(D_METHOD("request_return_to_launch", "sys_id"), &GoMAVSDKServer::request_return_to_launch);
+	ClassDB::bind_method(D_METHOD("request_hold", "sys_id"), &GoMAVSDKServer::request_hold);
 
 	BIND_ENUM_CONSTANT(FORWARD_OFF);
 	BIND_ENUM_CONSTANT(FORWARD_ON);
@@ -504,4 +620,17 @@ void GoMAVSDKServer::_bind_methods()
 
 	BIND_ENUM_CONSTANT(MANUAL_CONTROL_POSITION);
 	BIND_ENUM_CONSTANT(MANUAL_CONTROL_ALTITUDE);
+
+	BIND_ENUM_CONSTANT(ACTION_UNKNOWN);
+	BIND_ENUM_CONSTANT(ACTION_SUCCESS);
+	BIND_ENUM_CONSTANT(ACTION_NOSYSTEM);
+	BIND_ENUM_CONSTANT(ACTION_CONNECTIONERROR);
+	BIND_ENUM_CONSTANT(ACTION_BUSY);
+	BIND_ENUM_CONSTANT(ACTION_COMMANDDENIED);
+	BIND_ENUM_CONSTANT(ACTION_COMMANDDENIEDLANDEDSTATEUNKNOWN);
+	BIND_ENUM_CONSTANT(ACTION_TIMEOUT);
+	BIND_ENUM_CONSTANT(ACTION_VTOLTRANSITIONSUPPORTUNKNOWN);
+	BIND_ENUM_CONSTANT(ACTION_NOVTOLTRANSITIONSUPPORT);
+	BIND_ENUM_CONSTANT(ACTION_PARAMETERERROR);
+	BIND_ENUM_CONSTANT(ACTION_UNSUPPORTED);
 }

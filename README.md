@@ -139,6 +139,7 @@ You can find examples of mavsdk / ros2dds api in addons/mavsdk:ros22ds/examples
     <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_param.html">param</a></li>
     <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_mavlink_passthrough.html">mavlink_passthrouth</a></li>
     <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_manual_control.html">manual_control</a></li>
+    <li><a href="https://mavsdk.mavlink.io/main/en/cpp/api_reference/classmavsdk_1_1_action.html">action</a></li>
   </ol>
 </details>
 

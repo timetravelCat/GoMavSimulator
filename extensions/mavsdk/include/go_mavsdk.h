@@ -26,10 +26,21 @@ public:
 	bool add_mavlink_subscription(const int32_t &message_id);
 	void request_manual_control(GoMAVSDKServer::ManualControlMode mode);
 	GoMAVSDKServer::ManualControlResult send_manual_control(const real_t& x, const real_t& y, const real_t& z, const real_t& r);
+	void request_arm();
+	void request_disarm();
+	void request_takeoff();
+	void request_land();
+	void request_reboot();
+	void request_shutdown();
+	void request_terminate();
+	void request_kill();
+	void request_return_to_launch();
+	void request_hold();
 
 	void _on_shell_received(const String &message);
 	void _on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
 	void _on_response_manual_control(GoMAVSDKServer::ManualControlResult result);
+	void _on_response_action(GoMAVSDKServer::ActionResult result);
 
 	enum OdometrySource
 	{

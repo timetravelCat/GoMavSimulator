@@ -19,6 +19,7 @@
 #include <mavsdk/plugins/shell/shell.h>
 #include <mavsdk/plugins/manual_control/manual_control.h>
 #include <mavsdk/system.h>
+#include <mavsdk/plugins/action/action.h>
 
 using namespace godot;
 
@@ -105,6 +106,22 @@ public:
 		MANUAL_CONTROL_ALTITUDE
 	};
 
+	enum ActionResult
+	{
+		ACTION_UNKNOWN,
+        ACTION_SUCCESS,
+        ACTION_NOSYSTEM,
+        ACTION_CONNECTIONERROR,
+        ACTION_BUSY,
+        ACTION_COMMANDDENIED,
+        ACTION_COMMANDDENIEDLANDEDSTATEUNKNOWN,
+        ACTION_TIMEOUT,
+        ACTION_VTOLTRANSITIONSUPPORTUNKNOWN,
+        ACTION_NOVTOLTRANSITIONSUPPORT,
+        ACTION_PARAMETERERROR,
+        ACTION_UNSUPPORTED
+	};
+
 	struct APIs
 	{
 		std::shared_ptr<mavsdk::System> system;
@@ -112,6 +129,7 @@ public:
 		std::shared_ptr<mavsdk::Param> param;
 		std::shared_ptr<mavsdk::MavlinkPassthrough> mavlink_passthrough;
 		std::shared_ptr<mavsdk::ManualControl> manual_control;
+		std::shared_ptr<mavsdk::Action> action;
 	};
 
 	static GoMAVSDKServer *get_singleton()
@@ -167,6 +185,18 @@ public:
 	void request_manual_control(int32_t sys_id, ManualControlMode mode);
 	ManualControlResult send_manual_control(int32_t sys_id, real_t x, real_t y, real_t z, real_t r);
 
+	void _on_response_action(int32_t sys_id, mavsdk::Action::Result result);
+	void request_arm(int32_t sys_id);
+	void request_disarm(int32_t sys_id);
+	void request_takeoff(int32_t sys_id);
+	void request_land(int32_t sys_id);
+	void request_reboot(int32_t sys_id);
+	void request_shutdown(int32_t sys_id);
+	void request_terminate(int32_t sys_id);
+	void request_kill(int32_t sys_id);
+	void request_return_to_launch(int32_t sys_id);
+	void request_hold(int32_t sys_id);
+
 	GoMAVSDKServer()
 	{
 		singleton = this;
@@ -186,3 +216,4 @@ VARIANT_ENUM_CAST(GoMAVSDKServer::ParamResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::MavlinkPassthroughResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlMode);
+VARIANT_ENUM_CAST(GoMAVSDKServer::ActionResult);

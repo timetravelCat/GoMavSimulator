@@ -97,6 +97,96 @@ void GoMAVSDK::request_manual_control(GoMAVSDKServer::ManualControlMode mode)
 	server->request_manual_control(sys_id, mode);
 }
 
+void GoMAVSDK::request_arm()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_arm(sys_id);
+}
+
+void GoMAVSDK::request_disarm()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_disarm(sys_id);
+}
+
+void GoMAVSDK::request_takeoff()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_takeoff(sys_id);
+}
+
+void GoMAVSDK::request_land()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_land(sys_id);
+}
+
+void GoMAVSDK::request_reboot()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_reboot(sys_id);
+}
+
+void GoMAVSDK::request_shutdown()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_shutdown(sys_id);
+}
+
+void GoMAVSDK::request_terminate()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_terminate(sys_id);
+}
+
+void GoMAVSDK::request_kill()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_kill(sys_id);
+}
+
+void GoMAVSDK::request_return_to_launch()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_return_to_launch(sys_id);
+}
+
+void GoMAVSDK::request_hold()
+{
+	if (!sys_enable)
+	{
+		return;
+	}
+	server->request_hold(sys_id);
+}
+
 GoMAVSDKServer::ManualControlResult GoMAVSDK::send_manual_control(const real_t &x, const real_t &y, const real_t &z, const real_t &r)
 {
 	if (!sys_enable)
@@ -111,14 +201,14 @@ void GoMAVSDK::_on_shell_received(const String &message)
 {
 	if (sys_enable)
 	{
-		emit_signal("shell_received", message);
+		call_deferred("emit_signal", "shell_received", message);
 	}
 }
 void GoMAVSDK::_on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message)
 {
 	if (sys_enable)
 	{
-		emit_signal("mavlink_received", byte_message);
+		call_deferred("emit_signal", "mavlink_received", byte_message);
 		parse_odometry_subscription(mavlink_message);
 	}
 }
@@ -178,7 +268,7 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 				orientation = NED2EUS::ned_to_eus_q(orientation);
 
 			if (is_reference_valid)
-				emit_signal("pose_subscribed", position, orientation);
+				call_deferred("emit_signal", "pose_subscribed", position, orientation);
 		}
 		break;
 		}
@@ -198,7 +288,7 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 			if (ned_to_eus)
 				position = NED2EUS::ned_to_eus_v(position);
 
-			emit_signal("pose_subscribed", position, orientation);
+			call_deferred("emit_signal", "pose_subscribed", position, orientation);
 		}
 		break;
 
@@ -210,8 +300,8 @@ void GoMAVSDK::parse_odometry_subscription(const mavlink_message_t &mavlink_mess
 
 			if (ned_to_eus)
 				orientation = NED2EUS::ned_to_eus_q(orientation);
-			
-			emit_signal("pose_subscribed", position, orientation);
+
+			call_deferred("emit_signal", "pose_subscribed", position, orientation);
 		}
 		break;
 		}
@@ -224,7 +314,15 @@ void GoMAVSDK::_on_response_manual_control(GoMAVSDKServer::ManualControlResult r
 {
 	if (sys_enable)
 	{
-		emit_signal("response_manual_control", result);
+		call_deferred("emit_signal", "response_manual_control", result);
+	}
+}
+
+void GoMAVSDK::_on_response_action(GoMAVSDKServer::ActionResult result)
+{
+	if (sys_enable)
+	{
+		call_deferred("emit_signal", "response_action", result);
 	}
 }
 
@@ -240,6 +338,7 @@ void GoMAVSDK::_bind_methods()
 	ADD_SIGNAL(MethodInfo("shell_received", PropertyInfo(Variant::STRING, "shell")));
 	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message")));
 	ADD_SIGNAL(MethodInfo("response_manual_control", PropertyInfo(Variant::INT, "result")));
+	ADD_SIGNAL(MethodInfo("response_action", PropertyInfo(Variant::INT, "result")));
 
 	ClassDB::bind_method(D_METHOD("is_system_discovered"), &GoMAVSDK::is_system_discovered);
 	ClassDB::bind_method(D_METHOD("is_system_connected"), &GoMAVSDK::is_system_connected);
@@ -252,6 +351,17 @@ void GoMAVSDK::_bind_methods()
 
 	ClassDB::bind_method(D_METHOD("request_manual_control", "mode"), &GoMAVSDK::request_manual_control);
 	ClassDB::bind_method(D_METHOD("send_manual_control", "x", "y", "z", "r"), &GoMAVSDK::send_manual_control);
+
+	ClassDB::bind_method(D_METHOD("request_arm"), &GoMAVSDK::request_arm);
+	ClassDB::bind_method(D_METHOD("request_disarm"), &GoMAVSDK::request_disarm);
+	ClassDB::bind_method(D_METHOD("request_takeoff"), &GoMAVSDK::request_takeoff);
+	ClassDB::bind_method(D_METHOD("request_land"), &GoMAVSDK::request_land);
+	ClassDB::bind_method(D_METHOD("request_reboot"), &GoMAVSDK::request_reboot);
+	ClassDB::bind_method(D_METHOD("request_shutdown"), &GoMAVSDK::request_shutdown);
+	ClassDB::bind_method(D_METHOD("request_terminate"), &GoMAVSDK::request_terminate);
+	ClassDB::bind_method(D_METHOD("request_kill"), &GoMAVSDK::request_kill);
+	ClassDB::bind_method(D_METHOD("request_return_to_launch"), &GoMAVSDK::request_return_to_launch);
+	ClassDB::bind_method(D_METHOD("request_hold"), &GoMAVSDK::request_hold);
 
 	BIND_ENUM_CONSTANT(ODOMETRY_GROUND_TRUTH);
 	BIND_ENUM_CONSTANT(ODOMETRY_ESTIMATION);
