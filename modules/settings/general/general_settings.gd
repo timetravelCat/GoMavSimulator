@@ -25,6 +25,8 @@ func _ready():
 	add_child(world)
 	
 	# Register district
+	_district_aa = Vector3.ZERO
+	_district_bb = Vector3.ZERO
 	var district:Node3D = district_mini.instantiate()
 	district.name = "district"
 	recursive_create_collision_body(district)
@@ -35,12 +37,32 @@ func get_current_world() -> WorldEnvironment:
 		return find_child("world", false, false).get_node("WorldEnvironment")
 	return null
 
+var _district_aa:Vector3 = Vector3.INF
+var _district_bb:Vector3 = -Vector3.INF
+
 func recursive_create_collision_body(district_child:Node):
 	for child in district_child.get_children():
 		recursive_create_collision_body(child)
 		var meshInstance = child as MeshInstance3D
 		if meshInstance: # in case of meshinstance, 
 			meshInstance.create_trimesh_collision()
+			
+			# Get total aabb size of district
+			if meshInstance.mesh:
+				var aabb:AABB = meshInstance.mesh.get_aabb()
+				_district_aa.x = minf(_district_aa.x, aabb.position.x)
+				_district_aa.y = minf(_district_aa.y, aabb.position.y)
+				_district_aa.z = minf(_district_aa.z, aabb.position.z)
+				_district_aa.x = minf(_district_aa.x, aabb.end.x)
+				_district_aa.y = minf(_district_aa.y, aabb.end.y)
+				_district_aa.z = minf(_district_aa.z, aabb.end.z)
+				
+				_district_bb.x = maxf(_district_bb.x, aabb.position.x)
+				_district_bb.y = maxf(_district_bb.y, aabb.position.y)
+				_district_bb.z = maxf(_district_bb.z, aabb.position.z)
+				_district_bb.x = maxf(_district_bb.x, aabb.end.x)
+				_district_bb.y = maxf(_district_bb.y, aabb.end.y)
+				_district_bb.z = maxf(_district_bb.z, aabb.end.z)
 
 # New Viewer functionality
 var viewer_offset:Vector2i = Vector2i.ZERO

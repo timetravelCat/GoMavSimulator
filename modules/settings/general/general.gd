@@ -9,6 +9,8 @@ extends Control
 @export var ui_scaling:HSlider
 @export var minimap_on:Button
 @export var minimap_off:Button
+@export var minimap_scale:HSlider
+@export var minimap_transparency:HSlider
 @export var general_quality:OptionButton
 @export var shadows:OptionButton
 @export var visual_effects:OptionButton
@@ -130,16 +132,14 @@ func _on_ui_scaling_value_changed(value):
 	pass
 
 func _on_minimap_on_pressed():
-	# TODO 23.06.24 minimap feature is not implemented yet.
 	minimap_on.disabled = true
 	minimap_off.disabled = false
-	pass
+	Minimap.show()
 
 func _on_minimap_off_pressed():
-	# TODO 23.06.24 minimap feature is not implemented yet.
 	minimap_on.disabled = false
 	minimap_off.disabled = true
-	pass
+	Minimap.hide()
 
 func _on_shadows_item_selected(index):
 	# 0(ULTRA) 1 2 3 4 5(DISABLED)
@@ -362,3 +362,9 @@ func _on_overall_quality_item_selected(index):
 
 func _on_open_new_viewer_pressed():
 	GeneralSettings.create_new_viewer()
+
+func _on_minimap_scale_value_changed(value):
+	Minimap.ratio = value / minimap_scale.max_value
+
+func _on_minimap_transparency_value_changed(value):
+	Minimap.alpha = value / minimap_transparency.max_value

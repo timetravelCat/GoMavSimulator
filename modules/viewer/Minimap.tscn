@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dguw3d7tkk6t2"]
+
+[ext_resource type="Script" path="res://modules/viewer/Minimap.gd" id="1_e5htg"]
+[ext_resource type="Shader" path="res://modules/viewer/Minimap.gdshader" id="1_e376n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0mbh"]
+shader = ExtResource("1_e376n")
+shader_parameter/alpha = 0.3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0fjc1"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Minimap" type="TextureRect"]
+material = SubResource("ShaderMaterial_t0mbh")
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 42.0
+offset_bottom = 42.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource("ViewportTexture_0fjc1")
+stretch_mode = 4
+script = ExtResource("1_e5htg")
+alpha = 0.57
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(2, 2)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+top_level = true
+projection = 1
+current = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
