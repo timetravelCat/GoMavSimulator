@@ -39,4 +39,5 @@ tonemap_white = 3.22
 environment = SubResource("Environment_ma5yd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.967268, 0.129173, -0.21842, 0, 0.860742, 0.509041, 0.253758, -0.492379, 0.832568, 0, 0, 0)
+shadow_enabled = true
