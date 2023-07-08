@@ -19,3 +19,13 @@ func notify(contents:String, type:NOTICE_TYPE = NOTICE_TYPE.NORMAL, duration:flo
 	
 	notice.notify(duration)
 	pass
+
+func _ready():
+	# Regigter global notification 
+	Input.joy_connection_changed.connect(_on_joy_connection_changed) # joystick connection
+
+func _on_joy_connection_changed(device:int, connected:bool):
+	if connected:
+		notify("Joystick " + str(device) + "  connected", NOTICE_TYPE.NORMAL)
+	else:
+		notify("Joystick " + str(device) + "  disconnected", NOTICE_TYPE.WARNING)

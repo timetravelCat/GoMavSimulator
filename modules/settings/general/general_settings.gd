@@ -1,6 +1,7 @@
 extends Node
 
-var selected_world:int = 0
+# var selected_world:int = 0
+var world
 var world_volumetric = preload("res://modules/world/environment/Volumetric.tscn")
 
 var district_mumbai:PackedScene = preload("res://assets/district/cartoon/mumbai.tscn")
@@ -20,7 +21,7 @@ func _ready():
 	viewports.append(get_viewport())		
 	
 	# Regieter world
-	var world:Node3D = world_volumetric.instantiate()
+	world = world_volumetric.instantiate()
 	world.name = "world"
 	add_child(world)
 	
@@ -75,3 +76,6 @@ func create_new_viewer():
 	if viewer_offset.x > 640:
 		viewer_offset = Vector2.ZERO
 	add_child(viewer)
+
+func set_day_night(value:float):
+	world.day_night = value

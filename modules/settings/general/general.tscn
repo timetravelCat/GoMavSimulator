@@ -4,7 +4,7 @@
 [ext_resource type="LabelSettings" uid="uid://cm52gobxee8w4" path="res://modules/settings/SubTitle.tres" id="1_k0wsl"]
 [ext_resource type="Theme" uid="uid://ckui405kgf56e" path="res://modules/settings/Settings.tres" id="2_75ki2"]
 
-[node name="GENERAL" type="Control" node_paths=PackedStringArray("fullscreen", "screen_resolution", "main_window", "vertical_sync_on", "vertical_sync_off", "frame_rate_limitation", "ui_scaling", "minimap_on", "minimap_off", "minimap_scale", "minimap_transparency", "general_quality", "shadows", "visual_effects", "anti_alising", "ambient_occlusion", "texture")]
+[node name="GENERAL" type="Control" node_paths=PackedStringArray("fullscreen", "screen_resolution", "main_window", "vertical_sync_on", "vertical_sync_off", "frame_rate_limitation", "ui_scaling", "minimap_on", "minimap_off", "minimap_scale", "minimap_transparency", "noon_to_sunset", "general_quality", "shadows", "visual_effects", "anti_alising", "ambient_occlusion", "texture")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_joopu")
@@ -19,6 +19,7 @@ minimap_on = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxCon
 minimap_off = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer/minimap_off")
 minimap_scale = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer/minimap_scale")
 minimap_transparency = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer2/minimap_transparency")
+noon_to_sunset = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer9/HBoxContainer/day_night")
 general_quality = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/overall_quality")
 shadows = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/shadows")
 visual_effects = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer4/visual_effects")
@@ -300,6 +301,38 @@ theme_override_constants/margin_left = 32
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
+[node name="HBoxContainer9" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "NOON TO SUNSET"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="day_night" type="HSlider" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 12.0
+value = 6.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="MarginContainer10" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
 [node name="open_new_viewer" type="Button" parent="Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -527,6 +560,7 @@ popup/item_5/id = 5
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer7/HBoxContainer/minimap_off" to="." method="_on_minimap_off_pressed"]
 [connection signal="value_changed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer/minimap_scale" to="." method="_on_minimap_scale_value_changed"]
 [connection signal="value_changed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer2/minimap_transparency" to="." method="_on_minimap_transparency_value_changed"]
+[connection signal="value_changed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer9/HBoxContainer/day_night" to="." method="_on_day_night_value_changed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/open_new_viewer" to="." method="_on_open_new_viewer_pressed"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer/overall_quality" to="." method="_on_overall_quality_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/shadows" to="." method="_on_shadows_item_selected"]

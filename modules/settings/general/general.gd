@@ -11,6 +11,7 @@ extends Control
 @export var minimap_off:Button
 @export var minimap_scale:HSlider
 @export var minimap_transparency:HSlider
+@export var noon_to_sunset:HSlider
 @export var general_quality:OptionButton
 @export var shadows:OptionButton
 @export var visual_effects:OptionButton
@@ -368,3 +369,6 @@ func _on_minimap_scale_value_changed(value):
 
 func _on_minimap_transparency_value_changed(value):
 	Minimap.alpha = value / minimap_transparency.max_value
+
+func _on_day_night_value_changed(value):
+	GeneralSettings.set_day_night(value / noon_to_sunset.max_value)

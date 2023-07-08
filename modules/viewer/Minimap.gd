@@ -33,11 +33,12 @@ func _ready():
 	get_window().size_changed.connect(resize)
 	resize()
 
-func _on_gui_input(event):
-	# TODO implement zoom in / out
-	pass # Replace with function body.
+#func _on_gui_input(event):
+#	# TODO implement zoom in / out
+#	pass # Replace with function body.
 
 func resize():
 	var y_size:float = ratio*get_window().size.y
+	@warning_ignore("narrowing_conversion")
 	subViewport.size = Vector2i(_map_width_ratio*y_size, _map_height_ratio*y_size)
 	size = subViewport.size
