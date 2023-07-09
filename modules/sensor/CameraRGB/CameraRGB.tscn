@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxiltfkf4ea56"]
+
+[ext_resource type="Script" path="res://modules/sensor/CameraRGB/CameraRGB.gd" id="1_v7lpq"]
+[ext_resource type="Script" path="res://modules/sensor/CameraRGB/SubViewport.gd" id="2_v2w1u"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nr1ef"]
+viewport_path = NodePath("SubViewport")
+
+[node name="CameraRGB" type="Node3D" node_paths=PackedStringArray("publisher")]
+script = ExtResource("1_v7lpq")
+type = 2
+publisher = NodePath("SubViewport/ImagePublisher")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+script = ExtResource("2_v2w1u")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+cull_mask = 1048511
+current = true
+
+[node name="ImagePublisher" type="ImagePublisher" parent="SubViewport"]
+
+[node name="CompressedImagePublisher" type="CompressedImagePublisher" parent="SubViewport"]
+
+[node name="CameraInfoPublisher" type="CameraInfoPublisher" parent="SubViewport"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node3D"]
+remote_path = NodePath("../../SubViewport/Camera3D")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Window" type="Window" parent="."]
+initial_position = 1
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_nr1ef")
+
+[connection signal="size_changed" from="SubViewport" to="." method="_on_sub_viewport_size_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]

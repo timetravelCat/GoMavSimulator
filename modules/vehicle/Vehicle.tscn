@@ -4,3 +4,4 @@
 
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("1_f37w2")
+vehicle_layer = 64

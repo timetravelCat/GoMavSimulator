@@ -8,6 +8,7 @@ var enable:bool = true:
 var domain_id:int = 0:
 	set = set_domain_id
 # ===== model configuraiton ====== #
+@export_flags_3d_render var vehicle_layer
 enum MODEL_TYPE {MULTICOPTER, ROVER, PLANE}
 const MODEL_TYPE_STRING:PackedStringArray = [
 	"MultiCopter",
@@ -42,7 +43,8 @@ const SENSOR_TYPE_STRING:PackedStringArray = [
 	"Depth Camera"]
 static var sensor_list:Array = [
 	preload("res://modules/sensor/Range/Range.tscn"),
-	preload("res://modules/sensor/Lidar/Lidar.tscn")]
+	preload("res://modules/sensor/Lidar/Lidar.tscn"),
+	preload("res://modules/sensor/CameraRGB/CameraRGB.tscn")]
 var sensors:Array # sensors are all inherit from Sensor class
 # ===== getter, setters ====== #
 func _init():
@@ -78,6 +80,8 @@ func set_model_type(_model_type):
 	model.free()
 	model = _model
 	add_child(model)
+	recursive_set_visual_layer_vehicle(model)
+	
 func set_pose_type(_pose_type):
 	pose_type = _pose_type
 	var _pose = pose_list[pose_type].instantiate()
@@ -124,6 +128,10 @@ func add_sensor(_sensor_name:String, _sensor_type:SENSOR_TYPE):
 			sensor.distance = SimulatorSettings.def_lidar_distance
 			sensor.vertical_fov = SimulatorSettings.def_lidar_vertical_fov
 			sensor.resolution = SimulatorSettings.def_lidar_resolution
+		SENSOR_TYPE.RGB_CAMERA:
+			sensor.resolution = SimulatorSettings.def_rgb_camera_resolution
+			sensor.compressed = SimulatorSettings.def_rgb_camera_compressed
+			sensor.fov = SimulatorSettings.def_rgb_camera_fov
 		# TODO other sensor default setting
 
 	sensors.append(sensor)
@@ -139,3 +147,9 @@ func remove_sensor(_sensor_name:String):
 # ================================= # 
 # implement save_load
 
+func recursive_set_visual_layer_vehicle(vehicle_child:Node):
+	for child in vehicle_child.get_children():
+		recursive_set_visual_layer_vehicle(child)
+		var visualinstance = child as VisualInstance3D
+		if visualinstance: # in case of meshinstance, 
+			visualinstance.layers = vehicle_layer

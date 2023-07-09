@@ -2,9 +2,14 @@ extends Node3D
 
 class_name Sensor
 
+signal sensor_enabled(enable:bool)
+
 @export_category("Common Settings")
 @export var type:Vehicle.SENSOR_TYPE
-@export var publisher:Publisher
+@export var publisher:Publisher:
+	set(_publisher):
+		publisher = _publisher
+		_on_renamed()
 @export var hz:float = 10.0:
 	set(_hz):
 		timer.wait_time = 1.0 / _hz
@@ -18,6 +23,7 @@ class_name Sensor
 			timer.stop()
 			hide()
 		enable = _enable
+		sensor_enabled.emit(enable)
 
 var timer:Timer
 
