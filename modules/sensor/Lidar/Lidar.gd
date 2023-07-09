@@ -38,6 +38,7 @@ func _initialize():
 		raycast.target_position = Basis.from_euler(Vector3(0.0, angle_y, angle_z), EULER_ORDER_YZX)*Vector3(distance,0.0,0.0)
 		get_node("RayCastContainer").add_child(raycast)
 	
+	@warning_ignore("integer_division")
 	for height in (resolution.y - 1)/2: #height : 0,1
 		var angle_z:float = (height + 1.0)*(deg_to_rad(vertical_fov)/(resolution.y - 1))
 		for width in resolution.x:

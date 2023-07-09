@@ -64,8 +64,8 @@ func _on_timer_timeout():
 func _on_sub_viewport_size_changed():
 	cameraInfoPublisher.publish()
 
-func _on_sensor_enabled(enable:bool):
-	if enable:
+func _on_sensor_enabled(enabled:bool):
+	if enabled:
 		infoTimer.stop()
 		window.show()
 	else:
