@@ -43,6 +43,16 @@ public:
 		cameraInfo.k()[5] = double(size.height / 2.0);
 		cameraInfo.k()[1] = cameraInfo.k()[3] = cameraInfo.k()[6] = cameraInfo.k()[7] = 0.0;
 		cameraInfo.k()[8] = 1.0;
+
+		cameraInfo.p()[0] = cameraInfo.k()[0];
+		cameraInfo.p()[1] = cameraInfo.p()[3] = 0.0;
+		cameraInfo.p()[2] = cameraInfo.k()[2];
+		cameraInfo.p()[4] = cameraInfo.p()[7] = 0.0;
+		cameraInfo.p()[5] = cameraInfo.k()[4];
+		cameraInfo.p()[6] = cameraInfo.k()[5];
+		cameraInfo.p()[8] = cameraInfo.p()[9] = cameraInfo.p()[11] = 0.0;
+		cameraInfo.p()[10] = 1.0;
+
 		return _publish(&cameraInfo);
 	}
 
