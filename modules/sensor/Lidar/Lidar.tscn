@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://r7dfrpepdtmp"]
+
+[ext_resource type="Script" path="res://modules/sensor/Lidar/Lidar.gd" id="1_h7d5u"]
+
+[node name="Lidar" type="Node3D" node_paths=PackedStringArray("publisher")]
+script = ExtResource("1_h7d5u")
+type = 1
+publisher = NodePath("PointCloudPublisher")
+
+[node name="PointCloudPublisher" type="PointCloudPublisher" parent="."]
+
+[node name="RayCastContainer" type="Node3D" parent="."]

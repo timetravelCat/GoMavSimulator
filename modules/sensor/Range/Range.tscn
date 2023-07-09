@@ -9,3 +9,5 @@ publisher = NodePath("RangePublisher")
 [node name="RangePublisher" type="RangePublisher" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5

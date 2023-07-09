@@ -41,7 +41,8 @@ const SENSOR_TYPE_STRING:PackedStringArray = [
 	"RGB Camera",
 	"Depth Camera"]
 static var sensor_list:Array = [
-	preload("res://modules/sensor/Range/Range.tscn")]
+	preload("res://modules/sensor/Range/Range.tscn"),
+	preload("res://modules/sensor/Lidar/Lidar.tscn")]
 var sensors:Array # sensors are all inherit from Sensor class
 # ===== getter, setters ====== #
 func _init():
@@ -119,8 +120,12 @@ func add_sensor(_sensor_name:String, _sensor_type:SENSOR_TYPE):
 	match _sensor_type:
 		SENSOR_TYPE.RANGE:
 			sensor.distance = SimulatorSettings.def_range_distance
+		SENSOR_TYPE.LIDAR:
+			sensor.distance = SimulatorSettings.def_lidar_distance
+			sensor.vertical_fov = SimulatorSettings.def_lidar_vertical_fov
+			sensor.resolution = SimulatorSettings.def_lidar_resolution
 		# TODO other sensor default setting
-	
+
 	sensors.append(sensor)
 	add_child(sensor)
 	return sensor

@@ -13,8 +13,10 @@ class_name Sensor
 	set(_enable):
 		if _enable:
 			timer.start()
+			show()
 		else:
 			timer.stop()
+			hide()
 		enable = _enable
 
 var timer:Timer

@@ -14,6 +14,9 @@ const def_frame_id:String = "/map"
 
 # sensor defaults
 const def_range_distance:float = 100.0
+const def_lidar_distance:float = 100.0
+const def_lidar_resolution:Vector2i = Vector2(72,1)
+const def_lidar_vertical_fov:float = 0.0
 
 var VehicleContainer:Node
 var VehicleLoader:PackedScene = preload("res://modules/vehicle/Vehicle.tscn")

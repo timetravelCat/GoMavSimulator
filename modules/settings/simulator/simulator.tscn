@@ -726,7 +726,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "DISTANCE(RANGE)"
+text = "DISTANCE(RANGE,LIDAR)"
 vertical_alignment = 1
 
 [node name="RangeDistance" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
