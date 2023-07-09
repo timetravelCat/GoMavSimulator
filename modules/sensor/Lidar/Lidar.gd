@@ -8,7 +8,7 @@ extends Sensor
 		distance = _distance
 		_initialize()
 		
-@export var vertical_fov:float = 0.0: #radian
+@export var vertical_fov:float = 0.0: #degree
 	set(_vertical_fov):
 		vertical_fov = _vertical_fov
 		_initialize()
@@ -39,7 +39,7 @@ func _initialize():
 		get_node("RayCastContainer").add_child(raycast)
 	
 	for height in (resolution.y - 1)/2: #height : 0,1
-		var angle_z:float = (height + 1.0)*(vertical_fov/(resolution.y - 1))
+		var angle_z:float = (height + 1.0)*(deg_to_rad(vertical_fov)/(resolution.y - 1))
 		for width in resolution.x:
 			var angle_y:float = width*2.0*PI/resolution.x
 			var raycast_up = RayCast3D.new()

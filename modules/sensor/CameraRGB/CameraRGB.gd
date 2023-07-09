@@ -1,7 +1,5 @@
 extends Sensor
 
-class_name CameraRGB
-
 @onready var subViewport:SubViewport = $SubViewport
 @onready var imagePublisher:ImagePublisher = $SubViewport/ImagePublisher
 @onready var compressedImagePulibsher:CompressedImagePublisher = $SubViewport/CompressedImagePublisher

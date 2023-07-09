@@ -31,11 +31,13 @@ extends Control
 
 # sensor advanced settings
 @export var SensorPopup:MarginContainer
+@export var RGBCompress:CheckButton
 @export var CameraWitdh:LineEdit
 @export var CameraHeight:LineEdit
+@export var CameraFov:LineEdit
 @export var LidarVerticalFov:LineEdit
 @export var LidarWidth:LineEdit
-@export var LidarHeigth:LineEdit
+@export var LidarHeight:LineEdit
 @export var RangeDistance:LineEdit
 
 func _ready():
@@ -215,7 +217,14 @@ func _on_sensor_disable_pressed():
 	else:
 		SensorList.set_item_custom_fg_color(item, Color(1.0, 1.0, 1.0, 1.0))
 		SensorDisable.text = "DISABLE"	
-	
+
+@onready var compress_container = $Margin/SensorPopup/VBoxContainer/HBoxContainer6
+@onready var camera_resolution_container = $Margin/SensorPopup/VBoxContainer/HBoxContainer
+@onready var camera_fov_container = $Margin/SensorPopup/VBoxContainer/HBoxContainer5
+@onready var lidar_vertical_fov_container = $Margin/SensorPopup/VBoxContainer/HBoxContainer2
+@onready var lidar_resolution_contanier = $Margin/SensorPopup/VBoxContainer/HBoxContainer3
+@onready var lidar_range_distance_container = $Margin/SensorPopup/VBoxContainer/HBoxContainer4
+
 @warning_ignore("unused_parameter")
 func _on_sensor_list_item_selected(index):
 	var sensor:Sensor = get_selected_sensor()
@@ -239,23 +248,44 @@ func _on_sensor_list_item_selected(index):
 	RotationZ.text = str(rad_to_deg(euler.z))
 	SensorDisable.text = "DISABLE" if sensor.enable else "ENABLE"
 	
+	# Hide 
+	compress_container.hide()
+	camera_resolution_container.hide()
+	camera_fov_container.hide()
+	lidar_vertical_fov_container.hide()
+	lidar_resolution_contanier.hide()
+	lidar_range_distance_container.hide()
+	
 	match sensor.type:
 		Vehicle.SENSOR_TYPE.RANGE:
 			RangeDistance.text = str(sensor.distance)
+			lidar_range_distance_container.show()
 			
-	# TODO set other sensor type 
-#		Vehicle.SENSOR_TYPE.LIDAR:
-#			pass
-#		Vehicle.SENSOR_TYPE.RGB_CAMERA:
-#			pass
-#		Vehicle.SENSOR_TYPE.DEPTH_CAMERA:
-#			pass
-#	CameraWitdh.text = str(sensor.resoultion.x)
-#	CameraHeight.text = str(sensor.resoultion.y)
-#	LidarVerticalFov.text = str(rad_to_deg(sensor.vertical_fov))
-#	LidarWidth.text = str(rad_to_deg(sensor.horizontal_resolution))
-#	LidarHeigth.text = str(rad_to_deg(sensor.vertical_resolution))
-	pass
+		Vehicle.SENSOR_TYPE.LIDAR:
+			RangeDistance.text = str(sensor.distance)
+			LidarWidth.text = str(sensor.resolution.x)
+			LidarHeight.text = str(sensor.resolution.y)
+			LidarVerticalFov.text = str(sensor.vertical_fov)
+			lidar_range_distance_container.show()
+			lidar_resolution_contanier.show()
+			lidar_vertical_fov_container.show()
+			
+		Vehicle.SENSOR_TYPE.RGB_CAMERA:
+			CameraWitdh.text = str(sensor.resolution.x)
+			CameraHeight.text = str(sensor.resolution.y)
+			CameraFov.text = str(sensor.fov)
+			RGBCompress.set_pressed_no_signal(sensor.compressed)
+			compress_container.show()
+			camera_resolution_container.show()
+			camera_fov_container.show()
+			
+		Vehicle.SENSOR_TYPE.DEPTH_CAMERA:
+			CameraWitdh.text = str(sensor.resolution.x)
+			CameraHeight.text = str(sensor.resolution.y)
+			CameraFov.text = str(sensor.fov)
+			camera_resolution_container.show()
+			camera_fov_container.show()
+
 func get_selected_vehicle(notify:bool = true)->Vehicle:
 	if !VehicleList.is_anything_selected():
 		if notify:
@@ -263,6 +293,7 @@ func get_selected_vehicle(notify:bool = true)->Vehicle:
 		return null
 	
 	return SimulatorSettings.get_vehicle(VehicleList.get_item_text(VehicleList.get_selected_items()[0]))
+	
 func get_selected_sensor(notify:bool = true)->Sensor:
 	var vehicle:Vehicle = get_selected_vehicle()
 	if not vehicle:
@@ -348,9 +379,10 @@ func _on_topic_text_submitted(new_text):
 		var pose_ros2:PoseStampedSubscriber = vehicle.pose
 		pose_ros2.name = new_text
 
-# NOT YET SUPPORTED
+@warning_ignore("unused_parameter")
 func _on_sensor_type_item_selected(index):
-	pass # Replace with function body.
+	if SensorList.is_anything_selected():
+		Notification.notify("Changing exist sensor is not supported. Delete and add new sensor.", Notification.NOTICE_TYPE.WARNING)
 
 func _on_sensor_name_text_submitted(new_text:String):
 	var sensor:Sensor = get_selected_sensor(false)
@@ -379,8 +411,57 @@ func _on_rotation_text_submitted(new_text:String):
 	if sensor and !new_text.is_empty() and new_text.is_valid_float():
 		sensor.basis = ENU2EUS.enu_to_eus_b(Basis.from_euler(Vector3(deg_to_rad(RotationX.text.to_float()), deg_to_rad(RotationY.text.to_float()), deg_to_rad(RotationZ.text.to_float())), EULER_ORDER_ZYX))
 
+#func _check_valid_float(lineEdit:LineEdit)->bool:
+#	if lineEdit.text.is_empty() or not lineEdit.text.is_valid_float():
+#		Notification.notify("Unvalid input")
+#		lineEdit.text = ""
+#		return false
+#	return true
+#
+#func _check_valid_int(lineEdit:LineEdit)->bool:
+#	if lineEdit.text.is_empty() or not lineEdit.text.is_valid_int():
+#		Notification.notify("Unvalid input")
+#		lineEdit.text = ""
+#		return false
+#	return true
+
 # sensor advanced config
+func _on_compress_toggled(button_pressed):
+	var sensor = get_selected_sensor(false)
+	if sensor:
+		get_selected_sensor(false).compressed = button_pressed
+
+func _on_camera_width_text_submitted(new_text:String):
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_int():
+		sensor.resolution.x = new_text.to_int()
+
+func _on_camera_height_text_submitted(new_text:String):
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_int():
+		sensor.resolution.y = new_text.to_int()
+
+func _on_camera_fov_text_submitted(new_text:String):
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.fov = new_text.to_float()
+
+func _on_vertical_fov_text_submitted(new_text): ## Not Working?
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_float():
+		sensor.vertical_fov = new_text.to_float()
+
+func _on_lidar_width_text_submitted(new_text):
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_int():
+		sensor.resolution.x = new_text.to_int()
+
+func _on_lidar_height_text_submitted(new_text): ## Not Working?
+	var sensor = get_selected_sensor(false)
+	if sensor and !new_text.is_empty() and new_text.is_valid_int():
+		sensor.resolution.y = new_text.to_int()
+
 func _on_range_distance_text_submitted(new_text:String):
-	var sensor:Sensor = get_selected_sensor(false)
+	var sensor = get_selected_sensor(false)
 	if sensor and !new_text.is_empty() and new_text.is_valid_float():
 		sensor.distance = new_text.to_float()
