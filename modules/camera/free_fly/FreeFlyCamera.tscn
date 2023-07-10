@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://modules/camera/free_fly/FreeFlyCamera.gd" id="1_2g8l0"]
 
 [node name="FreeFlyCamera" type="Camera3D"]
+cull_mask = 1048543
 script = ExtResource("1_2g8l0")

@@ -404,7 +404,6 @@ func _on_location_text_submitted(new_text:String):
 	var sensor:Sensor = get_selected_sensor(false)
 	if sensor and !new_text.is_empty() and new_text.is_valid_float():
 		sensor.position = ENU2EUS.enu_to_eus_v(Vector3(LocationX.text.to_float(), LocationY.text.to_float(), LocationZ.text.to_float()))
-		print(sensor.position)
 
 func _on_rotation_text_submitted(new_text:String):
 	var sensor:Sensor = get_selected_sensor(false)

@@ -35,6 +35,7 @@ extends Sensor
 
 func _enter_tree():
 	get_parent().connect("renamed", _on_vehicle_renamed) # override vehicle renamed feature
+	connect("renamed", _on_vehicle_renamed)
 
 func _on_vehicle_renamed():
 	_on_renamed() 

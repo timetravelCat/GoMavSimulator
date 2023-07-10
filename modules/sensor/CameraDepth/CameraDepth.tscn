@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbpyca1on6efu"]
+
+[ext_resource type="Script" path="res://modules/sensor/CameraDepth/CameraDepth.gd" id="1_dwcn8"]
+[ext_resource type="Script" path="res://modules/sensor/CameraDepth/SubViewport.gd" id="2_qt7op"]
+[ext_resource type="Shader" path="res://modules/sensor/CameraDepth/CameraDepth.gdshader" id="3_uaqfp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir1ll"]
+render_priority = 0
+shader = ExtResource("3_uaqfp")
+
+[sub_resource type="QuadMesh" id="QuadMesh_umrff"]
+material = SubResource("ShaderMaterial_ir1ll")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Environment" id="Environment_u77gb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2liet"]
+viewport_path = NodePath("SubViewport")
+
+[node name="CameraDepth" type="Node3D" node_paths=PackedStringArray("publisher")]
+script = ExtResource("1_dwcn8")
+type = 3
+publisher = NodePath("SubViewport/Camera3D/ImagePublisher")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+layers = 32
+mesh = SubResource("QuadMesh_umrff")
+skeleton = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+script = ExtResource("2_qt7op")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+cull_mask = 1048511
+environment = SubResource("Environment_u77gb")
+current = true
+
+[node name="ImagePublisher" type="ImagePublisher" parent="SubViewport/Camera3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node3D"]
+remote_path = NodePath("../../SubViewport/Camera3D")
+
+[node name="Window" type="Window" parent="."]
+initial_position = 1
+unresizable = true
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_2liet")
+
+[connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]

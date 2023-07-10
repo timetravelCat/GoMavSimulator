@@ -17,9 +17,11 @@ const def_range_distance:float = 100.0
 const def_lidar_distance:float = 100.0
 const def_lidar_resolution:Vector2i = Vector2(72,1)
 const def_lidar_vertical_fov:float = 0.0
-const def_rgb_camera_resolution:Vector2i = Vector2(640, 320)
+const def_rgb_camera_resolution:Vector2i = Vector2i(640, 320)
 const def_rgb_camera_fov:float = 75.0
 const def_rgb_camera_compressed:bool = false
+const def_depth_camera_resolution:Vector2i = Vector2i(320, 160)
+const def_depth_camera_fov:float = 75.0
 
 var VehicleContainer:Node
 var VehicleLoader:PackedScene = preload("res://modules/vehicle/Vehicle.tscn")

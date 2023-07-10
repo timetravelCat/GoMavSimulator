@@ -24,6 +24,7 @@ current = true
 [node name="CompressedImagePublisher" type="CompressedImagePublisher" parent="SubViewport"]
 
 [node name="CameraInfoPublisher" type="CameraInfoPublisher" parent="SubViewport"]
+distortion = 0
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

@@ -36,4 +36,5 @@ project/assembly_name="GoMavSimulator"
 
 [layer_names]
 
+3d_render/layer_6="Depth Shader"
 3d_render/layer_7="vehicle"
