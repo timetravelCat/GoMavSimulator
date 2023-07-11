@@ -151,8 +151,8 @@ func remove_sensor(_sensor_name:String):
 # implement save_load
 
 func recursive_set_visual_layer_vehicle(vehicle_child:Node):
+	var visualinstance = vehicle_child as VisualInstance3D
+	if visualinstance: # in case of meshinstance, 
+		visualinstance.layers = vehicle_layer
 	for child in vehicle_child.get_children():
 		recursive_set_visual_layer_vehicle(child)
-		var visualinstance = child as VisualInstance3D
-		if visualinstance: # in case of meshinstance, 
-			visualinstance.layers = vehicle_layer

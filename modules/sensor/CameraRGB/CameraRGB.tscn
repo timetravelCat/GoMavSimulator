@@ -16,7 +16,7 @@ script = ExtResource("2_v2w1u")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-cull_mask = 1048511
+cull_mask = 1048479
 current = true
 
 [node name="ImagePublisher" type="ImagePublisher" parent="SubViewport"]
@@ -24,7 +24,6 @@ current = true
 [node name="CompressedImagePublisher" type="CompressedImagePublisher" parent="SubViewport"]
 
 [node name="CameraInfoPublisher" type="CameraInfoPublisher" parent="SubViewport"]
-distortion = 0
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
