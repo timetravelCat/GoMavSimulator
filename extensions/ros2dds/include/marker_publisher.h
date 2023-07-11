@@ -15,14 +15,20 @@
 #include <godot_cpp/classes/point_mesh.hpp>
 #include <godot_cpp/classes/text_mesh.hpp>
 #include <godot_cpp/classes/standard_material3d.hpp>
+#include <godot_cpp/classes/mesh_instance3d.hpp>
+#include <godot_cpp/classes/random_number_generator.hpp>
+#include <godot_cpp/classes/mesh_data_tool.hpp>
+#include <godot_cpp/classes/array_mesh.hpp>
 
 using namespace godot;
 
-class MarkerPublisher : public Publisher {
+class MarkerPublisher : public Publisher
+{
 	GDCLASS(MarkerPublisher, Publisher)
 
 public:
-	enum TYPE {
+	enum TYPE
+	{
 		ARROW = visualization_msgs::msg::Marker_Constants::ARROW,
 		CUBE = visualization_msgs::msg::Marker_Constants::CUBE,
 		SPHERE = visualization_msgs::msg::Marker_Constants::SPHERE,
@@ -33,167 +39,276 @@ public:
 		SPHERE_LIST = visualization_msgs::msg::Marker_Constants::SPHERE_LIST,
 		POINTS = visualization_msgs::msg::Marker_Constants::POINTS,
 		TEXT_VIEW_FACING = visualization_msgs::msg::Marker_Constants::TEXT_VIEW_FACING,
-		TRIANGLE_LIST = visualization_msgs::msg::Marker_Constants::TRIANGLE_LIST
+		TRIANGLE_LIST = visualization_msgs::msg::Marker_Constants::TRIANGLE_LIST,
 	};
 
-	TYPE type{ ARROW };
+	TYPE type{ARROW};
 	void set_type(TYPE p_type) { type = p_type; };
 	TYPE get_type() { return type; };
 
-	enum Action {
+	enum Action
+	{
 		ADD = visualization_msgs::msg::Marker_Constants::ADD,
 		MODIFIY = visualization_msgs::msg::Marker_Constants::MODIFY,
 		DELETE = visualization_msgs::msg::Marker_Constants::DELETE,
 		DELETEALL = visualization_msgs::msg::Marker_Constants::DELETEALL
 	};
 
-	Action action{ Action::MODIFIY };
+	Action action{Action::MODIFIY};
 	void set_action(Action p_action) { action = p_action; };
 	Action get_action() { return action; };
 
-	Ref<Mesh> mesh{ nullptr };
-	void set_mesh(const Ref<Mesh> p_mesh) {
+	Ref<Mesh> mesh{nullptr};
+	void set_mesh(const Ref<Mesh> p_mesh)
+	{
 		mesh = p_mesh;
+		if(mesh.is_null()) {
+			return;
+		}
 
 		Ref<Material> material;
-		if (cast_to<BoxMesh>(mesh.ptr())) {
+		if (cast_to<BoxMesh>(mesh.ptr()))
+		{
 			BoxMesh *boxMesh = cast_to<BoxMesh>(mesh.ptr());
 			material = boxMesh->get_material();
 			set_scale(boxMesh->get_size());
 			type = CUBE;
-
-		} else if (cast_to<CylinderMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<CylinderMesh>(mesh.ptr()))
+		{
 			CylinderMesh *cylinderMesh = cast_to<CylinderMesh>(mesh.ptr());
 			material = cylinderMesh->get_material();
-			//TODO set_scale not working
-			set_scale(Vector3{ 2.0f * (real_t)cylinderMesh->get_top_radius(), 2.0f * (real_t)cylinderMesh->get_top_radius(), (real_t)cylinderMesh->get_height() });
+			// TODO set_scale not working
+			set_scale(Vector3{2.0f * (real_t)cylinderMesh->get_top_radius(), 2.0f * (real_t)cylinderMesh->get_top_radius(), (real_t)cylinderMesh->get_height()});
 			type = CYLINDER;
-
-		} else if (cast_to<PlaneMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<PlaneMesh>(mesh.ptr()))
+		{
 			PlaneMesh *planeMesh = cast_to<PlaneMesh>(mesh.ptr());
 			material = planeMesh->get_material();
 			Vector3 size;
-			switch (planeMesh->get_orientation()) {
-				case PlaneMesh::Orientation::FACE_X:
-					size = Vector3{ 0.0f, planeMesh->get_size().y, planeMesh->get_size().x };
-					break;
-				case PlaneMesh::Orientation::FACE_Y:
-					size = Vector3{ planeMesh->get_size().x, 0.0f, planeMesh->get_size().y };
-					break;
-				case PlaneMesh::Orientation::FACE_Z:
-					size = Vector3{ planeMesh->get_size().x, planeMesh->get_size().y, 0.0f };
-					break;
+			switch (planeMesh->get_orientation())
+			{
+			case PlaneMesh::Orientation::FACE_X:
+				size = Vector3{0.0f, planeMesh->get_size().y, planeMesh->get_size().x};
+				break;
+			case PlaneMesh::Orientation::FACE_Y:
+				size = Vector3{planeMesh->get_size().x, 0.0f, planeMesh->get_size().y};
+				break;
+			case PlaneMesh::Orientation::FACE_Z:
+				size = Vector3{planeMesh->get_size().x, planeMesh->get_size().y, 0.0f};
+				break;
 			}
 
-			if (eus_to_enu) {
+			if (eus_to_enu)
+			{
 				set_scale(ENU2EUS::eus_to_enu_v(size));
-			} else {
+			}
+			else
+			{
 				set_scale(size);
 			}
 
 			type = CUBE;
-
-		} else if (cast_to<QuadMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<QuadMesh>(mesh.ptr()))
+		{
 			QuadMesh *quadMesh = cast_to<QuadMesh>(mesh.ptr());
 			material = quadMesh->get_material();
 			Vector3 size;
-			switch (quadMesh->get_orientation()) {
-				case QuadMesh::Orientation::FACE_X:
-					size = Vector3{ 0.0f, quadMesh->get_size().y, quadMesh->get_size().x };
-					break;
-				case QuadMesh::Orientation::FACE_Y:
-					size = Vector3{ quadMesh->get_size().x, 0.0f, quadMesh->get_size().y };
-					break;
-				case QuadMesh::Orientation::FACE_Z:
-					size = Vector3{ quadMesh->get_size().x, quadMesh->get_size().y, 0.0f };
-					break;
+			switch (quadMesh->get_orientation())
+			{
+			case QuadMesh::Orientation::FACE_X:
+				size = Vector3{0.0f, quadMesh->get_size().y, quadMesh->get_size().x};
+				break;
+			case QuadMesh::Orientation::FACE_Y:
+				size = Vector3{quadMesh->get_size().x, 0.0f, quadMesh->get_size().y};
+				break;
+			case QuadMesh::Orientation::FACE_Z:
+				size = Vector3{quadMesh->get_size().x, quadMesh->get_size().y, 0.0f};
+				break;
 			}
 
-			if (eus_to_enu) {
+			if (eus_to_enu)
+			{
 				set_scale(ENU2EUS::eus_to_enu_v(size));
-			} else {
+			}
+			else
+			{
 				set_scale(size);
 			}
 
 			type = CUBE;
-
-		} else if (cast_to<SphereMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<SphereMesh>(mesh.ptr()))
+		{
 			SphereMesh *sphereMesh = cast_to<SphereMesh>(mesh.ptr());
 			material = sphereMesh->get_material();
-			set_scale(Vector3{ 2.0f * (real_t)sphereMesh->get_radius(), 2.0f * (real_t)sphereMesh->get_radius(), (real_t)sphereMesh->get_height() });
+			set_scale(Vector3{2.0f * (real_t)sphereMesh->get_radius(), 2.0f * (real_t)sphereMesh->get_radius(), (real_t)sphereMesh->get_height()});
 			type = SPHERE;
-
-		} else if (cast_to<PointMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<PointMesh>(mesh.ptr()))
+		{
 			PointMesh *pointMesh = cast_to<PointMesh>(mesh.ptr());
 			material = pointMesh->get_material();
 			type = POINTS;
-
-		} else if (cast_to<TextMesh>(mesh.ptr())) {
+		}
+		else if (cast_to<TextMesh>(mesh.ptr()))
+		{
 			TextMesh *textMesh = cast_to<TextMesh>(mesh.ptr());
 			material = textMesh->get_material();
 			set_text(textMesh->get_text());
-			set_scale(Vector3{ 1.0f, 1.0f, float(textMesh->get_font_size()) / 16.0f });
+			set_scale(Vector3{1.0f, 1.0f, float(textMesh->get_font_size()) / 16.0f});
 			type = TEXT_VIEW_FACING;
-
-		} else {
-			WARN_PRINT("Marker publisher, not supported mesh type");
+		}
+		else
+		{
+			type = TYPE::TRIANGLE_LIST;
+			PackedVector3Array faces = mesh->get_faces();
+			marker.points().resize(faces.size());
+			marker.colors().resize(faces.size());
+			if (eus_to_enu)
+			{
+				for (int i = 0; i < faces.size(); i++)
+				{
+					marker.points()[i] = conversion(ENU2EUS::eus_to_enu_v(faces[i]));
+				}
+			}
+			else
+			{
+				for (int i = 0; i < faces.size(); i++)
+				{
+					marker.points()[i] = conversion(faces[i]);
+				}
+			}
 		}
 
-		if (material.is_valid()) {
+		if (material.is_valid())
+		{
 			StandardMaterial3D *standardMaterial = cast_to<StandardMaterial3D>(material.ptr());
-			if (standardMaterial) {
+			if (standardMaterial)
+			{
 				set_color(standardMaterial->get_albedo());
 			}
 		}
 	}
 	Ref<Mesh> get_mesh() const { return mesh; };
 
+	Node *surface = nullptr;
+	void set_surface(Node *p_surface)
+	{
+		if (surface == p_surface)
+		{
+			return;
+		}
+
+		type = TYPE::TRIANGLE_LIST;
+		surface = p_surface;
+	}
+	Node *get_surface() { return surface; }
+
+	RandomNumberGenerator rng;
+	MeshDataTool mdt;
+
+	void recurve_surface_update(Node *_child)
+	{
+		MeshInstance3D *_mesh_instance_3d = cast_to<MeshInstance3D>(_child);
+		if (_mesh_instance_3d)
+		{
+			Transform3D global_transform = _mesh_instance_3d->get_global_transform();
+			Ref<Mesh> mesh = _mesh_instance_3d->get_mesh();
+			std_msgs::msg::ColorRGBA color;
+			if (mesh.is_valid())
+			{
+				PackedVector3Array faces = mesh->get_faces();
+				if (eus_to_enu)
+				{
+					for (int i = 0; i < faces.size(); i++)
+					{
+						Vector3 vertex = global_transform.basis.xform(faces[i]) + global_transform.origin;
+						marker.points().push_back(conversion(ENU2EUS::eus_to_enu_v(vertex)));
+						color.r() = rng.randf();
+						color.g() = rng.randf();
+						color.b() = rng.randf();
+						color.a() = 1.0f;
+						marker.colors().push_back(color);
+					}
+				}
+				else
+				{
+					for (int i = 0; i < faces.size(); i++)
+					{
+						Vector3 vertex = global_transform.basis.xform(faces[i]) + global_transform.origin;
+						marker.points().push_back(conversion(vertex));
+						color.r() = rng.randf();
+						color.g() = rng.randf();
+						color.b() = rng.randf();
+						color.a() = 1.0f;
+						marker.colors().push_back(color);
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < _child->get_child_count(); i++)
+		{
+			recurve_surface_update(_child->get_child(i));
+		}
+	}
+
 	void set_eus_to_enu(bool p_eus_to_enu) { eus_to_enu = p_eus_to_enu; };
 	bool get_eus_to_enu() { return eus_to_enu; };
-	bool eus_to_enu{ true };
+	bool eus_to_enu{true};
 
 	void set_id(int32_t p_id) { id = p_id; };
 	int32_t get_id() { return id; };
-	int32_t id{ 0 };
+	int32_t id{0};
 
 	void set_frame_locked(bool p_frame_locked) { frame_locked = p_frame_locked; };
 	bool get_frame_locked() { return frame_locked; };
-	bool frame_locked{ false };
+	bool frame_locked{false};
 
 	void set_lifetime(float p_lifetime) { lifetime = p_lifetime; };
 	float get_lifetime() { return lifetime; };
-	float lifetime{ 0.0f };
+	float lifetime{0.0f};
 
 	void set_ns(String p_ns) { ns = p_ns; };
 	String get_ns() { return ns; };
-	String ns{ "" };
+	String ns{""};
 
-	void set_text(String p_text) {
+	void set_text(String p_text)
+	{
 		text = p_text;
 		type = TYPE::TEXT_VIEW_FACING;
 	};
 	String get_text() { return text; };
-	String text{ "" };
+	String text{""};
 
-	bool publish(Vector3 position, Quaternion orientation) {
+	bool publish(Vector3 position, Quaternion orientation)
+	{
 		updateHeader(marker);
 		if (type == LINE_STRIP ||
-				type == LINE_LIST ||
-				type == CUBE_LIST ||
-				type == SPHERE_LIST ||
-				type == POINTS ||
-				type == TRIANGLE_LIST) {
+			type == LINE_LIST ||
+			type == CUBE_LIST ||
+			type == SPHERE_LIST ||
+			type == POINTS)
+		{
 			WARN_PRINT_ONCE("Use publish_list instead of publish");
 			return false;
 		}
 
-		if (mesh.is_valid()) {
-			set_mesh(mesh);
-		}
-
-		if (eus_to_enu) {
+		if (eus_to_enu)
+		{
 			position = ENU2EUS::eus_to_enu_v(position);
 			orientation = ENU2EUS::eus_to_enu_q(orientation);
+		}
+
+		// Really a heavy work.
+		if (surface)
+		{
+			marker.points().resize(0);
+			marker.colors().resize(0);
+			recurve_surface_update(surface);
 		}
 
 		marker.type((int32_t)type);
@@ -204,6 +319,11 @@ public:
 		marker.color().g(color.g);
 		marker.color().b(color.b);
 		marker.color().a(color.a);
+		for (int i = 0; i < marker.colors().size(); i++)
+		{
+			marker.colors()[i] = marker.color();
+		}
+
 		marker.frame_locked(frame_locked);
 		marker.lifetime().sec() = (int32_t)lifetime;
 		marker.lifetime().nanosec() = (lifetime - float(marker.lifetime().sec())) * 1000000000;
@@ -214,36 +334,46 @@ public:
 		return _publish(&marker);
 	}
 
-	bool publish_list(const PackedVector3Array &positions, const PackedColorArray &colors) {
+	bool publish_list(const PackedVector3Array &positions, const PackedColorArray &colors)
+	{
 		updateHeader(marker);
 
 		if (type == ARROW ||
-				type == CUBE ||
-				type == SPHERE ||
-				type == CYLINDER ||
-				type == TEXT_VIEW_FACING) {
+			type == CUBE ||
+			type == SPHERE ||
+			type == CYLINDER ||
+			type == TEXT_VIEW_FACING)
+		{
 			WARN_PRINT_ONCE("Use publish instead of publish_list");
 			return false;
 		}
 
-		if (mesh.is_valid()) {
+		if (mesh.is_valid())
+		{
 			set_mesh(mesh);
 		}
 
 		marker.points().resize(positions.size());
-		if (eus_to_enu) {
-			for (int i = 0; i < positions.size(); i++) {
+		if (eus_to_enu)
+		{
+			for (int i = 0; i < positions.size(); i++)
+			{
 				marker.points()[i] = conversion(ENU2EUS::eus_to_enu_v(positions[i]));
 			}
-		} else {
-			for (int i = 0; i < positions.size(); i++) {
+		}
+		else
+		{
+			for (int i = 0; i < positions.size(); i++)
+			{
 				marker.points()[i] = conversion(positions[i]);
 			}
 		}
 
-		if (positions.size() == colors.size()) {
+		if (positions.size() == colors.size())
+		{
 			marker.colors().resize(colors.size());
-			for (int i = 0; i < colors.size(); i++) {
+			for (int i = 0; i < colors.size(); i++)
+			{
 				marker.colors()[i].r(colors[i].r);
 				marker.colors()[i].g(colors[i].g);
 				marker.colors()[i].b(colors[i].b);
@@ -273,36 +403,43 @@ public:
 
 	void set_scale(Vector3 p_scale) { scale = p_scale; };
 	Vector3 get_scale() { return scale; };
-	Vector3 scale{ 1.0f, 1.0f, 1.0f };
+	Vector3 scale{1.0f, 1.0f, 1.0f};
 
-	Node3D *node3d{ nullptr };
-	void set_node3d(Node3D *p_node3d) {
-		if (node3d == p_node3d) {
+	Node3D *node3d{nullptr};
+	void set_node3d(Node3D *p_node3d)
+	{
+		if (node3d == p_node3d)
+		{
 			return;
 		}
 		node3d = p_node3d;
 	}
 	Node3D *get_node3d() { return node3d; }
 
-	bool global{ true };
+	bool global{true};
 	void set_global(bool p_global) { global = p_global; }
 	bool get_global() { return global; }
 
-	bool publish_node3d() {
+	bool publish_node3d()
+	{
 		if (node3d == nullptr)
 			return false;
 
 		Vector3 position;
 		Quaternion orientation;
-		if (global) {
+		if (global)
+		{
 			position = node3d->get_global_position();
 			orientation = node3d->get_global_transform().get_basis().get_quaternion();
-		} else {
+		}
+		else
+		{
 			position = node3d->get_position();
 			orientation = node3d->get_transform().get_basis().get_quaternion();
 		}
 
-		if (type == POINTS) {
+		if (type == POINTS)
+		{
 			PackedVector3Array positionArray;
 			positionArray.push_back(position);
 			return publish_list(positionArray, PackedColorArray{});
@@ -312,7 +449,8 @@ public:
 	}
 
 protected:
-	static void _bind_methods() {
+	static void _bind_methods()
+	{
 		BIND_ENUM_CONSTANT(ADD);
 		BIND_ENUM_CONSTANT(MODIFIY);
 		BIND_ENUM_CONSTANT(DELETE);
@@ -376,9 +514,14 @@ protected:
 
 		ClassDB::bind_method(D_METHOD("publish", "position", "orientation"), &MarkerPublisher::publish);
 
+		ClassDB::bind_method(D_METHOD("set_surface", "surface"), &MarkerPublisher::set_surface);
+		ClassDB::bind_method(D_METHOD("get_surface"), &MarkerPublisher::get_surface);
+		ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "surface", PROPERTY_HINT_NODE_TYPE, "Node"), "set_surface", "get_surface");
+
 		ClassDB::bind_method(D_METHOD("set_node3d", "node3d"), &MarkerPublisher::set_node3d);
 		ClassDB::bind_method(D_METHOD("get_node3d"), &MarkerPublisher::get_node3d);
 		ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "node3d", PROPERTY_HINT_NODE_TYPE, "Node3D"), "set_node3d", "get_node3d");
+
 		ClassDB::bind_method(D_METHOD("set_global", "global"), &MarkerPublisher::set_global);
 		ClassDB::bind_method(D_METHOD("get_global"), &MarkerPublisher::get_global);
 		ADD_PROPERTY(PropertyInfo(Variant::BOOL, "global"), "set_global", "get_global");
@@ -387,7 +530,8 @@ protected:
 
 private:
 	visualization_msgs::msg::Marker marker{};
-	eprosima::fastdds::dds::TypeSupport _set_type() override {
+	eprosima::fastdds::dds::TypeSupport _set_type() override
+	{
 		return eprosima::fastdds::dds::TypeSupport(new visualization_msgs::msg::MarkerPubSubType());
 	}
 };
