@@ -5,7 +5,7 @@ var scene:PackedScene = ResourceLoader.load("res://modules/notice/notice.tscn")
 enum NOTICE_TYPE {ALERT, WARNING, NORMAL}
 
 func notify(contents:String, type:NOTICE_TYPE = NOTICE_TYPE.NORMAL, duration:float = 2.0):
-	var notice:Notice = scene.instantiate()
+	var notice = scene.instantiate()
 	add_child(notice)
 	notice.set_text(contents)
 	

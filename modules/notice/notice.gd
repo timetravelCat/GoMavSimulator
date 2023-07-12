@@ -1,4 +1,4 @@
-class_name Notice extends Control
+extends Control
 
 @onready var BackGround:ColorRect = $BackGround
 @onready var colorRect:ColorRect = $VBoxContainer/ColorRect
