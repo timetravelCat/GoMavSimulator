@@ -195,32 +195,31 @@ func _on_anti_alising_item_selected(index):
 			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_8X
 				viewport.use_taa = false
-				viewport.screen_space_aa = false
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
 		1: # MSAA_4
 			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_4X
 				viewport.use_taa = false
-				viewport.screen_space_aa = false
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
 		2: # MSAA_2
 			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_2X
 				viewport.use_taa = false
-				viewport.screen_space_aa = false
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
 		3: # TAA
 			for viewport in GeneralSettings.viewports:
 				viewport.use_taa = true
-				viewport.screen_space_aa = false
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
 			pass
 		4: # FXAA
 			for viewport in GeneralSettings.viewports:
-				viewport.screen_space_aa = true
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
 				viewport.use_taa = false
 			pass
 		5: # DISABLED
 			for viewport in GeneralSettings.viewports:
 				viewport.msaa_3d = Viewport.MSAA_DISABLED
-				viewport.screen_space_aa = false
-				viewport.screen_space_aa = false
+				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
 			pass
 	pass 
 

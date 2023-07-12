@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bis6av22xe7g"]
+
+[ext_resource type="Script" path="res://modules/settings/general/GeneralSettings.gd" id="1_rry6e"]
+[ext_resource type="PackedScene" uid="uid://bdp163bss2a8p" path="res://modules/world/environment/Volumetric.tscn" id="2_rbxeq"]
+[ext_resource type="PackedScene" uid="uid://1t8vfvfn7iky" path="res://assets/district/cartoon/mini.tscn" id="3_vx4uj"]
+[ext_resource type="PackedScene" uid="uid://cthjcxhxssknw" path="res://assets/district/cartoon/mumbai.tscn" id="4_qjpyr"]
+
+[node name="GeneralSettings" type="Node"]
+script = ExtResource("1_rry6e")
+worlds = Array[PackedScene]([ExtResource("2_rbxeq")])
+district_size = Vector3(1000, 100, 1000)
+districts = Array[PackedScene]([ExtResource("3_vx4uj"), ExtResource("4_qjpyr")])
+
+[node name="DistrictPublisher" type="MarkerPublisher" parent="."]
+type = 11
+topic_name = "District"
+topic_type = "visualization_msgs::msg::dds_::Marker_"
