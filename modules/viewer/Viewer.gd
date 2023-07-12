@@ -30,7 +30,11 @@ func _on_vehicle_selector_pressed():
 	vehicleSelector.selected = -1
 
 func _on_vehicle_selector_item_selected(index):
+	vehicleSelector.release_focus()
+	vehicleSelector.flat = true;
+	
 	if index == 0:
+		vehicleSelector.flat = false;
 		freeFlyCamera.make_current()
 		title = ""
 		return

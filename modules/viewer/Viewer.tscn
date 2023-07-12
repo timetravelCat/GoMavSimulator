@@ -35,7 +35,6 @@ tooltip_text = "Allways on Top"
 
 [node name="VehicleSelector" type="OptionButton" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
-flat = true
 fit_to_longest_item = false
 allow_reselect = true
 
