@@ -62,7 +62,8 @@ public:
 	void set_mesh(const Ref<Mesh> p_mesh)
 	{
 		mesh = p_mesh;
-		if(mesh.is_null()) {
+		if (mesh.is_null())
+		{
 			return;
 		}
 
@@ -202,20 +203,32 @@ public:
 			return;
 		}
 
-		type = TYPE::TRIANGLE_LIST;
+		marker.points().resize(0);
+		marker.colors().resize(0);
+
+		if(p_surface){
+			type = TYPE::TRIANGLE_LIST;
+			recurve_surface_update(p_surface);	
+		}
+
 		surface = p_surface;
 	}
 	Node *get_surface() { return surface; }
 
 	RandomNumberGenerator rng;
-	MeshDataTool mdt;
 
-	void recurve_surface_update(Node *_child)
+	void recurve_surface_update(Node *_child, Transform3D _transform = Transform3D())
 	{
+		Node3D *_node_3d = cast_to<Node3D>(_child);
+		if (_node_3d)
+		{
+			_transform.basis = _transform.basis*_node_3d->get_basis();
+			_transform.origin = _transform.origin + _transform.basis.xform(_node_3d->get_position());
+		}
+
 		MeshInstance3D *_mesh_instance_3d = cast_to<MeshInstance3D>(_child);
 		if (_mesh_instance_3d)
 		{
-			Transform3D global_transform = _mesh_instance_3d->get_global_transform();
 			Ref<Mesh> mesh = _mesh_instance_3d->get_mesh();
 			std_msgs::msg::ColorRGBA color;
 			if (mesh.is_valid())
@@ -225,7 +238,7 @@ public:
 				{
 					for (int i = 0; i < faces.size(); i++)
 					{
-						Vector3 vertex = global_transform.basis.xform(faces[i]) + global_transform.origin;
+						Vector3 vertex = _transform.basis.xform(faces[i]) + _transform.origin;
 						marker.points().push_back(conversion(ENU2EUS::eus_to_enu_v(vertex)));
 						color.r() = rng.randf();
 						color.g() = rng.randf();
@@ -238,7 +251,7 @@ public:
 				{
 					for (int i = 0; i < faces.size(); i++)
 					{
-						Vector3 vertex = global_transform.basis.xform(faces[i]) + global_transform.origin;
+						Vector3 vertex = _transform.basis.xform(faces[i]) + _transform.origin;
 						marker.points().push_back(conversion(vertex));
 						color.r() = rng.randf();
 						color.g() = rng.randf();
@@ -252,7 +265,7 @@ public:
 
 		for (int i = 0; i < _child->get_child_count(); i++)
 		{
-			recurve_surface_update(_child->get_child(i));
+			recurve_surface_update(_child->get_child(i), _transform);
 		}
 	}
 
@@ -303,14 +316,6 @@ public:
 			orientation = ENU2EUS::eus_to_enu_q(orientation);
 		}
 
-		// Really a heavy work.
-		if (surface)
-		{
-			marker.points().resize(0);
-			marker.colors().resize(0);
-			recurve_surface_update(surface);
-		}
-
 		marker.type((int32_t)type);
 		marker.action((int32_t)action);
 		marker.id(id);
@@ -319,10 +324,6 @@ public:
 		marker.color().g(color.g);
 		marker.color().b(color.b);
 		marker.color().a(color.a);
-		for (int i = 0; i < marker.colors().size(); i++)
-		{
-			marker.colors()[i] = marker.color();
-		}
 
 		marker.frame_locked(frame_locked);
 		marker.lifetime().sec() = (int32_t)lifetime;

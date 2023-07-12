@@ -12,8 +12,8 @@ option(MAVSDK           "build mavsdk library"                                  
 option(SERIAL           "build serial library"                                                  ON)
 
 set(FOONATHAN_MEMORY_VERSION "v0.7-3" CACHE STRING "version of foonathan_memory(https://github.com/foonathan/memory.git)")
-set(FAST_CDR_VERSION "v1.0.27" CACHE STRING "version of Fast-CDR(https://github.com/eProsima/Fast-CDR.git)")
-set(FAST_DDS_VERSION "v2.10.1" CACHE STRING "version of Fast-DDS(https://github.com/eProsima/Fast-DDS.git)")
+set(FAST_CDR_VERSION "v1.1.0" CACHE STRING "version of Fast-CDR(https://github.com/eProsima/Fast-CDR.git)")
+set(FAST_DDS_VERSION "v2.11.0" CACHE STRING "version of Fast-DDS(https://github.com/eProsima/Fast-DDS.git)")
 # MAVSDK original repository(https://github.com/mavlink/MAVSDK) has minor bug on windows, so used forked version. 
 set(MAVSDK_VERSION "v1.4.14-fix" CACHE STRING "version of MAVSDK(https://github.com/timetravelCat/MAVSDK)")
 
