@@ -1,6 +1,4 @@
-extends Node3D
-
-class_name Sensor
+class_name Sensor extends Node3D
 
 signal sensor_enabled(enable:bool)
 

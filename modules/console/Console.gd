@@ -1,6 +1,4 @@
-extends Window
-
-class_name Console
+class_name Console extends Window
 
 @export var contents:RichTextLabel
 signal text_submitted(text: String)

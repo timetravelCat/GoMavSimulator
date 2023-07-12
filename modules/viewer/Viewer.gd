@@ -1,6 +1,4 @@
-extends Window
-
-class_name Viewer
+class_name Viewer extends Window
 
 @onready var freeFlyCamera:FreeFlyCamera = $FreeFlyCamera
 @onready var thirdPersonCamera:ThirdPersonCamera = $ThirdPersonCamera

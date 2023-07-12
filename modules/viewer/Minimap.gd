@@ -1,7 +1,5 @@
 extends TextureRect
 
-# class_name Minimap (Registered as Singletone Scene)
-
 @onready var camera:Camera3D = $SubViewport/Camera3D
 @onready var subViewport:SubViewport = $SubViewport
 @export var height:float = 20.0

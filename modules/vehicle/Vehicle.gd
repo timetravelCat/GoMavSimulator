@@ -1,6 +1,4 @@
-extends Node3D
-
-class_name Vehicle
+class_name Vehicle extends Node3D
 
 # ===== general configuration ====== #
 var enable:bool = true:
