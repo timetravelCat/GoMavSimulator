@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 
 Notification="*res://modules/notice/Notification.gd"
 GeneralSettings="*res://modules/settings/general/GeneralSettings.tscn"
-MavlinkSettings="*res://modules/settings/mavlink/mavlink_settings.gd"
+MavlinkSettings="*res://modules/settings/mavlink/MavlinkSettings.tscn"
 SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
 Minimap="*res://modules/viewer/Minimap.tscn"
 
