@@ -11,6 +11,7 @@ extends Node
 			"serial://COM3:57600" : true
 		},
 }
+@export var save_path:String
 
 @export_category("Console")
 @export var open_on_connected:bool
@@ -34,9 +35,12 @@ func remove_connection(address:String):
 #@export var joystick:bool
 #@export var virtual_joystick:bool
 
+func reset():
+	DefaultSettingMethods.reset_default_property(self,default_settings,save_path)
+
 func _ready():
-	_change_system_id(system_id)
-	_change_component_id(component_id)
+	DefaultSettingMethods.load_default_property(self,default_settings,save_path)
+	
 	GoMAVSDKServer.connect("shell_received", _on_shell_received)
 	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.start_discovery() # start mavsdk discovery 

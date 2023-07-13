@@ -561,6 +561,7 @@ popup/item_4/id = 4
 popup/item_5/text = "DISABLED"
 popup/item_5/id = 5
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer/fullscreen" to="." method="_on_fullscreen_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer2/resolution" to="." method="_on_resolution_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/window" to="." method="_on_window_item_selected"]

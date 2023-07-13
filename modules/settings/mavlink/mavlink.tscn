@@ -313,6 +313,7 @@ auto_height = true
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer/console_connected" to="." method="_on_console_connected_item_selected"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer2/console_disconnected" to="." method="_on_console_disconnected_item_selected"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer3/open_console" to="." method="_on_open_console_pressed"]

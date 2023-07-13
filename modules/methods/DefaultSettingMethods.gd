@@ -2,7 +2,10 @@ extends Node
 
 func reset_default_property(node:Node, settings:Dictionary, path:String):
 	for setting in settings:
-		node.set(setting, settings[setting])
+		if settings[setting] is Dictionary:
+			node.set(setting, settings[setting].duplicate(true))
+		else:
+			node.set(setting, settings[setting])
 
 func load_default_property(node:Node, settings:Dictionary, path:String):
 	if not FileAccess.file_exists(path):

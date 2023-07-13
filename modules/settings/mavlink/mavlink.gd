@@ -11,57 +11,26 @@ extends Control
 @export var serial:OptionButton
 
 func reset_to_default():
-	pass
-#	console_connect.select(0)
-#	console_connect.item_selected.emit(0)
-#
-#	console_disconnect.select(0)
-#	console_disconnect.item_selected.emit(0)
-#
-#	joystick_control.select(1)
-#	joystick_control.item_selected.emit(1)
-#
-#	virtual_joystick.select(1)
-#	virtual_joystick.item_selected.emit(1)
-#
-#	system_id.text = str(MavlinkSettings.DEFAULT_SYS_ID)
-#	system_id.text_submitted.emit(system_id.text)
-#
-#	component_id.text = str(MavlinkSettings.DEFAULT_COMP_ID)
-#	component_id.text_submitted.emit(component_id.text)
-#
-#	# remove all items in list
-#	while autoconnect_list.item_count > 0:
-#		autoconnect_list.select(0)
-#		_on_autoconnect_remove_pressed()
+	MavlinkSettings.reset()
+	_ready()
 	
-# Add default item Required to Save
-
-#	for key in MavlinkSettings.default_connection_list:
-#		var autoConnect:MavlinkSettings.AutoConnect = MavlinkSettings.AutoConnect.new()
-#		autoConnect.index = autoconnect_list.add_item(key)
-#		autoConnect.enabled = MavlinkSettings.default_connection_list[key]
-#		MavlinkSettings.connection_list.merge({key:autoConnect})
-#		if !autoConnect.enabled:
-#			autoconnect_list.set_item_custom_fg_color(autoConnect.index, Color(1.0, 1.0, 1.0, 0.2))
-#	MavlinkSettings.auto_connect_list_changed.emit(true)
+func _ready():
+	# Prepare GUIs
+	console_connect.selected = !MavlinkSettings.open_on_connected
+	console_disconnect.selected = !MavlinkSettings.close_on_disconnected
+	system_id.text = str(MavlinkSettings.system_id)
+	component_id.text = str(MavlinkSettings.component_id)
+	autoconnect.clear()
+	autoconnect_list.clear()
+	for connection in MavlinkSettings.connection_list:
+		autoconnect_list.add_item(connection)		
+		if not MavlinkSettings.connection_list[connection]:
+			autoconnect_list.set_item_custom_fg_color(autoconnect_list.item_count-1, Color(1.0, 1.0, 1.0, 0.2))
 
 func _on_console_connected_item_selected(index):
-	match index:
-		0:
-			MavlinkSettings.open_on_connected = true
-		1:
-			MavlinkSettings.open_on_connected = false
-	pass
-
+	MavlinkSettings.open_on_connected = !index
 func _on_console_disconnected_item_selected(index):
-	match index:
-		0:
-			MavlinkSettings.close_on_disconnected = true
-		1:
-			MavlinkSettings.close_on_disconnected = false
-	pass
-
+	MavlinkSettings.close_on_disconnected = !index
 func _on_open_console_pressed():
 	MavlinkSettings.open_mavlink_shell();
 func _on_close_console_pressed():
@@ -140,3 +109,9 @@ func _on_serial_pressed():
 func _on_serial_item_selected(index):
 	autoconnect.text = "serial://" + serial.get_item_text(index) + ":57600"
 	serial.selected = -1
+
+func _on_gui_input(event):
+	if event is InputEventMouseButton:
+		var mouseEvent:InputEventMouse = event
+		if event.pressed and mouseEvent.button_index == MOUSE_BUTTON_RIGHT:
+			ControlMethods.recursive_release_focus(self)

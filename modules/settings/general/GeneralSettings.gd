@@ -1,5 +1,12 @@
 extends Node
 
+
+@export var default_settings:Dictionary = {
+	"world" : 0,
+	"district" : 0,
+}
+@export var save_path:String;
+
 @export_category("World")
 @export var worlds:Array[PackedScene] = []
 @export var world:int: set = _world_initialize
@@ -14,8 +21,6 @@ var current_district:Node3D
 var district_AABB:AABB 
 signal district_changed
 
-var viewports:Array[Viewport]
-
 # global methods
 func create_new_viewer():
 	_create_new_viewer()
@@ -24,17 +29,11 @@ func set_day_night(value:float):
 func publish_district():
 	_publish_district()
 
+func reset():
+	DefaultSettingMethods.reset_default_property(self,default_settings,save_path)
+
 func _ready():
-	# Regieter world
-	if not current_world:
-		_world_initialize(world)
-	
-	# Register district
-	if not current_district:
-		_district_initialize(district)
-		
-	# Register main window viewport
-	viewports.append(get_viewport())	
+	DefaultSettingMethods.load_default_property(self,default_settings,save_path)
 
 func _world_initialize(_world:int):
 	world = _world

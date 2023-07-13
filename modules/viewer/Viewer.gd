@@ -7,10 +7,10 @@ class_name Viewer extends Window
 func _enter_tree():
 	# shares same world of parent
 	world_3d = get_parent().get_window().world_3d
-	GeneralSettings.viewports.append(get_viewport())
+	GraphicsSettings.viewports.append(get_viewport())
 
 func _exit_tree():
-	GeneralSettings.viewports.erase(get_viewport())
+	GraphicsSettings.viewports.erase(get_viewport())
 
 func _on_close_requested():
 	call_deferred("queue_free")

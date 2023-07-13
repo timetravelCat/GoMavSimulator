@@ -4,6 +4,7 @@
 
 [node name="MavlinkSettings" type="Node"]
 script = ExtResource("1_f5qd8")
+save_path = "user://MavlinkSettings.json"
 open_on_connected = true
 close_on_disconnected = true
 
