@@ -371,3 +371,6 @@ func _on_minimap_transparency_value_changed(value):
 
 func _on_day_night_value_changed(value):
 	GeneralSettings.set_day_night(value / noon_to_sunset.max_value)
+
+func _on_publish_district_pressed():
+	GeneralSettings.publish_district()
