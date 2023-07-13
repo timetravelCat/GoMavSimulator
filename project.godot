@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Notification="*res://modules/notice/Notification.gd"
-GeneralSettings="*res://modules/settings/general/general_settings.gd"
+GeneralSettings="*res://modules/settings/general/GeneralSettings.tscn"
 MavlinkSettings="*res://modules/settings/mavlink/mavlink_settings.gd"
 SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
 Minimap="*res://modules/viewer/Minimap.tscn"
