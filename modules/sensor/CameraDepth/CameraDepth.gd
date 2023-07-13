@@ -68,6 +68,7 @@ func _on_timeout():
 	var compute_list := renderingDevice.compute_list_begin()
 	renderingDevice.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	renderingDevice.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
+	@warning_ignore("integer_division")
 	renderingDevice.compute_list_dispatch(compute_list, depth_image_bytes.size()/4 + 1, 1, 1)
 	renderingDevice.compute_list_end()
 	# Submit to GPU and wait for sync

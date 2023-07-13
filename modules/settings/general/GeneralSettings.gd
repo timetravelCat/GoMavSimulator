@@ -30,7 +30,7 @@ func publish_district():
 	_publish_district()
 
 func reset():
-	DefaultSettingMethods.reset_default_property(self,default_settings,save_path)
+	DefaultSettingMethods.reset_default_property(self,default_settings)
 
 func _ready():
 	DefaultSettingMethods.load_default_property(self,default_settings,save_path)

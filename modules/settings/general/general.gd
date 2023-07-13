@@ -127,6 +127,7 @@ func _on_frame_rate_item_selected(index):
 	GraphicsSettings.set_frame_rate_limitation(frame_rate_limitation_option[index])
 
 func _on_ui_scaling_value_changed(value):
+	@warning_ignore("narrowing_conversion")
 	GraphicsSettings.ui_scaling = ui_scaling.value
 	const settings_default_font_size:int = 26
 	const subtitle_default_font_size:int = 32 

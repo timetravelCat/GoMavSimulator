@@ -1,7 +1,7 @@
 class_name Viewer extends Window
 
-@onready var freeFlyCamera:FreeFlyCamera = $FreeFlyCamera
-@onready var thirdPersonCamera:ThirdPersonCamera = $ThirdPersonCamera
+@onready var freeFlyCamera = $FreeFlyCamera
+@onready var thirdPersonCamera = $ThirdPersonCamera
 @onready var vehicleSelector:OptionButton = $ColorRect/HBoxContainer/VehicleSelector
 
 func _enter_tree():

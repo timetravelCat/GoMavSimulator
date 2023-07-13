@@ -1,6 +1,6 @@
 extends Node
 
-func reset_default_property(node:Node, settings:Dictionary, path:String):
+func reset_default_property(node:Node, settings:Dictionary):
 	for setting in settings:
 		if settings[setting] is Dictionary:
 			node.set(setting, settings[setting].duplicate(true))
@@ -9,7 +9,7 @@ func reset_default_property(node:Node, settings:Dictionary, path:String):
 
 func load_default_property(node:Node, settings:Dictionary, path:String):
 	if not FileAccess.file_exists(path):
-		reset_default_property(node, settings, path)
+		reset_default_property(node, settings)
 		return
 	var file_access := FileAccess.open(path, FileAccess.READ)
 	while file_access.get_position() < file_access.get_length():
@@ -24,6 +24,7 @@ func load_default_property(node:Node, settings:Dictionary, path:String):
 
 func save_default_property(node:Node, settings:Dictionary, path:String):
 	var file_access = FileAccess.open(path, FileAccess.WRITE)
+	@warning_ignore("unassigned_variable")
 	var data:Dictionary
 	for setting in settings:
 		data.merge({setting: node.get(setting)})

@@ -1,5 +1,5 @@
 @icon("./FreeFlyCameraIcon.png")
-class_name FreeFlyCamera extends Camera3D
+extends Camera3D
 
 @export var follow:Node3D
 @export var speed:float = 5.0

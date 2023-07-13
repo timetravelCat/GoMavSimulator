@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var light:DirectionalLight3D = $DirectionalLight3D
+@onready var world_environment:WorldEnvironment = $WorldEnvironment
 @export_range(0.0, 1.0, 0.01) var day_night:float = 0.3:
 	set(_day_night):
 		day_night = _day_night

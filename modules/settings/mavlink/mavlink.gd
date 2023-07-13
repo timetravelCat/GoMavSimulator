@@ -37,10 +37,10 @@ func _on_close_console_pressed():
 	MavlinkSettings.close_mavlink_shell()
 
 # Not Implemented yet.
-func _on_joystick_control_item_selected(index):
-	pass
-func _on_virtual_joystick_item_selected(index):
-	pass
+#func _on_joystick_control_item_selected(index):
+#	pass
+#func _on_virtual_joystick_item_selected(index):
+#	pass
 
 func _on_system_id_text_submitted(new_text:String):
 	if new_text.is_valid_int():
