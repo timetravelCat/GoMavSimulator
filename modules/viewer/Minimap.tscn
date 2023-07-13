@@ -21,14 +21,13 @@ size_flags_vertical = 0
 texture = SubResource("ViewportTexture_0fjc1")
 stretch_mode = 4
 script = ExtResource("1_e5htg")
-alpha = 0.57
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(2, 2)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 top_level = true
+keep_aspect = 0
 cull_mask = 1048543
 projection = 1
 current = true
