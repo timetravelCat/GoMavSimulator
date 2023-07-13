@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf7rqn5o340b0"]
+
+[ext_resource type="Script" path="res://modules/settings/mavlink/MavlinkSettings.gd" id="1_f5qd8"]
+
+[node name="MavlinkSettings" type="Node"]
+script = ExtResource("1_f5qd8")
+open_on_connected = true
+close_on_disconnected = true
+
+[node name="ConsoleContainer" type="Node" parent="."]
+
+[node name="ConsoleTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AutoconnectTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ConsoleTimer" to="." method="_on_console_timer_timeout"]
+[connection signal="timeout" from="AutoconnectTimer" to="." method="_on_autoconnect_timer_timeout"]
