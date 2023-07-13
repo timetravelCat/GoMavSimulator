@@ -15,7 +15,6 @@ func _on_text_submitted(command):
 	
 	history.append(command)
 	history_location = history.size() - 1 # reset history location to recent
-	pass
 
 func _on_gui_input(event):
 	if history.is_empty():
@@ -31,4 +30,3 @@ func _on_gui_input(event):
 				text = history[history_location]
 				if history_location < history.size() - 1:
 					history_location += 1
-	pass
