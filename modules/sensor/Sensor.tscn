@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c704yva7g8vs8"]
+
+[ext_resource type="Script" path="res://modules/sensor/Sensor.gd" id="1_paamr"]
+
+[node name="Sensor" type="Node3D"]
+script = ExtResource("1_paamr")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="renamed" from="." to="." method="_rename_sensor_publisher"]

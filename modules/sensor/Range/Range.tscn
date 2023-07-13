@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://buybekntavl0w"]
+[gd_scene load_steps=3 format=3 uid="uid://cb7xvdv8jh0sq"]
 
 [ext_resource type="Script" path="res://modules/sensor/Range/Range.gd" id="1_5yvs0"]
+[ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_lobcu"]
 
-[node name="Range" type="Node3D" node_paths=PackedStringArray("publisher")]
+[node name="Range" node_paths=PackedStringArray("publisher") instance=ExtResource("1_lobcu")]
 script = ExtResource("1_5yvs0")
+distance = 100.0
 publisher = NodePath("RangePublisher")
 
-[node name="RangePublisher" type="RangePublisher" parent="."]
+[node name="RangePublisher" type="RangePublisher" parent="." index="1"]
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="." index="2"]
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

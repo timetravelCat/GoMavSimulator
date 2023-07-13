@@ -33,17 +33,6 @@ var pose_type:POSE_TYPE = POSE_TYPE.MAVLINK:
 	set = set_pose_type
 var pose = null
 # ===== sensor configuraiton ====== #
-enum SENSOR_TYPE {RANGE, LIDAR, RGB_CAMERA, DEPTH_CAMERA} 
-const SENSOR_TYPE_STRING:PackedStringArray = [
-	"Range(ToF)",
-	"Lidar",
-	"RGB Camera",
-	"Depth Camera"]
-static var sensor_list:Array = [
-	preload("res://modules/sensor/Range/Range.tscn"),
-	preload("res://modules/sensor/Lidar/Lidar.tscn"),
-	preload("res://modules/sensor/CameraRGB/CameraRGB.tscn"),
-	preload("res://modules/sensor/CameraDepth/CameraDepth.tscn")]
 var sensors:Array # sensors are all inherit from Sensor class
 # ===== getter, setters ====== #
 func _init():
@@ -108,7 +97,7 @@ func get_sensor(_sensor_name:String):
 	if _sensor_name == model.name or _sensor_name == pose.name:
 		return null
 	return find_child(_sensor_name, false, false)
-func add_sensor(_sensor_name:String, _sensor_type:SENSOR_TYPE):
+func add_sensor(_sensor_name:String, _sensor_type:SensorSettings.SENSOR_TYPE):
 	if _sensor_name == model.name or _sensor_name == pose.name:
 		Notification.notify("Unvalid sensor name requested. change sensor name", Notification.NOTICE_TYPE.ALERT)
 		return null
@@ -116,27 +105,12 @@ func add_sensor(_sensor_name:String, _sensor_type:SENSOR_TYPE):
 		Notification.notify("Sensor name exists", Notification.NOTICE_TYPE.ALERT)
 		return null
 	
-	var sensor = sensor_list[_sensor_type].instantiate()
+	var sensor = SensorSettings.Create(_sensor_type)
 	sensor.name = _sensor_name
-	
-	# set default settings
-	match _sensor_type:
-		SENSOR_TYPE.RANGE:
-			sensor.distance = SimulatorSettings.def_range_distance
-		SENSOR_TYPE.LIDAR:
-			sensor.distance = SimulatorSettings.def_lidar_distance
-			sensor.vertical_fov = SimulatorSettings.def_lidar_vertical_fov
-			sensor.resolution = SimulatorSettings.def_lidar_resolution
-		SENSOR_TYPE.RGB_CAMERA:
-			sensor.resolution = SimulatorSettings.def_rgb_camera_resolution
-			sensor.compressed = SimulatorSettings.def_rgb_camera_compressed
-			sensor.fov = SimulatorSettings.def_rgb_camera_fov
-		SENSOR_TYPE.DEPTH_CAMERA:
-			sensor.resolution = SimulatorSettings.def_depth_camera_resolution
-			sensor.fov = SimulatorSettings.def_depth_camera_fov
-
 	sensors.append(sensor)
 	add_child(sensor)
+	# TODO move load location?
+	DefaultSettingMethods.reset_default_property(sensor, sensor.property_saved_list)
 	return sensor
 func remove_sensor(_sensor_name:String):
 	if not get_sensor(_sensor_name):

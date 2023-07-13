@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://r7dfrpepdtmp"]
+[gd_scene load_steps=3 format=3 uid="uid://ib4jp4cqtror"]
 
 [ext_resource type="Script" path="res://modules/sensor/Lidar/Lidar.gd" id="1_h7d5u"]
+[ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_q7gdk"]
 
-[node name="Lidar" type="Node3D" node_paths=PackedStringArray("publisher")]
+[node name="Lidar" node_paths=PackedStringArray("publisher") instance=ExtResource("1_q7gdk")]
 script = ExtResource("1_h7d5u")
+distance = 100.0
+vertical_fov = 0.0
+resolution = Vector2i(72, 1)
 type = 1
 publisher = NodePath("PointCloudPublisher")
 
-[node name="PointCloudPublisher" type="PointCloudPublisher" parent="."]
+[node name="PointCloudPublisher" type="PointCloudPublisher" parent="." index="1"]
 
-[node name="RayCastContainer" type="Node3D" parent="."]
+[node name="RayCastContainer" type="Node3D" parent="." index="2"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

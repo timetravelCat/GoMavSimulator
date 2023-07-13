@@ -1,48 +1,40 @@
 extends Sensor
 
+var property_saved_list:Dictionary = {
+	"position":Vector3(0.0, 0.0, 0.0),
+	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
+	"hz":10.0,
+	"enable":true,
+	"resolution":Vector2i(320,180),
+	"fov":75.0,
+}
+
 @onready var subViewport:SubViewport = $SubViewport
 @onready var camera3D:Camera3D = $SubViewport/Camera3D
 @onready var window:Window = $Window
-
-@export var resolution:Vector2i = Vector2i(320, 180):
-	set(_resolution):
-		resolution = _resolution
-		if not subViewport:
-			return
-		subViewport.size = _resolution
-		window.size = resolution
-		
-@export var fov:float = 75.0:
-	set(_fov):
-		fov = _fov
-		if not camera3D:
-			return
-		camera3D.fov = fov
-
-#@export var decode_cpu:bool = false
-
-func _enter_tree():
-	get_parent().connect("renamed", _on_vehicle_renamed) # override vehicle renamed feature
-	connect("renamed", _on_vehicle_renamed)
-
-func _on_vehicle_renamed():
-	_on_renamed() 
-	if window:
-		window.title = publisher.topic_name
+@export var resolution:Vector2i = Vector2i(320,180): set = set_resolution
+@export var fov:float = 75.0: set = set_fov
 
 func _ready():
-	subViewport.size = resolution
-	window.size = resolution
-	subViewport.world_3d = get_viewport().world_3d
-	timer.timeout.connect(_on_timeout)
-	sensor_enabled.connect(_on_sensor_enabled)
 	
-# initialize rendering devices for decoding depth textures (by gpu)
+	super._ready()
+	set_resolution(resolution)
+	set_fov(fov)
+	subViewport.world_3d = get_viewport().world_3d
+	_on_sensor_renamed(get_parent().name, name)
+		
+	# initialize rendering devices for decoding depth textures (by gpu)
 	renderingDevice = RenderingServer.create_local_rendering_device();
 	shader_file = load("res://modules/sensor/CameraDepth/ComputeDepth.glsl")
 	shader_spirv = shader_file.get_spirv()
 	shader = renderingDevice.shader_create_from_spirv(shader_spirv)
 
+@warning_ignore("unused_parameter")
+func _on_sensor_renamed(vehicle_name:String, sensor_name:String):
+	if window:
+		window.title = publisher.topic_name
+
+#@export var decode_cpu:bool = false
 var renderingDevice:RenderingDevice;
 var shader_file;
 var shader_spirv;
@@ -89,3 +81,22 @@ func _on_sensor_enabled(_enable:bool):
 
 func _on_window_close_requested():
 	enable = false
+
+#func _on_sub_viewport_tree_entered():
+#	GraphicsSettings.viewports.append(get_node("SubViewport"))
+#
+#func _on_sub_viewport_tree_exited():
+#	GraphicsSettings.viewports.erase(get_node("SubViewport"))
+
+func set_resolution(_resolution):
+	resolution = _resolution
+	if subViewport:
+		subViewport.size = _resolution
+	if window:
+		window.size = resolution
+	
+func set_fov(_fov):
+	if fov:
+		fov = _fov
+	if camera3D:
+		camera3D.fov = fov

@@ -24,6 +24,7 @@ ControlMethods="*res://modules/methods/ControlMethods.gd"
 GeneralSettings="*res://modules/settings/general/GeneralSettings.tscn"
 GraphicsSettings="*res://modules/settings/general/GraphicsSettings.gd"
 MavlinkSettings="*res://modules/settings/mavlink/MavlinkSettings.tscn"
+SensorSettings="*res://modules/sensor/SensorSettings.gd"
 SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
 Minimap="*res://modules/viewer/Minimap.tscn"
 

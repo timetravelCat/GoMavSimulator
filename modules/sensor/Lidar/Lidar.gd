@@ -1,5 +1,15 @@
 extends Sensor
 
+var property_saved_list:Dictionary = {
+	"position":Vector3(0.0, 0.0, 0.0),
+	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
+	"hz":10.0,
+	"enable":true,
+	"distance":100.0,
+	"vertical_fov":0.0, #degree
+	"resolution":Vector2i(72,1),
+}
+
 @onready var pointCloudPublisher = $PointCloudPublisher
 @onready var rayCastContainer = $RayCastContainer
 
@@ -24,10 +34,10 @@ extends Sensor
 
 func _initialize():
 	# remove if container has raycasts
-	if not get_node("RayCastContainer"):
+	if not rayCastContainer:
 		return
 	
-	for raycast in get_node("RayCastContainer").get_children():
+	for raycast in rayCastContainer.get_children():
 		raycast.queue_free()
 	
 	# register raycasts depending on the settings
@@ -36,7 +46,7 @@ func _initialize():
 		var angle_y:float = width*2.0*PI/resolution.x
 		var raycast = RayCast3D.new()
 		raycast.target_position = Basis.from_euler(Vector3(0.0, angle_y, angle_z), EULER_ORDER_YZX)*Vector3(distance,0.0,0.0)
-		get_node("RayCastContainer").add_child(raycast)
+		rayCastContainer.add_child(raycast)
 	
 	@warning_ignore("integer_division")
 	for height in (resolution.y - 1)/2: #height : 0,1
@@ -47,13 +57,13 @@ func _initialize():
 			var raycast_down = RayCast3D.new()
 			raycast_up.target_position = Basis.from_euler(Vector3(0.0, angle_y, angle_z), EULER_ORDER_YZX)*Vector3(distance,0.0,0.0)
 			raycast_down.target_position = Basis.from_euler(Vector3(0.0, angle_y, -angle_z), EULER_ORDER_YZX)*Vector3(distance,0.0,0.0)
-			get_node("RayCastContainer").add_child(raycast_up)
-			get_node("RayCastContainer").add_child(raycast_down)
+			rayCastContainer.add_child(raycast_up)
+			rayCastContainer.add_child(raycast_down)
 
 func _ready():
 	#TODO implement save-load
+	super._ready()
 	_initialize()
-	timer.timeout.connect(_on_timeout)
 
 # TODO implement in GDExtension if high-resolution case is burden to cpu.
 var _pointcloud:PackedVector3Array

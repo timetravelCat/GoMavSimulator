@@ -1,61 +1,65 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbpyca1on6efu"]
+[gd_scene load_steps=8 format=3 uid="uid://cyvys1rjsmuac"]
 
 [ext_resource type="Script" path="res://modules/sensor/CameraDepth/CameraDepth.gd" id="1_dwcn8"]
-[ext_resource type="Script" path="res://modules/sensor/CameraDepth/SubViewport.gd" id="2_qt7op"]
+[ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_ph5g2"]
 [ext_resource type="Shader" path="res://modules/sensor/CameraDepth/CameraDepth.gdshader" id="3_uaqfp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir1ll"]
 render_priority = 0
 shader = ExtResource("3_uaqfp")
 
-[sub_resource type="QuadMesh" id="QuadMesh_umrff"]
+[sub_resource type="QuadMesh" id="QuadMesh_btx4p"]
 material = SubResource("ShaderMaterial_ir1ll")
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="Environment" id="Environment_u77gb"]
+[sub_resource type="Environment" id="Environment_ldkf8"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2liet"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tv6uh"]
 viewport_path = NodePath("SubViewport")
 
-[node name="CameraDepth" type="Node3D" node_paths=PackedStringArray("publisher")]
+[node name="CameraDepth" node_paths=PackedStringArray("publisher") instance=ExtResource("1_ph5g2")]
 script = ExtResource("1_dwcn8")
+resolution = Vector2i(320, 180)
+fov = 75.0
 type = 3
 publisher = NodePath("SubViewport/Camera3D/ImagePublisher")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 layers = 32
-mesh = SubResource("QuadMesh_umrff")
+mesh = SubResource("QuadMesh_btx4p")
 skeleton = NodePath("../SubViewport")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-script = ExtResource("2_qt7op")
+[node name="SubViewport" type="SubViewport" parent="." index="2"]
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="SubViewport" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1048511
-environment = SubResource("Environment_u77gb")
+environment = SubResource("Environment_ldkf8")
 current = true
 
-[node name="ImagePublisher" type="ImagePublisher" parent="SubViewport/Camera3D"]
+[node name="ImagePublisher" type="ImagePublisher" parent="SubViewport/Camera3D" index="0"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." index="3"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node3D"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node3D" index="0"]
 remote_path = NodePath("../../SubViewport/Camera3D")
 
-[node name="Window" type="Window" parent="."]
+[node name="Window" type="Window" parent="." index="4"]
 initial_position = 1
 unresizable = true
 
-[node name="TextureRect" type="TextureRect" parent="Window"]
+[node name="TextureRect" type="TextureRect" parent="Window" index="0"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_2liet")
+texture = SubResource("ViewportTexture_tv6uh")
 
+[connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
+[connection signal="sensor_renamed" from="." to="." method="_on_sensor_renamed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]
 [connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]

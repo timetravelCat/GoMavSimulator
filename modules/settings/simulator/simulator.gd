@@ -45,7 +45,7 @@ func _ready():
 	for vehicle_type in Vehicle.MODEL_TYPE_STRING:
 		VehicleType.add_item(vehicle_type)
 	SensorType.clear()
-	for sensor_type in 	Vehicle.SENSOR_TYPE_STRING:
+	for sensor_type in SensorSettings.sensor_type_string:
 		SensorType.add_item(sensor_type)
 	PoseSource.clear()
 	for pose_type in Vehicle.POSE_TYPE_STRING:
@@ -184,7 +184,7 @@ func _on_sensor_add_pressed():
 		Notification.notify(" Exists Sensor Name ", Notification.NOTICE_TYPE.ALERT)
 		return
 	
-	var sensor_type:Vehicle.SENSOR_TYPE = SensorType.selected as Vehicle.SENSOR_TYPE
+	var sensor_type:SensorSettings.SENSOR_TYPE = SensorType.selected as SensorSettings.SENSOR_TYPE
 	sensor = vehicle.add_sensor(SensorName.text, sensor_type)
 	if not sensor:
 		return
@@ -257,11 +257,11 @@ func _on_sensor_list_item_selected(index):
 	lidar_range_distance_container.hide()
 	
 	match sensor.type:
-		Vehicle.SENSOR_TYPE.RANGE:
+		SensorSettings.SENSOR_TYPE.RANGE:
 			RangeDistance.text = str(sensor.distance)
 			lidar_range_distance_container.show()
 			
-		Vehicle.SENSOR_TYPE.LIDAR:
+		SensorSettings.SENSOR_TYPE.LIDAR:
 			RangeDistance.text = str(sensor.distance)
 			LidarWidth.text = str(sensor.resolution.x)
 			LidarHeight.text = str(sensor.resolution.y)
@@ -270,7 +270,7 @@ func _on_sensor_list_item_selected(index):
 			lidar_resolution_contanier.show()
 			lidar_vertical_fov_container.show()
 			
-		Vehicle.SENSOR_TYPE.RGB_CAMERA:
+		SensorSettings.SENSOR_TYPE.RGB_CAMERA:
 			CameraWitdh.text = str(sensor.resolution.x)
 			CameraHeight.text = str(sensor.resolution.y)
 			CameraFov.text = str(sensor.fov)
@@ -279,7 +279,7 @@ func _on_sensor_list_item_selected(index):
 			camera_resolution_container.show()
 			camera_fov_container.show()
 			
-		Vehicle.SENSOR_TYPE.DEPTH_CAMERA:
+		SensorSettings.SENSOR_TYPE.DEPTH_CAMERA:
 			CameraWitdh.text = str(sensor.resolution.x)
 			CameraHeight.text = str(sensor.resolution.y)
 			CameraFov.text = str(sensor.fov)
