@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctuvpqkx7vkyi"]
+
+[ext_resource type="Script" path="res://modules/vehicle/pose/VehiclePose.gd" id="1_si8al"]
+
+[node name="PoseUser" type="Node"]
+script = ExtResource("1_si8al")

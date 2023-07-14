@@ -28,7 +28,7 @@ func _ready():
 	set_resolution(resolution)
 	set_fov(fov)
 	subViewport.world_3d = get_viewport().world_3d
-	on_sensor_renamed(get_parent().name, name)
+	on_sensor_renamed(vehicle.name, name)
 
 func on_sensor_renamed(vehicle_name:String, sensor_name:String):
 	cameraInfoPublisher.topic_name = vehicle_name + "/" + sensor_name + "_info"

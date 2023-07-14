@@ -1,7 +1,33 @@
 class_name Sensor extends Node3D
 
+enum SENSOR_TYPE {RANGE, LIDAR, RGB_CAMERA, DEPTH_CAMERA} 
+
+static var SENSOR_TYPE_STRING:PackedStringArray = [
+	"Range(ToF)",
+	"Lidar",
+	"RGB Camera",
+	"Depth Camera"
+]
+
+var vehicle:Vehicle
+
+static func Create(vehicle:Vehicle, sensor_type:SENSOR_TYPE)->Sensor:
+	var sensor:Sensor
+	match sensor_type:
+		SENSOR_TYPE.RANGE:
+			sensor = load("res://modules/sensor/Range/Range.tscn").instantiate()
+		SENSOR_TYPE.LIDAR:
+			sensor = load("res://modules/sensor/Range/Lidar.tscn").instantiate()
+		SENSOR_TYPE.RGB_CAMERA:
+			sensor = load("res://modules/sensor/Range/CameraRGB.tscn").instantiate()
+		SENSOR_TYPE.DEPTH_CAMERA:
+			sensor = load("res://modules/sensor/Range/CameraDepth.tscn").instantiate()
+	sensor.vehicle = vehicle
+	vehicle.connect("renamed", _rename_sensor_publisher)
+	return null
+
 @export_category("Common Settings")
-@export var type:SensorSettings.SENSOR_TYPE
+@export var type:SENSOR_TYPE
 @export var publisher:Publisher
 @export var hz:float = 10.0: set = set_hz
 @export var enable:bool = true: set = set_enable
@@ -14,14 +40,12 @@ signal sensor_renamed(vehicle_name:String, sensor_name:String)
 func _ready():
 	set_hz(hz);
 	set_enable(enable)
-	
-	get_parent().connect("renamed", _rename_sensor_publisher)
 	_rename_sensor_publisher()
 	
 func _rename_sensor_publisher():
-	if get_parent() and !get_parent().name.is_empty() and !name.is_empty() and publisher:
-		publisher.topic_name = get_parent().name + "/" + name	
-		emit_signal("sensor_renamed", get_parent().name, name)
+	if vehicle and !vehicle.name.is_empty() and !name.is_empty() and publisher:
+		publisher.topic_name = vehicle.name + "/" + name	
+		emit_signal("sensor_renamed", vehicle.name, name)
 
 func set_hz(_hz):
 	if timer:
