@@ -1,6 +1,7 @@
 extends Node
 
 @export var default_settings:Dictionary = {
+	"world" : 0,
 	"fullscreen":false,
 	"screen_resolution": Vector2i(1600,900),
 	"main_window": 0,
@@ -15,6 +16,14 @@ extends Node
 	"visual_effects": 2
 }
 @export var save_path:String;
+
+@export_category("World")
+@export var worlds:Array[PackedScene] = [
+	preload("res://modules/world/environment/Volumetric.tscn")
+	]
+@export var world:int: set = _world_initialize
+var current_world:Node3D
+signal world_changed
 
 @export var fullscreen:bool: set = set_fullscreen
 @export var screen_resolution:Vector2i: set = set_screen_resolution
@@ -31,6 +40,9 @@ extends Node
 
 var viewports:Array[Viewport]
 
+func set_day_night(value:float):
+	_set_day_night(value)
+
 func reset():
 	DefaultSettingMethods.reset_default_property(self, default_settings)
 
@@ -38,7 +50,7 @@ func _ready():
 	DefaultSettingMethods.load_default_property(self,default_settings,save_path)
 	# Register main window viewport
 	viewports.append(get_viewport())	
-	
+
 func set_fullscreen(_fullscreen):
 	fullscreen = _fullscreen
 	if fullscreen:
@@ -81,79 +93,70 @@ func set_shadow(_shadow):
 			RenderingServer.directional_shadow_atlas_set_size(16384, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_ULTRA)
-			GeneralSettings.current_world.light.shadow_bias = 0.005
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 16384
+			current_world._get_light().shadow_bias = 0.005
+			_set_viewports_property("positional_shadow_atlas_size", 16384)
 		1: # HIGH
 			RenderingServer.directional_shadow_atlas_set_size(8192, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_HIGH)
-			GeneralSettings.current_world.light.shadow_bias = 0.01
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 8192
+			current_world._get_light().shadow_bias = 0.01
+			_set_viewports_property("positional_shadow_atlas_size", 8192)
 		2: # MIDIUM
 			RenderingServer.directional_shadow_atlas_set_size(4096, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM)
-			GeneralSettings.current_world.light.shadow_bias = 0.02
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 4096
+			current_world._get_light().shadow_bias = 0.02
+			_set_viewports_property("positional_shadow_atlas_size", 4096)
 		3: # LOW
 			RenderingServer.directional_shadow_atlas_set_size(2048, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_LOW)
-			GeneralSettings.current_world.light.shadow_bias = 0.03
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 2048
+			current_world._get_light().shadow_bias = 0.03
+			_set_viewports_property("positional_shadow_atlas_size", 2048)
 		4: # VERY LOW
 			RenderingServer.directional_shadow_atlas_set_size(1024, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_VERY_LOW)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_SOFT_VERY_LOW)
-			GeneralSettings.current_world.light.shadow_bias = 0.04
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 1024
+			current_world._get_light().shadow_bias = 0.04
+			_set_viewports_property("positional_shadow_atlas_size", 1024)
 		5: # DISABLED
 			RenderingServer.directional_shadow_atlas_set_size(512, true)
 			RenderingServer.directional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
 			RenderingServer.positional_soft_shadow_filter_set_quality(RenderingServer.SHADOW_QUALITY_HARD)
-			GeneralSettings.current_world.light.shadow_bias = 0.06
-			for viewport in viewports:
-				viewport.positional_shadow_atlas_size = 0
+			current_world._get_light().shadow_bias = 0.06
+			_set_viewports_property("positional_shadow_atlas_size", 0)
 
 func set_anti_alising(_anti_alising):
 	anti_alising = _anti_alising
 	match anti_alising:
 		0: # MXAA_8
-			for viewport in viewports:
-				viewport.msaa_3d = Viewport.MSAA_8X
-				viewport.use_taa = false
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+			_set_viewports_property("msaa_3d", Viewport.MSAA_8X)
+			_set_viewports_property("use_taa", false)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_DISABLED)
 		1: # MSAA_4
-			for viewport in viewports:
-				viewport.msaa_3d = Viewport.MSAA_4X
-				viewport.use_taa = false
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+			_set_viewports_property("msaa_3d", Viewport.MSAA_4X)
+			_set_viewports_property("use_taa", false)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_DISABLED)
 		2: # MSAA_2
-			for viewport in viewports:
-				viewport.msaa_3d = Viewport.MSAA_2X
-				viewport.use_taa = false
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+			_set_viewports_property("msaa_3d", Viewport.MSAA_2X)
+			_set_viewports_property("use_taa", false)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_DISABLED)
 		3: # TAA
-			for viewport in viewports:
-				viewport.use_taa = true
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+			_set_viewports_property("msaa_3d", Viewport.MSAA_DISABLED)
+			_set_viewports_property("use_taa", true)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_DISABLED)
 		4: # FXAA
-			for viewport in viewports:
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
-				viewport.use_taa = false
+			_set_viewports_property("msaa_3d", Viewport.MSAA_DISABLED)
+			_set_viewports_property("use_taa", false)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_FXAA)
 		5: # DISABLED
-			for viewport in viewports:
-				viewport.msaa_3d = Viewport.MSAA_DISABLED
-				viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED 
+			_set_viewports_property("msaa_3d", Viewport.MSAA_DISABLED)
+			_set_viewports_property("use_taa", false)
+			_set_viewports_property("screen_space_aa", Viewport.SCREEN_SPACE_AA_DISABLED)
 
 func set_ambient_occlusion(_ambient_occlusion):
 	ambient_occlusion = _ambient_occlusion
-	var world_environment:WorldEnvironment = GeneralSettings.current_world.world_environment
+	var world_environment:WorldEnvironment = current_world._get_world_environment()
 	match ambient_occlusion:
 		0: # HIGH
 			world_environment.environment.ssao_enabled = true
@@ -177,27 +180,21 @@ func set_texture(_texture):
 	texture = _texture
 	match texture:
 		0: # ULTRA
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 0.0
+			_set_viewports_property("mesh_lod_threshold", 0.0)
 		1: # HIGH
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 1.0
+			_set_viewports_property("mesh_lod_threshold", 1.0)
 		2: # MEDIUM
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 2.0
+			_set_viewports_property("mesh_lod_threshold", 2.0)
 		3: # LOW
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 4.0
+			_set_viewports_property("mesh_lod_threshold", 4.0)
 		4: # VERY LOW
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 8.0
+			_set_viewports_property("mesh_lod_threshold", 8.0)
 		5: # DISABLED
-			for viewport in viewports:
-				viewport.mesh_lod_threshold = 8.0 
+			_set_viewports_property("mesh_lod_threshold", 8.0)
 
 func set_visual_effects(_visual_effects):
 	visual_effects = _visual_effects
-	var world_environment:WorldEnvironment = GeneralSettings.current_world.world_environment
+	var world_environment:WorldEnvironment = current_world._get_world_environment()
 	match visual_effects:
 		0: # ULTRA
 			world_environment.environment.set_ssr_enabled(true)
@@ -208,7 +205,6 @@ func set_visual_effects(_visual_effects):
 			RenderingServer.gi_set_use_half_resolution(false)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_ULTRA, true, 0.5, 4, 50, 300)
 			# RenderingServer.environment_set_volumetric_fog_filter_active(true)
-			pass
 		1: # HIGH
 			world_environment.environment.set_ssr_enabled(true)
 			world_environment.environment.set_ssr_max_steps(32)
@@ -219,7 +215,6 @@ func set_visual_effects(_visual_effects):
 			RenderingServer.gi_set_use_half_resolution(false)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_HIGH, true, 0.5, 4, 50, 300)
 			# RenderingServer.environment_set_volumetric_fog_filter_active(true)
-			pass
 		2: # MEDIUM
 			world_environment.environment.set_ssr_enabled(true)
 			world_environment.environment.set_ssr_max_steps(16)
@@ -230,7 +225,6 @@ func set_visual_effects(_visual_effects):
 			RenderingServer.gi_set_use_half_resolution(true)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_MEDIUM, true, 0.5, 4, 50, 300)
 			# RenderingServer.environment_set_volumetric_fog_filter_active(false)
-			pass
 		3: # LOW
 			world_environment.environment.set_ssr_enabled(true)
 			world_environment.environment.set_ssr_max_steps(8)
@@ -241,7 +235,6 @@ func set_visual_effects(_visual_effects):
 			RenderingServer.gi_set_use_half_resolution(true)
 			RenderingServer.environment_set_ssil_quality(RenderingServer.ENV_SSIL_QUALITY_LOW, true, 0.5, 4, 50, 300)
 			# RenderingServer.environment_set_volumetric_fog_filter_active(false)
-			pass
 		4: # VERY LOW
 			world_environment.environment.set_ssr_enabled(true)
 			world_environment.environment.set_ssr_max_steps(4)
@@ -256,4 +249,19 @@ func set_visual_effects(_visual_effects):
 			world_environment.environment.sdfgi_enabled = false
 			world_environment.environment.glow_enabled = false
 			# world_environment.environment.volumetric_fog_enabled = false
-			pass
+			
+func _set_viewports_property(property:String, value):
+	for viewport in viewports:
+		viewport.set(property, value)
+
+func _world_initialize(_world:int):
+	world = _world
+	if current_world:
+		current_world.free()
+	current_world = worlds[world].instantiate()
+	current_world.name = "world"
+	add_child(current_world)
+	world_changed.emit()
+
+func _set_day_night(value):
+	current_world._set_day_night(value)

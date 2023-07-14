@@ -1,4 +1,4 @@
-extends TextureRect
+class_name Minimap extends TextureRect
 
 @export var height:float = 200.0 # TODO set camera hight depends on the vehicle's hieght
 @export_range(0.0, 1.0, 0.01) var ratio:float = 0.5: set = _ratio_initialize 

@@ -78,11 +78,5 @@ func set_fov(_fov):
 		return
 	camera3D.fov = fov
 
-func _on_sub_viewport_tree_entered():
-	GraphicsSettings.viewports.append(get_node("SubViewport"))
-
-func _on_sub_viewport_tree_exited():
-	GraphicsSettings.viewports.erase(get_node("SubViewport"))
-
 func _on_always_on_top_button_toggled(button_pressed):
 	window.always_on_top = button_pressed

@@ -1,16 +1,8 @@
-extends Window
+extends GlobalWindow
 
 @onready var freeFlyCamera = $FreeFlyCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
 @onready var vehicleSelector:OptionButton = $ColorRect/HBoxContainer/VehicleSelector
-
-func _enter_tree():
-	# shares same world of parent
-	world_3d = get_parent().get_window().world_3d
-	GraphicsSettings.viewports.append(get_viewport())
-
-func _exit_tree():
-	GraphicsSettings.viewports.erase(get_viewport())
 
 func _on_close_requested():
 	call_deferred("queue_free")

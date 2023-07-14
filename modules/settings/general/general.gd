@@ -93,9 +93,9 @@ func _ready():
 	minimap_on.disabled = GraphicsSettings.minimap
 	minimap_off.disabled = !GraphicsSettings.minimap
 	if GraphicsSettings.minimap:
-		Minimap.show()
+		GeneralSettings.minimap.show()
 	else: 
-		Minimap.hide()
+		GeneralSettings.minimap.hide()
 	
 	# Quality Settings
 	shadows.selected = GraphicsSettings.shadow
@@ -139,13 +139,13 @@ func _on_minimap_on_pressed():
 	GraphicsSettings.minimap = true
 	minimap_on.disabled = true
 	minimap_off.disabled = false
-	Minimap.show()
+	GeneralSettings.minimap.show()
 
 func _on_minimap_off_pressed():
 	GraphicsSettings.minimap = false
 	minimap_on.disabled = false
 	minimap_off.disabled = true
-	Minimap.hide()
+	GeneralSettings.minimap.hide()
 
 func _on_shadows_item_selected(index):
 	GraphicsSettings.set_shadow(index)
@@ -182,13 +182,13 @@ func _on_open_new_viewer_pressed():
 	GeneralSettings.create_new_viewer()
 
 func _on_minimap_scale_value_changed(value):
-	Minimap.ratio = value / minimap_scale.max_value
+	GeneralSettings.minimap.ratio = value / minimap_scale.max_value
 
 func _on_minimap_transparency_value_changed(value):
-	Minimap.alpha = value / minimap_transparency.max_value
+	GeneralSettings.minimap.alpha = value / minimap_transparency.max_value
 
 func _on_day_night_value_changed(value):
-	GeneralSettings.set_day_night(value / noon_to_sunset.max_value)
+	GraphicsSettings.set_day_night(value / noon_to_sunset.max_value)
 
 func _on_publish_district_pressed():
 	GeneralSettings.publish_district()

@@ -36,7 +36,6 @@ tonemap_white = 3.22
 
 [node name="Volumetric" type="Node3D"]
 script = ExtResource("1_kv3p4")
-day_night = 0.02
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ma5yd")

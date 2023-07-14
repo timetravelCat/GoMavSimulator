@@ -1,13 +1,13 @@
-extends Node
+class_name DefaultSettingMethods
 
-func reset_default_property(node:Node, settings:Dictionary):
+static func reset_default_property(node:Node, settings:Dictionary):
 	for setting in settings:
 		if settings[setting] is Dictionary:
 			node.set(setting, settings[setting].duplicate(true))
 		else:
 			node.set(setting, settings[setting])
 
-func load_default_property(node:Node, settings:Dictionary, path:String):
+static func load_default_property(node:Node, settings:Dictionary, path:String):
 	if not FileAccess.file_exists(path):
 		reset_default_property(node, settings)
 		return
@@ -22,7 +22,7 @@ func load_default_property(node:Node, settings:Dictionary, path:String):
 		for setting in settings:
 			node.set(setting, data[setting])
 
-func save_default_property(node:Node, settings:Dictionary, path:String):
+static func save_default_property(node:Node, settings:Dictionary, path:String):
 	var file_access = FileAccess.open(path, FileAccess.WRITE)
 	@warning_ignore("unassigned_variable")
 	var data:Dictionary
