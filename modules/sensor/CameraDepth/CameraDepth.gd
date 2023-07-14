@@ -100,3 +100,6 @@ func set_fov(_fov):
 		fov = _fov
 	if camera3D:
 		camera3D.fov = fov
+
+func _on_always_on_top_button_toggled(button_pressed):
+	window.always_on_top = button_pressed

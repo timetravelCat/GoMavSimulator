@@ -32,8 +32,6 @@ static var pose_list:Array = [
 var pose_type:POSE_TYPE = POSE_TYPE.MAVLINK:
 	set = set_pose_type
 var pose = null
-# ===== sensor configuraiton ====== #
-var sensors:Array # sensors are all inherit from Sensor class
 # ===== getter, setters ====== #
 func _init():
 	model = model_list[model_type].instantiate()
@@ -47,13 +45,17 @@ func set_enable(_enable):
 		model.show()
 	else:
 		model.hide()
-	for sensor in sensors:
+	if not sensor_container:
+		return
+	for sensor in sensor_container.get_children():
 		sensor.enable = _enable
 func set_domain_id(_domain_id):
 	var pose_ros2 = pose as PoseStampedSubscriber
 	if pose_ros2:
 		pose_ros2.domain_id = _domain_id
-	for sensor in sensors:
+	if not sensor_container:
+		return
+	for sensor in sensor_container.get_children():
 		sensor.publisher.domain_id = _domain_id # sensor 
 	domain_id = _domain_id
 func set_model_type(_model_type):
@@ -93,10 +95,14 @@ func set_pose_type(_pose_type):
 	pose = _pose
 	add_child(pose)
 # ===== sensor retreive functions ===== #
+@onready var sensor_container:Node3D=$SensorContainer
+
+func get_sensors():
+	return sensor_container.get_children()
+
 func get_sensor(_sensor_name:String):
-	if _sensor_name == model.name or _sensor_name == pose.name:
-		return null
-	return find_child(_sensor_name, false, false)
+	return sensor_container.find_child(_sensor_name, false, false)
+	
 func add_sensor(_sensor_name:String, _sensor_type:SensorSettings.SENSOR_TYPE):
 	if _sensor_name == model.name or _sensor_name == pose.name:
 		Notification.notify("Unvalid sensor name requested. change sensor name", Notification.NOTICE_TYPE.ALERT)
@@ -107,17 +113,16 @@ func add_sensor(_sensor_name:String, _sensor_type:SensorSettings.SENSOR_TYPE):
 	
 	var sensor = SensorSettings.Create(_sensor_type)
 	sensor.name = _sensor_name
-	sensors.append(sensor)
-	add_child(sensor)
+	sensor_container.add_child(sensor)
 	# TODO move load location?
 	DefaultSettingMethods.reset_default_property(sensor, sensor.property_saved_list)
 	return sensor
+	
 func remove_sensor(_sensor_name:String):
 	if not get_sensor(_sensor_name):
 		return
 	var sensor = get_sensor(_sensor_name)
-	remove_child(sensor)
-	sensors.erase(sensor)
+	sensor_container.remove_child(sensor)
 	sensor.free()
 # ================================= # 
 # implement save_load

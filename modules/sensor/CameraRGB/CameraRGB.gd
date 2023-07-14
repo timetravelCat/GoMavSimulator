@@ -83,3 +83,6 @@ func _on_sub_viewport_tree_entered():
 
 func _on_sub_viewport_tree_exited():
 	GraphicsSettings.viewports.erase(get_node("SubViewport"))
+
+func _on_always_on_top_button_toggled(button_pressed):
+	window.always_on_top = button_pressed

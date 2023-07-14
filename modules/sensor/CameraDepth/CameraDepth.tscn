@@ -59,7 +59,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_tv6uh")
 
+[node name="AlwaysOnTopButton" type="CheckButton" parent="Window" index="1"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 24.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
 [connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
 [connection signal="sensor_renamed" from="." to="." method="_on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
 [connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]
+[connection signal="toggled" from="Window/AlwaysOnTopButton" to="." method="_on_always_on_top_button_toggled"]

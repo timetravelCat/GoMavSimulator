@@ -47,6 +47,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_3qsie")
 
+[node name="AlwaysOnTopButton" type="CheckButton" parent="Window" index="1"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 24.0
+grow_horizontal = 0
+
 [connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
 [connection signal="sensor_renamed" from="." to="." method="on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
@@ -55,3 +63,4 @@ texture = SubResource("ViewportTexture_3qsie")
 [connection signal="tree_exited" from="SubViewport" to="." method="_on_sub_viewport_tree_exited"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_timeout"]
 [connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]
+[connection signal="toggled" from="Window/AlwaysOnTopButton" to="." method="_on_always_on_top_button_toggled"]

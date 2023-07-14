@@ -151,7 +151,7 @@ func _on_vehicle_list_item_selected(index):
 		# TODO hide without unrelative options?
 		
 	SensorList.clear()
-	for sensor in vehicle.sensors:
+	for sensor in vehicle.get_sensors():
 		SensorList.add_item(sensor.name)
 
 func _on_sensor_add_pressed():
