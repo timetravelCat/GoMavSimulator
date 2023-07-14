@@ -1,19 +1,22 @@
-extends Node
+class_name SensorSettings extends Node
 
 enum SENSOR_TYPE {RANGE, LIDAR, RGB_CAMERA, DEPTH_CAMERA} 
 
-var sensor_type_string:PackedStringArray = [
+static var sensor_type_string:PackedStringArray = [
 	"Range(ToF)",
 	"Lidar",
 	"RGB Camera",
 	"Depth Camera"
 ]
-	
-var sensor_list:Array[PackedScene] = [
-	preload("res://modules/sensor/Range/Range.tscn"),
-	preload("res://modules/sensor/Lidar/Lidar.tscn"),
-	preload("res://modules/sensor/CameraRGB/CameraRGB.tscn"),
-	preload("res://modules/sensor/CameraDepth/CameraDepth.tscn")]
-	
-func Create(sensor_type:SENSOR_TYPE)->Node3D:
-	return sensor_list[sensor_type].instantiate()
+
+static func Create(sensor_type:SENSOR_TYPE)->Node3D:
+	match sensor_type:
+		SENSOR_TYPE.RANGE:
+			return load("res://modules/sensor/Range/Range.tscn").instantiate()
+		SENSOR_TYPE.LIDAR:
+			return load("res://modules/sensor/Range/Lidar.tscn").instantiate()
+		SENSOR_TYPE.RGB_CAMERA:
+			return load("res://modules/sensor/Range/CameraRGB.tscn").instantiate()
+		SENSOR_TYPE.DEPTH_CAMERA:
+			return load("res://modules/sensor/Range/CameraDepth.tscn").instantiate()
+	return null

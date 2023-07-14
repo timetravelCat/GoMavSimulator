@@ -22,7 +22,6 @@ Notification="*res://modules/notice/Notification.tscn"
 GeneralSettings="*res://modules/settings/general/GeneralSettings.tscn"
 GraphicsSettings="*res://modules/settings/general/GraphicsSettings.gd"
 MavlinkSettings="*res://modules/settings/mavlink/MavlinkSettings.tscn"
-SensorSettings="*res://modules/sensor/SensorSettings.gd"
 SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
 
 [display]

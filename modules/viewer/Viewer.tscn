@@ -14,31 +14,24 @@ current = true
 
 [node name="ThirdPersonCamera" parent="." instance=ExtResource("3_thma8")]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.611765, 0.329412, 0.278431, 0.372549)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-layout_mode = 1
-offset_right = 91.0
+[node name="AlwaysOnTop" type="CheckButton" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
 offset_bottom = 24.0
-
-[node name="AlwaysOnTop" type="CheckButton" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
+grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 2
 tooltip_text = "Allways on Top"
 
-[node name="VehicleSelector" type="OptionButton" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
+[node name="VehicleSelector" type="OptionButton" parent="."]
+offset_right = 43.0
+offset_bottom = 24.0
 fit_to_longest_item = false
 allow_reselect = true
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
-[connection signal="toggled" from="ColorRect/HBoxContainer/AlwaysOnTop" to="." method="_on_always_on_top_toggled"]
-[connection signal="item_selected" from="ColorRect/HBoxContainer/VehicleSelector" to="." method="_on_vehicle_selector_item_selected"]
-[connection signal="pressed" from="ColorRect/HBoxContainer/VehicleSelector" to="." method="_on_vehicle_selector_pressed"]
+[connection signal="toggled" from="AlwaysOnTop" to="." method="_on_always_on_top_toggled"]
+[connection signal="item_selected" from="VehicleSelector" to="." method="_on_vehicle_selector_item_selected"]
+[connection signal="pressed" from="VehicleSelector" to="." method="_on_vehicle_selector_pressed"]

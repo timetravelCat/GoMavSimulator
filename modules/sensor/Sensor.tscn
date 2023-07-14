@@ -4,9 +4,6 @@
 
 [node name="Sensor" type="Node3D"]
 script = ExtResource("1_paamr")
-type = null
-hz = null
-enable = null
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

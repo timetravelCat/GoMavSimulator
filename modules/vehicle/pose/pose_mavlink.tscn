@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://p1sg3chkbxof"]
-
-[ext_resource type="Script" path="res://modules/vehicle/pose/pose_mavlink.gd" id="1_blgeh"]
+[gd_scene format=3 uid="uid://p1sg3chkbxof"]
 
 [node name="pose_mavlink" type="GoMAVSDK"]
-script = ExtResource("1_blgeh")
-
-[connection signal="pose_subscribed" from="." to="." method="_on_pose_subscribed"]

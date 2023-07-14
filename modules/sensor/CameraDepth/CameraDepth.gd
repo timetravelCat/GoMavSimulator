@@ -1,4 +1,4 @@
-extends Sensor
+class_name CameraDepth extends Sensor
 
 var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
@@ -81,12 +81,6 @@ func _on_sensor_enabled(_enable:bool):
 
 func _on_window_close_requested():
 	enable = false
-
-#func _on_sub_viewport_tree_entered():
-#	GraphicsSettings.viewports.append(get_node("SubViewport"))
-#
-#func _on_sub_viewport_tree_exited():
-#	GraphicsSettings.viewports.erase(get_node("SubViewport"))
 
 func set_resolution(_resolution):
 	resolution = _resolution

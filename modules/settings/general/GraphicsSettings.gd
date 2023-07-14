@@ -18,12 +18,18 @@ extends Node
 @export var save_path:String;
 
 @export_category("World")
-@export var worlds:Array[PackedScene] = [
-	preload("res://modules/world/environment/Volumetric.tscn")
-	]
 @export var world:int: set = _world_initialize
 var current_world:Node3D
 signal world_changed
+
+func _world_initialize(_world:int):
+	world = _world
+	if current_world:
+		current_world.free()
+	current_world = WorldSettings.world_scenes[world].instantiate()
+	current_world.name = "world"
+	add_child(current_world)
+	world_changed.emit()
 
 @export var fullscreen:bool: set = set_fullscreen
 @export var screen_resolution:Vector2i: set = set_screen_resolution
@@ -253,15 +259,6 @@ func set_visual_effects(_visual_effects):
 func _set_viewports_property(property:String, value):
 	for viewport in viewports:
 		viewport.set(property, value)
-
-func _world_initialize(_world:int):
-	world = _world
-	if current_world:
-		current_world.free()
-	current_world = worlds[world].instantiate()
-	current_world.name = "world"
-	add_child(current_world)
-	world_changed.emit()
 
 func _set_day_night(value):
 	current_world._set_day_night(value)

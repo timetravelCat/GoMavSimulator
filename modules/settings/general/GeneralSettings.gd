@@ -14,7 +14,7 @@ var district_AABB:AABB
 signal district_changed
 
 @export_category("Minimap")
-@export var minimap_scene:PackedScene = preload("res://modules/viewer/Minimap.tscn")
+@export var minimap_scene:PackedScene
 
 # global methods
 func create_new_viewer():

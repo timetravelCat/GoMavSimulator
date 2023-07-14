@@ -7,15 +7,16 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_3qsie"]
 viewport_path = NodePath("SubViewport")
 
-[node name="CameraRGB" instance=ExtResource("1_cc8fp")]
+[node name="CameraRGB" node_paths=PackedStringArray("imagePublisher", "compressedImagePulibsher", "cameraInfoPublisher", "publisher") instance=ExtResource("1_cc8fp")]
 script = ExtResource("1_v7lpq")
-type = 2
-publisher = null
+imagePublisher = NodePath("SubViewport/ImagePublisher")
+compressedImagePulibsher = NodePath("SubViewport/CompressedImagePublisher")
+cameraInfoPublisher = NodePath("SubViewport/CameraInfoPublisher")
 compressed = false
 resolution = Vector2i(640, 360)
 fov = 75.0
-imagePublisher = null
-compressedImagePulibsher = null
+type = 2
+publisher = NodePath("SubViewport/ImagePublisher")
 
 [node name="SubViewport" type="SubViewport" parent="." index="1"]
 script = ExtResource("3_n6o3w")

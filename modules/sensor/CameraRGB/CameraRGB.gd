@@ -1,4 +1,4 @@
-extends Sensor
+class_name CameraRGB extends Sensor
 
 var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),

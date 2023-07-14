@@ -1,9 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsw7ic11mvx08"]
-
-[ext_resource type="Script" path="res://modules/vehicle/pose/pose_ros2.gd" id="1_mv71x"]
+[gd_scene format=3 uid="uid://bsw7ic11mvx08"]
 
 [node name="pose_ros2" type="PoseStampedSubscriber"]
-script = ExtResource("1_mv71x")
-
-[connection signal="on_data_subscribed" from="." to="." method="_on_on_data_subscribed"]
-[connection signal="renamed" from="." to="." method="_on_renamed"]

@@ -1,8 +1,8 @@
-extends GlobalWindow
+class_name Viewer extends GlobalWindow
 
 @onready var freeFlyCamera = $FreeFlyCamera
 @onready var thirdPersonCamera = $ThirdPersonCamera
-@onready var vehicleSelector:OptionButton = $ColorRect/HBoxContainer/VehicleSelector
+@onready var vehicleSelector:OptionButton = $VehicleSelector
 
 func _on_close_requested():
 	call_deferred("queue_free")
