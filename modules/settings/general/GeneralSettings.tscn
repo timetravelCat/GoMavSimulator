@@ -4,11 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://1t8vfvfn7iky" path="res://assets/district/cartoon/mini.tscn" id="3_vx4uj"]
 [ext_resource type="PackedScene" uid="uid://cthjcxhxssknw" path="res://assets/district/cartoon/mumbai.tscn" id="4_qjpyr"]
 
-[node name="GeneralSettings" type="Node"]
+[node name="GeneralSettings" type="Node" node_paths=PackedStringArray("district_publisher")]
 script = ExtResource("1_rry6e")
+default_settings = null
 save_path = "user://GeneralSettings.json"
 district_size = Vector3(1000, 100, 1000)
 districts = Array[PackedScene]([ExtResource("3_vx4uj"), ExtResource("4_qjpyr")])
+district = null
+minimap_scene = null
+district_publisher = NodePath("DistrictPublisher")
 
 [node name="DistrictPublisher" type="MarkerPublisher" parent="."]
 type = 11

@@ -10,7 +10,7 @@ var property_saved_list:Dictionary = {
 	"resolution":Vector2i(72,1),
 }
 
-@onready var pointCloudPublisher = $PointCloudPublisher
+@export var pointCloudPublisher:PointCloudPublisher
 @onready var rayCastContainer = $RayCastContainer
 
 @export var distance:float = 100.0:

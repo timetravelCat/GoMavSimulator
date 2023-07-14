@@ -45,7 +45,7 @@ func _district_initialize(_district:int):
 		minimap.free()
 	minimap = minimap_scene.instantiate()
 	add_child(minimap)
-	
+
 	
 func _create_collision_body(district_child:Node):
 	var meshInstance = district_child as MeshInstance3D
@@ -83,8 +83,8 @@ func _create_new_viewer():
 	if _viewer_position.x > 640:
 		_viewer_position = Vector2i.ZERO
 	add_child(viewer)
-	
-@onready var district_publisher:MarkerPublisher = $DistrictPublisher
+
+@export var district_publisher:MarkerPublisher
 func _publish_district():
 	district_publisher.surface = current_district
 	district_publisher.publish(current_district.position, current_district.quaternion)

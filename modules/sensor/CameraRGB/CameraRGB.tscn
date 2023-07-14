@@ -7,13 +7,15 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_3qsie"]
 viewport_path = NodePath("SubViewport")
 
-[node name="CameraRGB" node_paths=PackedStringArray("publisher") instance=ExtResource("1_cc8fp")]
+[node name="CameraRGB" instance=ExtResource("1_cc8fp")]
 script = ExtResource("1_v7lpq")
+type = 2
+publisher = null
 compressed = false
 resolution = Vector2i(640, 360)
 fov = 75.0
-type = 2
-publisher = NodePath("SubViewport/ImagePublisher")
+imagePublisher = null
+compressedImagePulibsher = null
 
 [node name="SubViewport" type="SubViewport" parent="." index="1"]
 script = ExtResource("3_n6o3w")
@@ -57,8 +59,6 @@ offset_left = -44.0
 offset_bottom = 24.0
 grow_horizontal = 0
 
-[connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
-[connection signal="sensor_renamed" from="." to="." method="on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
 [connection signal="size_changed" from="SubViewport" to="." method="_on_sub_viewport_size_changed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_timeout"]

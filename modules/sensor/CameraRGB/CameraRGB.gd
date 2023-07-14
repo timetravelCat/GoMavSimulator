@@ -11,9 +11,9 @@ var property_saved_list:Dictionary = {
 }
 
 @onready var subViewport:SubViewport = $SubViewport
-@onready var imagePublisher:ImagePublisher = $SubViewport/ImagePublisher
-@onready var compressedImagePulibsher:CompressedImagePublisher = $SubViewport/CompressedImagePublisher
-@onready var cameraInfoPublisher:CameraInfoPublisher = $SubViewport/CameraInfoPublisher
+@export var imagePublisher:ImagePublisher
+@export var compressedImagePulibsher:CompressedImagePublisher
+@export var cameraInfoPublisher:CameraInfoPublisher
 @onready var camera3D:Camera3D = $SubViewport/Camera3D
 @onready var window:Window = $Window
 @onready var infoTimer:Timer = $Timer

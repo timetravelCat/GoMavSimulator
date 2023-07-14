@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://modules/sensor/Lidar/Lidar.gd" id="1_h7d5u"]
 [ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_q7gdk"]
 
-[node name="Lidar" node_paths=PackedStringArray("publisher") instance=ExtResource("1_q7gdk")]
+[node name="Lidar" node_paths=PackedStringArray("pointCloudPublisher", "publisher") instance=ExtResource("1_q7gdk")]
 script = ExtResource("1_h7d5u")
+pointCloudPublisher = NodePath("PointCloudPublisher")
 distance = 100.0
 vertical_fov = 0.0
 resolution = Vector2i(72, 1)

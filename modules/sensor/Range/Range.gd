@@ -9,7 +9,7 @@ var property_saved_list:Dictionary = {
 }
 
 @onready var raycast3D = $RayCast3D
-@onready var rangePublisher = $RangePublisher
+@export var rangePublisher:RangePublisher
 
 @export var distance:float = 100.0:
 	set(_distance):
