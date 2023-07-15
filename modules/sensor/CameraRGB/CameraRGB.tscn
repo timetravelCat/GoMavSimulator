@@ -26,6 +26,8 @@ resolution = Vector2i(640, 360)
 fov = 75.0
 type = 2
 publisher = NodePath("SubViewport/ImagePublisher")
+hz = 10.0
+enable = true
 
 [node name="SubViewport" type="SubViewport" parent="." index="1"]
 script = ExtResource("3_n6o3w")
