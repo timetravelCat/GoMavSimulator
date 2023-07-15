@@ -1,7 +1,10 @@
 extends Node
 
 @export var default_settings:Dictionary = {
-	"district" : 0,
+	"district" : 0, # District 
+	"minimap" : true,
+	"minimap_ratio":0.5,
+	"minimap_alpha":0.5
 }
 @export var save_path:String;
 
@@ -14,7 +17,10 @@ var district_AABB:AABB
 signal district_changed
 
 @export_category("Minimap")
-@export var minimap_scene:PackedScene
+var minimap_scene:PackedScene = preload("res://modules/viewer/Minimap.tscn")
+@export var minimap:bool: set = set_minimap
+@export var minimap_ratio:float: set = set_minimap_ratio
+@export var minimap_alpha:float: set = set_minimap_alpha
 
 # global methods
 func create_new_viewer():
@@ -28,6 +34,9 @@ func reset():
 func _ready():
 	DefaultSettingMethods.load_default_property(self,default_settings,save_path)
 	
+func _exit_tree():
+	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
+
 func _district_initialize(_district:int):
 	district = _district
 	if current_district:
@@ -41,12 +50,11 @@ func _district_initialize(_district:int):
 	add_child(current_district)
 	district_changed.emit()
 	
-	if minimap:
-		minimap.free()
-	minimap = minimap_scene.instantiate()
-	add_child(minimap)
+	if minimap_node:
+		minimap_node.free()
+	minimap_node = minimap_scene.instantiate()
+	add_child(minimap_node)
 
-	
 func _create_collision_body(district_child:Node):
 	var meshInstance = district_child as MeshInstance3D
 	if meshInstance: 
@@ -89,4 +97,19 @@ func _publish_district():
 	district_publisher.surface = current_district
 	district_publisher.publish(current_district.position, current_district.quaternion)
 
-var minimap:Minimap
+func set_minimap(_minimap):
+	minimap = _minimap
+	if minimap:
+		minimap_node.show()
+	else:
+		minimap_node.hide()
+func set_minimap_ratio(ratio):
+	minimap_ratio = ratio
+	minimap_node.ratio = ratio
+func set_minimap_alpha(alpha):
+	minimap_alpha = alpha
+	minimap_node.alpha = alpha
+	
+var minimap_node:Minimap
+
+

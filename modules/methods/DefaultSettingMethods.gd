@@ -20,12 +20,22 @@ static func load_default_property(node:Node, settings:Dictionary, path:String):
 			continue
 		var data = json.get_data()
 		for setting in settings:
-			node.set(setting, data[setting])
+			if data.has(setting):
+				node.set(setting, data[setting])
+			else:
+				node.set(setting, settings[setting])
 
 static func save_default_property(node:Node, settings:Dictionary, path:String):
 	var file_access = FileAccess.open(path, FileAccess.WRITE)
 	@warning_ignore("unassigned_variable")
 	var data:Dictionary
 	for setting in settings:
-		data.merge({setting: node.get(setting)})
+		if not compare(node.get(setting), settings[setting]):
+			data.merge({setting: node.get(setting)})
 	file_access.store_line(JSON.stringify(data))
+
+static func compare(left, right)->bool:
+	if left is Dictionary and right is Dictionary:
+		return left.hash() == right.hash()
+	else:
+		return left == right

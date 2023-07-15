@@ -45,6 +45,9 @@ func _ready():
 	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.start_discovery() # start mavsdk discovery 
 
+func _exit_tree():
+	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
+
 # Console Methods
 @onready var console_timer = $ConsoleTimer
 @onready var console_container = $ConsoleContainer

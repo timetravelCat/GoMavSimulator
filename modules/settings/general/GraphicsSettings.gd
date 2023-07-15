@@ -8,7 +8,6 @@ extends Node
 	"vertical_sync": true,
 	"frame_rate_limitation": 60,
 	"ui_scaling": 50,
-	"minimap": true,
 	"shadow": 2,
 	"anti_alising": 2,
 	"ambient_occlusion": 2,
@@ -37,7 +36,6 @@ func _world_initialize(_world:int):
 @export var vertical_sync:bool: set = set_vertical_sync
 @export var frame_rate_limitation:int: set = set_frame_rate_limitation
 @export var ui_scaling:int: set = set_ui_scaling
-@export var minimap:bool: set = set_minimap
 @export var shadow:int: set = set_shadow
 @export var anti_alising:int: set = set_anti_alising
 @export var ambient_occlusion:int: set = set_ambient_occlusion
@@ -56,6 +54,9 @@ func _ready():
 	DefaultSettingMethods.load_default_property(self,default_settings,save_path)
 	# Register main window viewport
 	viewports.append(get_viewport())	
+
+func _exit_tree():
+	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
 
 func set_fullscreen(_fullscreen):
 	fullscreen = _fullscreen
@@ -87,10 +88,6 @@ func set_frame_rate_limitation(_frame_rate_limitation):
 func set_ui_scaling(_ui_scaling):
 	# Just used for save/load
 	ui_scaling = _ui_scaling
-
-func set_minimap(_minimap):
-	# Just used for save/load
-	minimap = _minimap
 
 func set_shadow(_shadow):
 	shadow = _shadow
