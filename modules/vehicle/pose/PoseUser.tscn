@@ -4,3 +4,4 @@
 
 [node name="PoseUser" type="Node"]
 script = ExtResource("1_si8al")
+type = 2

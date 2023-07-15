@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" path="res://modules/vehicle/Vehicle.gd" id="1_f37w2"]
 
-[node name="Vehicle" type="Node3D"]
+[node name="Vehicle" type="Node3D" node_paths=PackedStringArray("modelPublisher", "posePublisher")]
 script = ExtResource("1_f37w2")
 vehicle_layer = 64
+modelPublisher = NodePath("MarkerPublisher")
+posePublisher = NodePath("PoseStampedPublisher")
 
 [node name="SensorContainer" type="Node3D" parent="."]
+
+[node name="MarkerPublisher" type="MarkerPublisher" parent="."]
+
+[node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="."]
+
+[connection signal="renamed" from="." to="." method="_on_renamed"]

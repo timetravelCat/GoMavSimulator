@@ -4,10 +4,15 @@ extends VehiclePose
 
 var stop:bool = false
 
-func _enable(enable:bool):
+func _set_enable(enable:bool):
 	stop = !enable
 func _set_domain_id(domain_id:int):
 	poseSubscriber.domain_id = domain_id
+
+func _get_enable()->bool:
+	return !stop
+func _get_domain_id()->int:
+	return poseSubscriber.domain_id
 
 func _enter_tree():
 	super._enter_tree()

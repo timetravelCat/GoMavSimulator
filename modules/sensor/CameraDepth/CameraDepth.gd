@@ -1,6 +1,6 @@
 class_name CameraDepth extends Sensor
 
-var property_saved_list:Dictionary = {
+@export var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
 	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
 	"hz":10.0,

@@ -5,6 +5,7 @@
 [node name="Ros2Pose" type="Node" node_paths=PackedStringArray("poseSubscriber")]
 script = ExtResource("1_wn7hb")
 poseSubscriber = NodePath("PoseStampedSubscriber")
+type = 1
 
 [node name="PoseStampedSubscriber" type="PoseStampedSubscriber" parent="."]
 

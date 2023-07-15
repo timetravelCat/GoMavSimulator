@@ -11,7 +11,7 @@ static var SENSOR_TYPE_STRING:PackedStringArray = [
 
 var vehicle:Vehicle
 
-static func Create(vehicle:Vehicle, sensor_type:SENSOR_TYPE)->Sensor:
+static func Create(_vehicle:Vehicle, sensor_type:SENSOR_TYPE)->Sensor:
 	var sensor:Sensor
 	match sensor_type:
 		SENSOR_TYPE.RANGE:
@@ -22,8 +22,9 @@ static func Create(vehicle:Vehicle, sensor_type:SENSOR_TYPE)->Sensor:
 			sensor = load("res://modules/sensor/Range/CameraRGB.tscn").instantiate()
 		SENSOR_TYPE.DEPTH_CAMERA:
 			sensor = load("res://modules/sensor/Range/CameraDepth.tscn").instantiate()
-	sensor.vehicle = vehicle
-	vehicle.connect("renamed", _rename_sensor_publisher)
+	sensor.vehicle = _vehicle
+	_vehicle.sensorContainer.add_child(sensor)
+	_vehicle.connect("renamed", _rename_sensor_publisher)
 	return null
 
 @export_category("Common Settings")

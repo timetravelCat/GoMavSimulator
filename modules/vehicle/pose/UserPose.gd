@@ -6,8 +6,11 @@ var stop:bool
 var position:Vector3
 var quaternion:Quaternion
 
-func _enable(enable:bool):
+func _set_enable(enable:bool):
 	stop = !enable
+
+func _get_enable()->bool:
+	return !stop
 
 @export var speed:float = 5.0
 @export var drag_sensitivity:float = 0.05
