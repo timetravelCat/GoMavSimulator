@@ -18,6 +18,10 @@ class_name RangeSensor extends Sensor
 			raycast3D.target_position = Vector3(distance, 0.0, 0.0)
 		if rangePublisher:
 			rangePublisher.max_range = distance
-	
+
+func _ready():
+	super._ready()
+	distance = distance
+
 func _on_timeout():
 	rangePublisher.publish((raycast3D.get_collision_point() - global_position).length())

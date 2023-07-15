@@ -18,6 +18,9 @@ func _enter_tree():
 	super._enter_tree()
 	get_parent().connect("renamed", _on_renamed)
 
+func _ready():
+	renamed.emit()
+
 func _on_renamed():
 	if get_parent() and !get_parent().name.is_empty() and !name.is_empty():
 		poseSubscriber.topic_name = get_parent().name + "/" + name	

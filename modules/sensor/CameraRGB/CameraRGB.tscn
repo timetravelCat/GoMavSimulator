@@ -9,6 +9,15 @@ viewport_path = NodePath("SubViewport")
 
 [node name="CameraRGB" node_paths=PackedStringArray("imagePublisher", "compressedImagePulibsher", "cameraInfoPublisher", "publisher") instance=ExtResource("1_cc8fp")]
 script = ExtResource("1_v7lpq")
+property_saved_list = {
+"compressed": false,
+"enable": true,
+"fov": 75.0,
+"hz": 10.0,
+"position": Vector3(0, 0, 0),
+"quaternion": Quaternion(0, 0, 0, 1),
+"resolution": Vector2i(640, 360)
+}
 imagePublisher = NodePath("SubViewport/ImagePublisher")
 compressedImagePulibsher = NodePath("SubViewport/CompressedImagePublisher")
 cameraInfoPublisher = NodePath("SubViewport/CameraInfoPublisher")
@@ -60,6 +69,7 @@ offset_left = -44.0
 offset_bottom = 24.0
 grow_horizontal = 0
 
+[connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
 [connection signal="size_changed" from="SubViewport" to="." method="_on_sub_viewport_size_changed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_timeout"]

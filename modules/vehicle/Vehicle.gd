@@ -29,9 +29,10 @@ func SaveSettings():
 		DefaultSettingMethods.save_default_property(self, property_saved_list, get_setting_path())
 func get_setting_path()->String:
 	return name + "_setting.json"
-	
-#func _ready():
-#	LoadSettings()
+
+func _ready():
+	renamed.emit()
+
 #func _exit_tree():
 #	SaveSettings()
 

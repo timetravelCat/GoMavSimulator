@@ -59,7 +59,7 @@ func _get_domain_id()->int:
 
 func _enter_tree():
 	pose_update.connect(_on_pose_updated)
-	
+
 func _on_pose_updated(position, quaternion):
 	if not get_parent():
 		return
