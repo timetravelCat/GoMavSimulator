@@ -17,15 +17,15 @@ static func Create(_vehicle:Vehicle, sensor_type:SENSOR_TYPE)->Sensor:
 		SENSOR_TYPE.RANGE:
 			sensor = load("res://modules/sensor/Range/Range.tscn").instantiate()
 		SENSOR_TYPE.LIDAR:
-			sensor = load("res://modules/sensor/Range/Lidar.tscn").instantiate()
+			sensor = load("res://modules/sensor/Lidar/Lidar.tscn").instantiate()
 		SENSOR_TYPE.RGB_CAMERA:
-			sensor = load("res://modules/sensor/Range/CameraRGB.tscn").instantiate()
+			sensor = load("res://modules/sensor/CameraRGB/CameraRGB.tscn").instantiate()
 		SENSOR_TYPE.DEPTH_CAMERA:
-			sensor = load("res://modules/sensor/Range/CameraDepth.tscn").instantiate()
+			sensor = load("res://modules/sensor/CameraDepth/CameraDepth.tscn").instantiate()
 	sensor.vehicle = _vehicle
 	_vehicle.sensorContainer.add_child(sensor)
-	_vehicle.connect("renamed", _rename_sensor_publisher)
-	return null
+	_vehicle.connect("renamed", sensor._rename_sensor_publisher)
+	return sensor
 
 @export_category("Common Settings")
 @export var type:SENSOR_TYPE

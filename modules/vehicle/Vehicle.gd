@@ -19,17 +19,32 @@ static func Create(vehicle_name:String)->Vehicle:
 	return vehicle
 
 # TODO Load - Save of : Vehicle, VehiclePose, VehicleModel, Sensors
+func ResetSettings():
+	DefaultSettingMethods.reset_default_property(self, property_saved_list)
+func LoadSettings():
+	if not name.is_empty():
+		DefaultSettingMethods.load_default_property(self, property_saved_list, get_setting_path())	
+func SaveSettings():
+	if not name.is_empty():
+		DefaultSettingMethods.save_default_property(self, property_saved_list, get_setting_path())
+func get_setting_path()->String:
+	return name + "_setting.json"
+	
+#func _ready():
+#	LoadSettings()
+#func _exit_tree():
+#	SaveSettings()
 
 # ===== general configuration ====== #
 @export_flags_3d_render var vehicle_layer
-var enable:bool = true: set = set_enable
-var domain_id:int: set = set_domain_id
+@export var enable:bool = true: set = set_enable
+@export var domain_id:int: set = set_domain_id
 # ===== model configuraiton ====== #
-var model_type:VehicleModel.MODEL_TYPE : set = set_model_type
+@export var model_type:VehicleModel.MODEL_TYPE : set = set_model_type
 @export var modelPublisher:MarkerPublisher
 @export var enable_model_publish:bool
 # ===== pose configuration ===== #
-var pose_type:VehiclePose.POSE_TYPE: set = set_pose_type
+@export var pose_type:VehiclePose.POSE_TYPE: set = set_pose_type
 @export var posePublisher:PoseStampedPublisher
 @export var enable_pose_publish:bool
 # ===== sensor retreive functions ===== #

@@ -30,6 +30,9 @@ static func Create(vehicle:Vehicle, model_type:MODEL_TYPE)->VehicleModel:
 	vehicle.modelPublisher.surface = model
 	return model
 
+func _set_scale(value:float):
+	scale = Vector3(value, value, value)
+
 func _set_enable(enable:bool):
 	if enable:
 		show()
