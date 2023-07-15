@@ -4,3 +4,17 @@
 
 [node name="GraphicsSettings" type="Node"]
 script = ExtResource("1_x1ucv")
+save_path = "user://GraphicsSettings.json"
+world = null
+fullscreen = null
+screen_resolution = null
+main_window = null
+vertical_sync = null
+frame_rate_limitation = null
+ui_scaling = null
+minimap = null
+shadow = null
+anti_alising = null
+ambient_occlusion = null
+texture = null
+visual_effects = null

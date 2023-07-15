@@ -1,6 +1,6 @@
-extends Sensor
+class_name CameraDepth extends Sensor
 
-var property_saved_list:Dictionary = {
+@export var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
 	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
 	"hz":10.0,
@@ -16,12 +16,11 @@ var property_saved_list:Dictionary = {
 @export var fov:float = 75.0: set = set_fov
 
 func _ready():
-	
 	super._ready()
 	set_resolution(resolution)
 	set_fov(fov)
 	subViewport.world_3d = get_viewport().world_3d
-	_on_sensor_renamed(get_parent().name, name)
+	_on_sensor_renamed(vehicle.name, name)
 		
 	# initialize rendering devices for decoding depth textures (by gpu)
 	renderingDevice = RenderingServer.create_local_rendering_device();
@@ -81,12 +80,6 @@ func _on_sensor_enabled(_enable:bool):
 
 func _on_window_close_requested():
 	enable = false
-
-#func _on_sub_viewport_tree_entered():
-#	GraphicsSettings.viewports.append(get_node("SubViewport"))
-#
-#func _on_sub_viewport_tree_exited():
-#	GraphicsSettings.viewports.erase(get_node("SubViewport"))
 
 func set_resolution(_resolution):
 	resolution = _resolution

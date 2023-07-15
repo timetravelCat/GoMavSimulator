@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsw831grj1tby"]
+
+[ext_resource type="Script" path="res://modules/vehicle/pose/Ros2Pose.gd" id="1_wn7hb"]
+
+[node name="Ros2Pose" type="Node" node_paths=PackedStringArray("poseSubscriber")]
+script = ExtResource("1_wn7hb")
+poseSubscriber = NodePath("PoseStampedSubscriber")
+type = 1
+
+[node name="PoseStampedSubscriber" type="PoseStampedSubscriber" parent="."]
+
+[connection signal="renamed" from="." to="." method="_on_renamed"]
+[connection signal="on_data_subscribed" from="PoseStampedSubscriber" to="." method="_on_pose_stamped_subscriber_on_data_subscribed"]

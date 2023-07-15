@@ -1,4 +1,4 @@
-extends Window
+class_name Console extends Window
 
 @export_category("Console")
 @export var write_to_contents:bool

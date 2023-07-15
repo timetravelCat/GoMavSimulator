@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var publisher:PoseStampedPublisher = $PoseStampedPublisher
+# @onready var publisher:PoseStampedPublisher = $PoseStampedPublisher
 var vehicle_scene = preload("res://modules/vehicle/Vehicle.tscn")
 
 func _ready():
@@ -31,7 +31,7 @@ var t = 0.0
 func _process(delta):
 	t += delta
 	var z:float = cos(t)
-	publisher.publish(Vector3(0,0,z), Quaternion.IDENTITY)
+	# publisher.publish(Vector3(0,0,z), Quaternion.IDENTITY)
 
 
 

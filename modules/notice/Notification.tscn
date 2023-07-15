@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3dskfgkk46h3"]
+
+[ext_resource type="Script" path="res://modules/notice/Notification.gd" id="1_fomkv"]
+[ext_resource type="PackedScene" uid="uid://dsve8ghv6qr61" path="res://modules/notice/notice.tscn" id="2_gbdux"]
+
+[node name="Notification" type="Node"]
+script = ExtResource("1_fomkv")
+notice_scene = ExtResource("2_gbdux")
+notice_duration = 2.0

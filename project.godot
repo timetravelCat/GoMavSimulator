@@ -18,15 +18,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Notification="*res://modules/notice/Notification.gd"
-DefaultSettingMethods="*res://modules/methods/DefaultSettingMethods.gd"
-ControlMethods="*res://modules/methods/ControlMethods.gd"
+Notification="*res://modules/notice/Notification.tscn"
 GeneralSettings="*res://modules/settings/general/GeneralSettings.tscn"
-GraphicsSettings="*res://modules/settings/general/GraphicsSettings.gd"
+GraphicsSettings="*res://modules/settings/general/GraphicsSettings.tscn"
 MavlinkSettings="*res://modules/settings/mavlink/MavlinkSettings.tscn"
-SensorSettings="*res://modules/sensor/SensorSettings.gd"
-SimulatorSettings="*res://modules/settings/simulator/simulator_settings.gd"
-Minimap="*res://modules/viewer/Minimap.tscn"
+SimulatorSettings="*res://modules/settings/simulator/SimulatorSettings.tscn"
 
 [display]
 

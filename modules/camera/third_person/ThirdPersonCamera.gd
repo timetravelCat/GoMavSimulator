@@ -1,5 +1,5 @@
 @icon("./ThirdPersonCameraIcon.svg")
-extends Camera3D
+class_name ThirdPersonCamera extends Camera3D
 
 @export var control:bool = true
 @export var follow:Node3D

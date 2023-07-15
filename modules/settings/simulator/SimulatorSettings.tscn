@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3uqfmkl2n6ev"]
+
+[ext_resource type="Script" path="res://modules/settings/simulator/SimulatorSettings.gd" id="1_4vl5y"]
+
+[node name="SimulatorSettings" type="Node"]
+script = ExtResource("1_4vl5y")

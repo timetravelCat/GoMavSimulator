@@ -90,12 +90,8 @@ func _ready():
 	subtitle.font_size = clampi(int(ui_scaling_ratio * subtitle_default_font_size), 1, 2*subtitle_default_font_size)
 	
 	# minimap setting
-	minimap_on.disabled = GraphicsSettings.minimap
-	minimap_off.disabled = !GraphicsSettings.minimap
-	if GraphicsSettings.minimap:
-		Minimap.show()
-	else: 
-		Minimap.hide()
+	minimap_on.disabled = GeneralSettings.minimap
+	minimap_off.disabled = !GeneralSettings.minimap
 	
 	# Quality Settings
 	shadows.selected = GraphicsSettings.shadow
@@ -139,13 +135,12 @@ func _on_minimap_on_pressed():
 	GraphicsSettings.minimap = true
 	minimap_on.disabled = true
 	minimap_off.disabled = false
-	Minimap.show()
+	GeneralSettings.minimap = true
 
 func _on_minimap_off_pressed():
-	GraphicsSettings.minimap = false
+	GeneralSettings.minimap = false
 	minimap_on.disabled = false
 	minimap_off.disabled = true
-	Minimap.hide()
 
 func _on_shadows_item_selected(index):
 	GraphicsSettings.set_shadow(index)
@@ -182,13 +177,13 @@ func _on_open_new_viewer_pressed():
 	GeneralSettings.create_new_viewer()
 
 func _on_minimap_scale_value_changed(value):
-	Minimap.ratio = value / minimap_scale.max_value
+	GeneralSettings.minimap_ratio = value / minimap_scale.max_value
 
 func _on_minimap_transparency_value_changed(value):
-	Minimap.alpha = value / minimap_transparency.max_value
+	GeneralSettings.minimap_alpha = value / minimap_transparency.max_value
 
 func _on_day_night_value_changed(value):
-	GeneralSettings.set_day_night(value / noon_to_sunset.max_value)
+	GraphicsSettings.set_day_night(value / noon_to_sunset.max_value)
 
 func _on_publish_district_pressed():
 	GeneralSettings.publish_district()
