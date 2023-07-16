@@ -32,6 +32,8 @@ static func Create(vehicle:Vehicle, model_type:MODEL_TYPE)->VehicleModel:
 
 func _set_scale(value:float):
 	scale = Vector3(value, value, value)
+func _get_scale()->float:
+	return scale.x
 
 func _set_enable(enable:bool):
 	if enable:

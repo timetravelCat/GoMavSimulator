@@ -6,7 +6,11 @@ class_name Vehicle extends Node3D
 	"enable":true,
 	"domain_id":0,
 	"model_type":VehicleModel.MODEL_TYPE.MULTICOPTER,
+	"model_scale":1.0,
 	"pose_type":VehiclePose.POSE_TYPE.MAVLINK,
+	"sys_id":1,
+	"odometry_source":0,
+	"pose_name":"pose",
 	"enable_model_publish":false,
 	"enable_pose_publish":true,
 }
@@ -18,7 +22,6 @@ static func Create(vehicle_name:String)->Vehicle:
 	vehicle.name = vehicle_name
 	return vehicle
 
-# TODO Load - Save of : Vehicle, VehiclePose, VehicleModel, Sensors
 func ResetSettings():
 	DefaultSettingMethods.reset_default_property(self, property_saved_list)
 func LoadSettings():
@@ -29,12 +32,8 @@ func SaveSettings():
 		DefaultSettingMethods.save_default_property(self, property_saved_list, get_setting_path())
 func get_setting_path()->String:
 	return name + "_setting.json"
-
 func _ready():
 	renamed.emit()
-
-#func _exit_tree():
-#	SaveSettings()
 
 # ===== general configuration ====== #
 @export_flags_3d_render var vehicle_layer
@@ -43,10 +42,14 @@ func _ready():
 # ===== model configuraiton ====== #
 @export var model_type:VehicleModel.MODEL_TYPE : set = set_model_type
 @export var modelPublisher:MarkerPublisher
+@export var model_scale:float : set = set_model_scale, get = get_model_scale
 @export var enable_model_publish:bool
 # ===== pose configuration ===== #
 @export var pose_type:VehiclePose.POSE_TYPE: set = set_pose_type
 @export var posePublisher:PoseStampedPublisher
+@export var sys_id:int : set = set_sys_id, get = get_sys_id
+@export var odometry_source:GoMAVSDK.OdometrySource : set = set_odometry_source, get = get_odometry_source
+@export var pose_name:String : set = set_pose_name, get = get_pose_name
 @export var enable_pose_publish:bool
 # ===== sensor retreive functions ===== #
 @onready var sensorContainer:Node3D = $SensorContainer
@@ -84,13 +87,32 @@ func set_model_type(_model_type):
 	model_type = _model_type
 	VehicleModel.Create(self, _model_type)
 	recursive_set_visual_layer_vehicle(model)
-	# TODO load model
+func set_model_scale(_model_scale):
+	model_scale = _model_scale
+	model._set_scale(_model_scale)
+func get_model_scale()->float:
+	return model._get_scale()
+		
 var pose:VehiclePose
 func set_pose_type(_pose_type):
 	pose_type = _pose_type
 	VehiclePose.Create(self, _pose_type)
 	pose.connect("pose_update", _on_pose_updated)
-	# TODO load pose 
+func set_sys_id(_sys_id):
+	sys_id = _sys_id
+	pose._set_sys_id(sys_id)
+func set_odometry_source(_odometry_source):
+	odometry_source = _odometry_source
+	pose._set_odometry_source(_odometry_source)
+func set_pose_name(_pose_name):
+	pose_name = _pose_name
+	pose.name = _pose_name
+func get_sys_id()->int:
+	return pose._get_sys_id()
+func get_odometry_source()->GoMAVSDK.OdometrySource:
+	return pose._get_odometry_source()
+func get_pose_name()->String:
+	return pose.name
 func recursive_set_visual_layer_vehicle(vehicle_child:Node):
 	var visualinstance = vehicle_child as VisualInstance3D
 	if visualinstance: # in case of meshinstance, 

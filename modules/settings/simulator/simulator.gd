@@ -137,9 +137,9 @@ func _on_vehicle_list_item_selected(index):
 	PoseSource.selected = vehicle.pose_type
 	set_slider_value_from_vehicle(vehicle)
 	VehicleDisable.text = "DISABLE" if vehicle.enable else "ENABLE"
-	MavlinkPoseSource.selected = vehicle.pose._get_odometry_source()
-	MavlinkSysId.text = str(vehicle.pose._get_sys_id())
-	Ros2PoseSource.text = str(vehicle.pose.name)
+	MavlinkPoseSource.selected = vehicle.odometry_source
+	MavlinkSysId.text = str(vehicle.sys_id)
+	Ros2PoseSource.text = vehicle.pose_name
 	SensorList.clear()
 	for sensor in vehicle.get_sensors():
 		SensorList.add_item(sensor.name)
@@ -221,19 +221,19 @@ func _on_vehicle_setup_close_pressed():
 
 func _on_mavlink_pose_source_item_selected(index):
 	var vehicle = get_selected_vehicle_silent() as Vehicle
-	vehicle.pose._set_odometry_source(index)
+	vehicle.odometry_source = index
 
 func _on_sysid_text_submitted(new_text:String):
 	var vehicle = get_selected_vehicle_silent() as Vehicle
 	if not ControlMethods.check_valid_int_and_notify(MavlinkSysId, " Mavlink System ID invalid "):
 		return
-	vehicle.pose._set_sys_id(new_text.to_int())	
+	vehicle.sys_id = new_text.to_int()
 
 func _on_topic_text_submitted(new_text):
 	var vehicle = get_selected_vehicle_silent() as Vehicle
 	if not ControlMethods.check_valid_string_and_notify(Ros2PoseSource, " Ros2 Topic Name is Invalid "):
-		return 			
-	vehicle.pose.name = new_text
+		return 	
+	vehicle.pose_name = new_text
 
 func _on_publish_vehicle_pose_toggled(button_pressed):
 	print(button_pressed)
@@ -485,9 +485,9 @@ func _on_gui_input(event):
 			ControlMethods.recursive_release_focus(self)
 # ========= MISC ========= #
 func set_slider_value_from_vehicle(vehicle:Vehicle):
-	VehicleScale.value = vehicle.model.scale.x*VehicleScale.max_value;
+	VehicleScale.value = vehicle.model_scale*VehicleScale.max_value;
 func set_vehicle_scale_from_slider(vehicle:Vehicle):
-	vehicle.model._set_scale(VehicleScale.value/VehicleScale.max_value)
+	vehicle.model_scale = VehicleScale.value/VehicleScale.max_value
 
 
 
