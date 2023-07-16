@@ -3,23 +3,53 @@ class_name Vehicle extends Node3D
 # ===== default settings ===== #
 @export var property_saved_list:Dictionary = {
 	"name":"vehicle",
+	"model_type":VehicleModel.MODEL_TYPE.MULTICOPTER,
+	"pose_type":VehiclePose.POSE_TYPE.MAVLINK,
+	"pose_name":"pose",
 	"enable":true,
 	"domain_id":0,
-	"model_type":VehicleModel.MODEL_TYPE.MULTICOPTER,
 	"model_scale":1.0,
-	"pose_type":VehiclePose.POSE_TYPE.MAVLINK,
 	"sys_id":1,
 	"odometry_source":0,
-	"pose_name":"pose",
 	"enable_model_publish":false,
 	"enable_pose_publish":true,
 }
 
 static var vehicle_scene:PackedScene = preload("res://modules/vehicle/Vehicle.tscn")
 
-static func Create(vehicle_name:String)->Vehicle:
-	var vehicle:Vehicle = vehicle_scene.instantiate()
-	vehicle.name = vehicle_name
+static func Create(vehicle_name:String, settings:Dictionary = {})->Vehicle:
+	var vehicle = vehicle_scene.instantiate() as Vehicle
+	vehicle.sensorContainer = vehicle.get_child(0)
+	if not vehicle_name.is_empty():
+		vehicle.name = vehicle_name
+	for property in vehicle.property_saved_list:
+		if property == "name" and not vehicle_name.is_empty():
+			continue
+		if property == "sensors": # sensors property is set after vehicle property are all set.
+			continue
+		if settings.has(property):
+			vehicle.set(property, settings[property])
+		else:
+			vehicle.set(property, vehicle.property_saved_list[property])
+	if settings.has("sensors"):
+		var sensors = settings["sensors"] as Dictionary
+		for sensor_name in sensors:
+			var sensor_data = sensors[sensor_name]
+			var sensor = vehicle.add_sensor(sensor_data["type"], sensor_name)
+			# Set property of sensor without "type"
+			for sensor_property in sensor_data:
+				if sensor_property == "type":
+					continue
+					
+				if typeof(sensor.get(sensor_property)) == Variant.Type.TYPE_VECTOR2 or \
+					typeof(sensor.get(sensor_property)) == Variant.Type.TYPE_VECTOR2I or \
+					typeof(sensor.get(sensor_property)) == Variant.Type.TYPE_VECTOR3 or \
+					typeof(sensor.get(sensor_property)) == Variant.Type.TYPE_VECTOR3I or \
+					typeof(sensor.get(sensor_property)) == Variant.Type.TYPE_QUATERNION:
+						sensor.set(sensor_property, DefaultSettingMethods.string_to_vector(sensor_data[sensor_property]))
+						continue
+				
+				sensor.set(sensor_property, sensor_data[sensor_property])
 	return vehicle
 
 func ResetSettings():
@@ -52,16 +82,14 @@ func _ready():
 @export var pose_name:String : set = set_pose_name, get = get_pose_name
 @export var enable_pose_publish:bool
 # ===== sensor retreive functions ===== #
-@onready var sensorContainer:Node3D = $SensorContainer
 func get_sensors():
 	return sensorContainer.get_children()
 func get_sensor(sensor_name:String):
 	return sensorContainer.find_child(sensor_name, false, false)
-func add_sensor(sensor_name:String, sensor_type:Sensor.SENSOR_TYPE):
+func add_sensor(sensor_type:Sensor.SENSOR_TYPE, sensor_name:String)->Sensor:
 	if sensorContainer.has_node(sensor_name):
-		return
-	Sensor.Create(self, sensor_type)
-	# TOOD load sensor settings
+		return null
+	return Sensor.Create(self, sensor_type, sensor_name)
 func remove_sensor(sensor_name:String):
 	var sensor:Sensor = get_sensor(sensor_name)
 	if not sensor:
@@ -82,7 +110,6 @@ func set_domain_id(_domain_id):
 		sensor.publisher.domain_id = _domain_id
 	modelPublisher.domain_id = _domain_id
 	posePublisher.domain_id = _domain_id
-var model:VehicleModel
 func set_model_type(_model_type):
 	model_type = _model_type
 	VehicleModel.Create(self, _model_type)
@@ -92,8 +119,6 @@ func set_model_scale(_model_scale):
 	model._set_scale(_model_scale)
 func get_model_scale()->float:
 	return model._get_scale()
-		
-var pose:VehiclePose
 func set_pose_type(_pose_type):
 	pose_type = _pose_type
 	VehiclePose.Create(self, _pose_type)
@@ -127,3 +152,7 @@ func _on_pose_updated(pos:Vector3, quat:Quaternion):
 		posePublisher.publish(pos, quat)
 	if enable_model_publish:
 		modelPublisher.publish(pos, quat)
+# ===== ineternal variable ====== #
+var sensorContainer:Node3D
+var pose:VehiclePose
+var model:VehicleModel

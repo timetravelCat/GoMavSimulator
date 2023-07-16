@@ -4,3 +4,4 @@
 
 [node name="SimulatorSettings" type="Node"]
 script = ExtResource("1_4vl5y")
+save_path = "user://SimulatorSettings.json"

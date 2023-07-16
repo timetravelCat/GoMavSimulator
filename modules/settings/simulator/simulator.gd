@@ -285,9 +285,9 @@ func _on_sensor_add_pressed():
 	var vehicle = SimulatorSettings.find_vehicle(ControlMethods.get_selected_item_text(VehicleList)) as Vehicle
 	if vehicle.get_sensor(SensorName.text):
 		Notification.notify(" Sensor Name Exists ", Notification.NOTICE_TYPE.ALERT)
-		return		
-	var sensor = Sensor.Create(vehicle, SensorType.selected) as Sensor
-	sensor.name = SensorName.text
+		return
+		
+	var sensor = vehicle.add_sensor(SensorType.selected, SensorName.text) as Sensor
 	sensor.hz = PublishRate.text.to_float()
 	sensor.position = ENU2EUS.enu_to_eus_v(Vector3(LocationX.text.to_float(), LocationY.text.to_float(), LocationZ.text.to_float()))
 	sensor.basis = ENU2EUS.enu_to_eus_b(Basis.from_euler(Vector3(deg_to_rad(RotationX.text.to_float()), deg_to_rad(RotationY.text.to_float()), deg_to_rad(RotationZ.text.to_float())), EULER_ORDER_ZYX))
@@ -485,9 +485,9 @@ func _on_gui_input(event):
 			ControlMethods.recursive_release_focus(self)
 # ========= MISC ========= #
 func set_slider_value_from_vehicle(vehicle:Vehicle):
-	VehicleScale.value = vehicle.model_scale*VehicleScale.max_value;
+	VehicleScale.value = vehicle.model_scale*VehicleScale.max_value/10.0;
 func set_vehicle_scale_from_slider(vehicle:Vehicle):
-	vehicle.model_scale = VehicleScale.value/VehicleScale.max_value
+	vehicle.model_scale = 10.0*VehicleScale.value/VehicleScale.max_value
 
 
 
