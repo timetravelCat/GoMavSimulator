@@ -57,6 +57,9 @@ func check_vehicle_exist_and_notify(string:String)->bool:
 func find_vehicle(string:String)->Vehicle:
 	return find_child(string, false, false)
 
+func get_vehicles()->Array[Node]:
+	return get_children()
+
 func add_vehicle(vehicle:Vehicle):
 	if not find_vehicle(vehicle.name):
 		add_child(vehicle)

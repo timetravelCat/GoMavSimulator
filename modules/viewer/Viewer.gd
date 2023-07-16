@@ -15,7 +15,7 @@ func _on_vehicle_selector_pressed():
 	vehicleSelector.clear()
 	vehicleSelector.add_item("FreeCam")
 	# get current vehicle list
-	for vehicle in SimulatorSettings.VehicleContainer.get_children():
+	for vehicle in SimulatorSettings.get_vehicles():
 		vehicleSelector.add_item(vehicle.name)
 	vehicleSelector.selected = -1
 
@@ -30,7 +30,7 @@ func _on_vehicle_selector_item_selected(index):
 		return
 	
 	var key = vehicleSelector.get_item_text(index)
-	var vehicle = SimulatorSettings.VehicleContainer.find_child(key, false, false)
+	var vehicle = SimulatorSettings.find_vehicle(key)
 	if not vehicle:
 		Notification.notify("Vehicle deleted during selection", Notification.NOTICE_TYPE.ALERT) 
 		return

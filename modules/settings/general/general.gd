@@ -132,7 +132,7 @@ func _on_ui_scaling_value_changed(value):
 	subtitle.font_size = clampi(int(ui_scaling_ratio * subtitle_default_font_size), 1, 2*subtitle_default_font_size)
 
 func _on_minimap_on_pressed():
-	GraphicsSettings.minimap = true
+	GeneralSettings.minimap = true
 	minimap_on.disabled = true
 	minimap_off.disabled = false
 	GeneralSettings.minimap = true

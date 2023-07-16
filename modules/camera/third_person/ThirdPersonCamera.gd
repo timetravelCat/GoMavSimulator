@@ -3,6 +3,8 @@ class_name ThirdPersonCamera extends Camera3D
 
 @export var control:bool = true
 @export var follow:Node3D
+signal lost_follow
+var _last_follow_valid:bool = true
 @export var distance:float = 10.0
 @export var offset:Vector2 
 @export_range(-180.0,180.0,5.0,"suffix:°") var azimuth:float
@@ -15,14 +17,19 @@ class_name ThirdPersonCamera extends Camera3D
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if not follow:
+		if _last_follow_valid:
+			_last_follow_valid = false
+			current = false
+			lost_follow.emit()
 		return
+	_last_follow_valid = true
 	global_transform = Transform3D(
 		Basis.from_euler(Vector3(deg_to_rad(-elevation + tilt),deg_to_rad(-90.0 + azimuth),0.0), EULER_ORDER_YXZ),
 		follow.global_position + Basis.from_euler(Vector3(0.0, deg_to_rad(azimuth), deg_to_rad(-elevation)), EULER_ORDER_YXZ)*Vector3(-distance, offset.x, offset.y)
 	)
 
 func _input(event):
-	if not get_window().has_focus() or not current:
+	if not get_window().has_focus() or not current or not control:
 		return
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

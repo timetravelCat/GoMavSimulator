@@ -10,7 +10,14 @@ extends Node
 
 @export_category("District")
 @export var district_size:Vector3
-@export var districts:Array[PackedScene] = []
+var districts:Array = [
+	preload("res://assets/district/cartoon/mini.tscn"),
+	preload("res://assets/district/cartoon/mumbai.tscn")
+]
+var districts_string:PackedStringArray = [
+	"cartoon_mini",
+	"cartoon_mumbai"
+]
 @export var district:int: set = _district_initialize
 var current_district:Node3D
 var district_AABB:AABB 

@@ -1,17 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://rls8rni64seq"]
+[gd_scene load_steps=6 format=3 uid="uid://rls8rni64seq"]
 
 [ext_resource type="PackedScene" uid="uid://df188sjgsf3uy" path="res://modules/settings/Settings.tscn" id="1_7eqy0"]
 [ext_resource type="Script" path="res://Main.gd" id="1_lokdk"]
+[ext_resource type="Theme" uid="uid://ckui405kgf56e" path="res://modules/settings/Settings.tres" id="2_0fw7w"]
+[ext_resource type="PackedScene" uid="uid://b3pjwqev4pui5" path="res://modules/camera/free_fly/FreeFlyCamera.tscn" id="2_roeko"]
+[ext_resource type="PackedScene" uid="uid://bum8rielb7exg" path="res://modules/camera/third_person/ThirdPersonCamera.tscn" id="3_tjm03"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("publisher")]
 script = ExtResource("1_lokdk")
+publisher = NodePath("PoseStampedPublisher")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -5.65523e-09, -1.2493e-07, -9.23376e-08, 0.707107, 0.707107, 8.43399e-08, 0.707107, -0.707107, -2, 14, -10.815)
+[node name="FreeFlyCamera" parent="." instance=ExtResource("2_roeko")]
+current = true
+
+[node name="ThirdPersonCamera" parent="." instance=ExtResource("3_tjm03")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_0fw7w")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="DistrictSelector" type="OptionButton" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+flat = true
+alignment = 2
+fit_to_longest_item = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="VehicleSelector" type="OptionButton" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+flat = true
+alignment = 2
+fit_to_longest_item = false
 
 [node name="Settings" parent="." instance=ExtResource("1_7eqy0")]
+visible = false
 
 [node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="."]
 eus_to_enu = false
 topic_name = "vehicle/pose"
 topic_type = "geometry_msgs::msg::dds_::PoseStamped_"
+
+[connection signal="lost_follow" from="ThirdPersonCamera" to="." method="_on_third_person_camera_lost_follow"]
+[connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/DistrictSelector" to="." method="_on_district_selector_item_selected"]
+[connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/VehicleSelector" to="." method="_on_vehicle_selector_item_selected"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/VehicleSelector" to="." method="_on_vehicle_selector_pressed"]
+[connection signal="visibility_changed" from="Settings" to="." method="_on_settings_visibility_changed"]
