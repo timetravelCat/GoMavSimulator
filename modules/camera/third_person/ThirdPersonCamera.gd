@@ -33,6 +33,11 @@ func _input(event):
 		return
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			# TODO move to better place? or make new camera?
+			if follow and follow is Vehicle:
+				var vehicle = follow as Vehicle
+				if vehicle.pose_type == VehiclePose.POSE_TYPE.USER:	# Do nothing if == VehiclePose.POSE_TYPE.USER
+					return
 #			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			azimuth -= drag_sensitivity*event.relative.x
 			tilt -= drag_sensitivity*event.relative.y

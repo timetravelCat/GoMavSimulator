@@ -19,7 +19,7 @@ static func Create(vehicle:Vehicle, pose_type:POSE_TYPE)->VehiclePose:
 		POSE_TYPE.ROS2:
 			pose = load("res://modules/vehicle/pose/Ros2Pose.tscn").instantiate()
 		POSE_TYPE.USER:
-			pose = load("res://modules/vehicle/pose/PoseUser.tscn").instantiate()
+			pose = load("res://modules/vehicle/pose/UserPose.tscn").instantiate()
 	pose.name = "pose"
 	
 	if vehicle.pose:
