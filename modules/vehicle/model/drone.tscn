@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://modules/vehicle/model/VehicleModel.gd" id="2_cti7k"]
 
 [node name="matrice_300_rtk" node_paths=PackedStringArray("meshes") instance=ExtResource("1_50g2n")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.0522655, 0)
 script = ExtResource("2_cti7k")
 rotating_scale = 1.0
 meshes = [NodePath("RootNode/polySurface4387/prop_1"), NodePath("RootNode/polySurface4387/prop_2"), NodePath("RootNode/polySurface4387/prop_3"), NodePath("RootNode/polySurface4387/prop_4")]
