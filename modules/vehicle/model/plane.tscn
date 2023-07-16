@@ -4,6 +4,6 @@
 [ext_resource type="Script" path="res://modules/vehicle/model/VehicleModel.gd" id="2_tkgyr"]
 
 [node name="plane" instance=ExtResource("1_i5v0x")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1.02747, 0)
 script = ExtResource("2_tkgyr")
 type = 2
