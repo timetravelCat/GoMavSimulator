@@ -1,6 +1,6 @@
-extends Sensor
+class_name CameraRGB extends Sensor
 
-var property_saved_list:Dictionary = {
+@export var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
 	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
 	"hz":10.0,
@@ -11,9 +11,9 @@ var property_saved_list:Dictionary = {
 }
 
 @onready var subViewport:SubViewport = $SubViewport
-@onready var imagePublisher:ImagePublisher = $SubViewport/ImagePublisher
-@onready var compressedImagePulibsher:CompressedImagePublisher = $SubViewport/CompressedImagePublisher
-@onready var cameraInfoPublisher:CameraInfoPublisher = $SubViewport/CameraInfoPublisher
+@export var imagePublisher:ImagePublisher
+@export var compressedImagePulibsher:CompressedImagePublisher
+@export var cameraInfoPublisher:CameraInfoPublisher
 @onready var camera3D:Camera3D = $SubViewport/Camera3D
 @onready var window:Window = $Window
 @onready var infoTimer:Timer = $Timer
@@ -28,7 +28,7 @@ func _ready():
 	set_resolution(resolution)
 	set_fov(fov)
 	subViewport.world_3d = get_viewport().world_3d
-	on_sensor_renamed(get_parent().name, name)
+	on_sensor_renamed(vehicle.name, name)
 
 func on_sensor_renamed(vehicle_name:String, sensor_name:String):
 	cameraInfoPublisher.topic_name = vehicle_name + "/" + sensor_name + "_info"
@@ -77,12 +77,6 @@ func set_fov(_fov):
 	if not camera3D:
 		return
 	camera3D.fov = fov
-
-func _on_sub_viewport_tree_entered():
-	GraphicsSettings.viewports.append(get_node("SubViewport"))
-
-func _on_sub_viewport_tree_exited():
-	GraphicsSettings.viewports.erase(get_node("SubViewport"))
 
 func _on_always_on_top_button_toggled(button_pressed):
 	window.always_on_top = button_pressed

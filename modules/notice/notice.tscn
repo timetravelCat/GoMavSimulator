@@ -9,7 +9,6 @@ font_size = 26
 font_color = Color(0.792157, 0.568627, 0.141176, 1)
 
 [node name="notice" type="Control"]
-z_index = 20
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0

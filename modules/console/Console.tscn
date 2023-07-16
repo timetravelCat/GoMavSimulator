@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhoy8rp8jiuwi"]
+[gd_scene load_steps=12 format=3 uid="uid://drg1boou1cpkx"]
 
 [ext_resource type="Texture2D" uid="uid://byif8bpl66qjr" path="res://modules/console/icons/resize-svgrepo-com.svg" id="1_3wrr1"]
 [ext_resource type="Texture2D" uid="uid://np2d48qym0bc" path="res://modules/console/icons/bookmark-svgrepo-com.svg" id="1_jvdvo"]
@@ -26,10 +26,10 @@ size = Vector2i(400, 400)
 theme = SubResource("Theme_f3o6w")
 script = ExtResource("1_u72xh")
 write_to_contents = true
-normal = Color(0.392157, 0.847059, 0.847059, 1)
-accept = Color(0, 0.858824, 0, 1)
-warning = Color(0.886275, 0.886275, 0, 1)
-alert = Color(0.933333, 0.152941, 0, 1)
+normal = Color(0.435294, 0.701961, 1, 1)
+accept = Color(0, 0.862745, 0.192157, 1)
+warning = Color(1, 1, 0, 1)
+alert = Color(0.917647, 0, 0, 1)
 
 [node name="BorderColor" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_xkeyo")

@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf7rqn5o340b0"]
+[gd_scene load_steps=3 format=3 uid="uid://cf7rqn5o340b0"]
 
 [ext_resource type="Script" path="res://modules/settings/mavlink/MavlinkSettings.gd" id="1_f5qd8"]
+[ext_resource type="PackedScene" uid="uid://drg1boou1cpkx" path="res://modules/console/Console.tscn" id="2_al6oa"]
 
 [node name="MavlinkSettings" type="Node"]
 script = ExtResource("1_f5qd8")
 save_path = "user://MavlinkSettings.json"
 open_on_connected = true
 close_on_disconnected = true
+console_scene = ExtResource("2_al6oa")
 
 [node name="ConsoleContainer" type="Node" parent="."]
 

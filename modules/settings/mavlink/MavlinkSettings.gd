@@ -45,10 +45,14 @@ func _ready():
 	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.start_discovery() # start mavsdk discovery 
 
+func _exit_tree():
+	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
+
 # Console Methods
 @onready var console_timer = $ConsoleTimer
 @onready var console_container = $ConsoleContainer
-var console_scene:PackedScene = preload("res://modules/console/Console.tscn")
+@export var console_scene:PackedScene
+
 func _on_console_timer_timeout():
 	for window in console_container.get_children():
 		if GoMAVSDKServer.is_system_connected(window.name.to_int()):

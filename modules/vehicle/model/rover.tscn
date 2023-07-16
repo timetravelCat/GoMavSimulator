@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://3m2urnoqd15j"]
+
+[ext_resource type="PackedScene" uid="uid://cof8w0of5gkqn" path="res://assets/models/rover.glb" id="1_2k6pt"]
+[ext_resource type="Script" path="res://modules/vehicle/model/VehicleModel.gd" id="2_0x5f5"]
+
+[node name="rover" instance=ExtResource("1_2k6pt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.469048, 0)
+script = ExtResource("2_0x5f5")
+type = 1

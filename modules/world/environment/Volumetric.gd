@@ -1,9 +1,16 @@
-extends Node3D
+extends GlobalWorld
 
-@onready var light:DirectionalLight3D = $DirectionalLight3D
-@onready var world_environment:WorldEnvironment = $WorldEnvironment
-@export_range(0.0, 1.0, 0.01) var day_night:float = 0.3:
-	set(_day_night):
-		day_night = _day_night
-		if light:
-			light.rotation.x = -deg_to_rad(90.0)*(1.0-day_night)
+func _get_world_environment()->WorldEnvironment:
+	return _world_environment
+func _get_light()->DirectionalLight3D:
+	return _light
+func _set_day_night(time:float):
+	_day_night = time
+
+@onready var _light:DirectionalLight3D = $DirectionalLight3D
+@onready var _world_environment:WorldEnvironment = $WorldEnvironment
+@export_range(0.0, 1.0, 0.01) var _day_night:float = 0.3:
+	set(day_night):
+		_day_night = day_night
+		if _light:
+			_light.rotation.x = -deg_to_rad(90.0)*(1.0-day_night)

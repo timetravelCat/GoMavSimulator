@@ -1,6 +1,6 @@
-extends Sensor
+class_name Lidar extends Sensor
 
-var property_saved_list:Dictionary = {
+@export var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
 	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
 	"hz":10.0,
@@ -10,7 +10,7 @@ var property_saved_list:Dictionary = {
 	"resolution":Vector2i(72,1),
 }
 
-@onready var pointCloudPublisher = $PointCloudPublisher
+@export var pointCloudPublisher:PointCloudPublisher
 @onready var rayCastContainer = $RayCastContainer
 
 @export var distance:float = 100.0:
@@ -48,7 +48,6 @@ func _initialize():
 		raycast.target_position = Basis.from_euler(Vector3(0.0, angle_y, angle_z), EULER_ORDER_YZX)*Vector3(distance,0.0,0.0)
 		rayCastContainer.add_child(raycast)
 	
-	@warning_ignore("integer_division")
 	for height in (resolution.y - 1)/2: #height : 0,1
 		var angle_z:float = (height + 1.0)*(deg_to_rad(vertical_fov)/(resolution.y - 1))
 		for width in resolution.x:

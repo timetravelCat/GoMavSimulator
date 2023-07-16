@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cctvnsl6hdqxv"]
+
+[ext_resource type="Script" path="res://modules/vehicle/pose/MavlinkPose.gd" id="1_i4twu"]
+
+[node name="MavlinkPose" type="Node" node_paths=PackedStringArray("goMAVSDK")]
+script = ExtResource("1_i4twu")
+goMAVSDK = NodePath("GoMAVSDK")
+
+[node name="GoMAVSDK" type="GoMAVSDK" parent="."]
+
+[connection signal="pose_subscribed" from="GoMAVSDK" to="." method="_on_go_mavsdk_pose_subscribed"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdp163bss2a8p"]
+[gd_scene load_steps=9 format=3 uid="uid://db1rrce76t45b"]
 
-[ext_resource type="Script" path="res://modules/world/environment/Volumetric.gd" id="1_kv3p4"]
+[ext_resource type="Script" path="res://modules/world/environment/Volumetric.gd" id="1_6f5in"]
 [ext_resource type="Shader" path="res://modules/world/environment/clouds.gdshader" id="1_rvq6p"]
 [ext_resource type="CompressedTexture3D" uid="uid://dbfbysid168mx" path="res://modules/world/environment/perlworlnoise.tga" id="2_gxuyk"]
 [ext_resource type="Texture2D" uid="uid://dfkye0uf4i6w1" path="res://modules/world/environment/weather.bmp" id="3_v2532"]
@@ -35,8 +35,7 @@ tonemap_mode = 3
 tonemap_white = 3.22
 
 [node name="Volumetric" type="Node3D"]
-script = ExtResource("1_kv3p4")
-day_night = 0.02
+script = ExtResource("1_6f5in")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ma5yd")

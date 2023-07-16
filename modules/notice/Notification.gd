@@ -1,14 +1,15 @@
 # "Notification" : A singletone node controlling simple string popup.
 extends Node
 
-var scene:PackedScene = ResourceLoader.load("res://modules/notice/notice.tscn")
+@export var notice_scene:PackedScene
+@export var notice_duration:float
+
 enum NOTICE_TYPE {ALERT, WARNING, NORMAL}
 
-func notify(contents:String, type:NOTICE_TYPE = NOTICE_TYPE.NORMAL, duration:float = 2.0):
-	var notice = scene.instantiate()
-	add_child(notice)
+func notify(contents:String, type:NOTICE_TYPE = NOTICE_TYPE.NORMAL, duration:float = notice_duration):
+	var notice = notice_scene.instantiate()
+	get_parent().add_child(notice)
 	notice.set_text(contents)
-	
 	match type:
 		NOTICE_TYPE.ALERT:
 			notice.set_color(Color("ORANGE_RED"))
@@ -18,11 +19,10 @@ func notify(contents:String, type:NOTICE_TYPE = NOTICE_TYPE.NORMAL, duration:flo
 			notice.set_color(Color("LIME"))
 	
 	notice.notify(duration)
-	pass
 
 func _ready():
-	# Regigter global notification 
-	Input.joy_connection_changed.connect(_on_joy_connection_changed) # joystick connection
+	# Global notification - joystick connection
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 func _on_joy_connection_changed(device:int, connected:bool):
 	if connected:

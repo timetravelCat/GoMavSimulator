@@ -1,6 +1,7 @@
 @icon("./FreeFlyCameraIcon.png")
-extends Camera3D
+class_name FreeFlyCamera extends Camera3D
 
+@export var control:bool = true
 @export var follow:Node3D
 @export var speed:float = 5.0
 @export var drag_sensitivity:float = 0.05
@@ -17,7 +18,7 @@ func reset():
 		global_transform = Transform3D(_basis_offset, Vector3.ZERO)
 
 func _process(delta):
-	if not get_window().has_focus() or not current:
+	if not get_window().has_focus() or not current or not control:
 		return
 	var direction = Vector3.ZERO
 	if Input.is_key_pressed(KEY_W): 	direction.z -= 1
@@ -35,7 +36,7 @@ func _process(delta):
 	global_transform.basis = global_transform.basis * Basis(Vector3(0.0, 0.0, 1.0), angle*drag_sensitivity)
 
 func _input(event):
-	if not get_window().has_focus() or not current:
+	if not get_window().has_focus() or not current or not control:
 		return
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

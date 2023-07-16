@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
 [ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWitdh", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance")]
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "PublishVehiclePose", "PublishVehicleMesh", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWitdh", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance", "MavlinkPoseSourceContainer", "MavlinkSystemIDCotainer", "Ros2PoseSourceContainer", "compress_container", "camera_resolution_container", "camera_fov_container", "lidar_vertical_fov_container", "lidar_resolution_contanier", "lidar_range_distance_container")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r845a")
@@ -16,9 +16,11 @@ VehicleScale = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer2/HBoxC
 VehicleList = NodePath("Margin/HBoxContainer/VBoxContainer/VehicleList")
 VehicleDisable = NodePath("Margin/HBoxContainer/VBoxContainer/HBoxContainer3/VehicleDisable")
 VehiclePopup = NodePath("Margin/VehiclePopup")
-MavlinkPoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer/MavlinkPoseSource")
-MavlinkSysId = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer2/sysid")
-Ros2PoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer3/topic")
+MavlinkPoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer/MavlinkPoseSource")
+MavlinkSysId = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer/sysid")
+Ros2PoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer/topic")
+PublishVehiclePose = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer4/PublishVehiclePose")
+PublishVehicleMesh = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer5/PublishVehicleMesh")
 SensorType = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/SensorType")
 SensorName = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer/SensorName")
 FrameID = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer/FrameID")
@@ -32,14 +34,23 @@ RotationZ = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxCon
 SensorList = NodePath("Margin/HBoxContainer/VBoxContainer2/SensorList")
 SensorDisable = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable")
 SensorPopup = NodePath("Margin/SensorPopup")
-RGBCompress = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer6/HBoxContainer/Compress")
-CameraWitdh = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraWidth")
-CameraHeight = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraHeight")
-CameraFov = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer5/CameraFov")
-LidarVerticalFov = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer2/VerticalFov")
-LidarWidth = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarWidth")
-LidarHeight = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarHeight")
-RangeDistance = NodePath("Margin/SensorPopup/VBoxContainer/HBoxContainer4/RangeDistance")
+RGBCompress = NodePath("Margin/SensorPopup/VBoxContainer/CompressContainer/HBoxContainer/Compress")
+CameraWitdh = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraWidth")
+CameraHeight = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraHeight")
+CameraFov = NodePath("Margin/SensorPopup/VBoxContainer/CameraFovContainer/CameraFov")
+LidarVerticalFov = NodePath("Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer/VerticalFov")
+LidarWidth = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarWidth")
+LidarHeight = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarHeight")
+RangeDistance = NodePath("Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer/RangeDistance")
+MavlinkPoseSourceContainer = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer")
+MavlinkSystemIDCotainer = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer")
+Ros2PoseSourceContainer = NodePath("Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer")
+compress_container = NodePath("Margin/SensorPopup/VBoxContainer/CompressContainer")
+camera_resolution_container = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer")
+camera_fov_container = NodePath("Margin/SensorPopup/VBoxContainer/CameraFovContainer")
+lidar_vertical_fov_container = NodePath("Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer")
+lidar_resolution_contanier = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer")
+lidar_range_distance_container = NodePath("Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -173,7 +184,6 @@ size_flags_horizontal = 10
 size_flags_vertical = 4
 item_count = 3
 selected = 0
-fit_to_longest_item = false
 popup/item_0/text = "MAVLINK"
 popup/item_0/id = 0
 popup/item_1/text = "ROS2"
@@ -550,16 +560,16 @@ color = Color(0.0509804, 0.0941176, 0.0980392, 0.847059)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+[node name="MavlinkPoseSourceContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "POSE SOURCE(MAVLINK)"
 vertical_alignment = 1
 
-[node name="MavlinkPoseSource" type="OptionButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer"]
+[node name="MavlinkPoseSource" type="OptionButton" parent="Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -575,16 +585,16 @@ popup/item_1/id = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+[node name="MavlinkSystemIDContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "SYS ID(MAVLINK)"
 vertical_alignment = 1
 
-[node name="sysid" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer2"]
+[node name="sysid" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -595,16 +605,16 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+[node name="Ros2PoseSourceContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "POSE SOURCE(ROS2)"
 vertical_alignment = 1
 
-[node name="topic" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer3"]
+[node name="topic" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -615,6 +625,38 @@ alignment = 1
 [node name="MarginContainer4" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 6
+tooltip_text = "Vehicle pose will be published on topic \"$(vehicle_name)_pose\""
+mouse_filter = 1
+text = "PUBLISH VEHICLE POSE"
+vertical_alignment = 1
+
+[node name="PublishVehiclePose" type="CheckButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="MarginContainer5" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "PUBLISH VEHICLE MESH"
+vertical_alignment = 1
+
+[node name="PublishVehicleMesh" type="CheckButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 6
 
 [node name="VehicleSetupClose" type="TextureButton" parent="Margin/VehiclePopup"]
 custom_minimum_size = Vector2(40, 40)
@@ -640,47 +682,47 @@ color = Color(0.0509804, 0.0941176, 0.0980392, 0.847059)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="CompressContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer6"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/CompressContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "RGB Compress(PNG)"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer6"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/CompressContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Compress" type="CheckButton" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer6/HBoxContainer"]
+[node name="Compress" type="CheckButton" parent="Margin/SensorPopup/VBoxContainer/CompressContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="MarginContainer6" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="CameraResolutionContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "RESOLUTION(CAMERA)"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="CameraWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="CameraWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "width"
 alignment = 1
 
-[node name="CameraHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="CameraHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -691,16 +733,16 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="CameraFovContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/CameraFovContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "CAMERA FOV"
 vertical_alignment = 1
 
-[node name="CameraFov" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer5"]
+[node name="CameraFov" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/CameraFovContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -711,16 +753,16 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="LidarVerticalFovContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "VERTICAL FOV(LIDAR)"
 vertical_alignment = 1
 
-[node name="VerticalFov" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer2"]
+[node name="VerticalFov" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -731,27 +773,27 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="LidarResolutionContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "RESOLUTION(LIDAR)"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="LidarWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="LidarWidth" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 placeholder_text = "width"
 alignment = 1
 
-[node name="LidarHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="LidarHeight" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -762,16 +804,16 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 6
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+[node name="LidarRangeDistanceContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "DISTANCE(RANGE,LIDAR)"
 vertical_alignment = 1
 
-[node name="RangeDistance" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/HBoxContainer4"]
+[node name="RangeDistance" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -786,6 +828,7 @@ size_flags_vertical = 0
 texture_normal = ExtResource("3_me20j")
 stretch_mode = 4
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="item_selected" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer/VehicleType" to="." method="_on_vehicle_type_item_selected"]
 [connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer8/HBoxContainer/VehicleName" to="." method="_on_vehicle_name_text_submitted"]
 [connection signal="text_submitted" from="Margin/HBoxContainer/VBoxContainer/HBoxContainer6/DomainID" to="." method="_on_domain_id_text_submitted"]
@@ -813,16 +856,18 @@ stretch_mode = 4
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable" to="." method="_on_sensor_disable_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorAdd" to="." method="_on_sensor_add_pressed"]
 [connection signal="pressed" from="Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDelete" to="." method="_on_sensor_delete_pressed"]
-[connection signal="item_selected" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer/MavlinkPoseSource" to="." method="_on_mavlink_pose_source_item_selected"]
-[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer2/sysid" to="." method="_on_sysid_text_submitted"]
-[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer3/topic" to="." method="_on_topic_text_submitted"]
+[connection signal="item_selected" from="Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer/MavlinkPoseSource" to="." method="_on_mavlink_pose_source_item_selected"]
+[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer/sysid" to="." method="_on_sysid_text_submitted"]
+[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer/topic" to="." method="_on_topic_text_submitted"]
+[connection signal="toggled" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/PublishVehiclePose" to="." method="_on_publish_vehicle_pose_toggled"]
+[connection signal="toggled" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer5/PublishVehicleMesh" to="." method="_on_publish_vehicle_mesh_toggled"]
 [connection signal="pressed" from="Margin/VehiclePopup/VehicleSetupClose" to="." method="_on_vehicle_setup_close_pressed"]
-[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/HBoxContainer6/HBoxContainer/Compress" to="." method="_on_compress_toggled"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraWidth" to="." method="_on_camera_width_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer/HBoxContainer/CameraHeight" to="." method="_on_camera_height_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer5/CameraFov" to="." method="_on_camera_fov_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer2/VerticalFov" to="." method="_on_vertical_fov_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarWidth" to="." method="_on_lidar_width_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer3/HBoxContainer/LidarHeight" to="." method="_on_lidar_height_text_submitted"]
-[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/HBoxContainer4/RangeDistance" to="." method="_on_range_distance_text_submitted"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/CompressContainer/HBoxContainer/Compress" to="." method="_on_compress_toggled"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraWidth" to="." method="_on_camera_width_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraHeight" to="." method="_on_camera_height_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/CameraFovContainer/CameraFov" to="." method="_on_camera_fov_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer/VerticalFov" to="." method="_on_vertical_fov_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarWidth" to="." method="_on_lidar_width_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarHeight" to="." method="_on_lidar_height_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer/RangeDistance" to="." method="_on_range_distance_text_submitted"]
 [connection signal="pressed" from="Margin/SensorPopup/SensorSetupClose" to="." method="_on_sensor_setup_close_pressed"]
