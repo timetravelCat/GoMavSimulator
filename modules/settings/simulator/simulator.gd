@@ -473,7 +473,7 @@ func _on_vehicle_list_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			VehicleList.deselect_all()
-			SensorList.deselect_all()
+			SensorList.clear()
 
 func _on_sensor_list_gui_input(event):
 	if event is InputEventMouseButton:
