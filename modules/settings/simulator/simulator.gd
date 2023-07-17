@@ -199,6 +199,7 @@ func _on_pose_source_item_selected(index):
 	var vehicle = get_selected_vehicle_silent() as Vehicle
 	if vehicle:
 		vehicle.pose_type = index as VehiclePose.POSE_TYPE
+		VehicleList.item_selected.emit(VehicleList.get_selected_items()[0])
 		
 @warning_ignore("unused_parameter")
 func _on_vehicle_scale_value_changed(value):

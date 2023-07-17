@@ -52,8 +52,12 @@ func _unhandled_input(event):
 func _on_settings_visibility_changed():
 	freeFlyCamera.control = !settings.visible
 	thirdPersonCamera.control = !settings.visible
+	# if thirdPersonCamera's vehicle removed, change to freeFlyCamera automatically.
+	if not is_instance_valid(thirdPersonCamera.follow):
+		thirdPersonCamera.follow = null
+		freeFlyCamera.make_current()
 	# if setting is visible and thirdPersonCamera's follow target is valid and user-input vehicle, then disable movement.
-	if thirdPersonCamera.follow:
+	if is_instance_valid(thirdPersonCamera.follow):
 		var vehicle = thirdPersonCamera.follow as Vehicle
 		if vehicle and vehicle.pose_type == VehiclePose.POSE_TYPE.USER:
 			if settings.visible:

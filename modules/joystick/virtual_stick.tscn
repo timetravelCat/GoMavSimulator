@@ -1,102 +1,49 @@
-[gd_scene load_steps=15 format=3 uid="uid://cuymyfobv2hb"]
+[gd_scene load_steps=4 format=3 uid="uid://ls4cls421chv"]
 
+[ext_resource type="Texture2D" uid="uid://cgm0qsqbg15n8" path="res://modules/joystick/icon/stick_circle.svg" id="1_8bscl"]
 [ext_resource type="Script" path="res://modules/joystick/virtual_stick.gd" id="1_kce4t"]
-[ext_resource type="PackedScene" uid="uid://ls4cls421chv" path="res://modules/joystick/virtual_joystick.tscn" id="2_mrvtv"]
-[ext_resource type="Texture2D" uid="uid://cym5odru4m22a" path="res://modules/joystick/icon/l_stick.svg" id="3_mx6h0"]
-[ext_resource type="Texture2D" uid="uid://oqj6no6kyy4r" path="res://modules/joystick/icon/a.png" id="3_yx8u4"]
-[ext_resource type="Texture2D" uid="uid://c8576y3onbiwy" path="res://modules/joystick/icon/r_stick.png" id="4_gxnol"]
-[ext_resource type="Texture2D" uid="uid://cy5xdx30vfwln" path="res://modules/joystick/icon/a_down.png" id="4_y5bwb"]
-[ext_resource type="Texture2D" uid="uid://bbdttsa7vc44i" path="res://modules/joystick/icon/b.png" id="5_jn6qq"]
-[ext_resource type="Texture2D" uid="uid://csnpndqa0br82" path="res://modules/joystick/icon/b_down.png" id="6_d6iih"]
-[ext_resource type="Texture2D" uid="uid://bvmdffalpgsfk" path="res://modules/joystick/icon/x.png" id="7_57fno"]
-[ext_resource type="Texture2D" uid="uid://jrt7tybk0bnh" path="res://modules/joystick/icon/x_down.png" id="8_lawuu"]
-[ext_resource type="Texture2D" uid="uid://bkjlrp5ykcalu" path="res://modules/joystick/icon/y.png" id="9_fx5ke"]
-[ext_resource type="Texture2D" uid="uid://jm2v32nns7b" path="res://modules/joystick/icon/y_down.png" id="10_xe3g6"]
+[ext_resource type="Texture2D" uid="uid://bcr6mkhlvjc7l" path="res://icon.svg" id="2_icd0d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0pvb"]
-bg_color = Color(0.113725, 0.113725, 0.113725, 0.298039)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.478431, 0.564706, 0.364706, 0.145098)
-border_blend = true
-corner_radius_top_left = 60
-corner_radius_top_right = 60
-corner_radius_bottom_right = 60
-corner_radius_bottom_left = 60
-anti_aliasing = false
-
-[sub_resource type="Theme" id="Theme_xdqwe"]
-Panel/styles/panel = SubResource("StyleBoxFlat_c0pvb")
-
-[node name="VirutalJoystick" type="Panel"]
-offset_right = 515.0
-offset_bottom = 376.0
-theme = SubResource("Theme_xdqwe")
+[node name="VirtualStick" type="ColorRect"]
+custom_minimum_size = Vector2(200, 200)
+color = Color(0, 0, 0, 0)
 script = ExtResource("1_kce4t")
 
-[node name="LSTICK" parent="." instance=ExtResource("2_mrvtv")]
-layout_mode = 0
-offset_left = 47.0
-offset_top = 147.0
-offset_right = 247.0
-offset_bottom = 347.0
-buttonTexture = ExtResource("3_mx6h0")
-hz = 10.0
+[node name="Circle" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_8bscl")
+stretch_mode = 0
 
-[node name="RSTICK" parent="." instance=ExtResource("2_mrvtv")]
-layout_mode = 0
-offset_left = 264.0
-offset_top = 34.0
-offset_right = 464.0
-offset_bottom = 234.0
-buttonTexture = ExtResource("4_gxnol")
-hz = 10.0
+[node name="MarginContainer" type="MarginContainer" parent="Circle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="A" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 36.0
-offset_top = 28.0
-offset_right = 136.0
-offset_bottom = 128.0
-tooltip_text = "Arm"
-texture_normal = ExtResource("3_yx8u4")
-texture_pressed = ExtResource("4_y5bwb")
+[node name="TextureButton" type="TextureButton" parent="Circle/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+keep_pressed_outside = true
+texture_normal = ExtResource("2_icd0d")
+stretch_mode = 0
 
-[node name="B" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 138.0
-offset_top = 28.0
-offset_right = 238.0
-offset_bottom = 128.0
-tooltip_text = "Disarm"
-texture_normal = ExtResource("5_jn6qq")
-texture_pressed = ExtResource("6_d6iih")
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
-[node name="X" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 269.0
-offset_top = 248.0
-offset_right = 369.0
-offset_bottom = 348.0
-tooltip_text = "Position"
-texture_normal = ExtResource("7_57fno")
-texture_pressed = ExtResource("8_lawuu")
-
-[node name="Y" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 371.0
-offset_top = 248.0
-offset_right = 471.0
-offset_bottom = 348.0
-tooltip_text = "Altitude"
-texture_normal = ExtResource("9_fx5ke")
-texture_pressed = ExtResource("10_xe3g6")
-
-[connection signal="virutal_joystick_event" from="LSTICK" to="." method="_on_lstick_virutal_joystick_event"]
-[connection signal="virutal_joystick_event" from="RSTICK" to="." method="_on_rstick_virutal_joystick_event"]
-[connection signal="pressed" from="A" to="." method="_on_a_pressed"]
-[connection signal="pressed" from="B" to="." method="_on_b_pressed"]
-[connection signal="pressed" from="X" to="." method="_on_x_pressed"]
-[connection signal="pressed" from="Y" to="." method="_on_y_pressed"]
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="Circle" to="." method="_on_joystick_down"]
+[connection signal="button_up" from="Circle" to="." method="_on_joystick_up"]
+[connection signal="gui_input" from="Circle" to="." method="_on_circle_gui_input"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

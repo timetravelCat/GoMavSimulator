@@ -101,3 +101,7 @@ aileron_up={
 
 3d_render/layer_6="Depth Shader"
 3d_render/layer_7="vehicle"
+
+[rendering]
+
+anti_aliasing/quality/use_debanding=true
