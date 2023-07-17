@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40mm"
+   height="40mm"
+   viewBox="0 0 40 40"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   sodipodi:docname="stick_circle.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.7146035"
+     inkscape:cx="82.857892"
+     inkscape:cy="77.170708"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" /><defs
+     id="defs2" /><g
+     inkscape:label="레이어 1"
+     inkscape:groupmode="layer"
+     id="layer1"><circle
+       style="fill:none;stroke-width:0.957;fill-opacity:0;stroke-dasharray:9.57000017, 0.95700002;stroke:#000000;stroke-opacity:1;stroke-dashoffset:0;stroke-linejoin:bevel;stroke-linecap:butt;paint-order:markers fill stroke"
+       id="path296"
+       cx="20.026533"
+       cy="20.098831"
+       r="19.737341" /><path
+       style="fill:#000000;stroke-width:0.273252;fill-opacity:0"
+       d="M 71.455428,150.26887 C 53.0622,149.24642 36.291627,141.68091 23.080003,128.44583 11.123605,116.46821 4.1153293,102.19394 1.7401518,84.981408 c -0.4716571,-3.418024 -0.4716571,-14.616617 0,-18.03464 C 4.0270151,50.374232 10.814287,36.149817 21.979841,24.529472 37.253327,8.6338722 57.690413,0.55988973 79.828542,1.6754594 112.57159,3.3254249 140.62576,26.884867 148.20389,59.095978 c 5.17521,21.997435 -0.13321,45.423122 -14.34897,63.320972 -4.19562,5.28235 -11.09659,11.58459 -17.03964,15.56128 -10.43891,6.98502 -23.65592,11.51611 -35.522776,12.17803 -5.429162,0.30282 -6.246863,0.31219 -9.837076,0.11261 z"
+       id="path500"
+       transform="scale(0.26458333)" /></g></svg>

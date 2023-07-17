@@ -20,6 +20,14 @@ viewport_path = NodePath("SubViewport")
 
 [node name="CameraDepth" node_paths=PackedStringArray("publisher") instance=ExtResource("1_ph5g2")]
 script = ExtResource("1_dwcn8")
+property_saved_list = {
+"enable": true,
+"fov": 75.0,
+"hz": 10.0,
+"position": Vector3(0, 0, 0),
+"quaternion": Quaternion(0, 0, 0, 1),
+"resolution": Vector2i(320, 180)
+}
 resolution = Vector2i(320, 180)
 fov = 75.0
 type = 3
@@ -38,6 +46,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 cull_mask = 1048511
 environment = SubResource("Environment_ldkf8")
 current = true
+far = 1000.0
 
 [node name="ImagePublisher" type="ImagePublisher" parent="SubViewport/Camera3D" index="0"]
 
