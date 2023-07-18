@@ -138,10 +138,10 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 item_count = 2
-selected = 1
-popup/item_0/text = "ENABLED"
+selected = 0
+popup/item_0/text = "DISABLED"
 popup/item_0/id = 0
-popup/item_1/text = "DISABLED"
+popup/item_1/text = "ENABLED"
 popup/item_1/id = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer"]
@@ -163,10 +163,10 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 item_count = 2
-selected = 1
-popup/item_0/text = "ON"
+selected = 0
+popup/item_0/text = "OFF"
 popup/item_0/id = 0
-popup/item_1/text = "OFF"
+popup/item_1/text = "ON"
 popup/item_1/id = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Margin/HBoxContainer"]

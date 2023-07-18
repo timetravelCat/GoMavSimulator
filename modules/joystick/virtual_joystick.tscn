@@ -44,6 +44,7 @@ offset_right = 247.0
 offset_bottom = 347.0
 buttonTexture = ExtResource("3_mx6h0")
 hz = 10.0
+return_to_y_origin = false
 
 [node name="RSTICK" parent="." instance=ExtResource("2_mrvtv")]
 layout_mode = 0
@@ -94,7 +95,9 @@ tooltip_text = "Altitude"
 texture_normal = ExtResource("9_fx5ke")
 texture_pressed = ExtResource("10_xe3g6")
 
+[connection signal="virtual_joystick_reset" from="LSTICK" to="." method="_on_lstick_virtual_joystick_reset"]
 [connection signal="virutal_joystick_event" from="LSTICK" to="." method="_on_lstick_virutal_joystick_event"]
+[connection signal="virtual_joystick_reset" from="RSTICK" to="." method="_on_rstick_virtual_joystick_reset"]
 [connection signal="virutal_joystick_event" from="RSTICK" to="." method="_on_rstick_virutal_joystick_event"]
 [connection signal="pressed" from="A" to="." method="_on_a_pressed"]
 [connection signal="pressed" from="B" to="." method="_on_b_pressed"]

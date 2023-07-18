@@ -64,16 +64,6 @@ func _on_settings_visibility_changed():
 				vehicle.pose._set_enable(false)
 			else:
 				vehicle.pose._set_enable(true)
-				
-# Debugging #
-# @onready var publisher:PoseStampedPublisher = $PoseStampedPublisher
-@export var publisher:PoseStampedPublisher	
-var t = 0.0
-func _process(delta):
-	t += delta
-	var z:float = cos(t)
-	publisher.publish(Vector3(0,0,z), Quaternion.IDENTITY)
-
 
 
 

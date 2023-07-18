@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b3pjwqev4pui5" path="res://modules/camera/free_fly/FreeFlyCamera.tscn" id="2_roeko"]
 [ext_resource type="PackedScene" uid="uid://bum8rielb7exg" path="res://modules/camera/third_person/ThirdPersonCamera.tscn" id="3_tjm03"]
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("publisher")]
+[node name="Main" type="Node3D"]
 script = ExtResource("1_lokdk")
-publisher = NodePath("PoseStampedPublisher")
 
 [node name="FreeFlyCamera" parent="." instance=ExtResource("2_roeko")]
 current = true
@@ -17,11 +16,10 @@ current = true
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_horizontal = 0
 theme = ExtResource("2_0fw7w")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
@@ -56,11 +54,6 @@ fit_to_longest_item = false
 
 [node name="Settings" parent="." instance=ExtResource("1_7eqy0")]
 visible = false
-
-[node name="PoseStampedPublisher" type="PoseStampedPublisher" parent="."]
-eus_to_enu = false
-topic_name = "vehicle/pose"
-topic_type = "geometry_msgs::msg::dds_::PoseStamped_"
 
 [connection signal="lost_follow" from="ThirdPersonCamera" to="." method="_on_third_person_camera_lost_follow"]
 [connection signal="item_selected" from="Control/MarginContainer/VBoxContainer/DistrictSelector" to="." method="_on_district_selector_item_selected"]

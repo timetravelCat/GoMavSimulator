@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf7rqn5o340b0"]
+[gd_scene load_steps=5 format=3 uid="uid://cf7rqn5o340b0"]
 
 [ext_resource type="Script" path="res://modules/settings/mavlink/MavlinkSettings.gd" id="1_f5qd8"]
 [ext_resource type="PackedScene" uid="uid://drg1boou1cpkx" path="res://modules/console/Console.tscn" id="2_al6oa"]
+[ext_resource type="PackedScene" uid="uid://cuymyfobv2hb" path="res://modules/joystick/virtual_joystick.tscn" id="3_7rnkc"]
+[ext_resource type="Texture2D" uid="uid://bfbjo5sy7j73v" path="res://modules/joystick/icon/disconnected.png" id="4_dg34b"]
 
 [node name="MavlinkSettings" type="Node"]
 script = ExtResource("1_f5qd8")
@@ -18,6 +20,28 @@ autostart = true
 
 [node name="AutoconnectTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="VirutalJoystick" parent="." instance=ExtResource("3_7rnkc")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -515.0
+offset_top = -376.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="JoystickStatus" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 256.0
+grow_vertical = 0
+texture = ExtResource("4_dg34b")
 
 [connection signal="timeout" from="ConsoleTimer" to="." method="_on_console_timer_timeout"]
 [connection signal="timeout" from="AutoconnectTimer" to="." method="_on_autoconnect_timer_timeout"]

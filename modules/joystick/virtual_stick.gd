@@ -10,6 +10,7 @@ extends ColorRect
 @export var return_to_y_origin:bool = true
 
 signal virutal_joystick_event(x:float, y:float) # ranges [-1,1]
+signal virtual_joystick_reset(x:bool, y:bool)
 
 func set_hz(_hz):
 	hz = _hz
@@ -53,5 +54,4 @@ func _on_joystick_up():
 	if return_to_y_origin:
 		button.global_position.y = global_position.y + size.y/2 - button.size.y/2
 	_last_mouse_position = global_position + size/2
-
-
+	virtual_joystick_reset.emit(return_to_x_origin, return_to_y_origin)

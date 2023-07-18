@@ -10,7 +10,7 @@ class_name Vehicle extends Node3D
 	"domain_id":0,
 	"model_scale":1.0,
 	"sys_id":1,
-	"odometry_source":0,
+	"odometry_source":1, # 1 as initial value (ESTIMATION)
 	"enable_model_publish":false,
 	"enable_pose_publish":true,
 }

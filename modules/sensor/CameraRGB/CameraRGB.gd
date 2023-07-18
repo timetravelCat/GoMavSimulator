@@ -45,6 +45,8 @@ func _on_sub_viewport_size_changed():
 	cameraInfoPublisher.publish()
 
 func _on_sensor_enabled(enabled:bool):
+	if not window:
+		return
 	if enabled:
 		infoTimer.stop()
 		window.show()
