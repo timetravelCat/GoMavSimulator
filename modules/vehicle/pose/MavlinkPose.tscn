@@ -7,5 +7,13 @@ script = ExtResource("1_i4twu")
 goMAVSDK = NodePath("GoMAVSDK")
 
 [node name="GoMAVSDK" type="GoMAVSDK" parent="."]
+sys_id = 1
+
+[node name="ManualControlTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
 
 [connection signal="pose_subscribed" from="GoMAVSDK" to="." method="_on_go_mavsdk_pose_subscribed"]
+[connection signal="response_action" from="GoMAVSDK" to="." method="_on_go_mavsdk_response_action"]
+[connection signal="response_manual_control" from="GoMAVSDK" to="." method="_on_go_mavsdk_response_manual_control"]
+[connection signal="timeout" from="ManualControlTimer" to="." method="_on_manual_control_timer_timeout"]

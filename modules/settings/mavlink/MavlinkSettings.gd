@@ -10,6 +10,8 @@ extends Node
 			"udp://:14550" : false, 
 			"serial://COM3:57600" : true
 		},
+	"enable_joystick": false,
+	"enable_virtual_joystick": false
 }
 @export var save_path:String
 
@@ -30,11 +32,6 @@ func add_or_enable_connection(address:String, enable:bool):
 func remove_connection(address:String):
 	_remove_connection(address)
 
-# Not implemented joystick feature yet.
-#@export_category("JoyStick")
-#@export var joystick:bool
-#@export var virtual_joystick:bool
-
 func reset():
 	DefaultSettingMethods.reset_default_property(self,default_settings)
 
@@ -44,11 +41,14 @@ func _ready():
 	GoMAVSDKServer.connect("shell_received", _on_shell_received)
 	GoMAVSDKServer.connect("system_discovered", _on_system_discovered)
 	GoMAVSDKServer.start_discovery() # start mavsdk discovery 
+	
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 func _exit_tree():
 	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
 
 # Console Methods
+
 @onready var console_timer = $ConsoleTimer
 @onready var console_container = $ConsoleContainer
 @export var console_scene:PackedScene
@@ -125,3 +125,29 @@ func _remove_connection(address:String):
 	connection_list.erase(address)
 	if enabled:
 		_restart_server()
+		
+# JoyStick Settings 
+@onready var virtual_joystick:Panel = $VirutalJoystick
+@onready var joystick_status:TextureRect = $JoystickStatus
+@export_category("JoyStick")
+@export var enable_joystick:bool:
+	set(_enable):
+		enable_joystick = _enable
+		if _enable:
+			if Input.get_connected_joypads().size() == 0:
+					joystick_status.show()
+		else:
+			joystick_status.hide()
+@warning_ignore("unused_parameter")
+func _on_joy_connection_changed(device, connected):
+	if connected:
+		joystick_status.hide()
+	if Input.get_connected_joypads().size() == 0:
+		joystick_status.show()
+@export var enable_virtual_joystick:bool:
+	set(_enable):
+		enable_virtual_joystick = _enable
+		if enable_virtual_joystick:
+			virtual_joystick.show()
+		else:
+			virtual_joystick.hide()

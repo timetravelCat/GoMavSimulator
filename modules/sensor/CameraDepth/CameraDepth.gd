@@ -73,6 +73,8 @@ func _on_timeout():
 	renderingDevice.free_rid(buffer)
 
 func _on_sensor_enabled(_enable:bool):
+	if not window:
+		return
 	if _enable:
 		window.show()
 	else:

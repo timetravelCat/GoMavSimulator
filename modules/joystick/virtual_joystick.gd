@@ -6,6 +6,52 @@ extends Panel
 @onready var XButoon = $X
 @onready var YButton = $Y
 
+func _on_lstick_virtual_joystick_reset(x, y):
+	if x:
+		var inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "rudder_up"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "rudder_down"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+	if y:
+		var inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "throttle_up"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		Input.parse_input_event(inputEventActionY)	
+		inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "throttle_down"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		Input.parse_input_event(inputEventActionY)	
+func _on_rstick_virtual_joystick_reset(x, y):
+	if x:
+		var inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "aileron_up"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "aileron_down"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+	if y:
+		var inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "elevator_up"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		Input.parse_input_event(inputEventActionY)	
+		inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "elevator_down"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		Input.parse_input_event(inputEventActionY)	
 func _on_lstick_virutal_joystick_event(x, y):
 	if x > 0.0:
 		var inputEventActionX = InputEventAction.new()
@@ -13,8 +59,18 @@ func _on_lstick_virutal_joystick_event(x, y):
 		inputEventActionX.pressed = true
 		inputEventActionX.strength = absf(x)
 		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "rudder_down"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
 	elif x < 0.0:
 		var inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "rudder_up"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
 		inputEventActionX.action = "rudder_down"
 		inputEventActionX.pressed = true
 		inputEventActionX.strength = absf(x)
@@ -24,14 +80,21 @@ func _on_lstick_virutal_joystick_event(x, y):
 		inputEventActionY.action = "throttle_up"
 		inputEventActionY.pressed = true
 		inputEventActionY.strength = absf(y)
-		Input.call_deferred("parse_input_event", inputEventActionY)
+		Input.parse_input_event(inputEventActionY)	
+		inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "throttle_down"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
 		Input.parse_input_event(inputEventActionY)	
 	elif y < 0.0:
 		var inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "throttle_up"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		inputEventActionY = InputEventAction.new()
 		inputEventActionY.action = "throttle_down"
 		inputEventActionY.pressed = true
 		inputEventActionY.strength = absf(y)
-		Input.call_deferred("parse_input_event", inputEventActionY)
 		Input.parse_input_event(inputEventActionY)	
 func _on_rstick_virutal_joystick_event(x, y):
 	if x > 0.0:
@@ -40,8 +103,18 @@ func _on_rstick_virutal_joystick_event(x, y):
 		inputEventActionX.pressed = true
 		inputEventActionX.strength = absf(x)
 		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "aileron_down"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
 	elif x < 0.0:
 		var inputEventActionX = InputEventAction.new()
+		inputEventActionX.action = "aileron_up"
+		inputEventActionX.pressed = true
+		inputEventActionX.strength = 0.0
+		Input.parse_input_event(inputEventActionX)	
+		inputEventActionX = InputEventAction.new()
 		inputEventActionX.action = "aileron_down"
 		inputEventActionX.pressed = true
 		inputEventActionX.strength = absf(x)
@@ -51,14 +124,22 @@ func _on_rstick_virutal_joystick_event(x, y):
 		inputEventActionY.action = "elevator_up"
 		inputEventActionY.pressed = true
 		inputEventActionY.strength = absf(y)
-		Input.call_deferred("parse_input_event", inputEventActionY)
+		Input.parse_input_event(inputEventActionY)	
+		inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "elevator_down"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
 		Input.parse_input_event(inputEventActionY)	
 	elif y < 0.0:
 		var inputEventActionY = InputEventAction.new()
+		inputEventActionY.action = "elevator_up"
+		inputEventActionY.pressed = true
+		inputEventActionY.strength = 0.0
+		Input.parse_input_event(inputEventActionY)	
+		inputEventActionY = InputEventAction.new()
 		inputEventActionY.action = "elevator_down"
 		inputEventActionY.pressed = true
 		inputEventActionY.strength = absf(y)
-		Input.call_deferred("parse_input_event", inputEventActionY)
 		Input.parse_input_event(inputEventActionY)	
 	
 func _on_a_pressed(): # ARM
