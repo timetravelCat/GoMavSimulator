@@ -20,7 +20,7 @@ func _on_go_mavsdk_pose_subscribed(position, orientation):
 
 func _on_go_mavsdk_response_action(result):
 	var action_result = result as GoMAVSDKServer.ActionResult
-	if action_result != GoMAVSDKServer.ACTION_SUCCESS:
+	if action_result != GoMAVSDKServer.ACTION_SUCCESS: 
 		Notification.notify(" ARM/DISARM Request Failed ", Notification.NOTICE_TYPE.ALERT)
 func _on_go_mavsdk_response_manual_control(result):
 	var manual_control_result = result as GoMAVSDKServer.ManualControlResult
@@ -77,3 +77,8 @@ func _send_manual_control():
 var exit_thread:bool
 var semaphore:Semaphore
 var thread:Thread
+
+func _on_go_mavsdk_armed_received(armed):
+	armed_updated.emit(armed)
+func _on_go_mavsdk_flightmode_received(flight_mode):
+	flight_mode_updated.emit(flight_mode)

@@ -27,6 +27,7 @@ func _on_renamed():
 
 func _on_pose_stamped_subscriber_on_data_subscribed(position, orientation):
 	if stop:
+		armed_updated.emit(false)
 		return
 	pose_update.emit(position, orientation)
-
+	armed_updated.emit(true)

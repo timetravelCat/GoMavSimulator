@@ -326,6 +326,22 @@ void GoMAVSDK::_on_response_action(GoMAVSDKServer::ActionResult result)
 	}
 }
 
+void GoMAVSDK::_on_armed_received(bool armed)
+{
+	if (sys_enable)
+	{
+		call_deferred("emit_signal", "armed_received", armed);
+	}
+}
+
+void GoMAVSDK::_on_flightmode_received(GoMAVSDKServer::FlightMode flight_mode)
+{
+	if (sys_enable)
+	{
+		call_deferred("emit_signal", "flightmode_received", flight_mode);
+	}
+}
+
 void GoMAVSDK::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("set_sys_id", "sys_id"), &GoMAVSDK::set_sys_id);
@@ -339,6 +355,8 @@ void GoMAVSDK::_bind_methods()
 	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message")));
 	ADD_SIGNAL(MethodInfo("response_manual_control", PropertyInfo(Variant::INT, "result")));
 	ADD_SIGNAL(MethodInfo("response_action", PropertyInfo(Variant::INT, "result")));
+	ADD_SIGNAL(MethodInfo("armed_received", PropertyInfo(Variant::BOOL, "armed")));
+	ADD_SIGNAL(MethodInfo("flightmode_received", PropertyInfo(Variant::INT, "flight_mode")));
 
 	ClassDB::bind_method(D_METHOD("is_system_discovered"), &GoMAVSDK::is_system_discovered);
 	ClassDB::bind_method(D_METHOD("is_system_connected"), &GoMAVSDK::is_system_connected);

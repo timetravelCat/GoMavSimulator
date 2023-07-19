@@ -20,6 +20,7 @@
 #include <mavsdk/plugins/manual_control/manual_control.h>
 #include <mavsdk/system.h>
 #include <mavsdk/plugins/action/action.h>
+#include <mavsdk/plugins/telemetry/telemetry.h>
 
 using namespace godot;
 
@@ -122,6 +123,25 @@ public:
         ACTION_UNSUPPORTED
 	};
 
+	enum FlightMode
+	{
+		FLIGHT_MODE_UNKNOWN,
+		FLIGHT_MODE_READY,
+		FLIGHT_MODE_TAKEOFF,
+		FLIGHT_MODE_HOLD,
+		FLIGHT_MODE_MISSION,
+		FLIGHT_MODE_RETURNTOLAUNCH,
+		FLIGHT_MODE_LAND,
+		FLIGHT_MODE_OFFBOARD,
+		FLIGHT_MODE_FOLLOWME,
+		FLIGHT_MODE_MANUAL,
+		FLIGHT_MODE_ALTCTL,
+		FLIGHT_MODE_POSCTL,
+		FLIGHT_MODE_ACRO,
+		FLIGHT_MODE_STABILIZED,
+		FLIGHT_MODE_RATTITUDE,
+	};
+
 	struct APIs
 	{
 		std::shared_ptr<mavsdk::System> system;
@@ -130,6 +150,7 @@ public:
 		std::shared_ptr<mavsdk::MavlinkPassthrough> mavlink_passthrough;
 		std::shared_ptr<mavsdk::ManualControl> manual_control;
 		std::shared_ptr<mavsdk::Action> action;
+		std::shared_ptr<mavsdk::Telemetry> telemetry;
 	};
 
 	static GoMAVSDKServer *get_singleton()
@@ -149,6 +170,8 @@ private:
 
 	void _on_shell_received(const int32_t &sys_id, const String message);
 	void _on_mavlink_received(const int32_t &sys_id, const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
+	void _on_armed_received(const int32_t &sys_id, bool armed);
+	void _on_flightmode_received(const int32_t &sys_id, FlightMode flightMode);
 
 protected:
 	static void _bind_methods();
@@ -217,3 +240,4 @@ VARIANT_ENUM_CAST(GoMAVSDKServer::MavlinkPassthroughResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlResult);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ManualControlMode);
 VARIANT_ENUM_CAST(GoMAVSDKServer::ActionResult);
+VARIANT_ENUM_CAST(GoMAVSDKServer::FlightMode);

@@ -35,6 +35,8 @@ static func Create(vehicle:Vehicle, pose_type:POSE_TYPE)->VehiclePose:
 	return pose
 
 signal pose_update(position, quaternion)
+signal armed_updated(armed)
+signal flight_mode_updated(flight_mode)
 
 @warning_ignore("unused_parameter")
 func _set_enable(enable:bool):

@@ -17,6 +17,7 @@ func _get_enable()->bool:
 
 func _process(delta):
 	if stop or not get_window().has_focus():
+		armed_updated.emit(false)
 		return
 	var direction = Vector3.ZERO
 	if Input.is_key_pressed(KEY_W): 	direction.x += 1
@@ -28,6 +29,7 @@ func _process(delta):
 	direction = direction.normalized()	
 	position += quaternion*(direction*speed*delta)
 	pose_update.emit(position, quaternion)
+	armed_updated.emit(true)
 
 func _input(event):
 	if stop or not get_window().has_focus():

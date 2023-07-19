@@ -123,6 +123,7 @@ func set_pose_type(_pose_type):
 	pose_type = _pose_type
 	VehiclePose.Create(self, _pose_type)
 	pose.connect("pose_update", _on_pose_updated)
+	pose.connect("armed_updated", _on_armed_updated)
 func set_sys_id(_sys_id):
 	sys_id = _sys_id
 	pose._set_sys_id(sys_id)
@@ -152,6 +153,9 @@ func _on_pose_updated(pos:Vector3, quat:Quaternion):
 		posePublisher.publish(pos, quat)
 	if enable_model_publish:
 		modelPublisher.publish(pos, quat)
+func _on_armed_updated(armed):
+	if model:
+		model.armed = armed
 # ===== ineternal variable ====== #
 var sensorContainer:Node3D
 var pose:VehiclePose

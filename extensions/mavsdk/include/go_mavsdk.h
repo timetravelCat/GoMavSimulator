@@ -41,6 +41,8 @@ public:
 	void _on_mavlink_received(const mavlink_message_t &mavlink_message, const PackedByteArray &byte_message);
 	void _on_response_manual_control(GoMAVSDKServer::ManualControlResult result);
 	void _on_response_action(GoMAVSDKServer::ActionResult result);
+	void _on_armed_received(bool armed);
+	void _on_flightmode_received(GoMAVSDKServer::FlightMode flight_mode);
 
 	enum OdometrySource
 	{

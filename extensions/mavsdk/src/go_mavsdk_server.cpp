@@ -53,6 +53,7 @@ void GoMAVSDKServer::_finalize()
 			api.second.mavlink_passthrough.reset();
 			api.second.manual_control.reset();
 			api.second.action.reset();
+			api.second.telemetry.reset();
 		}
 
 		_apis.clear();
@@ -101,6 +102,26 @@ void GoMAVSDKServer::_on_shell_received(const int32_t &sys_id, const String mess
 	for (auto &iter : _go_mavsdk_sets.at(sys_id))
 	{
 		iter->_on_shell_received(message);
+	}
+}
+
+void GoMAVSDKServer:: _on_armed_received(const int32_t &sys_id, bool armed)
+{
+	call_deferred("emit_signal", "armed_received", sys_id, armed);
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
+	{
+		iter->_on_armed_received(armed);
+	}
+}
+
+void GoMAVSDKServer:: _on_flightmode_received(const int32_t &sys_id, GoMAVSDKServer::FlightMode flightMode)
+{
+	call_deferred("emit_signal", "flightmode_received", sys_id, flightMode);
+	extern std::array<std::unordered_set<GoMAVSDK *>, UINT8_MAX + 1> _go_mavsdk_sets;
+	for (auto &iter : _go_mavsdk_sets.at(sys_id))
+	{
+		iter->_on_flightmode_received(flightMode);
 	}
 }
 
@@ -260,9 +281,15 @@ void GoMAVSDKServer::start_discovery()
 									api.mavlink_passthrough = std::make_shared<mavsdk::MavlinkPassthrough>(system);
 									api.manual_control = std::make_shared<mavsdk::ManualControl>(system);
 									api.action = std::make_shared<mavsdk::Action>(system);
+									api.telemetry = std::make_shared<mavsdk::Telemetry>(system);
 
 									api.shell->subscribe_receive([this, sys_id](const std::string output)
 																 { _on_shell_received(sys_id, output.data()); });
+									api.telemetry->subscribe_armed([this, sys_id](bool armed)
+																 { _on_armed_received(sys_id, armed); });
+									api.telemetry->subscribe_flight_mode([this, sys_id](mavsdk::Telemetry::FlightMode flightMode)
+																 { _on_flightmode_received(sys_id, (FlightMode)flightMode); });
+
 									_THREAD_SAFE_LOCK_
 									_apis.insert({sys_id, api});
 									_THREAD_SAFE_UNLOCK_
@@ -531,7 +558,9 @@ void GoMAVSDKServer::_bind_methods()
 	ADD_SIGNAL(MethodInfo("mavlink_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::PACKED_BYTE_ARRAY, "message"))); // Verified
 	ADD_SIGNAL(MethodInfo("response_manual_control", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::INT, "result")));
 	ADD_SIGNAL(MethodInfo("response_action", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::INT, "result")));
-
+	ADD_SIGNAL(MethodInfo("armed_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::BOOL, "armed")));
+	ADD_SIGNAL(MethodInfo("flightmode_received", PropertyInfo(Variant::INT, "sys_id"), PropertyInfo(Variant::INT, "flightmode")));
+	
 	ClassDB::bind_method(D_METHOD("initialize", "force"), &GoMAVSDKServer::initialize, DEFVAL(0));						   // Verified
 	ClassDB::bind_method(D_METHOD("set_system_id", "sys_id"), &GoMAVSDKServer::set_system_id);							   // Verified
 	ClassDB::bind_method(D_METHOD("get_system_id"), &GoMAVSDKServer::get_system_id);									   // Verified
@@ -633,4 +662,20 @@ void GoMAVSDKServer::_bind_methods()
 	BIND_ENUM_CONSTANT(ACTION_NOVTOLTRANSITIONSUPPORT);
 	BIND_ENUM_CONSTANT(ACTION_PARAMETERERROR);
 	BIND_ENUM_CONSTANT(ACTION_UNSUPPORTED);
+
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_UNKNOWN);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_READY);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_TAKEOFF);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_HOLD);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_MISSION);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_RETURNTOLAUNCH);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_LAND);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_OFFBOARD);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_FOLLOWME);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_MANUAL);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_ALTCTL);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_POSCTL);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_ACRO);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_STABILIZED);
+	BIND_ENUM_CONSTANT(FLIGHT_MODE_RATTITUDE);
 }

@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://rls8rni64seq"]
+[gd_scene load_steps=8 format=3 uid="uid://rls8rni64seq"]
 
 [ext_resource type="PackedScene" uid="uid://df188sjgsf3uy" path="res://modules/settings/Settings.tscn" id="1_7eqy0"]
 [ext_resource type="Script" path="res://Main.gd" id="1_lokdk"]
 [ext_resource type="Theme" uid="uid://ckui405kgf56e" path="res://modules/settings/Settings.tres" id="2_0fw7w"]
 [ext_resource type="PackedScene" uid="uid://b3pjwqev4pui5" path="res://modules/camera/free_fly/FreeFlyCamera.tscn" id="2_roeko"]
 [ext_resource type="PackedScene" uid="uid://bum8rielb7exg" path="res://modules/camera/third_person/ThirdPersonCamera.tscn" id="3_tjm03"]
+[ext_resource type="FontFile" uid="uid://cvdjbrr43tpah" path="res://assets/fonts/architect-s-daughter/ArchitectsDaughter.ttf" id="5_02gyn"]
+
+[sub_resource type="Theme" id="Theme_h1sq5"]
+default_font = ExtResource("5_02gyn")
+default_font_size = 24
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_lokdk")
@@ -51,6 +56,35 @@ layout_mode = 2
 flat = true
 alignment = 2
 fit_to_longest_item = false
+
+[node name="VehicleStatus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_h1sq5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VehicleStatus"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Armed" type="Label" parent="VehicleStatus/HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VehicleStatus/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FlightMode" type="Label" parent="VehicleStatus/HBoxContainer"]
+layout_mode = 2
 
 [node name="Settings" parent="." instance=ExtResource("1_7eqy0")]
 visible = false

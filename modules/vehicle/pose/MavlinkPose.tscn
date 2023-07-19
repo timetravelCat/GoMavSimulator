@@ -13,6 +13,8 @@ sys_id = 1
 wait_time = 0.05
 autostart = true
 
+[connection signal="armed_received" from="GoMAVSDK" to="." method="_on_go_mavsdk_armed_received"]
+[connection signal="flightmode_received" from="GoMAVSDK" to="." method="_on_go_mavsdk_flightmode_received"]
 [connection signal="pose_subscribed" from="GoMAVSDK" to="." method="_on_go_mavsdk_pose_subscribed"]
 [connection signal="response_action" from="GoMAVSDK" to="." method="_on_go_mavsdk_response_action"]
 [connection signal="response_manual_control" from="GoMAVSDK" to="." method="_on_go_mavsdk_response_manual_control"]

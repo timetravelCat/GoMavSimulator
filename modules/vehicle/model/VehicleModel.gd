@@ -2,7 +2,7 @@ class_name VehicleModel extends Node3D
 
 @export var type:MODEL_TYPE
 @export var armed:bool
-@export_range(0.0, 10.0, 1.0) var rotating_scale:float
+@export var rotating_scale:float = 1.0
 @export var meshes:Array[MeshInstance3D]
 
 enum MODEL_TYPE {MULTICOPTER, ROVER, PLANE}

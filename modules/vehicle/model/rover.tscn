@@ -7,3 +7,597 @@
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.469048, 0)
 script = ExtResource("2_0x5f5")
 type = 1
+
+[node name="Object_1554" parent="Rover/Object_5/Object_1536/Object_1537/Object_1553" index="0"]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_394" parent="Rover/Object_5/Object_384/Object_385/Object_386/Object_387/Object_392" index="1"]
+transform = Transform3D(1, 2.17656e-14, 0, 5.25074e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_670" parent="Rover/Object_5/Object_384/Object_666/Object_667/Object_668/Object_669" index="0"]
+transform = Transform3D(1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 3.33067e-16, 1, 0, 0, 0)
+
+[node name="Object_671" parent="Rover/Object_5/Object_384/Object_666/Object_667/Object_668/Object_669" index="1"]
+transform = Transform3D(1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 3.33067e-16, 1, 0, 0, 0)
+
+[node name="Object_672" parent="Rover/Object_5/Object_384/Object_666/Object_667/Object_668/Object_669" index="2"]
+transform = Transform3D(1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 3.33067e-16, 1, 0, 0, 0)
+
+[node name="Object_674" parent="Rover/Object_5/Object_384/Object_666/Object_667/Object_668/Object_673" index="0"]
+transform = Transform3D(1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 3.33067e-16, 1, 0, 0, 0)
+
+[node name="Object_676" parent="Rover/Object_5/Object_384/Object_666/Object_667/Object_668/Object_673" index="2"]
+transform = Transform3D(1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 3.33067e-16, 1, 0, 0, 0)
+
+[node name="Object_683" parent="Rover/Object_5/Object_384/Object_666/Object_681/Object_682" index="0"]
+transform = Transform3D(1, 5.96047e-08, -1.42109e-14, -2.98023e-08, 1, 3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_686" parent="Rover/Object_5/Object_384/Object_666/Object_684/Object_685" index="0"]
+transform = Transform3D(1, 2.98023e-08, 7.10543e-15, -2.98023e-08, 1, 8.88178e-16, 0, -3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_690" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_689" index="0"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_691" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_689" index="1"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_692" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_689" index="2"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_696" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_693" index="2"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_697" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_693" index="3"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_700" parent="Rover/Object_5/Object_384/Object_666/Object_687/Object_688/Object_693" index="6"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 5.37437e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_703" parent="Rover/Object_5/Object_384/Object_666/Object_701/Object_702" index="0"]
+transform = Transform3D(1, -4.80713e-16, 1.42109e-14, -8.03108e-15, 1, 3.55271e-15, 0, 2.22045e-15, 1, 0, 0, -1.90735e-06)
+
+[node name="Object_706" parent="Rover/Object_5/Object_384/Object_666/Object_704/Object_705" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -4.21989e-16, 3.55271e-15, -4.21989e-16, 1, 0, 0, 0)
+
+[node name="Object_710" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_709" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_713" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_711/Object_712" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_714" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_711" index="1"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_717" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_715/Object_716" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_718" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_715" index="1"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_721" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_719/Object_720" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_722" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_719" index="1"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_725" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_723/Object_724" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_726" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_723" index="1"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_729" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_727/Object_728" index="0"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_730" parent="Rover/Object_5/Object_384/Object_666/Object_707/Object_708/Object_727" index="1"]
+transform = Transform3D(1, 0, -8.88178e-16, 0, 1, 5.18741e-16, -8.88178e-16, 5.18742e-16, 1, 0, 0, 0)
+
+[node name="Object_734" parent="Rover/Object_5/Object_384/Object_666/Object_731/Object_732/Object_733" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_737" parent="Rover/Object_5/Object_384/Object_666/Object_731/Object_732/Object_735/Object_736" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_738" parent="Rover/Object_5/Object_384/Object_666/Object_731/Object_732/Object_735" index="1"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_741" parent="Rover/Object_5/Object_384/Object_666/Object_739/Object_740" index="0"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 6.0789e-15, 1, 3.55271e-15, 1.42109e-14, -1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_742" parent="Rover/Object_5/Object_384/Object_666/Object_739/Object_740" index="1"]
+transform = Transform3D(1, -2.98023e-08, 1.42109e-14, 6.0789e-15, 1, 3.55271e-15, 1.42109e-14, -1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_745" parent="Rover/Object_5/Object_384/Object_666/Object_743/Object_744" index="0"]
+transform = Transform3D(1, 1.01394e-16, 0, 1.01394e-16, 1, 0, 2.22045e-16, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_746" parent="Rover/Object_5/Object_384/Object_666/Object_743/Object_744" index="1"]
+transform = Transform3D(1, 1.01394e-16, 0, 1.01394e-16, 1, 0, 2.22045e-16, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_747" parent="Rover/Object_5/Object_384/Object_666/Object_743/Object_744" index="2"]
+transform = Transform3D(1, 1.01394e-16, 0, 1.01394e-16, 1, 0, 2.22045e-16, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_750" parent="Rover/Object_5/Object_384/Object_666/Object_748/Object_749" index="0"]
+transform = Transform3D(1, 2.19196e-15, 7.10543e-15, 9.11196e-16, 1, 3.55271e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_751" parent="Rover/Object_5/Object_384/Object_666/Object_748/Object_749" index="1"]
+transform = Transform3D(1, 2.19196e-15, 7.10543e-15, 9.11196e-16, 1, 3.55271e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_752" parent="Rover/Object_5/Object_384/Object_666/Object_748/Object_749" index="2"]
+transform = Transform3D(1, 2.19196e-15, 7.10543e-15, 9.11196e-16, 1, 3.55271e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_756" parent="Rover/Object_5/Object_384/Object_666/Object_753/Object_754/Object_755" index="0"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_759" parent="Rover/Object_5/Object_384/Object_666/Object_753/Object_754/Object_757/Object_758" index="0"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_760" parent="Rover/Object_5/Object_384/Object_666/Object_753/Object_754/Object_757" index="1"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_764" parent="Rover/Object_5/Object_384/Object_666/Object_761/Object_762/Object_763" index="0"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_767" parent="Rover/Object_5/Object_384/Object_666/Object_761/Object_762/Object_765/Object_766" index="0"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_768" parent="Rover/Object_5/Object_384/Object_666/Object_761/Object_762/Object_765" index="1"]
+transform = Transform3D(1, 3.55271e-15, 3.55271e-15, -3.55271e-15, 1, 9.55509e-16, 0, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_772" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_771" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_774" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_773" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_776" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_775" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_778" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_777" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_780" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_779" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_782" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_781" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_784" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_783" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_786" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_785" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_788" parent="Rover/Object_5/Object_384/Object_666/Object_769/Object_770/Object_787" index="0"]
+transform = Transform3D(1, 0, -5.60091e-14, -2.84217e-14, 1, -1.42109e-14, -4.3817e-14, -1.42109e-14, 1, 0, 1.90735e-06, 0)
+
+[node name="Object_791" parent="Rover/Object_5/Object_384/Object_666/Object_789/Object_790" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -4.58294e-16, -3.55271e-15, -4.58294e-16, 1, 0, 0, 0)
+
+[node name="Object_794" parent="Rover/Object_5/Object_384/Object_666/Object_792/Object_793" index="0"]
+transform = Transform3D(1, 3.55271e-15, 0, 0, 1, 2.98023e-08, 0, 4.96005e-16, 1, 0, 0, 0)
+
+[node name="Object_798" parent="Rover/Object_5/Object_384/Object_666/Object_795/Object_796/Object_797" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_801" parent="Rover/Object_5/Object_384/Object_666/Object_795/Object_796/Object_799/Object_800" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_802" parent="Rover/Object_5/Object_384/Object_666/Object_795/Object_796/Object_799" index="1"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_806" parent="Rover/Object_5/Object_384/Object_666/Object_803/Object_804/Object_805" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_809" parent="Rover/Object_5/Object_384/Object_666/Object_803/Object_804/Object_807/Object_808" index="0"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_810" parent="Rover/Object_5/Object_384/Object_666/Object_803/Object_804/Object_807" index="1"]
+transform = Transform3D(1, 4.44089e-16, 3.55271e-15, -4.44089e-16, 1, 2.02655e-16, 0, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_814" parent="Rover/Object_5/Object_384/Object_666/Object_811/Object_812/Object_813" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 3.55271e-15, -8.30475e-16, 1, 0, 0, 0)
+
+[node name="Object_817" parent="Rover/Object_5/Object_384/Object_666/Object_811/Object_812/Object_815/Object_816" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 3.55271e-15, -8.30475e-16, 1, 0, 0, 0)
+
+[node name="Object_818" parent="Rover/Object_5/Object_384/Object_666/Object_811/Object_812/Object_815" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 3.55271e-15, -8.30475e-16, 1, 0, 0, 0)
+
+[node name="Object_821" parent="Rover/Object_5/Object_384/Object_666/Object_819/Object_820" index="0"]
+transform = Transform3D(1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 1.42109e-14, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_822" parent="Rover/Object_5/Object_384/Object_666/Object_819/Object_820" index="1"]
+transform = Transform3D(1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 1.42109e-14, 3.55271e-15, 1, 0, 0, 0)
+
+[node name="Object_826" parent="Rover/Object_5/Object_384/Object_666/Object_823/Object_824/Object_825" index="0"]
+transform = Transform3D(1, 3.55271e-15, 0, 0, 1, -9.53443e-16, 0, -9.53443e-16, 1, 0, 0, 0)
+
+[node name="Object_829" parent="Rover/Object_5/Object_384/Object_666/Object_823/Object_824/Object_827/Object_828" index="0"]
+transform = Transform3D(1, 3.55271e-15, 0, 0, 1, -9.53443e-16, 0, -9.53443e-16, 1, 0, 0, 0)
+
+[node name="Object_830" parent="Rover/Object_5/Object_384/Object_666/Object_823/Object_824/Object_827" index="1"]
+transform = Transform3D(1, 3.55271e-15, 0, 0, 1, -9.53443e-16, 0, -9.53443e-16, 1, 0, 0, 0)
+
+[node name="Object_833" parent="Rover/Object_5/Object_384/Object_666/Object_831/Object_832" index="0"]
+transform = Transform3D(1, 5.26528e-16, 3.55271e-15, 5.26528e-16, 1, 0, 0, -8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_836" parent="Rover/Object_5/Object_384/Object_666/Object_834/Object_835" index="0"]
+transform = Transform3D(1, 5.26528e-16, 3.55271e-15, 5.26528e-16, 1, 0, 0, -8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_840" parent="Rover/Object_5/Object_384/Object_666/Object_837/Object_838/Object_839" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_843" parent="Rover/Object_5/Object_384/Object_666/Object_837/Object_838/Object_841/Object_842" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_844" parent="Rover/Object_5/Object_384/Object_666/Object_837/Object_838/Object_841" index="1"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_848" parent="Rover/Object_5/Object_384/Object_666/Object_845/Object_846/Object_847" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_851" parent="Rover/Object_5/Object_384/Object_666/Object_845/Object_846/Object_849/Object_850" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_852" parent="Rover/Object_5/Object_384/Object_666/Object_845/Object_846/Object_849" index="1"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, 0)
+
+[node name="Object_856" parent="Rover/Object_5/Object_384/Object_666/Object_853/Object_854/Object_855" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, -1.90735e-06)
+
+[node name="Object_859" parent="Rover/Object_5/Object_384/Object_666/Object_853/Object_854/Object_857/Object_858" index="0"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, -9.53674e-07)
+
+[node name="Object_860" parent="Rover/Object_5/Object_384/Object_666/Object_853/Object_854/Object_857" index="1"]
+transform = Transform3D(1, 5.10385e-15, 7.10543e-15, -2.98023e-08, 1, 7.10543e-15, 7.10543e-15, 0, 1, 0, 0, -1.90735e-06)
+
+[node name="Object_864" parent="Rover/Object_5/Object_384/Object_666/Object_861/Object_862/Object_863" index="0"]
+transform = Transform3D(1, 1.44805e-08, 3.09439e-09, 2.70348e-08, 1, -1.49012e-08, -1.16032e-09, -1.49012e-08, 1, 0, 0, 0)
+
+[node name="Object_867" parent="Rover/Object_5/Object_384/Object_666/Object_861/Object_862/Object_865/Object_866" index="0"]
+transform = Transform3D(1, 1.44805e-08, 3.09439e-09, 2.70348e-08, 1, -1.49012e-08, -1.16032e-09, -1.49012e-08, 1, 0, 0, 0)
+
+[node name="Object_868" parent="Rover/Object_5/Object_384/Object_666/Object_861/Object_862/Object_865" index="1"]
+transform = Transform3D(1, 1.44805e-08, 3.09439e-09, 2.70348e-08, 1, -1.49012e-08, -1.16032e-09, -1.49012e-08, 1, 0, 0, 0)
+
+[node name="Object_888" parent="Rover/Object_5/Object_384/Object_885/Object_886/Object_887" index="0"]
+transform = Transform3D(1, 1.77636e-15, 0, 0, 1, -8.67707e-16, 0, -8.67707e-16, 1, 0, 0, 0)
+
+[node name="Object_891" parent="Rover/Object_5/Object_384/Object_885/Object_886/Object_889/Object_890" index="0"]
+transform = Transform3D(1, 1.77636e-15, 0, 0, 1, -8.67707e-16, 0, -8.67707e-16, 1, 0, 0, 0)
+
+[node name="Object_892" parent="Rover/Object_5/Object_384/Object_885/Object_886/Object_889" index="1"]
+transform = Transform3D(1, 1.77636e-15, 0, 0, 1, -8.67707e-16, 0, -8.67707e-16, 1, 0, 0, 0)
+
+[node name="Object_896" parent="Rover/Object_5/Object_384/Object_893/Object_894/Object_895" index="0"]
+transform = Transform3D(1, 3.55271e-15, 0, -3.55271e-15, 1, -9.31323e-10, 5.55112e-17, 9.31323e-10, 1, 0, 0, 0)
+
+[node name="Object_899" parent="Rover/Object_5/Object_384/Object_893/Object_894/Object_897/Object_898" index="0"]
+transform = Transform3D(1, 3.55271e-15, 0, -3.55271e-15, 1, -9.31323e-10, 5.55112e-17, 9.31323e-10, 1, 0, 0, 0)
+
+[node name="Object_900" parent="Rover/Object_5/Object_384/Object_893/Object_894/Object_897" index="1"]
+transform = Transform3D(1, 3.55271e-15, 0, -3.55271e-15, 1, -9.31323e-10, 5.55112e-17, 9.31323e-10, 1, 0, 0, 0)
+
+[node name="Object_1148" parent="Rover/Object_5/Object_927/Object_1146/Object_1147" index="0"]
+transform = Transform3D(1, 0, -6.36866e-15, -3.55271e-15, 1, 3.55271e-15, 1.49012e-08, 0, 1, 0, 0, 0)
+
+[node name="Object_1175" parent="Rover/Object_5/Object_927/Object_1173/Object_1174" index="0"]
+transform = Transform3D(1, -2.27924e-11, -7.65255e-12, -6.29588e-11, 1, 1.49012e-08, 8.62921e-13, 0, 1, 0, 0, 0)
+
+[node name="Object_1178" parent="Rover/Object_5/Object_927/Object_1176/Object_1177" index="0"]
+transform = Transform3D(1, 3.15055e-11, -6.9349e-12, 3.09086e-11, 1, 0, -1.46656e-11, 0, 1, 0, 0, 0)
+
+[node name="Object_1181" parent="Rover/Object_5/Object_927/Object_1179/Object_1180" index="0"]
+transform = Transform3D(1, -4.61995e-11, -3.6664e-12, -1.52269e-11, 1, 1.49012e-08, -1.91847e-12, 1.49012e-08, 1, 0, 0, 0)
+
+[node name="Object_1184" parent="Rover/Object_5/Object_927/Object_1182/Object_1183" index="0"]
+transform = Transform3D(1, 2.48264e-11, 1.44169e-11, 2.00728e-12, 1, 0, 7.38964e-12, 0, 1, 0, 4.76837e-07, 3.8147e-06)
+
+[node name="Object_1199" parent="Rover/Object_5/Object_927/Object_1197/Object_1198" index="0"]
+transform = Transform3D(1, -5.82076e-11, -5.68434e-14, 5.82077e-11, 1, -6.93889e-18, 2.84217e-14, 2.77556e-17, 1, 0, 0, 0)
+
+[node name="Object_1202" parent="Rover/Object_5/Object_927/Object_1200/Object_1201" index="0"]
+transform = Transform3D(1, 0, -7.45058e-09, -7.45058e-09, 1, 2.98023e-08, -7.45058e-09, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1205" parent="Rover/Object_5/Object_927/Object_1203/Object_1204" index="0"]
+transform = Transform3D(1, -1.0882e-11, 1.19798e-11, 1.5774e-11, 1, 0, 1.01501e-11, 0, 1, 0, 0, 0)
+
+[node name="Object_1214" parent="Rover/Object_5/Object_927/Object_1209/Object_1210/Object_1211/Object_1212" index="1"]
+transform = Transform3D(1, 8.24529e-15, 0, 1.44245e-14, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_1415" parent="Rover/Object_5/Object_927/Object_1412/Object_1413/Object_1414" index="0"]
+transform = Transform3D(1, 7.10543e-15, 1.38778e-17, 0, 1, 2.40806e-18, 1.04083e-17, -2.32831e-10, 1, 0, 0, 0)
+
+[node name="Object_1418" parent="Rover/Object_5/Object_927/Object_1412/Object_1413/Object_1416/Object_1417" index="0"]
+transform = Transform3D(1, 7.10543e-15, 1.38778e-17, 0, 1, 2.40806e-18, 1.04083e-17, -2.32831e-10, 1, 0, 0, 0)
+
+[node name="Object_1419" parent="Rover/Object_5/Object_927/Object_1412/Object_1413/Object_1416" index="1"]
+transform = Transform3D(1, 7.10543e-15, 1.38778e-17, 0, 1, 2.40806e-18, 1.04083e-17, -2.32831e-10, 1, 0, 0, 0)
+
+[node name="Object_1423" parent="Rover/Object_5/Object_927/Object_1420/Object_1421/Object_1422" index="0"]
+transform = Transform3D(1, -3.55271e-15, -2.22045e-16, 0, 1, 1.11759e-08, 4.44089e-16, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1426" parent="Rover/Object_5/Object_927/Object_1420/Object_1421/Object_1424/Object_1425" index="0"]
+transform = Transform3D(1, -3.55271e-15, -2.22045e-16, 0, 1, 1.11759e-08, 4.44089e-16, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1427" parent="Rover/Object_5/Object_927/Object_1420/Object_1421/Object_1424" index="1"]
+transform = Transform3D(1, -3.55271e-15, -2.22045e-16, 0, 1, 1.11759e-08, 4.44089e-16, -7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1003" parent="Rover/Object_5/Object_927/Object_928/Object_1001/Object_1002" index="0"]
+transform = Transform3D(1, -5.96047e-08, 0, -1.07292e-14, 1, -1.42109e-14, 0, 1.06581e-14, 1, 0, 0, -3.8147e-06)
+
+[node name="Object_1004" parent="Rover/Object_5/Object_927/Object_928/Object_1001/Object_1002" index="1"]
+transform = Transform3D(1, -5.96047e-08, 0, -1.07292e-14, 1, -1.42109e-14, 0, 1.06581e-14, 1, 0, 0, -3.8147e-06)
+
+[node name="Object_1007" parent="Rover/Object_5/Object_927/Object_928/Object_1005/Object_1006" index="0"]
+transform = Transform3D(1, -5.96046e-08, 3.55271e-15, -5.96046e-08, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_1008" parent="Rover/Object_5/Object_927/Object_928/Object_1005/Object_1006" index="1"]
+transform = Transform3D(1, -5.96046e-08, 3.55271e-15, -5.96046e-08, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_1009" parent="Rover/Object_5/Object_927/Object_928/Object_1005/Object_1006" index="2"]
+transform = Transform3D(1, -5.96046e-08, 3.55271e-15, -5.96046e-08, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_1012" parent="Rover/Object_5/Object_927/Object_928/Object_1010/Object_1011" index="0"]
+transform = Transform3D(1, 3.72529e-09, 1.42109e-14, -3.72529e-09, 1, 4.44089e-16, 7.10543e-15, -1.11022e-16, 1, 0, 0, 0)
+
+[node name="Object_1013" parent="Rover/Object_5/Object_927/Object_928/Object_1010/Object_1011" index="1"]
+transform = Transform3D(1, 3.72529e-09, 1.42109e-14, -3.72529e-09, 1, 4.44089e-16, 7.10543e-15, -1.11022e-16, 1, 0, 0, 0)
+
+[node name="Object_1014" parent="Rover/Object_5/Object_927/Object_928/Object_1010/Object_1011" index="2"]
+transform = Transform3D(1, 3.72529e-09, 1.42109e-14, -3.72529e-09, 1, 4.44089e-16, 7.10543e-15, -1.11022e-16, 1, 0, 0, 0)
+
+[node name="Object_1018" parent="Rover/Object_5/Object_927/Object_928/Object_1015/Object_1016/Object_1017" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1021" parent="Rover/Object_5/Object_927/Object_928/Object_1015/Object_1016/Object_1019/Object_1020" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1022" parent="Rover/Object_5/Object_927/Object_928/Object_1015/Object_1016/Object_1019" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1026" parent="Rover/Object_5/Object_927/Object_928/Object_1023/Object_1024/Object_1025" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1029" parent="Rover/Object_5/Object_927/Object_928/Object_1023/Object_1024/Object_1027/Object_1028" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1030" parent="Rover/Object_5/Object_927/Object_928/Object_1023/Object_1024/Object_1027" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, -1.77636e-15, -2.98023e-08, 1, 0, 0, 0)
+
+[node name="Object_1034" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1033" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1036" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1035" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1038" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1037" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1040" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1039" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1042" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1041" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1044" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1043" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1046" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1045" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1048" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1047" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1050" parent="Rover/Object_5/Object_927/Object_928/Object_1031/Object_1032/Object_1049" index="0"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -7.10543e-15, -5.12146e-15, 1.42109e-14, 1, 0, 0, 0)
+
+[node name="Object_1053" parent="Rover/Object_5/Object_927/Object_928/Object_1051/Object_1052" index="0"]
+transform = Transform3D(1, 3.55271e-15, -1.77636e-15, -3.55271e-15, 1, -9.5138e-16, 0, -9.5138e-16, 1, 0, 0, 0)
+
+[node name="Object_1056" parent="Rover/Object_5/Object_927/Object_928/Object_1054/Object_1055" index="0"]
+transform = Transform3D(1, 1.42109e-14, -5.32907e-15, 0, 1, 5.96046e-08, -1.77636e-15, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1060" parent="Rover/Object_5/Object_927/Object_928/Object_1057/Object_1058/Object_1059" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, -9.53674e-07, 0)
+
+[node name="Object_1063" parent="Rover/Object_5/Object_927/Object_928/Object_1057/Object_1058/Object_1061/Object_1062" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, -9.53674e-07, 1.90735e-06)
+
+[node name="Object_1064" parent="Rover/Object_5/Object_927/Object_928/Object_1057/Object_1058/Object_1061" index="1"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, -9.53674e-07, 0)
+
+[node name="Object_1068" parent="Rover/Object_5/Object_927/Object_928/Object_1065/Object_1066/Object_1067" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1071" parent="Rover/Object_5/Object_927/Object_928/Object_1065/Object_1066/Object_1069/Object_1070" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1072" parent="Rover/Object_5/Object_927/Object_928/Object_1065/Object_1066/Object_1069" index="1"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1076" parent="Rover/Object_5/Object_927/Object_928/Object_1073/Object_1074/Object_1075" index="0"]
+transform = Transform3D(1, 0, 0, -4.44089e-16, 1, -7.45058e-09, -7.10543e-15, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1079" parent="Rover/Object_5/Object_927/Object_928/Object_1073/Object_1074/Object_1077/Object_1078" index="0"]
+transform = Transform3D(1, 0, 0, -4.44089e-16, 1, -7.45058e-09, -7.10543e-15, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1080" parent="Rover/Object_5/Object_927/Object_928/Object_1073/Object_1074/Object_1077" index="1"]
+transform = Transform3D(1, 0, 0, -4.44089e-16, 1, -7.45058e-09, -7.10543e-15, 7.45058e-09, 1, 0, 0, 0)
+
+[node name="Object_1083" parent="Rover/Object_5/Object_927/Object_928/Object_1081/Object_1082" index="0"]
+transform = Transform3D(1, -2.99379e-15, -1.42109e-14, -4.62334e-15, 1, -8.88178e-15, 2.84217e-14, 0, 1, 0, 0, 0)
+
+[node name="Object_1084" parent="Rover/Object_5/Object_927/Object_928/Object_1081/Object_1082" index="1"]
+transform = Transform3D(1, -2.99379e-15, -1.42109e-14, -4.62334e-15, 1, -8.88178e-15, 2.84217e-14, 0, 1, 0, 0, 0)
+
+[node name="Object_1088" parent="Rover/Object_5/Object_927/Object_928/Object_1085/Object_1086/Object_1087" index="0"]
+transform = Transform3D(1, 0, 0, -3.55271e-15, 1, -3.19587e-16, -1.33227e-15, 5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1091" parent="Rover/Object_5/Object_927/Object_928/Object_1085/Object_1086/Object_1089/Object_1090" index="0"]
+transform = Transform3D(1, 0, 0, -3.55271e-15, 1, -3.19587e-16, -1.33227e-15, 5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1092" parent="Rover/Object_5/Object_927/Object_928/Object_1085/Object_1086/Object_1089" index="1"]
+transform = Transform3D(1, 0, 0, -3.55271e-15, 1, -3.19587e-16, -1.33227e-15, 5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1095" parent="Rover/Object_5/Object_927/Object_928/Object_1093/Object_1094" index="0"]
+transform = Transform3D(1, -5.26528e-16, 3.55271e-15, -5.26528e-16, 1, 8.88178e-16, 0, 1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_1098" parent="Rover/Object_5/Object_927/Object_928/Object_1096/Object_1097" index="0"]
+transform = Transform3D(1, -5.26528e-16, 3.55271e-15, -5.26528e-16, 1, 8.88178e-16, 0, 1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_1102" parent="Rover/Object_5/Object_927/Object_928/Object_1099/Object_1100/Object_1101" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1105" parent="Rover/Object_5/Object_927/Object_928/Object_1099/Object_1100/Object_1103/Object_1104" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1106" parent="Rover/Object_5/Object_927/Object_928/Object_1099/Object_1100/Object_1103" index="1"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1110" parent="Rover/Object_5/Object_927/Object_928/Object_1107/Object_1108/Object_1109" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1113" parent="Rover/Object_5/Object_927/Object_928/Object_1107/Object_1108/Object_1111/Object_1112" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1114" parent="Rover/Object_5/Object_927/Object_928/Object_1107/Object_1108/Object_1111" index="1"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1118" parent="Rover/Object_5/Object_927/Object_928/Object_1115/Object_1116/Object_1117" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1121" parent="Rover/Object_5/Object_927/Object_928/Object_1115/Object_1116/Object_1119/Object_1120" index="0"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1122" parent="Rover/Object_5/Object_927/Object_928/Object_1115/Object_1116/Object_1119" index="1"]
+transform = Transform3D(1, -4.11106e-15, 0, -2.12663e-15, 1, -5.32907e-15, 0, 7.10543e-15, 1, 0, 0, 0)
+
+[node name="Object_1126" parent="Rover/Object_5/Object_927/Object_928/Object_1123/Object_1124/Object_1125" index="0"]
+transform = Transform3D(1, 5.43077e-08, -1.82613e-08, 4.55037e-09, 1, -1.49012e-08, 9.91081e-09, 0, 1, 9.53674e-07, 9.53674e-07, 9.53674e-07)
+
+[node name="Object_1129" parent="Rover/Object_5/Object_927/Object_928/Object_1123/Object_1124/Object_1127/Object_1128" index="0"]
+transform = Transform3D(1, 5.43077e-08, -1.82613e-08, 4.55037e-09, 1, -1.49012e-08, 9.91081e-09, 0, 1, 0, 2.86102e-06, 9.53674e-07)
+
+[node name="Object_1130" parent="Rover/Object_5/Object_927/Object_928/Object_1123/Object_1124/Object_1127" index="1"]
+transform = Transform3D(1, 5.43077e-08, -1.82613e-08, 4.55037e-09, 1, -1.49012e-08, 9.91081e-09, 0, 1, 9.53674e-07, 9.53674e-07, 9.53674e-07)
+
+[node name="Object_932" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_931" index="0"]
+transform = Transform3D(1, -2.98023e-08, 8.88178e-16, 3.43037e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_933" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_931" index="1"]
+transform = Transform3D(1, -2.98023e-08, 8.88178e-16, 3.43037e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_934" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_931" index="2"]
+transform = Transform3D(1, -2.98023e-08, 8.88178e-16, 3.43037e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_936" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="0"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_937" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="1"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_938" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="2"]
+transform = Transform3D(1, -2.98023e-08, 8.88178e-16, 3.43037e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_939" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="3"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_940" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="4"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_941" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="5"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_942" parent="Rover/Object_5/Object_927/Object_928/Object_929/Object_930/Object_935" index="6"]
+transform = Transform3D(1, -1.49012e-08, 0, 3.43037e-16, 1, -3.55271e-15, 0, 0, 1, 0, 0, 0)
+
+[node name="Object_945" parent="Rover/Object_5/Object_927/Object_928/Object_943/Object_944" index="0"]
+transform = Transform3D(1, -7.45058e-09, -1.42109e-14, 5.67772e-16, 1, 6.66134e-16, 2.84217e-14, -1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_948" parent="Rover/Object_5/Object_927/Object_928/Object_946/Object_947" index="0"]
+transform = Transform3D(1, -1.04997e-15, 7.10543e-15, -7.45059e-09, 1, 0, -2.13163e-14, -3.55271e-15, 1, 0, 0, 3.8147e-06)
+
+[node name="Object_949" parent="Rover/Object_5/Object_927/Object_928" index="22"]
+transform = Transform3D(-1.19209e-07, 1.49012e-08, 1, 0.283126, 0.959083, 1.49012e-08, -0.959083, 0.283126, -1.19209e-07, -16.8332, -13.1357, -14.2111)
+
+[node name="Object_952" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_951" index="0"]
+transform = Transform3D(1, -1.93509e-16, 1.42109e-14, -5.47497e-16, 1, 1.77636e-15, -1.42109e-14, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_953" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_951" index="1"]
+transform = Transform3D(1, -1.93509e-16, 1.42109e-14, -5.47497e-16, 1, 1.77636e-15, -1.42109e-14, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_954" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_951" index="2"]
+transform = Transform3D(1, -1.93509e-16, 1.42109e-14, -5.47497e-16, 1, 1.77636e-15, -1.42109e-14, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_955" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950" index="1"]
+transform = Transform3D(1, -1.93509e-16, 0, -5.47497e-16, 1, 0, 0, 4.44089e-16, 1, 0, 0, 0)
+
+[node name="Object_956" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="0"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_957" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="1"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_958" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="2"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_959" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="3"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_960" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="4"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_961" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="5"]
+transform = Transform3D(1, -1.93509e-16, 7.10543e-15, -5.47497e-16, 1, 8.88178e-16, -7.10543e-15, 8.88178e-16, 1, 0, 0, 0)
+
+[node name="Object_962" parent="Rover/Object_5/Object_927/Object_928/Object_949/Object_950/Object_955" index="6"]
+transform = Transform3D(1, -1.93509e-16, 1.42109e-14, -5.47497e-16, 1, 1.77636e-15, -1.42109e-14, 1.77636e-15, 1, 0, 0, 0)
+
+[node name="Object_965" parent="Rover/Object_5/Object_927/Object_928/Object_963/Object_964" index="0"]
+transform = Transform3D(1, -9.83243e-17, 0, -2.383e-16, 1, 9.99201e-16, 0, -2.66454e-15, 1, 0, 0, 0)
+
+[node name="Object_968" parent="Rover/Object_5/Object_927/Object_928/Object_966/Object_967" index="0"]
+transform = Transform3D(1, 3.55271e-15, -3.55271e-15, 7.10543e-15, 1, -1.49012e-07, 3.55271e-15, 1.19209e-07, 1, 0, 0, 0)
+
+[node name="Object_972" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_971" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_975" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_973/Object_974" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_976" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_973" index="1"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_979" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_977/Object_978" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_980" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_977" index="1"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_983" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_981/Object_982" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_984" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_981" index="1"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_987" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_985/Object_986" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_988" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_985" index="1"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_991" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_989/Object_990" index="0"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_992" parent="Rover/Object_5/Object_927/Object_928/Object_969/Object_970/Object_989" index="1"]
+transform = Transform3D(1, -7.10543e-15, 1.77636e-15, 0, 1, -5.3388e-16, 0, -5.3388e-16, 1, 0, 0, 0)
+
+[node name="Object_996" parent="Rover/Object_5/Object_927/Object_928/Object_993/Object_994/Object_995" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_1000" parent="Rover/Object_5/Object_927/Object_928/Object_993/Object_994/Object_997" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)
+
+[node name="Object_999" parent="Rover/Object_5/Object_927/Object_928/Object_993/Object_994/Object_997/Object_998" index="0"]
+transform = Transform3D(1, -5.32907e-15, 0, 1.77636e-15, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0)

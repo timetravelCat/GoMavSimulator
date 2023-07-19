@@ -32,14 +32,26 @@ func _on_vehicle_selector_pressed():
 		vehicleSelector.add_item(vehicle.name)
 	vehicleSelector.selected = -1
 func _on_vehicle_selector_item_selected(index):
+	# disconnect previously connected signals
+	if is_instance_valid(thirdPersonCamera.follow):
+		var vehicle_pose = thirdPersonCamera.follow.pose as VehiclePose
+		if vehicle_pose.is_connected("armed_updated", _on_armed_updated):
+			vehicle_pose.disconnect("armed_updated", _on_armed_updated)
+		if vehicle_pose.is_connected("_on_flight_mode_updated", _on_flight_mode_updated):
+			vehicle_pose.disconnect("_on_flight_mode_updated", _on_flight_mode_updated)
+	
 	vehicleSelector.release_focus()
 	if index == 0:
 		freeFlyCamera.make_current()
 		return
-	
+				
 	var vehicle_name = vehicleSelector.get_item_text(index)
 	thirdPersonCamera.follow = SimulatorSettings.find_vehicle(vehicle_name) as Vehicle
 	thirdPersonCamera.make_current()
+	var vehicle_pose = thirdPersonCamera.follow.pose as VehiclePose
+	vehicle_pose.connect("armed_updated", _on_armed_updated)
+	vehicle_pose.connect("flight_mode_updated", _on_flight_mode_updated)
+	
 func _on_third_person_camera_lost_follow():
 	vehicleSelector.selected = 0
 	
@@ -65,5 +77,40 @@ func _on_settings_visibility_changed():
 			else:
 				vehicle.pose._set_enable(true)
 
-
-
+@onready var armed_label:Label = $VehicleStatus/HBoxContainer/Armed
+@onready var flight_mode_label:Label = $VehicleStatus/HBoxContainer/FlightMode
+func _on_armed_updated(armed):
+	if armed:
+		armed_label.text = "ARMED"
+	else:
+		armed_label.text = "DISARMED"
+func _on_flight_mode_updated(flight_mode):
+	match flight_mode:
+		GoMAVSDKServer.FLIGHT_MODE_READY:
+			flight_mode_label.text = "READY"
+		GoMAVSDKServer.FLIGHT_MODE_TAKEOFF:
+			flight_mode_label.text = "TAKEOFF"
+		GoMAVSDKServer.FLIGHT_MODE_HOLD:
+			flight_mode_label.text = "HOLD"
+		GoMAVSDKServer.FLIGHT_MODE_MISSION:
+			flight_mode_label.text = "MISSION"
+		GoMAVSDKServer.FLIGHT_MODE_RETURNTOLAUNCH:
+			flight_mode_label.text = "RETURNTOLAUNCH"
+		GoMAVSDKServer.FLIGHT_MODE_LAND:
+			flight_mode_label.text = "LAND"
+		GoMAVSDKServer.FLIGHT_MODE_OFFBOARD:
+			flight_mode_label.text = "OFFBOARD"
+		GoMAVSDKServer.FLIGHT_MODE_FOLLOWME:
+			flight_mode_label.text = "FOLLOWME"
+		GoMAVSDKServer.FLIGHT_MODE_MANUAL:
+			flight_mode_label.text = "MANUAL"
+		GoMAVSDKServer.FLIGHT_MODE_ALTCTL:
+			flight_mode_label.text = "ALTCTL"
+		GoMAVSDKServer.FLIGHT_MODE_POSCTL:
+			flight_mode_label.text = "POSCTL"
+		GoMAVSDKServer.FLIGHT_MODE_ACRO:
+			flight_mode_label.text = "ACRO"
+		GoMAVSDKServer.FLIGHT_MODE_STABILIZED:
+			flight_mode_label.text = "STABILIZED"
+		GoMAVSDKServer.FLIGHT_MODE_RATTITUDE:
+			flight_mode_label.text = "RATTITUDE"
