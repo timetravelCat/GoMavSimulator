@@ -4,7 +4,151 @@
 [ext_resource type="Script" path="res://modules/vehicle/model/VehicleModel.gd" id="2_cti7k"]
 
 [node name="matrice_300_rtk" node_paths=PackedStringArray("meshes") instance=ExtResource("1_50g2n")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -2.35426, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.00779283, 0)
 script = ExtResource("2_cti7k")
 rotating_scale = 30.0
 meshes = [NodePath("RootNode/polySurface4387/prop_1"), NodePath("RootNode/polySurface4387/prop_2"), NodePath("RootNode/polySurface4387/prop_3"), NodePath("RootNode/polySurface4387/prop_4")]
+
+[node name="RootNode" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0144246, -0.35269)
+
+[node name="polySurface4387" parent="RootNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0296066, -0.258351, 0.526894)
+
+[node name="polySurface4387_Copper_0" parent="RootNode/polySurface4387" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Copper_0_001" parent="RootNode/polySurface4387" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Copper_0_002" parent="RootNode/polySurface4387" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_2_0" parent="RootNode/polySurface4387" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_Camera_1_0" parent="RootNode/polySurface4387" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_Camera_2_0" parent="RootNode/polySurface4387" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_Camera_3_0" parent="RootNode/polySurface4387" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_camera_4_0" parent="RootNode/polySurface4387" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_camera_5_0" parent="RootNode/polySurface4387" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Glass_sensor_0" parent="RootNode/polySurface4387" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert11_0" parent="RootNode/polySurface4387" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert12_0" parent="RootNode/polySurface4387" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert18_0" parent="RootNode/polySurface4387" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0" parent="RootNode/polySurface4387" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_001" parent="RootNode/polySurface4387" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_002" parent="RootNode/polySurface4387" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_003" parent="RootNode/polySurface4387" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_004" parent="RootNode/polySurface4387" index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_005" parent="RootNode/polySurface4387" index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_006" parent="RootNode/polySurface4387" index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_007" parent="RootNode/polySurface4387" index="20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_008" parent="RootNode/polySurface4387" index="21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_009" parent="RootNode/polySurface4387" index="22"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert19_0_010" parent="RootNode/polySurface4387" index="23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert1_0" parent="RootNode/polySurface4387" index="24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert20_0" parent="RootNode/polySurface4387" index="25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert21_0" parent="RootNode/polySurface4387" index="26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert23_0" parent="RootNode/polySurface4387" index="27"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert24_0" parent="RootNode/polySurface4387" index="28"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert25_0" parent="RootNode/polySurface4387" index="29"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert26_0" parent="RootNode/polySurface4387" index="30"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert27_0" parent="RootNode/polySurface4387" index="31"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert28_0" parent="RootNode/polySurface4387" index="32"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert29_0" parent="RootNode/polySurface4387" index="33"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert30_0" parent="RootNode/polySurface4387" index="34"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert31_0" parent="RootNode/polySurface4387" index="35"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert3_0" parent="RootNode/polySurface4387" index="36"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert4_0" parent="RootNode/polySurface4387" index="37"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert5_0" parent="RootNode/polySurface4387" index="38"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert7_0" parent="RootNode/polySurface4387" index="39"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_lambert8_0" parent="RootNode/polySurface4387" index="40"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="polySurface4387_Yellow_lamp_0" parent="RootNode/polySurface4387" index="41"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.38084, 0)
+
+[node name="prop_1" parent="RootNode/polySurface4387" index="42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.78563, 0.266716, 2.99089)
+
+[node name="prop_2" parent="RootNode/polySurface4387" index="43"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.38203, 0.266852, -3.35183)
+
+[node name="prop_3" parent="RootNode/polySurface4387" index="44"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38203, 0.266853, -3.35183)
+
+[node name="prop_4" parent="RootNode/polySurface4387" index="45"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.78564, 0.266722, 2.9909)

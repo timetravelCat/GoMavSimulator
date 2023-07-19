@@ -4,9 +4,12 @@
 [ext_resource type="Script" path="res://modules/vehicle/model/VehicleModel.gd" id="2_0x5f5"]
 
 [node name="rover" instance=ExtResource("1_2k6pt")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.469048, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0133416, 0)
 script = ExtResource("2_0x5f5")
 type = 1
+
+[node name="Rover" parent="." index="0"]
+transform = Transform3D(0.0406952, 0, 0, 0, 0.0406952, 0, 0, 0, 0.0406952, 0, 0.188304, 0)
 
 [node name="Object_1554" parent="Rover/Object_5/Object_1536/Object_1537/Object_1553" index="0"]
 transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, 0, 0)
