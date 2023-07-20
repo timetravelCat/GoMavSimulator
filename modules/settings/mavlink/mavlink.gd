@@ -26,7 +26,9 @@ func _ready():
 		autoconnect_list.add_item(connection)		
 		if not MavlinkSettings.connection_list[connection]:
 			autoconnect_list.set_item_custom_fg_color(autoconnect_list.item_count-1, Color(1.0, 1.0, 1.0, 0.2))
-
+	joystick_control.selected = MavlinkSettings.enable_joystick
+	virtual_joystick.selected = MavlinkSettings.enable_virtual_joystick
+	
 func _on_console_connected_item_selected(index):
 	MavlinkSettings.open_on_connected = !index
 func _on_console_disconnected_item_selected(index):

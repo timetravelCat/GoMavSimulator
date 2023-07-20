@@ -101,6 +101,7 @@ public:
 			_image->get_data().ptr());
 
 		updateHeader(image);
+		_image.unref();
 		return _publish(&image);
 	}
 

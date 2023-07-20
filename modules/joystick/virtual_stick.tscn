@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ls4cls421chv"]
+[gd_scene load_steps=3 format=3 uid="uid://ls4cls421chv"]
 
 [ext_resource type="Texture2D" uid="uid://cgm0qsqbg15n8" path="res://modules/joystick/icon/stick_circle.svg" id="1_8bscl"]
 [ext_resource type="Script" path="res://modules/joystick/virtual_stick.gd" id="1_kce4t"]
-[ext_resource type="Texture2D" uid="uid://bcr6mkhlvjc7l" path="res://icon.svg" id="2_icd0d"]
 
 [node name="VirtualStick" type="ColorRect"]
 custom_minimum_size = Vector2(200, 200)
@@ -35,7 +34,6 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 mouse_filter = 2
 keep_pressed_outside = true
-texture_normal = ExtResource("2_icd0d")
 stretch_mode = 0
 
 [node name="Timer" type="Timer" parent="."]

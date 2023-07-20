@@ -14,7 +14,7 @@ config/name="GoMavSimulator"
 config/tags=PackedStringArray("dev")
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon/icon.ico"
 
 [autoload]
 
