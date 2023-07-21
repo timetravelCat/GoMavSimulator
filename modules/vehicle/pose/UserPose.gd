@@ -13,7 +13,7 @@ func _get_enable()->bool:
 	return !stop
 
 @export var speed:float = 5.0
-@export var drag_sensitivity:float = 0.05
+@export var drag_sensitivity:float = 0.2
 
 func _process(delta):
 	if stop or not get_window().has_focus():
