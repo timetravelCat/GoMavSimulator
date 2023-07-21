@@ -24,4 +24,7 @@ func _ready():
 	distance = distance
 
 func _on_timeout():
-	rangePublisher.publish((raycast3D.get_collision_point() - global_position).length())
+	if raycast3D.is_colliding():
+		rangePublisher.publish((raycast3D.get_collision_point() - global_position).length())
+	else:
+		rangePublisher.publish(INF)

@@ -17,6 +17,7 @@ distance = 100.0
 publisher = NodePath("RangePublisher")
 
 [node name="RangePublisher" type="RangePublisher" parent="." index="1"]
+field_of_view = 1.0
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="2"]
 debug_shape_custom_color = Color(1, 0, 0, 1)
