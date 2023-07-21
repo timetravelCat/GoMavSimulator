@@ -14,6 +14,7 @@ func _ready():
 	districtSelector.clear()
 	for district in GeneralSettings.districts_string:
 		districtSelector.add_item(district)
+	districtSelector.selected = GeneralSettings.district
 	# camera property initialization
 	vehicleSelector.add_item("FreeCam")
 	vehicleSelector.selected = 0
@@ -37,8 +38,8 @@ func _on_vehicle_selector_item_selected(index):
 		var vehicle_pose = thirdPersonCamera.follow.pose as VehiclePose
 		if vehicle_pose.is_connected("armed_updated", _on_armed_updated):
 			vehicle_pose.disconnect("armed_updated", _on_armed_updated)
-		if vehicle_pose.is_connected("_on_flight_mode_updated", _on_flight_mode_updated):
-			vehicle_pose.disconnect("_on_flight_mode_updated", _on_flight_mode_updated)
+		if vehicle_pose.is_connected("flight_mode_updated", _on_flight_mode_updated):
+			vehicle_pose.disconnect("flight_mode_updated", _on_flight_mode_updated)
 	
 	vehicleSelector.release_focus()
 	if index == 0:

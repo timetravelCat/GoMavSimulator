@@ -12,7 +12,6 @@ main_window = null
 vertical_sync = null
 frame_rate_limitation = null
 ui_scaling = null
-minimap = null
 shadow = null
 anti_alising = null
 ambient_occlusion = null

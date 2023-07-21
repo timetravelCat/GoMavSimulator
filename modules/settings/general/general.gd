@@ -100,6 +100,10 @@ func _ready():
 	ambient_occlusion.selected = GraphicsSettings.ambient_occlusion
 	texture.selected = GraphicsSettings.texture
 	
+	# general setting - set as average of other qualities
+	@warning_ignore("integer_division")
+	general_quality.selected = clampi((shadows.selected + visual_effects.selected + anti_alising.selected + ambient_occlusion.selected + texture.selected)/5, 0, 5)
+	
 func _on_fullscreen_item_selected(index):
 	GraphicsSettings.set_fullscreen(index)
 
@@ -135,7 +139,6 @@ func _on_minimap_on_pressed():
 	GeneralSettings.minimap = true
 	minimap_on.disabled = true
 	minimap_off.disabled = false
-	GeneralSettings.minimap = true
 
 func _on_minimap_off_pressed():
 	GeneralSettings.minimap = false
