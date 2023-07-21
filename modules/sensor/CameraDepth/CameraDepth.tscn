@@ -46,7 +46,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 cull_mask = 1048511
 environment = SubResource("Environment_ldkf8")
 current = true
-far = 1000.0
 
 [node name="ImagePublisher" type="ImagePublisher" parent="SubViewport/Camera3D" index="0"]
 
