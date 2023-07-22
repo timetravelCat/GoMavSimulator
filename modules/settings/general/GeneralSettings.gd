@@ -12,11 +12,13 @@ extends Node
 @export var district_size:Vector3
 var districts:Array = [
 	preload("res://assets/district/cartoon/mini.tscn"),
-	preload("res://assets/district/cartoon/mumbai.tscn")
+	preload("res://assets/district/cartoon/mumbai.tscn"),
+	preload("res://assets/district/city/city.tscn")
 ]
 var districts_string:PackedStringArray = [
 	"cartoon_mini",
-	"cartoon_mumbai"
+	"cartoon_mumbai",
+	"city"
 ]
 @export var district:int: set = _district_initialize
 var current_district:Node3D
@@ -34,7 +36,7 @@ func create_new_viewer():
 	_create_new_viewer()
 func publish_district():
 	_publish_district()
-
+	
 func reset():
 	DefaultSettingMethods.reset_default_property(self,default_settings)
 
@@ -45,6 +47,9 @@ func _exit_tree():
 	DefaultSettingMethods.save_default_property(self,default_settings,save_path)
 
 func _district_initialize(_district:int):
+	if _district >= districts.size():
+		_district = 0
+	
 	district = _district
 	if current_district:
 		current_district.free()
@@ -66,6 +71,7 @@ func _create_collision_body(district_child:Node):
 	var meshInstance = district_child as MeshInstance3D
 	if meshInstance: 
 		meshInstance.create_trimesh_collision()
+#		meshInstance.create_convex_collision(true, false)
 		
 		# Get total aabb size of district
 		if meshInstance.mesh:
