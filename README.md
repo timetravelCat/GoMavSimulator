@@ -97,7 +97,7 @@ git clone https://github.com/timetravelCat/GoMavSimulator.git
 ```
 - Open GoMavSimulator by [godot editor](https://godotengine.org/), 4.1.1 or more recent
 - Run in editor 
-- Add a scene/vehicle model/sensor, [Documentation](https://example.com)
+- Add a scene/vehicle model/sensor, [Documentation](https://github.com/timetravelCat/GoMavSimulator/blob/main/docs/Development.md)
 - Manually export by templates [Exporting projects](https://docs.godotengine.org/en/stable/tutorials/export/exporting_projects.html)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
