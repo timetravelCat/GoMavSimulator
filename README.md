@@ -56,7 +56,7 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
-### GoMavSimulator is created for development of robotics applications sutch as autonomous flight/driving. It directly provide various sensor simulation results through ROS2's messaging middleware.
+### GoMavSimulator is created for development of robotics applications such as autonomous flight/driving. It directly provide various sensor simulation results through ROS2's messaging middleware.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
