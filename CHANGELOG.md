@@ -1,5 +1,10 @@
 # Changelog
 
+## 2023.07.30
+- v1.0.1
+- close #3, minor bugfixes.
+- close #5, now depth image published with camera info.
+
 ## 2023.07.22
 - v1.0.0
 - Basic features are completed.
