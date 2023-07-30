@@ -14,6 +14,7 @@ class_name CameraDepth extends Sensor
 @onready var window:Window = $Window
 @export var resolution:Vector2i = Vector2i(320,180): set = set_resolution
 @export var fov:float = 75.0: set = set_fov
+@export var cameraInfoPublisher:CameraInfoPublisher
 
 func _ready():
 	super._ready()
@@ -30,6 +31,7 @@ func _ready():
 
 @warning_ignore("unused_parameter")
 func _on_sensor_renamed(vehicle_name:String, sensor_name:String):
+	cameraInfoPublisher.topic_name = vehicle_name + "/" + sensor_name + "_info"
 	if window:
 		window.title = publisher.topic_name
 
@@ -98,3 +100,9 @@ func set_fov(_fov):
 
 func _on_always_on_top_button_toggled(button_pressed):
 	window.always_on_top = button_pressed
+
+func _on_sub_viewport_size_changed():
+	cameraInfoPublisher.publish()
+
+func _on_timer_timeout():
+	cameraInfoPublisher.publish()
