@@ -140,10 +140,13 @@ func _on_vehicle_list_item_selected(index):
 	MavlinkPoseSource.selected = vehicle.odometry_source
 	MavlinkSysId.text = str(vehicle.sys_id)
 	Ros2PoseSource.text = vehicle.pose_name
+	PublishVehiclePose.set_pressed_no_signal(vehicle.enable_pose_publish)
+	PublishVehicleMesh.set_pressed_no_signal(vehicle.enable_model_publish)
+	
 	SensorList.clear()
 	for sensor in vehicle.get_sensors():
 		SensorList.add_item(sensor.name)
-		
+
 	MavlinkPoseSourceContainer.hide()
 	MavlinkSystemIDCotainer.hide()
 	Ros2PoseSourceContainer.hide()
