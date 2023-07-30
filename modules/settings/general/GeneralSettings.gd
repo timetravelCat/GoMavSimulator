@@ -66,6 +66,9 @@ func _district_initialize(_district:int):
 		minimap_node.free()
 	minimap_node = minimap_scene.instantiate()
 	add_child(minimap_node)
+	set_minimap(minimap)
+	set_minimap_ratio(minimap_ratio)
+	set_minimap_alpha(minimap_alpha)
 
 func _create_collision_body(district_child:Node):
 	var meshInstance = district_child as MeshInstance3D
