@@ -1,7 +1,10 @@
 # Changelog
+## 2023.07.31
+- v1.0.1
+- #8 fix weird lidar sensor modeling
+- #7 fix depth image publication
 
 ## 2023.07.30
-- v1.0.1
 - close #3, minor bugfixes.
 - close #5, now depth image published with camera info.
 
