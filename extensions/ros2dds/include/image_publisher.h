@@ -90,14 +90,14 @@ public:
 			return false;
 		}
 		const int num_channels = sensor_msgs::image_encodings::numChannels(encoding);
-		// const int bit_depth = sensor_msgs::image_encodings::bitDepth(encoding);
+		const int byte_per_channel = sensor_msgs::image_encodings::bitDepth(encoding)/8;
 
 		sensor_msgs::fillImage(
 			image,
 			encoding,
 			_image->get_height(),
 			_image->get_width(),
-			num_channels * _image->get_width(),
+			byte_per_channel * num_channels * _image->get_width(),
 			_image->get_data().ptr());
 
 		updateHeader(image);
