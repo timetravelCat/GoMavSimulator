@@ -61,18 +61,17 @@ func _initialize():
 			rayCastContainer.add_child(raycast_down)
 
 func _ready():
-	#TODO implement save-load
 	super._ready()
 	_initialize()
 
-# TODO implement in GDExtension if high-resolution case is burden to cpu.
 var _pointcloud:PackedVector3Array
 func _on_timeout():
 	var raycasts = rayCastContainer.get_children() 
 	_pointcloud.resize(raycasts.size())
+	var toBody:Basis = global_transform.basis.transposed()
 	for i in raycasts.size():
 		if raycasts[i].is_colliding():
-			_pointcloud[i] = raycasts[i].get_collision_point() - global_position
+			_pointcloud[i] = toBody*(raycasts[i].get_collision_point() - global_position)
 		else:
 			_pointcloud[i] = Vector3(INF, INF, INF)
 	pointCloudPublisher.publish(_pointcloud)
