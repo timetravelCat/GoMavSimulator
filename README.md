@@ -21,7 +21,7 @@
     <a href="https://github.com/timetravelCat/GoMavSimulator/tree/main/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/timetravelCat/GoMavSimulator">View Demo</a>
+    <a href="https://drive.google.com/file/d/1glVoOS9Agmiz97uZ9ULsO2GhZks26fbg/preview">View Demo</a>
     ·
     <a href="https://github.com/timetravelCat/GoMavSimulator/issues">Report Bug</a>
     ·
@@ -80,6 +80,7 @@
 - Configure simulation
   - Select ground-truth position/orientation topics from MAVSDK or ROS2
   - Setup sensors (image, depth image, PointClouds, range ...)
+- Run VehicleSensorSubscriber node from [GoMavSimulator-ros2-demo](https://github.com/timetravelCat/GoMavSimulator-ros2-demo)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
