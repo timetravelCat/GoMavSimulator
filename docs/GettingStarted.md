@@ -6,6 +6,10 @@
 - Configure simulation
   - Select ground-truth position/orientation topics from MAVSDK or ROS2
   - Setup sensors (image, depth image, PointClouds, range ...)
+- If you are using ubuntu & running not binaries but godot editor, 
+    - currently supported platforms are 20.04 & 22.04
+    - you need to run **./setup.sh** before you open this project.
+    - If you want to support other versions of linux, you need to build [GDextension modules](GDExtension.md).
 ## Architecture Diagram
 ![](./screenshots/SimpleUsage.png)
 

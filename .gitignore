@@ -27,3 +27,12 @@ extensions/**/*.os
 extensions/**/**/*.os
 extensions/**/**/**/*.os
 extensions/**/**/**/**/*.os
+
+# automtically linked files depend on ubuntu version
+# See setup.sh
+addons/mavsdk/bin/libmavsdk_binding_debug.so
+addons/mavsdk/bin/libmavsdk_binding_release.so
+addons/ros2dds/bin/libros2dds_binding_debug.so
+addons/ros2dds/bin/libros2dds_binding_release.so
+addons/serial/bin/libserial_binding_debug.so
+addons/serial/bin/libserial_binding_release.so

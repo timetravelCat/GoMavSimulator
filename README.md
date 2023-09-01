@@ -81,6 +81,11 @@
   - Select ground-truth position/orientation topics from MAVSDK or ROS2
   - Setup sensors (image, depth image, PointClouds, range ...)
 - Run VehicleSensorSubscriber node from [GoMavSimulator-ros2-demo](https://github.com/timetravelCat/GoMavSimulator-ros2-demo)
+- If you are using ubuntu & running not binaries but godot editor, 
+    - currently supported platforms are 20.04 & 22.04
+    - you need to run **./setup.sh** before you open this project.
+    - If you want to support other versions of linux, you need to build [GDextension modules](docs/GDExtension.md).
+- Please refer to [docs](docs/README.md) for more details.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
