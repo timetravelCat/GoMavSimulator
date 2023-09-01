@@ -296,6 +296,7 @@ func _on_sensor_add_pressed():
 	sensor.position = ENU2EUS.enu_to_eus_v(Vector3(LocationX.text.to_float(), LocationY.text.to_float(), LocationZ.text.to_float()))
 	sensor.basis = ENU2EUS.enu_to_eus_b(Basis.from_euler(Vector3(deg_to_rad(RotationX.text.to_float()), deg_to_rad(RotationY.text.to_float()), deg_to_rad(RotationZ.text.to_float())), EULER_ORDER_ZYX))
 	sensor.publisher.frame_id = FrameID.text
+	sensor.publisher.domain_id = vehicle.domain_id
 	SensorList.add_item(sensor.name)
 
 func _on_sensor_delete_pressed():

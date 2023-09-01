@@ -50,6 +50,9 @@ static func Create(vehicle_name:String, settings:Dictionary = {})->Vehicle:
 						continue
 				
 				sensor.set(sensor_property, sensor_data[sensor_property])
+			# Set domain id of sensor 
+			sensor.publisher.domain_id = vehicle.domain_id
+			
 	return vehicle
 
 func ResetSettings():
