@@ -64,7 +64,7 @@ Serial GDextension is based on [matrixant](https://github.com/matrixant/serial_p
   
 - Linux
   ```sh
-  ./extensions/ubuntu_setup.sh # Tested on ubuntu 22.04
+  ./extensions/ubuntu_setup.sh # Tested on ubuntu 20.04 / 22.04
   ```
 
 ### Steps for rebuilding shared library.

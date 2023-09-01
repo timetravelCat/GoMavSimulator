@@ -11,7 +11,7 @@ if(WIN32)
     set(SHLWAPI_LIB_DIR ${WINDOWSSDK_LATEST_DIR}/Lib/${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}/um/x64)
     message("${SHLWAPI_LIB_DIR}")
 else()
-    
+    set(SHLWAPI_TARGET rt)
 endif()
 
 # OpenSSL
