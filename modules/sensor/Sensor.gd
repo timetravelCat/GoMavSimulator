@@ -33,6 +33,7 @@ static func Create(_vehicle:Vehicle, sensor_type:SENSOR_TYPE, sensor_name:String
 @export var publisher:Publisher
 @export var hz:float = 10.0: set = set_hz
 @export var enable:bool = true: set = set_enable
+var frame_id:String: set = set_frame_id, get = get_frame_id
 
 signal sensor_enabled(enable:bool)
 signal sensor_renamed(vehicle_name:String, sensor_name:String)
@@ -66,3 +67,10 @@ func set_enable(_enable):
 		hide()
 	
 	sensor_enabled.emit(enable)
+
+func set_frame_id(_frame_id):
+	publisher.frame_id = _frame_id
+	frame_id = _frame_id
+	
+func get_frame_id()->String:
+	return publisher.frame_id

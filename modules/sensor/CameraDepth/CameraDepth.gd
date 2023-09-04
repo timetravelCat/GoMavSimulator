@@ -3,6 +3,7 @@ class_name CameraDepth extends Sensor
 @export var property_saved_list:Dictionary = {
 	"position":Vector3(0.0, 0.0, 0.0),
 	"quaternion":Quaternion(0.0, 0.0, 0.0, 1.0),
+	"frame_id":"/map",
 	"hz":10.0,
 	"enable":true,
 	"resolution":Vector2i(320,180),

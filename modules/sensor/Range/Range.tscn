@@ -8,6 +8,7 @@ script = ExtResource("1_5yvs0")
 property_saved_list = {
 "distance": 100.0,
 "enable": true,
+"frame_id": "/map",
 "hz": 30.0,
 "position": Vector3(0, 0, 0),
 "quaternion": Quaternion(0, 0, 0, 1)

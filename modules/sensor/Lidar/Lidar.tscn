@@ -11,6 +11,7 @@ property_saved_list = {
 "hz": 10.0,
 "position": Vector3(0, 0, 0),
 "quaternion": Quaternion(0, 0, 0, 1),
+"frame_id": "/map",
 "resolution": Vector2i(72, 1),
 "vertical_fov": 0.0
 }
