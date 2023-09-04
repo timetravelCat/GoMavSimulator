@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
 [ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "PublishVehiclePose", "PublishVehicleMesh", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWitdh", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance", "MavlinkPoseSourceContainer", "MavlinkSystemIDCotainer", "Ros2PoseSourceContainer", "compress_container", "camera_resolution_container", "camera_fov_container", "lidar_vertical_fov_container", "lidar_resolution_contanier", "lidar_range_distance_container")]
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "PublishVehiclePose", "PublishVehicleMesh", "PosePublisherFrameID", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWitdh", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance", "MavlinkPoseSourceContainer", "MavlinkSystemIDCotainer", "Ros2PoseSourceContainer", "compress_container", "camera_resolution_container", "camera_fov_container", "lidar_vertical_fov_container", "lidar_resolution_contanier", "lidar_range_distance_container")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r845a")
@@ -19,8 +19,9 @@ VehiclePopup = NodePath("Margin/VehiclePopup")
 MavlinkPoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer/MavlinkPoseSource")
 MavlinkSysId = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer/sysid")
 Ros2PoseSource = NodePath("Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer/topic")
-PublishVehiclePose = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer4/PublishVehiclePose")
+PublishVehiclePose = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer/PublishVehiclePose")
 PublishVehicleMesh = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer5/PublishVehicleMesh")
+PosePublisherFrameID = NodePath("Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer2/PoseFrameID")
 SensorType = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer/SensorType")
 SensorName = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer8/HBoxContainer/SensorName")
 FrameID = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer10/HBoxContainer/FrameID")
@@ -629,17 +630,42 @@ theme_override_constants/margin_top = 6
 [node name="HBoxContainer4" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_constants/separation = 12
+
+[node name="Label2" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 tooltip_text = "Vehicle pose will be published on topic \"$(vehicle_name)_pose\""
 mouse_filter = 1
 text = "PUBLISH VEHICLE POSE"
 vertical_alignment = 1
 
-[node name="PublishVehiclePose" type="CheckButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
+[node name="PublishVehiclePose" type="CheckButton" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_constants/separation = 12
+
+[node name="Label3" type="Label" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Frame id of vehicle pose publisher."
+mouse_filter = 1
+text = "Frame ID"
+vertical_alignment = 1
+
+[node name="PoseFrameID" type="LineEdit" parent="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "/map"
+alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="Margin/VehiclePopup/VBoxContainer"]
 layout_mode = 2
@@ -859,7 +885,8 @@ stretch_mode = 4
 [connection signal="item_selected" from="Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer/MavlinkPoseSource" to="." method="_on_mavlink_pose_source_item_selected"]
 [connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer/sysid" to="." method="_on_sysid_text_submitted"]
 [connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer/topic" to="." method="_on_topic_text_submitted"]
-[connection signal="toggled" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/PublishVehiclePose" to="." method="_on_publish_vehicle_pose_toggled"]
+[connection signal="toggled" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer/PublishVehiclePose" to="." method="_on_publish_vehicle_pose_toggled"]
+[connection signal="text_submitted" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer4/HBoxContainer2/PoseFrameID" to="." method="_on_pose_frame_id_text_submitted"]
 [connection signal="toggled" from="Margin/VehiclePopup/VBoxContainer/HBoxContainer5/PublishVehicleMesh" to="." method="_on_publish_vehicle_mesh_toggled"]
 [connection signal="pressed" from="Margin/VehiclePopup/VehicleSetupClose" to="." method="_on_vehicle_setup_close_pressed"]
 [connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/CompressContainer/HBoxContainer/Compress" to="." method="_on_compress_toggled"]

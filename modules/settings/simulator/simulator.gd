@@ -16,6 +16,7 @@ extends Control
 @export var Ros2PoseSource:LineEdit
 @export var PublishVehiclePose:CheckButton
 @export var PublishVehicleMesh:CheckButton
+@export var PosePublisherFrameID:LineEdit
 
 # sensor settings
 @export var SensorType:OptionButton
@@ -70,6 +71,7 @@ func _ready():
 	VehiclePopup.hide()
 	MavlinkSysId.clear()
 	Ros2PoseSource.clear()
+	PosePublisherFrameID.clear()
 	
 	SensorName.clear()
 	FrameID.text = "/map"
@@ -140,6 +142,7 @@ func _on_vehicle_list_item_selected(index):
 	MavlinkPoseSource.selected = vehicle.odometry_source
 	MavlinkSysId.text = str(vehicle.sys_id)
 	Ros2PoseSource.text = vehicle.pose_name
+	PosePublisherFrameID.text = vehicle.pose_frame_id
 	PublishVehiclePose.set_pressed_no_signal(vehicle.enable_pose_publish)
 	PublishVehicleMesh.set_pressed_no_signal(vehicle.enable_model_publish)
 	
@@ -247,6 +250,12 @@ func _on_publish_vehicle_pose_toggled(button_pressed):
 func _on_publish_vehicle_mesh_toggled(button_pressed):
 	var vehicle = get_selected_vehicle_silent() as Vehicle
 	vehicle.enable_model_publish = button_pressed
+
+func _on_pose_frame_id_text_submitted(new_text):
+	var vehicle = get_selected_vehicle_silent() as Vehicle
+	if not ControlMethods.check_valid_string_and_notify(PosePublisherFrameID, " Frame ID is Invalid "):
+		return 	
+	vehicle.pose_frame_id = new_text
 
 # ========== Sensor ============ #
 func get_selected_sensor()->Sensor:

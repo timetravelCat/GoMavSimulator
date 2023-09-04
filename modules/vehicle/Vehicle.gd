@@ -13,6 +13,7 @@ class_name Vehicle extends Node3D
 	"odometry_source":1, # 1 as initial value (ESTIMATION)
 	"enable_model_publish":false,
 	"enable_pose_publish":true,
+	"pose_frame_id":"/map",
 }
 
 static var vehicle_scene:PackedScene = preload("res://modules/vehicle/Vehicle.tscn")
@@ -84,6 +85,7 @@ func _ready():
 @export var odometry_source:GoMAVSDK.OdometrySource : set = set_odometry_source, get = get_odometry_source
 @export var pose_name:String : set = set_pose_name, get = get_pose_name
 @export var enable_pose_publish:bool
+@export var pose_frame_id:String : set = set_pose_frame_id, get = get_pose_frame_id
 # ===== sensor retreive functions ===== #
 func get_sensors():
 	return sensorContainer.get_children()
@@ -136,6 +138,11 @@ func set_odometry_source(_odometry_source):
 func set_pose_name(_pose_name):
 	pose_name = _pose_name
 	pose.name = _pose_name
+func set_pose_frame_id(_pose_frame_id):
+	posePublisher.frame_id = _pose_frame_id
+	pose_frame_id = _pose_frame_id
+func get_pose_frame_id()->String:
+	return posePublisher.frame_id
 func get_sys_id()->int:
 	return pose._get_sys_id()
 func get_odometry_source()->GoMAVSDK.OdometrySource:
