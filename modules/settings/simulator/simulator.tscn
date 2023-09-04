@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://modules/settings/simulator/simulator.gd" id="1_r845a"]
 [ext_resource type="Texture2D" uid="uid://dpr777nmenbpt" path="res://modules/console/icons/close_20x.svg" id="3_me20j"]
 
-[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "PublishVehiclePose", "PublishVehicleMesh", "PosePublisherFrameID", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWitdh", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance", "MavlinkPoseSourceContainer", "MavlinkSystemIDCotainer", "Ros2PoseSourceContainer", "compress_container", "camera_resolution_container", "camera_fov_container", "lidar_vertical_fov_container", "lidar_resolution_contanier", "lidar_range_distance_container")]
+[node name="SIMULATOR" type="Control" node_paths=PackedStringArray("VehicleType", "VehicleName", "DomainID", "PoseSource", "VehicleScale", "VehicleList", "VehicleDisable", "VehiclePopup", "MavlinkPoseSource", "MavlinkSysId", "Ros2PoseSource", "PublishVehiclePose", "PublishVehicleMesh", "PosePublisherFrameID", "SensorType", "SensorName", "FrameID", "PublishRate", "LocationX", "LocationY", "LocationZ", "RotationX", "RotationY", "RotationZ", "SensorList", "SensorDisable", "SensorPopup", "RGBCompress", "CameraWidth", "CameraHeight", "CameraFov", "LidarVerticalFov", "LidarWidth", "LidarHeight", "RangeDistance", "PanoramaResolution", "PanoramaL", "PanoramaF", "PanoramaR", "PanoramaB", "PanoramaU", "PanoramaD", "MavlinkPoseSourceContainer", "MavlinkSystemIDCotainer", "Ros2PoseSourceContainer", "compress_container", "camera_resolution_container", "camera_fov_container", "lidar_vertical_fov_container", "lidar_resolution_contanier", "lidar_range_distance_container", "panorama_container")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r845a")
@@ -36,13 +36,20 @@ SensorList = NodePath("Margin/HBoxContainer/VBoxContainer2/SensorList")
 SensorDisable = NodePath("Margin/HBoxContainer/VBoxContainer2/HBoxContainer5/SensorDisable")
 SensorPopup = NodePath("Margin/SensorPopup")
 RGBCompress = NodePath("Margin/SensorPopup/VBoxContainer/CompressContainer/HBoxContainer/Compress")
-CameraWitdh = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraWidth")
+CameraWidth = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraWidth")
 CameraHeight = NodePath("Margin/SensorPopup/VBoxContainer/CameraResolutionContainer/HBoxContainer/CameraHeight")
 CameraFov = NodePath("Margin/SensorPopup/VBoxContainer/CameraFovContainer/CameraFov")
 LidarVerticalFov = NodePath("Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer/VerticalFov")
 LidarWidth = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarWidth")
 LidarHeight = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarHeight")
 RangeDistance = NodePath("Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer/RangeDistance")
+PanoramaResolution = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaResolution")
+PanoramaL = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaL")
+PanoramaF = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaF")
+PanoramaR = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaR")
+PanoramaB = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaB")
+PanoramaU = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaU")
+PanoramaD = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaD")
 MavlinkPoseSourceContainer = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkPoseSourceContainer")
 MavlinkSystemIDCotainer = NodePath("Margin/VehiclePopup/VBoxContainer/MavlinkSystemIDContainer")
 Ros2PoseSourceContainer = NodePath("Margin/VehiclePopup/VBoxContainer/Ros2PoseSourceContainer")
@@ -52,6 +59,7 @@ camera_fov_container = NodePath("Margin/SensorPopup/VBoxContainer/CameraFovConta
 lidar_vertical_fov_container = NodePath("Margin/SensorPopup/VBoxContainer/LidarVerticalFovContainer")
 lidar_resolution_contanier = NodePath("Margin/SensorPopup/VBoxContainer/LidarResolutionContainer")
 lidar_range_distance_container = NodePath("Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer")
+panorama_container = NodePath("Margin/SensorPopup/VBoxContainer/PanoramaContainer")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -693,7 +701,6 @@ texture_normal = ExtResource("3_me20j")
 stretch_mode = 4
 
 [node name="SensorPopup" type="MarginContainer" parent="Margin"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 50
@@ -846,6 +853,60 @@ size_flags_vertical = 4
 placeholder_text = "m"
 alignment = 1
 
+[node name="MarginContainer7" type="MarginContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+
+[node name="PanoramaContainer" type="HBoxContainer" parent="Margin/SensorPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESOLUTION"
+
+[node name="PanoramaResolution" type="LineEdit" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+
+[node name="PanoramaL" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Left Camera"
+text = "L"
+
+[node name="PanoramaF" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Front Camera"
+text = "F"
+
+[node name="PanoramaR" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Right Camera"
+text = "R"
+
+[node name="PanoramaB" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Back Camera"
+text = "B"
+
+[node name="PanoramaU" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Up Camera"
+text = "U"
+
+[node name="PanoramaD" type="CheckBox" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+tooltip_text = "Enable Down Camera"
+text = "D"
+
+[node name="VSeparator3" type="VSeparator" parent="Margin/SensorPopup/VBoxContainer/PanoramaContainer"]
+layout_mode = 2
+
 [node name="SensorSetupClose" type="TextureButton" parent="Margin/SensorPopup"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -897,4 +958,11 @@ stretch_mode = 4
 [connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarWidth" to="." method="_on_lidar_width_text_submitted"]
 [connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarResolutionContainer/HBoxContainer/LidarHeight" to="." method="_on_lidar_height_text_submitted"]
 [connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/LidarRangeDistanceContainer/RangeDistance" to="." method="_on_range_distance_text_submitted"]
+[connection signal="text_submitted" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaResolution" to="." method="_on_panorama_resolution_text_submitted"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaL" to="." method="_on_panorama_l_toggled"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaF" to="." method="_on_panorama_f_toggled"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaR" to="." method="_on_panorama_r_toggled"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaB" to="." method="_on_panorama_b_toggled"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaU" to="." method="_on_panorama_u_toggled"]
+[connection signal="toggled" from="Margin/SensorPopup/VBoxContainer/PanoramaContainer/PanoramaD" to="." method="_on_panorama_d_toggled"]
 [connection signal="pressed" from="Margin/SensorPopup/SensorSetupClose" to="." method="_on_sensor_setup_close_pressed"]

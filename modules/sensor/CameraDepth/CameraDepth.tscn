@@ -23,10 +23,10 @@ script = ExtResource("1_dwcn8")
 property_saved_list = {
 "enable": true,
 "fov": 75.0,
+"frame_id": "/map",
 "hz": 10.0,
 "position": Vector3(0, 0, 0),
 "quaternion": Quaternion(0, 0, 0, 1),
-"frame_id": "/map",
 "resolution": Vector2i(320, 180)
 }
 resolution = Vector2i(320, 180)

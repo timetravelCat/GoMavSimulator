@@ -35,13 +35,20 @@ extends Control
 # sensor advanced settings
 @export var SensorPopup:MarginContainer
 @export var RGBCompress:CheckButton
-@export var CameraWitdh:LineEdit
+@export var CameraWidth:LineEdit
 @export var CameraHeight:LineEdit
 @export var CameraFov:LineEdit
 @export var LidarVerticalFov:LineEdit
 @export var LidarWidth:LineEdit
 @export var LidarHeight:LineEdit
 @export var RangeDistance:LineEdit
+@export var PanoramaResolution:LineEdit
+@export var PanoramaL:CheckBox
+@export var PanoramaF:CheckBox
+@export var PanoramaR:CheckBox
+@export var PanoramaB:CheckBox
+@export var PanoramaU:CheckBox
+@export var PanoramaD:CheckBox
 
 # Prepare GUI
 func _ready():
@@ -88,13 +95,14 @@ func _ready():
 	# Sensor advanced setting
 	SensorPopup.hide()
 	RGBCompress.disabled = true
-	CameraWitdh.clear()
+	CameraWidth.clear()
 	CameraHeight.clear()
 	CameraFov.clear()
 	LidarVerticalFov.clear()
 	LidarWidth.clear()
 	LidarHeight.clear()
 	RangeDistance.clear()
+	PanoramaResolution.clear()
 
 func reset_to_default():
 	SimulatorSettings.reset()
@@ -354,6 +362,7 @@ func _on_sensor_list_item_selected(index):
 	lidar_vertical_fov_container.hide()
 	lidar_resolution_contanier.hide()
 	lidar_range_distance_container.hide()
+	panorama_container.hide()
 	match sensor.type:
 		Sensor.SENSOR_TYPE.RANGE:
 			RangeDistance.text = str(sensor.distance)
@@ -369,7 +378,7 @@ func _on_sensor_list_item_selected(index):
 			lidar_vertical_fov_container.show()
 
 		Sensor.SENSOR_TYPE.RGB_CAMERA:
-			CameraWitdh.text = str(sensor.resolution.x)
+			CameraWidth.text = str(sensor.resolution.x)
 			CameraHeight.text = str(sensor.resolution.y)
 			CameraFov.text = str(sensor.fov)
 			RGBCompress.set_pressed_no_signal(sensor.compressed)
@@ -378,12 +387,22 @@ func _on_sensor_list_item_selected(index):
 			camera_fov_container.show()
 
 		Sensor.SENSOR_TYPE.DEPTH_CAMERA:
-			CameraWitdh.text = str(sensor.resolution.x)
+			CameraWidth.text = str(sensor.resolution.x)
 			CameraHeight.text = str(sensor.resolution.y)
 			CameraFov.text = str(sensor.fov)
 			camera_resolution_container.show()
 			camera_fov_container.show()
-
+		
+		Sensor.SENSOR_TYPE.RGB_PANORAMA:
+			panorama_container.show()
+			PanoramaResolution.text = str(sensor.resolution)
+			PanoramaL.button_pressed = sensor.left
+			PanoramaF.button_pressed = sensor.front
+			PanoramaR.button_pressed = sensor.right
+			PanoramaB.button_pressed = sensor.back
+			PanoramaU.button_pressed = sensor.top
+			PanoramaD.button_pressed = sensor.bottom
+		
 @warning_ignore("unused_parameter")
 func _on_sensor_type_item_selected(index):
 	if SensorList.is_anything_selected():
@@ -431,6 +450,7 @@ func _on_rotation_text_submitted(new_text:String):
 @export var lidar_vertical_fov_container:HBoxContainer
 @export var lidar_resolution_contanier:HBoxContainer
 @export var lidar_range_distance_container:HBoxContainer
+@export var panorama_container:HBoxContainer
 
 func _on_sensor_advanced_config_pressed():
 	if not ControlMethods.check_anything_selected_and_notify(SensorList, " Select Any Sensor "):
@@ -447,7 +467,7 @@ func _on_compress_toggled(button_pressed):
 
 func _on_camera_width_text_submitted(new_text:String):
 	var sensor = get_selected_sensor_silent() as Sensor
-	if sensor and ControlMethods.check_valid_int_and_notify(CameraWitdh, "Camera Width Invalid"):
+	if sensor and ControlMethods.check_valid_int_and_notify(CameraWidth, "Camera Width Invalid"):
 		sensor.resolution.x = new_text.to_int()
 
 func _on_camera_height_text_submitted(new_text:String):
@@ -480,6 +500,41 @@ func _on_range_distance_text_submitted(new_text:String):
 	if sensor and ControlMethods.check_valid_float_and_notify(RangeDistance, "Lidar Height not valid"):
 		sensor.distance = new_text.to_float()
 
+func _on_panorama_resolution_text_submitted(new_text):
+	var sensor = get_selected_sensor_silent()
+	if sensor and ControlMethods.check_valid_int_and_notify(PanoramaResolution, "Panorama Resolution is not valid"):
+		sensor.resolution = new_text.to_int()
+
+func _on_panorama_l_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.left = button_pressed
+
+func _on_panorama_f_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.front = button_pressed
+
+func _on_panorama_r_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.right = button_pressed
+
+func _on_panorama_b_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.back = button_pressed
+
+func _on_panorama_u_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.top = button_pressed
+
+func _on_panorama_d_toggled(button_pressed):
+	var sensor = get_selected_sensor_silent()
+	if sensor:
+		sensor.bottom = button_pressed
+
 # =========== input handling ========= #
 # release focus if right-mouse clicked
 func _on_vehicle_list_gui_input(event):
@@ -502,6 +557,3 @@ func set_slider_value_from_vehicle(vehicle:Vehicle):
 	VehicleScale.value = vehicle.model_scale*VehicleScale.max_value/10.0;
 func set_vehicle_scale_from_slider(vehicle:Vehicle):
 	vehicle.model_scale = 10.0*VehicleScale.value/VehicleScale.max_value
-
-
-

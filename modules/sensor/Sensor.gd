@@ -1,12 +1,13 @@
 class_name Sensor extends Node3D
 
-enum SENSOR_TYPE {RANGE, LIDAR, RGB_CAMERA, DEPTH_CAMERA} 
+enum SENSOR_TYPE {RANGE, LIDAR, RGB_CAMERA, DEPTH_CAMERA, RGB_PANORAMA} 
 
 static var SENSOR_TYPE_STRING:PackedStringArray = [
 	"Range(ToF)",
 	"Lidar",
 	"RGB Camera",
-	"Depth Camera"
+	"Depth Camera",
+	"RGB Panorama"
 ]
 
 var vehicle:Vehicle
@@ -22,6 +23,8 @@ static func Create(_vehicle:Vehicle, sensor_type:SENSOR_TYPE, sensor_name:String
 			sensor = load("res://modules/sensor/CameraRGB/CameraRGB.tscn").instantiate()
 		SENSOR_TYPE.DEPTH_CAMERA:
 			sensor = load("res://modules/sensor/CameraDepth/CameraDepth.tscn").instantiate()
+		SENSOR_TYPE.RGB_PANORAMA:
+			sensor = load("res://modules/sensor/PanoramaRGB/PanoramaRGB.tscn").instantiate()
 	sensor.vehicle = _vehicle
 	sensor.name = sensor_name
 	_vehicle.sensorContainer.add_child(sensor)

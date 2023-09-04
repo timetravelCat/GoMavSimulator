@@ -13,10 +13,10 @@ property_saved_list = {
 "compressed": false,
 "enable": true,
 "fov": 75.0,
+"frame_id": "/map",
 "hz": 10.0,
 "position": Vector3(0, 0, 0),
 "quaternion": Quaternion(0, 0, 0, 1),
-"frame_id": "/map",
 "resolution": Vector2i(640, 360)
 }
 imagePublisher = NodePath("SubViewport/ImagePublisher")
@@ -71,6 +71,7 @@ offset_bottom = 24.0
 grow_horizontal = 0
 
 [connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
+[connection signal="sensor_renamed" from="." to="." method="on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]
 [connection signal="size_changed" from="SubViewport" to="." method="_on_sub_viewport_size_changed"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_timeout"]
