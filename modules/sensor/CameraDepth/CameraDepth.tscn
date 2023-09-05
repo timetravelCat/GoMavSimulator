@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_ph5g2"]
 [ext_resource type="Shader" path="res://modules/sensor/CameraDepth/CameraDepth.gdshader" id="3_uaqfp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir1ll"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g38li"]
 render_priority = 0
 shader = ExtResource("3_uaqfp")
 
 [sub_resource type="QuadMesh" id="QuadMesh_btx4p"]
-material = SubResource("ShaderMaterial_ir1ll")
+material = SubResource("ShaderMaterial_g38li")
 flip_faces = true
 size = Vector2(2, 2)
 

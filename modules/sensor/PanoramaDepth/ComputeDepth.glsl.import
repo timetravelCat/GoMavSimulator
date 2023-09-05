@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bnugowb5ogn45"
+path="res://.godot/imported/ComputeDepth.glsl-ec03c781598767f258e5e84b8c574b25.res"
+
+[deps]
+
+source_file="res://modules/sensor/PanoramaDepth/ComputeDepth.glsl"
+dest_files=["res://.godot/imported/ComputeDepth.glsl-ec03c781598767f258e5e84b8c574b25.res"]
+
+[params]
+

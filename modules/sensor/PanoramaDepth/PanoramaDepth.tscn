@@ -1,0 +1,198 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyxwe0xwf8a3g"]
+
+[ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_kdmpk"]
+[ext_resource type="Script" path="res://modules/sensor/PanoramaDepth/PanoramaDepth.gd" id="2_aihkh"]
+[ext_resource type="Script" path="res://modules/settings/general/GlobalWindow.gd" id="3_wxjjy"]
+[ext_resource type="Shader" path="res://modules/sensor/PanoramaDepth/PanoramaDepth.gdshader" id="4_44pwf"]
+[ext_resource type="Script" path="res://modules/settings/general/GlobalSubViewport.gd" id="4_i534n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5fqy"]
+render_priority = 0
+shader = ExtResource("4_44pwf")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrygk"]
+material = SubResource("ShaderMaterial_f5fqy")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="PanoramaDepth" node_paths=PackedStringArray("window", "viewport_left", "viewport_front", "viewport_right", "viewport_back", "viewport_top", "viewport_bottom", "publisher") instance=ExtResource("1_kdmpk")]
+script = ExtResource("2_aihkh")
+property_saved_list = {
+"back": true,
+"bottom": false,
+"enable": true,
+"frame_id": "/map",
+"front": true,
+"hz": 10.0,
+"left": true,
+"position": Vector3(0, 0, 0),
+"quaternion": Quaternion(0, 0, 0, 1),
+"resolution": 160,
+"right": true,
+"top": false
+}
+window = NodePath("GlobalWindow")
+viewport_left = NodePath("GlobalWindow/GridContainer/LeftViewportContainer/Viewport")
+viewport_front = NodePath("GlobalWindow/GridContainer/FrontViewportContainer/Viewport")
+viewport_right = NodePath("GlobalWindow/GridContainer/RightViewportContainer/Viewport")
+viewport_back = NodePath("GlobalWindow/GridContainer/BackViewportContainer/Viewport")
+viewport_top = NodePath("GlobalWindow/GridContainer/TopViewportContainer/Viewport")
+viewport_bottom = NodePath("GlobalWindow/GridContainer/BottomViewportContainer/Viewport")
+left = true
+front = true
+right = true
+back = true
+top = false
+bottom = false
+resolution = 160
+type = 5
+publisher = NodePath("GlobalWindow/ImagePublisher")
+
+[node name="Node3D" type="Node3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Forward" type="RemoteTransform3D" parent="Node3D" index="0"]
+remote_path = NodePath("../../GlobalWindow/GridContainer/FrontViewportContainer/Viewport/Camera3D")
+
+[node name="Left" type="RemoteTransform3D" parent="Node3D" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/GridContainer/LeftViewportContainer/Viewport/Camera3D")
+
+[node name="Back" type="RemoteTransform3D" parent="Node3D" index="2"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/GridContainer/BackViewportContainer/Viewport/Camera3D")
+
+[node name="Right" type="RemoteTransform3D" parent="Node3D" index="3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/GridContainer/RightViewportContainer/Viewport/Camera3D")
+
+[node name="Top" type="RemoteTransform3D" parent="Node3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/GridContainer/TopViewportContainer/Viewport/Camera3D")
+
+[node name="Bottom" type="RemoteTransform3D" parent="Node3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/GridContainer/BottomViewportContainer/Viewport/Camera3D")
+
+[node name="Shader" type="RemoteTransform3D" parent="Node3D" index="6"]
+transform = Transform3D(0.92388, 0, 0.382683, 0, 1, 0, -0.382683, 0, 0.92388, 0, 0, 0)
+remote_path = NodePath("../../GlobalWindow/MeshInstance3D")
+
+[node name="GlobalWindow" type="Window" parent="." index="2"]
+position = Vector2i(0, 24)
+unresizable = true
+script = ExtResource("3_wxjjy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GlobalWindow" index="0"]
+transform = Transform3D(0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 0, 0, 0)
+layers = 32
+mesh = SubResource("QuadMesh_xrygk")
+
+[node name="ImagePublisher" type="ImagePublisher" parent="GlobalWindow" index="1"]
+
+[node name="GridContainer" type="GridContainer" parent="GlobalWindow" index="2"]
+offset_right = 3092.0
+offset_bottom = 512.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[node name="LeftViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="0"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/LeftViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/LeftViewportContainer/Viewport" index="0"]
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="FrontViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="1"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/FrontViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/FrontViewportContainer/Viewport" index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="RightViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="2"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/RightViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/RightViewportContainer/Viewport" index="0"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="BackViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="3"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/BackViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/BackViewportContainer/Viewport" index="0"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="TopViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="4"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/TopViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/TopViewportContainer/Viewport" index="0"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="BottomViewportContainer" type="SubViewportContainer" parent="GlobalWindow/GridContainer" index="5"]
+layout_mode = 2
+
+[node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/BottomViewportContainer" index="0"]
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("4_i534n")
+
+[node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/BottomViewportContainer/Viewport" index="0"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+cull_mask = 1048511
+current = true
+fov = 90.0
+
+[node name="AllwaysOnTopButton" type="CheckButton" parent="GlobalWindow" index="3"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_bottom = 24.0
+grow_horizontal = 0
+flat = true
+
+[connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
+[connection signal="sensor_renamed" from="." to="." method="_on_sensor_renamed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="close_requested" from="GlobalWindow" to="." method="_on_global_window_close_requested"]
+[connection signal="gui_input" from="GlobalWindow/GridContainer" to="." method="_on_grid_container_gui_input"]
+[connection signal="toggled" from="GlobalWindow/AllwaysOnTopButton" to="." method="_on_allways_on_top_button_toggled"]

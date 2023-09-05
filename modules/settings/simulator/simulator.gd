@@ -402,7 +402,17 @@ func _on_sensor_list_item_selected(index):
 			PanoramaB.button_pressed = sensor.back
 			PanoramaU.button_pressed = sensor.top
 			PanoramaD.button_pressed = sensor.bottom
-		
+			
+		Sensor.SENSOR_TYPE.DEPTH_PANORAMA:
+			panorama_container.show()
+			PanoramaResolution.text = str(sensor.resolution)
+			PanoramaL.button_pressed = sensor.left
+			PanoramaF.button_pressed = sensor.front
+			PanoramaR.button_pressed = sensor.right
+			PanoramaB.button_pressed = sensor.back
+			PanoramaU.button_pressed = sensor.top
+			PanoramaD.button_pressed = sensor.bottom
+			
 @warning_ignore("unused_parameter")
 func _on_sensor_type_item_selected(index):
 	if SensorList.is_anything_selected():
