@@ -101,3 +101,15 @@ There are camera control option on top left corner.
     * B : Disarm
     * L : Throttle(Up/Down), Rudder(Left/Right)
     * R : Elevator(Up/Down), Aileron(Left/Right)
+
+### Simulator Settings
+
+Supported sensor types
+- Range
+- Lidar
+- RGB Camera
+- Depth Camera
+- Panorama RGB
+- Panorama Depth 
+
+Refer to [Simulator Settings](./Settings.md) for more details.

@@ -37,3 +37,8 @@ In this section, methods to add a vehicle and sensors are explained.
 * Camera's `Resolution` and `FoV` can be configured.
 * Maximum distance of Depth Camera is `1000m`. (publish infinite if exceeds 1000m)
 
+### Panorama RGB / Depth
+![](./screenshots/Panorama.png)
+* Panorama sensor is an image, which is composed of 6 camera with fixed vertical / horizontal `fov in a 90 degree`
+* You can select each `L`eft, `F`ront, `R`ight, `B`ack, `U`p, `D`own cameras for publish or not. (As a default, L, F, R, B is selected)
+* You can configure of camera's `Resolution`, which means height of image, and width is decided by (num of selected view)*resolution.
