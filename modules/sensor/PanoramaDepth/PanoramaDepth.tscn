@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyxwe0xwf8a3g"]
+[gd_scene load_steps=12 format=3 uid="uid://cyxwe0xwf8a3g"]
 
 [ext_resource type="PackedScene" uid="uid://c704yva7g8vs8" path="res://modules/sensor/Sensor.tscn" id="1_kdmpk"]
 [ext_resource type="Script" path="res://modules/sensor/PanoramaDepth/PanoramaDepth.gd" id="2_aihkh"]
-[ext_resource type="Script" path="res://modules/settings/general/GlobalWindow.gd" id="3_wxjjy"]
 [ext_resource type="Shader" path="res://modules/sensor/PanoramaDepth/PanoramaDepth.gdshader" id="4_44pwf"]
-[ext_resource type="Script" path="res://modules/settings/general/GlobalSubViewport.gd" id="4_i534n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f5fqy"]
 render_priority = 0
@@ -14,6 +12,18 @@ shader = ExtResource("4_44pwf")
 material = SubResource("ShaderMaterial_f5fqy")
 flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="Environment" id="Environment_qqlde"]
+
+[sub_resource type="Environment" id="Environment_xrtoe"]
+
+[sub_resource type="Environment" id="Environment_qh38q"]
+
+[sub_resource type="Environment" id="Environment_qvotq"]
+
+[sub_resource type="Environment" id="Environment_awwrv"]
+
+[sub_resource type="Environment" id="Environment_vo11g"]
 
 [node name="PanoramaDepth" node_paths=PackedStringArray("window", "viewport_left", "viewport_front", "viewport_right", "viewport_back", "viewport_top", "viewport_bottom", "publisher") instance=ExtResource("1_kdmpk")]
 script = ExtResource("2_aihkh")
@@ -81,7 +91,6 @@ remote_path = NodePath("../../GlobalWindow/MeshInstance3D")
 [node name="GlobalWindow" type="Window" parent="." index="2"]
 position = Vector2i(0, 24)
 unresizable = true
-script = ExtResource("3_wxjjy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GlobalWindow" index="0"]
 transform = Transform3D(0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 0, 0, 0)
@@ -103,10 +112,10 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/LeftViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/LeftViewportContainer/Viewport" index="0"]
 cull_mask = 1048511
+environment = SubResource("Environment_qqlde")
 current = true
 fov = 90.0
 
@@ -116,11 +125,11 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/FrontViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/FrontViewportContainer/Viewport" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1048511
+environment = SubResource("Environment_xrtoe")
 current = true
 fov = 90.0
 
@@ -130,11 +139,11 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/RightViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/RightViewportContainer/Viewport" index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 cull_mask = 1048511
+environment = SubResource("Environment_qh38q")
 current = true
 fov = 90.0
 
@@ -144,11 +153,11 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/BackViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/BackViewportContainer/Viewport" index="0"]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
 cull_mask = 1048511
+environment = SubResource("Environment_qvotq")
 current = true
 fov = 90.0
 
@@ -158,11 +167,11 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/TopViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/TopViewportContainer/Viewport" index="0"]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
 cull_mask = 1048511
+environment = SubResource("Environment_awwrv")
 current = true
 fov = 90.0
 
@@ -172,11 +181,11 @@ layout_mode = 2
 [node name="Viewport" type="SubViewport" parent="GlobalWindow/GridContainer/BottomViewportContainer" index="0"]
 handle_input_locally = false
 render_target_update_mode = 4
-script = ExtResource("4_i534n")
 
 [node name="Camera3D" type="Camera3D" parent="GlobalWindow/GridContainer/BottomViewportContainer/Viewport" index="0"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
 cull_mask = 1048511
+environment = SubResource("Environment_vo11g")
 current = true
 fov = 90.0
 

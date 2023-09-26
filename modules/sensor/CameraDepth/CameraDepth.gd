@@ -21,7 +21,6 @@ func _ready():
 	super._ready()
 	set_resolution(resolution)
 	set_fov(fov)
-	subViewport.world_3d = get_viewport().world_3d
 	_on_sensor_renamed(vehicle.name, name)
 		
 	# initialize rendering devices for decoding depth textures (by gpu)
