@@ -73,7 +73,7 @@
 
 <!-- GETTING STARTED -->
 ## Getting Started
-- Install [OpenSSL 1.1.1u](https://slproweb.com/products/Win32OpenSSL.html) (windows only)
+- Install [OpenSSL 1.1.1*](https://slproweb.com/products/Win32OpenSSL.html) (windows only)
 - Add OpenSSL binary path(C:\Program Files\OpenSSL-Win64\bin\) to System PATH
 - Download latest [release](https://github.com/timetravelCat/GoMavSimulator/releases/)
 - Run as admin (for windows)
