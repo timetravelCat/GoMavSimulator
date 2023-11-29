@@ -84,6 +84,7 @@ grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[connection signal="domain_id_changed" from="." to="." method="_on_domain_id_changed"]
 [connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
 [connection signal="sensor_renamed" from="." to="." method="_on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]

@@ -43,6 +43,7 @@ var frame_id:String: set = set_frame_id, get = get_frame_id
 
 signal sensor_enabled(enable:bool)
 signal sensor_renamed(vehicle_name:String, sensor_name:String)
+signal domain_id_changed(domain_id:int)
 
 @onready var timer:Timer = $Timer
 
@@ -80,3 +81,7 @@ func set_frame_id(_frame_id):
 	
 func get_frame_id()->String:
 	return publisher.frame_id
+
+func set_domain_id(domain_id):
+	publisher.domain_id= domain_id
+	domain_id_changed.emit(domain_id)

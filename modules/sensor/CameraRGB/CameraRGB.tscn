@@ -70,6 +70,7 @@ offset_left = -44.0
 offset_bottom = 24.0
 grow_horizontal = 0
 
+[connection signal="domain_id_changed" from="." to="." method="_on_domain_id_changed"]
 [connection signal="sensor_enabled" from="." to="." method="_on_sensor_enabled"]
 [connection signal="sensor_renamed" from="." to="." method="on_sensor_renamed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timeout"]

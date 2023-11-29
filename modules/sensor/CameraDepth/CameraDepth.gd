@@ -106,3 +106,6 @@ func _on_sub_viewport_size_changed():
 
 func _on_timer_timeout():
 	cameraInfoPublisher.publish()
+
+func _on_domain_id_changed(domain_id):
+	cameraInfoPublisher.domain_id = domain_id

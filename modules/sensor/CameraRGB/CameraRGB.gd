@@ -83,3 +83,7 @@ func set_fov(_fov):
 
 func _on_always_on_top_button_toggled(button_pressed):
 	window.always_on_top = button_pressed
+
+func _on_domain_id_changed(domain_id):
+	cameraInfoPublisher.domain_id = domain_id
+	
