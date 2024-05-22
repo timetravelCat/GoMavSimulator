@@ -34,9 +34,7 @@ var minimap_scene:PackedScene = preload("res://modules/viewer/Minimap.tscn")
 # global methods
 func create_new_viewer():
 	_create_new_viewer()
-func publish_district():
-	_publish_district()
-	
+
 func reset():
 	DefaultSettingMethods.reset_default_property(self,default_settings)
 
@@ -107,11 +105,6 @@ func _create_new_viewer():
 	if _viewer_position.x > 640:
 		_viewer_position = Vector2i.ZERO
 	add_child(viewer)
-
-@export var district_publisher:MarkerPublisher
-func _publish_district():
-	district_publisher.surface = current_district
-	district_publisher.publish(current_district.position, current_district.quaternion)
 
 func set_minimap(_minimap):
 	minimap = _minimap

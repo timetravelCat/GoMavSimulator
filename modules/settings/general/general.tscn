@@ -345,6 +345,7 @@ text = " Open Additonal Viewer "
 [node name="publish_district" type="Button" parent="Margin/HBoxContainer/VBoxContainer/HBoxContainer10"]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = "Publish District"
 
 [node name="MarginContainer11" type="MarginContainer" parent="Margin/HBoxContainer/VBoxContainer"]

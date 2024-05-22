@@ -2,13 +2,7 @@
 
 [ext_resource type="Script" path="res://modules/settings/general/GeneralSettings.gd" id="1_rry6e"]
 
-[node name="GeneralSettings" type="Node" node_paths=PackedStringArray("district_publisher")]
+[node name="GeneralSettings" type="Node"]
 script = ExtResource("1_rry6e")
 save_path = "user://GeneralSettings.json"
 district_size = Vector3(1000, 100, 1000)
-district_publisher = NodePath("DistrictPublisher")
-
-[node name="DistrictPublisher" type="MarkerPublisher" parent="."]
-type = 11
-topic_name = "District"
-topic_type = "visualization_msgs::msg::dds_::Marker_"

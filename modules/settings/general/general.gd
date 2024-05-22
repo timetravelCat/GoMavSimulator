@@ -189,7 +189,7 @@ func _on_day_night_value_changed(value):
 	GraphicsSettings.set_day_night(value / noon_to_sunset.max_value)
 
 func _on_publish_district_pressed():
-	GeneralSettings.publish_district()
+	pass
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton:
